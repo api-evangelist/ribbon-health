@@ -1,0 +1,62 @@
+specificationVersion: "0.1"
+id: ribbon-health-rate-limits
+name: Ribbon Health API Rate Limits
+description: >
+  The H1 API (Ribbon Health) enforces per-endpoint rate limits. Exceeding these
+  limits returns a 429 Too Many Requests error with a rate_limit_exceeded code.
+  Most search and list endpoints are capped at 1,000 requests per minute; single
+  resource lookups by NPI or UUID allow 5,000 requests per minute. The deductible
+  eligibility endpoint has a stricter hourly quota.
+limits:
+  - endpoint: GET /v1/custom/providers
+    description: Provider search / list
+    limit: 1000
+    period: minute
+    errorCode: rate_limit_exceeded
+    httpStatus: 429
+  - endpoint: GET /v1/custom/providers/{npi}
+    description: Single provider lookup by NPI
+    limit: 5000
+    period: minute
+    errorCode: rate_limit_exceeded
+    httpStatus: 429
+  - endpoint: GET /v1/custom/locations
+    description: Location search / list
+    limit: 1000
+    period: minute
+    errorCode: rate_limit_exceeded
+    httpStatus: 429
+  - endpoint: GET /v1/custom/locations/{uuid}
+    description: Single location lookup by UUID
+    limit: 5000
+    period: minute
+    errorCode: rate_limit_exceeded
+    httpStatus: 429
+  - endpoint: GET /v1/insurances
+    description: Insurance list
+    limit: 1000
+    period: minute
+    errorCode: rate_limit_exceeded
+    httpStatus: 429
+  - endpoint: GET /v1/specialties
+    description: Specialties list
+    limit: 1000
+    period: minute
+    errorCode: rate_limit_exceeded
+    httpStatus: 429
+  - endpoint: GET /v1/conditions
+    description: Conditions list
+    limit: 1000
+    period: minute
+    errorCode: rate_limit_exceeded
+    httpStatus: 429
+  - endpoint: GET /v1/eligibility/deductible
+    description: Member deductible eligibility check
+    limit: 1000
+    period: hour
+    errorCode: rate_limit_exceeded
+    httpStatus: 429
+notes: >
+  Rate limit thresholds are as documented in ribbon.readme.io/docs/rate-limits
+  for API version 2.2. Limits may be adjusted per customer contract. Contact
+  Ribbon Health / H1 support at support@ribbonhealth.com for rate limit increases.

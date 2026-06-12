@@ -1,0 +1,76 @@
+aid: ribbon-health
+name: Ribbon Health
+description: >
+  Ribbon Health (now part of H1) is a healthcare provider data platform offering
+  a REST API for searching provider directories, verifying insurance networks,
+  checking provider availability, and enriching clinical data. The H1 API provides
+  comprehensive data on doctors, insurance plans, procedures, costs, and quality
+  scores across the United States, enabling health plans, providers, and digital
+  health solutions to build accurate provider directories and care navigation tools.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/apis.yml
+created: 2026-06-12
+modified: 2026-06-12
+specificationVersion: "0.19"
+tags:
+  - Healthcare
+  - Provider Directory
+  - Insurance
+  - Clinical Data
+  - Care Navigation
+  - Eligibility
+  - Price Transparency
+  - Provider Search
+  - Health Plans
+  - Digital Health
+apis:
+  - aid: ribbon-health:h1-api
+    name: H1 API (Ribbon Health)
+    description: >
+      The H1 REST API provides healthcare enterprises with accurate data on
+      providers, insurance plans, costs, and quality of care. Key capabilities
+      include provider search and lookup by NPI, location search, insurance
+      network verification, eligibility checking, procedure cost estimation,
+      and custom provider directory management.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+    baseURL: https://api.ribbonhealth.com/v1
+    tags:
+      - Healthcare
+      - Provider Directory
+      - Insurance
+      - Eligibility
+      - Price Transparency
+      - Clinical Data
+    properties:
+      - type: Documentation
+        url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+      - type: OpenAPI
+        url: https://ribbon.readme.io/llms.txt
+common:
+  - type: Website
+    url: https://h1.co
+  - type: Documentation
+    url: https://ribbon.readme.io/
+  - type: GitHub
+    url: https://github.com/nikothomas/ribbon-health
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/ribbonhealth
+  - type: Blog
+    url: https://h1.co/blog/
+  - type: Pricing
+    url: https://h1.co/request-demo/
+  - type: StatusPage
+    url: https://status.ribbonhealth.com/
+  - type: X
+    url: https://twitter.com/RibbonHealth
+  - type: Plans
+    url: plans/ribbon-health-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/ribbon-health-rate-limits.yml
+  - type: FinOps
+    url: finops/ribbon-health-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

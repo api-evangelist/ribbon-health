@@ -1,0 +1,60 @@
+specificationVersion: "1.0"
+id: ribbon-health-finops
+name: Ribbon Health FinOps Framework
+description: >
+  FinOps considerations for managing spend and usage of the Ribbon Health (H1)
+  API platform. The API is enterprise-contracted with custom pricing; cost
+  optimization focuses on minimizing unnecessary calls, caching reference data,
+  and right-sizing data requests.
+framework: FinOps Framework FOCUS 1.0
+provider: Ribbon Health (H1)
+billingModel: enterprise-contract
+pricingTransparency: low
+costDrivers:
+  - name: API Call Volume
+    description: >
+      Primary cost driver. Pricing is negotiated per API call volume tiers
+      across endpoints. High-volume endpoints such as provider search
+      (v1/custom/providers) and location search (v1/custom/locations) are
+      most likely to drive cost at scale.
+    unit: API calls
+  - name: Endpoint Access Scope
+    description: >
+      Some endpoints (eligibility, price transparency, custom data types)
+      may be licensed separately or add-on modules requiring additional
+      contract negotiation.
+    unit: feature modules
+  - name: Data Refresh Frequency
+    description: >
+      Polling or frequent re-fetching of provider data increases call counts.
+      Caching provider and reference data locally reduces unnecessary spend.
+    unit: API calls
+optimizationRecommendations:
+  - category: Caching
+    recommendation: >
+      Cache reference data (specialties, insurances, clinical areas, conditions,
+      treatments) locally. These datasets change infrequently; repeated lookups
+      waste quota and cost.
+  - category: Field Selection
+    recommendation: >
+      Use include/exclude field parameters on provider and location responses
+      to retrieve only necessary fields and reduce payload size and latency.
+  - category: Batch Lookups
+    recommendation: >
+      Prefer bulk search endpoints over individual NPI/UUID lookups where
+      possible for initial data loads. Use individual lookups (5,000/min limit)
+      for high-frequency enrichment workflows.
+  - category: Rate Limit Monitoring
+    recommendation: >
+      Monitor for 429 responses and implement exponential backoff. Track usage
+      against contracted rate limits to avoid service disruption.
+  - category: Eligibility Endpoint
+    recommendation: >
+      The deductible eligibility endpoint (1,000 calls/hour) is the most
+      constrained. Cache eligibility results per member per benefit period
+      to avoid exhausting the hourly quota.
+visibility:
+  usageDashboard: false
+  costDashboard: false
+  invoicing: enterprise-contract
+  contactForUsageReports: support@ribbonhealth.com

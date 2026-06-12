@@ -1,0 +1,44 @@
+specificationVersion: "0.1"
+id: ribbon-health-plans-pricing
+name: Ribbon Health Plans and Pricing
+description: >
+  Ribbon Health (H1 API) does not publish self-serve pricing tiers publicly.
+  Access to the API is enterprise-only and requires a demo/sales engagement.
+  Pricing is customized based on data volume, endpoint access, and use case.
+plans:
+  - name: Enterprise (Custom)
+    description: >
+      Custom enterprise pricing for health plans, providers, and digital health
+      companies. Includes access to provider search, location data, insurance
+      network verification, eligibility, and price transparency endpoints.
+      Pricing is negotiated based on API call volume, data scope, and contract
+      terms. Request a demo at https://h1.co/request-demo/ to obtain a quote.
+    url: https://h1.co/request-demo/
+    features:
+      - Provider search and NPI lookup
+      - Location search and management
+      - Insurance network verification
+      - Member eligibility checking (powered by pVerify)
+      - Procedure cost estimation (price transparency)
+      - Clinical areas, conditions, and treatments data
+      - Organization and network data
+      - Custom provider directory management
+      - Custom filters for providers and locations
+      - Bearer token authentication
+      - API v2.2 access
+    rateLimits:
+      - endpoint: v1/custom/providers
+        limit: 1000
+        period: minute
+      - endpoint: v1/custom/providers/{npi}
+        limit: 5000
+        period: minute
+      - endpoint: v1/custom/locations
+        limit: 1000
+        period: minute
+      - endpoint: v1/custom/locations/{uuid}
+        limit: 5000
+        period: minute
+      - endpoint: v1/eligibility/deductible
+        limit: 1000
+        period: hour
