@@ -1,0 +1,7 @@
+{
+  "response_example": {
+    "count": 107,
+    "next": "https://api.ribbonhealth.com/v1/custom/clinical_areas?page=3",
+    "previous": "https://api.ribbonhealth.com/v1/custom/clinical_areas?page=1"
+  }
+}

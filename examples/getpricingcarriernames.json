@@ -1,0 +1,8 @@
+{
+  "response_example": {
+    "carriers": [
+      "Aetna",
+      "Cigna"
+    ]
+  }
+}

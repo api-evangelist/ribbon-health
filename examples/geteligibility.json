@@ -1,0 +1,9 @@
+{
+  "request_body": {
+    "member_id": "000000000-00",
+    "first_name": "John",
+    "last_name": "Doe",
+    "birth_date": "1980-12-31",
+    "insurance_partner": "aetna_better_health_il"
+  }
+}

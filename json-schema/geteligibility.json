@@ -1,0 +1,1675 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "getEligibility",
+  "description": "JSON Schema for getEligibility response from Ribbon Health H1 API",
+  "required": [
+    "parameters",
+    "request_id",
+    "status"
+  ],
+  "type": "object",
+  "properties": {
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "member_id": {
+          "type": "string",
+          "description": "The member's identification number",
+          "example": "000000000-00"
+        },
+        "first_name": {
+          "type": "string",
+          "description": "The member's first name",
+          "example": "John"
+        },
+        "last_name": {
+          "type": "string",
+          "description": "The member's last name",
+          "example": "Doe"
+        },
+        "birth_date": {
+          "type": "string",
+          "description": "The member's birth date as an ISO-format date string",
+          "format": "date",
+          "example": "1980-12-31"
+        },
+        "insurance_partner": {
+          "type": "string",
+          "description": "The identifier for this insurance partner in the Ribbon API",
+          "example": "aetna_better_health_il"
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "is_valid": {
+          "type": "boolean",
+          "description": "Whether the eligibility check was successful",
+          "example": true
+        },
+        "error": {
+          "type": "string",
+          "description": "If `is_valid` is `true`, an error code explaining what went wrong. When `is_valid` is `false`, this will be `null`.",
+          "nullable": true
+        }
+      }
+    },
+    "request_id": {
+      "type": "string",
+      "description": "A unique identifier for the given response which Ribbon can use to find it in our logs during support requests",
+      "example": "40610978"
+    },
+    "plan_info": {
+      "type": "object",
+      "properties": {
+        "insurance_partner": {
+          "type": "string",
+          "description": "The identifier for this insurance partner in the Ribbon API",
+          "example": "aetna_better_health_il"
+        },
+        "plan_name": {
+          "type": "string",
+          "description": "User-friendly display name for this insurance partner",
+          "example": "Aetna Better Health of Illinois"
+        },
+        "is_active": {
+          "type": "boolean",
+          "description": "Whether the member is actively covered by this plan",
+          "example": true
+        },
+        "plan_start_date": {
+          "type": "string",
+          "description": "The starting date for the member's coverage by this plan",
+          "format": "date",
+          "example": "2012-02-01"
+        },
+        "plan_end_date": {
+          "type": "string",
+          "description": "The ending date for the member's coverage by this plan",
+          "format": "date",
+          "nullable": true,
+          "example": "2024-01-01"
+        }
+      }
+    },
+    "deductible_detail": {
+      "type": "object",
+      "properties": {
+        "individual": {
+          "type": "object",
+          "properties": {
+            "in_network": {
+              "type": "object",
+              "properties": {
+                "spend": {
+                  "type": "string",
+                  "description": "The amount the member has paid towards in-network deductibles, in dollars",
+                  "nullable": true,
+                  "example": "16.43"
+                },
+                "maximum": {
+                  "type": "string",
+                  "description": "The maximum amount the member can pay towards in-network deductibles, in dollars",
+                  "nullable": true,
+                  "example": "3000"
+                },
+                "remaining": {
+                  "type": "string",
+                  "description": "The remaining amount the member can pay towards in-network deductibles, in dollars",
+                  "example": "2983.57"
+                }
+              }
+            },
+            "out_of_network": {
+              "type": "object",
+              "properties": {
+                "spend": {
+                  "type": "string",
+                  "description": "The amount the member has paid towards out-of-network deductibles, in dollars",
+                  "nullable": true,
+                  "example": "16.43"
+                },
+                "maximum": {
+                  "type": "string",
+                  "description": "The maximum amount the member can pay towards out-of-network deductibles, in dollars",
+                  "nullable": true,
+                  "example": "6000"
+                },
+                "remaining": {
+                  "type": "string",
+                  "description": "The remaining amount the member can pay towards out-of-network deductibles, in dollars",
+                  "nullable": true,
+                  "example": "5983.57"
+                }
+              }
+            }
+          }
+        },
+        "family": {
+          "type": "object",
+          "properties": {
+            "in_network": {
+              "type": "object",
+              "properties": {
+                "spend": {
+                  "type": "string",
+                  "description": "The amount the member has paid towards in-network deductibles, in dollars",
+                  "nullable": true,
+                  "example": "16.43"
+                },
+                "maximum": {
+                  "type": "string",
+                  "description": "The maximum amount the member can pay towards in-network deductibles, in dollars",
+                  "nullable": true,
+                  "example": "6000"
+                },
+                "remaining": {
+                  "type": "string",
+                  "description": "The remaining amount the member can pay towards in-network deductibles, in dollars",
+                  "nullable": true,
+                  "example": "5983.57"
+                }
+              }
+            },
+            "out_of_network": {
+              "type": "object",
+              "properties": {
+                "spend": {
+                  "type": "string",
+                  "description": "The amount the member has paid towards out-of-network deductibles, in dollars",
+                  "nullable": true,
+                  "example": "16.43"
+                },
+                "maximum": {
+                  "type": "string",
+                  "description": "The maximum amount the member can pay towards out-of-network deductibles, in dollars",
+                  "nullable": true,
+                  "example": "6000"
+                },
+                "remaining": {
+                  "type": "string",
+                  "description": "The remaining amount the member can pay towards out-of-network deductibles, in dollars",
+                  "nullable": true,
+                  "example": "5983.57"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "out_of_pocket_detail": {
+      "type": "object",
+      "properties": {
+        "individual": {
+          "type": "object",
+          "properties": {
+            "in_network": {
+              "type": "object",
+              "properties": {
+                "spend": {
+                  "type": "string",
+                  "description": "The amount the member has paid towards their in-network out-of-pocket maximum, in dollars",
+                  "nullable": true,
+                  "example": "16.43"
+                },
+                "maximum": {
+                  "type": "string",
+                  "description": "The maximum amount the member can pay towards their in-network out-of-pocket maximum, in dollars",
+                  "nullable": true,
+                  "example": "3000"
+                },
+                "remaining": {
+                  "type": "string",
+                  "description": "The remaining amount the member can pay towards their in-network out-of-pocket maximum, in dollars",
+                  "nullable": true,
+                  "example": "2983.57"
+                }
+              }
+            },
+            "out_of_network": {
+              "type": "object",
+              "properties": {
+                "spend": {
+                  "type": "string",
+                  "description": "The amount the member has paid towards their out-of-network out-of-pocket maximum, in dollars",
+                  "nullable": true,
+                  "example": "16.43"
+                },
+                "maximum": {
+                  "type": "string",
+                  "description": "The maximum amount the member can pay towards their out-of-network out-of-pocket maximum, in dollars",
+                  "nullable": true,
+                  "example": "6000"
+                },
+                "remaining": {
+                  "type": "string",
+                  "description": "The remaining amount the member can pay towards their out-of-network out-of-pocket maximum, in dollars",
+                  "nullable": true,
+                  "example": "5983.57"
+                }
+              }
+            }
+          }
+        },
+        "family": {
+          "type": "object",
+          "properties": {
+            "in_network": {
+              "type": "object",
+              "properties": {
+                "spend": {
+                  "type": "string",
+                  "description": "The amount the member has paid towards their in-network out-of-pocket maximum, in dollars",
+                  "nullable": true,
+                  "example": "16.43"
+                },
+                "maximum": {
+                  "type": "string",
+                  "description": "The maximum amount the member can pay towards their in-network out-of-pocket maximum, in dollars",
+                  "nullable": true,
+                  "example": "3000"
+                },
+                "remaining": {
+                  "type": "string",
+                  "description": "The remaining amount the member can pay towards their in-network out-of-pocket maximum, in dollars",
+                  "nullable": true,
+                  "example": "2983.57"
+                }
+              }
+            },
+            "out_of_network": {
+              "type": "object",
+              "properties": {
+                "spend": {
+                  "type": "string",
+                  "description": "The amount the member has paid towards their out-of-network out-of-pocket maximum, in dollars",
+                  "nullable": true,
+                  "example": "16.43"
+                },
+                "maximum": {
+                  "type": "string",
+                  "description": "The maximum amount the member can pay towards their out-of-network out-of-pocket maximum, in dollars",
+                  "nullable": true,
+                  "example": "6000"
+                },
+                "remaining": {
+                  "type": "string",
+                  "description": "The remaining amount the member can pay towards their out-of-network out-of-pocket maximum, in dollars",
+                  "nullable": true,
+                  "example": "5983.57"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "primary_care_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "dme_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "oncology_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "vision_optometry_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "physical_therapy_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "specialist_office_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "mental_health_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "surgical_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "urgent_care_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "diagnostic_lab_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "asc_facility_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "chiropractic_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "mri_ct_scan_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "x_ray_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "speech_therapy_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "occupational_therapy_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "emergency_medical_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "wellness_or_routine_visit_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "podiatry_office_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "outpatient_professional_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "anesthesia_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "substance_abuse_professional_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "substance_abuse_in_patient_facility_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "substance_abuse_out_patient_facility_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "flu_vaccination_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "hospital_inpatient_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "pharmacy_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "hospital_outpatient_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "telemedicine_primary_care_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "telemedicine_specialist_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "telemedicine_urgent_care_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "telemedicine_physical_therapy_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "telemedicine_mental_health_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "psychotherapy_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "snf_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "snf_room_board_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "home_health_care_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "hospice_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    },
+    "professional_physician_visit_inpatient_summary": {
+      "type": "object",
+      "properties": {
+        "in_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's in-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        },
+        "out_of_network": {
+          "type": "object",
+          "properties": {
+            "copay": {
+              "type": "string",
+              "description": "The amount of the member's out-of-network copay, in dollars",
+              "example": "30.0"
+            },
+            "coinsurance": {
+              "type": "string",
+              "nullable": true,
+              "example": "0.0"
+            }
+          }
+        }
+      }
+    }
+  }
+}

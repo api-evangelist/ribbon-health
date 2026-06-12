@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "getNetworkAnalysis",
+  "description": "JSON Schema for getNetworkAnalysis response from Ribbon Health H1 API",
+  "required": [
+    "data",
+    "parameters"
+  ],
+  "type": "object",
+  "properties": {
+    "parameters": {
+      "required": [
+        "insurance_id",
+        "npi_count",
+        "ssa_codes"
+      ],
+      "type": "object",
+      "properties": {
+        "insurance_id": {
+          "type": "string",
+          "description": "A unique identifier for a single provider network from the Insurances reference endpoint.",
+          "format": "uuid",
+          "example": "000912ad-5674-4c23-9b00-dca4e76aaa07"
+        },
+        "ssa_codes": {
+          "type": "array",
+          "description": "The SSA codes the network analysis was run on.",
+          "example": [
+            "14141",
+            "14150"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "npi_count": {
+          "type": "integer",
+          "description": "How many unique NPIs accept the given insurance across all requested counties.",
+          "format": "int32",
+          "example": 2999
+        }
+      }
+    },
+    "data": {
+      "type": "array",
+      "description": "",
+      "items": {
+        "required": [
+          "display",
+          "npi_count",
+          "ssa_code"
+        ],
+        "type": "object",
+        "properties": {
+          "ssa_code": {
+            "type": "string",
+            "description": "The SSA code of the county this data is for.",
+            "example": "14141"
+          },
+          "display": {
+            "type": "string",
+            "description": "The display name of the county this data is for.",
+            "example": "Cook, IL"
+          },
+          "npi_count": {
+            "type": "integer",
+            "description": "How many unique NPIs accept the given insurance in this county.",
+            "format": "int32",
+            "example": 2103
+          },
+          "npis": {
+            "type": "array",
+            "description": "The NPIs of providers who accept the given insurance in this county.\n\nIf the `exclude_npis` parameter was set to true, this key will not be present.",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,137 @@
+vocabulary:
+  - term: provider
+    definition: >
+      A healthcare professional (doctor, nurse practitioner, physician assistant, etc.)
+      identified by a National Provider Identifier (NPI) and associated with one or more
+      clinical locations, specialties, and insurance networks.
+  - term: npi
+    definition: >
+      National Provider Identifier — a unique 10-digit identification number issued
+      to healthcare providers in the United States by the Centers for Medicare and
+      Medicaid Services (CMS).
+  - term: location
+    definition: >
+      A physical address or site where a healthcare provider practices, identified
+      by a location_uuid. Locations are associated with insurances, organizations,
+      and clinical areas.
+  - term: insurance
+    definition: >
+      A health insurance plan or carrier associated with a provider or location,
+      identified by an insurance_uuid. Includes information on carrier name, plan
+      type, and network participation.
+  - term: specialty
+    definition: >
+      A clinical specialty or sub-specialty practiced by a provider, identified by
+      a specialty_uuid. Can be designated as a primary specialty.
+  - term: procedure
+    definition: >
+      A medical procedure or service that a provider performs, identified by a
+      procedure_uuid and associated CPT or other procedure codes.
+  - term: clinical_area
+    definition: >
+      A broad clinical focus area grouping related conditions and treatments,
+      used to categorize providers and locations.
+  - term: condition
+    definition: >
+      A medical condition or diagnosis that a provider treats, linked to clinical
+      areas and treatments.
+  - term: treatment
+    definition: >
+      A medical treatment or therapy offered by a provider, linked to conditions
+      and clinical areas.
+  - term: organization
+    definition: >
+      A healthcare organization (hospital system, medical group, etc.) associated
+      with provider locations, identified by an organization_uuid.
+  - term: tin
+    definition: >
+      Tax Identification Number — used to identify a healthcare organization or
+      practice group for billing purposes.
+  - term: eligibility
+    definition: >
+      Insurance eligibility verification — confirms whether a patient/member is
+      covered under a given health plan and provides benefit details including
+      deductible and out-of-pocket progress.
+  - term: network
+    definition: >
+      An insurance network defines which providers and locations participate in
+      a given health plan, affecting cost-sharing for members.
+  - term: carrier
+    definition: >
+      A health insurance carrier (insurance company), identified by a carrier_uuid.
+      Associated with specific insurance plans and networks.
+  - term: procedure_cost_estimate
+    definition: >
+      An estimated cost for a medical procedure at a specific provider location,
+      accounting for insurance plan coverage and negotiated rates.
+  - term: cost_index
+    definition: >
+      A normalized score representing the relative cost of care at a provider or
+      location compared to peers in the same market.
+  - term: efficiency_index
+    definition: >
+      A score indicating a provider's efficiency in delivering care relative to
+      peer providers, factoring in cost and outcomes.
+  - term: outcomes_index
+    definition: >
+      A score representing clinical quality outcomes achieved by a provider
+      relative to peer providers.
+  - term: confidence_score
+    definition: >
+      A measure of data completeness and accuracy for provider network and
+      insurance information in the Ribbon Health dataset.
+  - term: panel_age
+    definition: >
+      The age range of patients a provider accepts, used to filter providers
+      by the population they serve (e.g., pediatric, adult, geriatric).
+  - term: panel_sex
+    definition: >
+      The biological sex of patients a provider accepts (e.g., male, female, all).
+  - term: virtual_care_platform
+    definition: >
+      A telehealth or digital health platform through which a provider offers
+      virtual visits and remote care services.
+  - term: network_analysis
+    definition: >
+      An analysis of provider network adequacy and composition for a given
+      insurance plan, geographic region, or specialty area.
+  - term: filter
+    definition: >
+      A saved search configuration (provider or location filter) that can be
+      applied to queries to narrow results by specific criteria.
+  - term: provider_type
+    definition: >
+      The category or credential type of a healthcare provider (e.g., MD, DO,
+      NP, PA), identified by a provider_type_uuid.
+  - term: location_type
+    definition: >
+      The category of a clinical location (e.g., office, hospital, urgent care),
+      identified by a location_type_uuid.
+  - term: national_bluecard
+    definition: >
+      A flag indicating whether a provider participates in the Blue Cross Blue
+      Shield BlueCard national network, enabling reciprocal coverage across state plans.
+  - term: ssa_codes
+    definition: >
+      Social Security Administration geographic codes used to define service areas
+      and regions for network adequacy analysis.
+  - term: min_confidence
+    definition: >
+      A minimum threshold for the Ribbon Health confidence score, used to filter
+      provider-insurance associations by data reliability.
+  - term: distance
+    definition: >
+      The search radius (in miles) around a given location used to find nearby
+      providers or locations.
+tags:
+  - Providers
+  - Locations
+  - Filters
+  - Reference Endpoints
+  - Focus Area Endpoints
+  - Organizations
+  - TINs
+  - Virtual Care Platforms
+  - Price Transparency
+  - Cost Estimates
+  - Networks

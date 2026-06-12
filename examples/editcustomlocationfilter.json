@@ -1,0 +1,8 @@
+{
+  "request_body": {
+    "parameter": "location_types_filter",
+    "field": "location_types",
+    "value_type": "list",
+    "filter_type": "contains_any"
+  }
+}

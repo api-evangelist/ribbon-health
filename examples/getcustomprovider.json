@@ -1,0 +1,11 @@
+{
+  "response_example": {
+    "npi": "1861664294",
+    "first_name": "Jane",
+    "middle_name": "J",
+    "last_name": "Doe",
+    "age": 38,
+    "ratings_count": 20,
+    "ratings_avg": 9.8
+  }
+}

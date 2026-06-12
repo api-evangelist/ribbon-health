@@ -1,0 +1,10 @@
+{
+  "response_example": {
+    "uuid": "f38b9fd5-1e28-4f6e-953c-1e1493b68e21",
+    "address": "185 Berry St # 130, San Francisco, CA 94107, US",
+    "latitude": 37.7765973,
+    "longitude": -122.3919488,
+    "google_maps_link": "https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US",
+    "confidence": 2
+  }
+}

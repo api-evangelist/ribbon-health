@@ -1,0 +1,156 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "getConditions",
+  "description": "JSON Schema for getConditions response from Ribbon Health H1 API",
+  "required": [
+    "count",
+    "next",
+    "parameters",
+    "previous",
+    "results"
+  ],
+  "type": "object",
+  "properties": {
+    "count": {
+      "type": "integer",
+      "description": "The total number of results matched, across all pages.",
+      "format": "int32",
+      "example": 480
+    },
+    "next": {
+      "type": "string",
+      "nullable": true,
+      "example": "https://api.ribbonhealth.com/v1/custom/conditions?page=3"
+    },
+    "previous": {
+      "type": "string",
+      "nullable": true,
+      "example": "https://api.ribbonhealth.com/v1/custom/conditions?page=1"
+    },
+    "parameters": {},
+    "results": {
+      "type": "array",
+      "description": "",
+      "items": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "description": "A UUID uniquely identifying this condition",
+            "format": "uuid",
+            "example": "99f4762e-c4c2-4d1d-983a-2b8b303e691d"
+          },
+          "display": {
+            "type": "string",
+            "example": "Chronic Depression"
+          },
+          "types": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "type": "string",
+              "enum": [
+                "focus_areas",
+                "condition_cost_estimate"
+              ],
+              "x-enum-elements": [
+                {
+                  "name": "focus_areas",
+                  "description": ""
+                },
+                {
+                  "name": "condition_cost_estimate",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "specialties": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "type": "object",
+              "properties": {
+                "uuid": {
+                  "type": "string",
+                  "description": "A UUID uniquely identifying this specialty",
+                  "format": "uuid",
+                  "example": "18d8ad26-7e5f-44ac-9afa-966efb375344"
+                },
+                "taxonomy_code": {
+                  "example": "207Q00000X",
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                "board_specialty": {
+                  "type": "string",
+                  "nullable": true,
+                  "example": "Family Medicine"
+                },
+                "board_sub_specialty": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "non_md_specialty": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "non_md_sub_specialty": {
+                  "type": "string",
+                  "nullable": true,
+                  "example": "None"
+                },
+                "provider_name": {
+                  "type": "string",
+                  "nullable": true,
+                  "example": "Family Medicine Doctor"
+                },
+                "colloquial": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "taxonomy_1": {
+                  "type": "string",
+                  "nullable": true,
+                  "example": "Allopathic & Osteopathic Physicians"
+                },
+                "taxonomy_2": {
+                  "type": "string",
+                  "nullable": true,
+                  "example": "Family Medicine"
+                },
+                "taxonomy_3": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "display": {
+                  "type": "string",
+                  "example": "Family Medicine"
+                },
+                "provider_type": {
+                  "type": "string",
+                  "example": "Doctor"
+                },
+                "is_primary": {
+                  "type": "boolean",
+                  "description": "Whether or not a specialty is a provider's primary specialty",
+                  "example": true
+                }
+              }
+            }
+          },
+          "modules": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

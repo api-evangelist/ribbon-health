@@ -47,7 +47,17 @@ apis:
       - type: Documentation
         url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
       - type: OpenAPI
-        url: https://ribbon.readme.io/llms.txt
+        url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/openapi/ribbon-health-h1-api-openapi.yml
+      - type: JSONSchema
+        url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomproviders.json
+      - type: JSONSchema
+        url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomlocation.json
+      - type: JSONSchema
+        url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/geteligibility.json
+      - type: JSONSchema
+        url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getprocedurecoststimate.json
+      - type: JSONSchema
+        url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getnetworkanalysis.json
 common:
   - type: Website
     url: https://h1.co
@@ -71,6 +81,12 @@ common:
     url: rate-limits/ribbon-health-rate-limits.yml
   - type: FinOps
     url: finops/ribbon-health-finops.yml
+  - type: Vocabulary
+    url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/vocabulary/ribbon-health-vocabulary.yml
+  - type: JSONLDContext
+    url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-ld/ribbon-health-context.jsonld
+  - type: BlogRSS
+    url: https://h1.co/blog/feed
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

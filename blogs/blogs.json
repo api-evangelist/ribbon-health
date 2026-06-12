@@ -1,0 +1,10 @@
+{
+  "blogSource": {
+    "url": "https://h1.co/blog/",
+    "rssUrl": "https://h1.co/blog/feed",
+    "rssStatus": "feed_exists_no_items",
+    "notes": "RSS feed at h1.co/blog/feed returns valid RSS 2.0 but contains no items (last built 2022-10-19). Blog content is available at h1.co/blog/ via HTML. Previously Ribbon Health blog, now H1 blog after acquisition.",
+    "lastChecked": "2026-06-12"
+  },
+  "posts": []
+}

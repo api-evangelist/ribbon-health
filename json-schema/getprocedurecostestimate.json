@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "getProcedureCostEstimate",
+  "description": "JSON Schema for getProcedureCostEstimate response from Ribbon Health H1 API",
+  "type": "object",
+  "properties": {
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "procedures": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "A UUID uniquely identifying this procedure",
+                "format": "uuid",
+                "example": "0a9a245f-2f52-4cc0-a5c3-77a811acc6f7"
+              },
+              "display": {
+                "type": "string",
+                "example": "MRI, arm"
+              },
+              "procedure_code_count": {
+                "type": "integer",
+                "format": "int32",
+                "example": 7
+              },
+              "procedure_codes": {
+                "type": "array",
+                "description": "",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "example": "73222"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "CPT"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "MRI, arm"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "member_zip": {
+          "type": "string",
+          "example": "60606"
+        }
+      }
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "cost_estimates": {
+          "type": "object",
+          "properties": {
+            "minimum": {
+              "type": "number",
+              "description": "Minimum cost for all of the given procedures combined.",
+              "example": 100
+            },
+            "median": {
+              "type": "number",
+              "description": "Median cost for all of the given procedures combined.",
+              "example": 300
+            },
+            "maximum": {
+              "type": "number",
+              "description": "Maximum cost for all of the given procedures combined.",
+              "example": 500
+            }
+          }
+        }
+      }
+    }
+  }
+}

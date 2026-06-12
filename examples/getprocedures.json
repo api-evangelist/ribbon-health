@@ -1,0 +1,7 @@
+{
+  "response_example": {
+    "count": 141,
+    "next": "https://api.ribbonhealth.com/v1/procedures?page=3",
+    "previous": "https://api.ribbonhealth.com/v1/procedures?page=1"
+  }
+}

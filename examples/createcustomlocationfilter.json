@@ -1,0 +1,8 @@
+{
+  "request_body": {
+    "parameter": "max_c_section_rate",
+    "field": "c_section_rate",
+    "value_type": "example_value_type",
+    "filter_type": "example_filter_type"
+  }
+}

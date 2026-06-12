@@ -1,0 +1,202 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "ribbon": "https://ribbon.readme.io/docs/",
+    "h1": "https://h1.co/",
+    "fhir": "http://hl7.org/fhir/",
+
+    "provider": {
+      "@id": "ribbon:provider",
+      "@type": "@id",
+      "comment": "A healthcare provider identified by NPI in the Ribbon Health API."
+    },
+    "npi": {
+      "@id": "ribbon:npi",
+      "@type": "xsd:string",
+      "comment": "National Provider Identifier (NPI) — unique 10-digit identifier for US healthcare providers."
+    },
+    "location": {
+      "@id": "ribbon:location",
+      "@type": "@id",
+      "comment": "A physical location where a provider practices."
+    },
+    "location_uuid": {
+      "@id": "ribbon:location_uuid",
+      "@type": "xsd:string"
+    },
+    "insurance": {
+      "@id": "ribbon:insurance",
+      "@type": "@id",
+      "comment": "An insurance plan associated with a provider or location."
+    },
+    "insurance_uuid": {
+      "@id": "ribbon:insurance_uuid",
+      "@type": "xsd:string"
+    },
+    "specialty": {
+      "@id": "ribbon:specialty",
+      "@type": "@id",
+      "comment": "A clinical specialty practiced by a provider."
+    },
+    "specialty_uuid": {
+      "@id": "ribbon:specialty_uuid",
+      "@type": "xsd:string"
+    },
+    "procedure": {
+      "@id": "ribbon:procedure",
+      "@type": "@id",
+      "comment": "A medical procedure performed by a provider."
+    },
+    "procedure_uuid": {
+      "@id": "ribbon:procedure_uuid",
+      "@type": "xsd:string"
+    },
+    "clinical_area": {
+      "@id": "ribbon:clinical_area",
+      "@type": "@id",
+      "comment": "A broad clinical focus area grouping conditions and treatments."
+    },
+    "clinical_area_uuid": {
+      "@id": "ribbon:clinical_area_uuid",
+      "@type": "xsd:string"
+    },
+    "condition": {
+      "@id": "ribbon:condition",
+      "@type": "@id",
+      "comment": "A medical condition or diagnosis."
+    },
+    "condition_uuid": {
+      "@id": "ribbon:condition_uuid",
+      "@type": "xsd:string"
+    },
+    "treatment": {
+      "@id": "ribbon:treatment",
+      "@type": "@id",
+      "comment": "A medical treatment or therapy."
+    },
+    "treatment_uuid": {
+      "@id": "ribbon:treatment_uuid",
+      "@type": "xsd:string"
+    },
+    "organization": {
+      "@id": "ribbon:organization",
+      "@type": "@id",
+      "comment": "A healthcare organization (hospital system, medical group, etc.)."
+    },
+    "organization_uuid": {
+      "@id": "ribbon:organization_uuid",
+      "@type": "xsd:string"
+    },
+    "tin": {
+      "@id": "ribbon:tin",
+      "@type": "@id",
+      "comment": "A Tax Identification Number for a healthcare organization or practice."
+    },
+    "tin_id": {
+      "@id": "ribbon:tin_id",
+      "@type": "xsd:string"
+    },
+    "eligibility": {
+      "@id": "ribbon:eligibility",
+      "@type": "@id",
+      "comment": "Insurance eligibility verification for a patient/member."
+    },
+    "network": {
+      "@id": "ribbon:network",
+      "@type": "@id",
+      "comment": "An insurance network defining provider participation in a health plan."
+    },
+    "carrier": {
+      "@id": "ribbon:carrier",
+      "@type": "@id",
+      "comment": "A health insurance carrier (insurance company)."
+    },
+    "carrier_uuid": {
+      "@id": "ribbon:carrier_uuid",
+      "@type": "xsd:string"
+    },
+    "carrier_name": {
+      "@id": "ribbon:carrier_name",
+      "@type": "xsd:string"
+    },
+    "provider_type": {
+      "@id": "ribbon:provider_type",
+      "@type": "@id",
+      "comment": "The credential type of a healthcare provider (MD, DO, NP, PA, etc.)."
+    },
+    "provider_type_uuid": {
+      "@id": "ribbon:provider_type_uuid",
+      "@type": "xsd:string"
+    },
+    "location_type": {
+      "@id": "ribbon:location_type",
+      "@type": "@id",
+      "comment": "The category of a clinical location."
+    },
+    "location_type_uuid": {
+      "@id": "ribbon:location_type_uuid",
+      "@type": "xsd:string"
+    },
+    "procedure_cost_estimate": {
+      "@id": "ribbon:procedure_cost_estimate",
+      "@type": "@id",
+      "comment": "An estimated cost for a medical procedure at a provider location."
+    },
+    "network_analysis": {
+      "@id": "ribbon:network_analysis",
+      "@type": "@id",
+      "comment": "Analysis of provider network adequacy and composition."
+    },
+    "cost_index": {
+      "@id": "ribbon:cost_index",
+      "@type": "xsd:decimal",
+      "comment": "Normalized cost score relative to peer providers."
+    },
+    "efficiency_index": {
+      "@id": "ribbon:efficiency_index",
+      "@type": "xsd:decimal",
+      "comment": "Efficiency score relative to peer providers."
+    },
+    "outcomes_index": {
+      "@id": "ribbon:outcomes_index",
+      "@type": "xsd:decimal",
+      "comment": "Clinical quality outcomes score."
+    },
+    "confidence_score": {
+      "@id": "ribbon:confidence_score",
+      "@type": "xsd:decimal",
+      "comment": "Data completeness and accuracy score for provider-insurance associations."
+    },
+    "distance": {
+      "@id": "schema:distance",
+      "@type": "xsd:decimal",
+      "comment": "Search radius in miles for geographic provider searches."
+    },
+    "gender": {
+      "@id": "schema:gender",
+      "@type": "xsd:string"
+    },
+    "language": {
+      "@id": "schema:knowsLanguage",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "address": {
+      "@id": "schema:address"
+    },
+    "state": {
+      "@id": "schema:addressRegion"
+    },
+    "page": {
+      "@id": "ribbon:page",
+      "@type": "xsd:integer"
+    },
+    "page_size": {
+      "@id": "ribbon:page_size",
+      "@type": "xsd:integer"
+    },
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  }
+}

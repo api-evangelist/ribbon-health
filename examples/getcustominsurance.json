@@ -1,0 +1,13 @@
+{
+  "response_example": {
+    "uuid": "d8addf29-1054-4ccb-b179-dda65f7fefdd",
+    "carrier_association": "Aetna",
+    "carrier_brand": "Aetna",
+    "carrier_name": "Aetna",
+    "state": "NY",
+    "plan_name": "Aetna HealthFund Open Choice",
+    "plan_type": "PPO",
+    "display_name": "Aetna - HealthFund Open Choice - PPO",
+    "confidence": 4
+  }
+}

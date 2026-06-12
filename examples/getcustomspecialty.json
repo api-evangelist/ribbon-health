@@ -1,0 +1,14 @@
+{
+  "response_example": {
+    "uuid": "18d8ad26-7e5f-44ac-9afa-966efb375344",
+    "taxonomy_code": "207Q00000X",
+    "board_specialty": "Family Medicine",
+    "non_md_sub_specialty": "None",
+    "provider_name": "Family Medicine Doctor",
+    "taxonomy_1": "Allopathic & Osteopathic Physicians",
+    "taxonomy_2": "Family Medicine",
+    "display": "Family Medicine",
+    "provider_type": "Doctor",
+    "is_primary": true
+  }
+}

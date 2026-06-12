@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "getInsurances",
+  "description": "JSON Schema for getInsurances response from Ribbon Health H1 API",
+  "required": [
+    "count",
+    "next",
+    "previous",
+    "results"
+  ],
+  "type": "object",
+  "properties": {
+    "count": {
+      "type": "integer",
+      "description": "The total number of results matched, across all pages.",
+      "format": "int32",
+      "example": 141
+    },
+    "next": {
+      "type": "string",
+      "nullable": true,
+      "example": "https://api.ribbonhealth.com/v1/custom/insurances?search=aetna&page=3"
+    },
+    "previous": {
+      "type": "string",
+      "nullable": true,
+      "example": "https://api.ribbonhealth.com/v1/custom/insurances?search=aetna&page=1"
+    },
+    "results": {
+      "type": "array",
+      "description": "",
+      "items": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "description": "A UUID uniquely identifying this insurance",
+            "format": "uuid",
+            "example": "d8addf29-1054-4ccb-b179-dda65f7fefdd"
+          },
+          "carrier_association": {
+            "type": "string",
+            "nullable": true,
+            "example": "Aetna"
+          },
+          "carrier_brand": {
+            "type": "string",
+            "nullable": true,
+            "example": "Aetna"
+          },
+          "carrier_name": {
+            "type": "string",
+            "nullable": true,
+            "example": "Aetna"
+          },
+          "state": {
+            "type": "string",
+            "nullable": true,
+            "example": "NY"
+          },
+          "plan_name": {
+            "type": "string",
+            "nullable": true,
+            "example": "Aetna HealthFund Open Choice"
+          },
+          "plan_type": {
+            "type": "string",
+            "nullable": true,
+            "example": "PPO"
+          },
+          "metal_level": {
+            "type": "string",
+            "nullable": true
+          },
+          "display_name": {
+            "type": "string",
+            "example": "Aetna - HealthFund Open Choice - PPO"
+          },
+          "network": {
+            "type": "string",
+            "nullable": true
+          },
+          "confidence": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "example": 4
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "codes": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

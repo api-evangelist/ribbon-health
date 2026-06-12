@@ -1,0 +1,492 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "getCustomProvider",
+  "description": "JSON Schema for getCustomProvider response from Ribbon Health H1 API",
+  "type": "object",
+  "properties": {
+    "npi": {
+      "pattern": "^\\d{10}$",
+      "type": "string",
+      "description": "The healthcare provider's 10-digit National Provider Identifier (NPI)",
+      "example": "1861664294"
+    },
+    "first_name": {
+      "type": "string",
+      "description": "First name of the provider",
+      "example": "Jane"
+    },
+    "middle_name": {
+      "type": "string",
+      "description": "Middle name of the provider",
+      "nullable": true,
+      "example": "J"
+    },
+    "last_name": {
+      "type": "string",
+      "description": "Last name of the provider",
+      "example": "Doe"
+    },
+    "age": {
+      "type": "integer",
+      "description": "The estimated age of the provider",
+      "format": "int32",
+      "nullable": true,
+      "example": 38
+    },
+    "gender": {
+      "type": "string",
+      "description": "The gender of the provider",
+      "enum": [
+        "m",
+        "f"
+      ],
+      "x-enum-elements": [
+        {
+          "name": "m",
+          "description": ""
+        },
+        {
+          "name": "f",
+          "description": ""
+        }
+      ]
+    },
+    "ratings_count": {
+      "type": "integer",
+      "description": "Total number of ratings collected across different sources",
+      "format": "int32",
+      "example": 20
+    },
+    "ratings_avg": {
+      "type": "number",
+      "description": "Average patient satisfaction rating out of 10 points across multiple sources",
+      "nullable": true,
+      "example": 9.8
+    },
+    "degrees": {
+      "type": "array",
+      "description": "Lists all degrees associated with this provider (e.g. MD, OD, PhD)",
+      "items": {
+        "type": "string"
+      }
+    },
+    "specialties": {
+      "type": "array",
+      "description": "This lists all the specialties for a given provider",
+      "items": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "description": "A UUID uniquely identifying this specialty",
+            "format": "uuid",
+            "example": "18d8ad26-7e5f-44ac-9afa-966efb375344"
+          },
+          "taxonomy_code": {
+            "example": "207Q00000X",
+            "oneOf": [
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "board_specialty": {
+            "type": "string",
+            "nullable": true,
+            "example": "Family Medicine"
+          },
+          "board_sub_specialty": {
+            "type": "string",
+            "nullable": true
+          },
+          "non_md_specialty": {
+            "type": "string",
+            "nullable": true
+          },
+          "non_md_sub_specialty": {
+            "type": "string",
+            "nullable": true,
+            "example": "None"
+          },
+          "provider_name": {
+            "type": "string",
+            "nullable": true,
+            "example": "Family Medicine Doctor"
+          },
+          "colloquial": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxonomy_1": {
+            "type": "string",
+            "nullable": true,
+            "example": "Allopathic & Osteopathic Physicians"
+          },
+          "taxonomy_2": {
+            "type": "string",
+            "nullable": true,
+            "example": "Family Medicine"
+          },
+          "taxonomy_3": {
+            "type": "string",
+            "nullable": true
+          },
+          "display": {
+            "type": "string",
+            "example": "Family Medicine"
+          },
+          "provider_type": {
+            "type": "string",
+            "example": "Doctor"
+          },
+          "is_primary": {
+            "type": "boolean",
+            "description": "Whether or not a specialty is a provider's primary specialty",
+            "example": true
+          }
+        }
+      }
+    },
+    "languages": {
+      "type": "array",
+      "description": "List of confirmed languages spoken",
+      "items": {
+        "type": "string"
+      }
+    },
+    "educations": {
+      "type": "array",
+      "description": "List of the schools attended by the provider",
+      "items": {
+        "required": [
+          "education",
+          "type",
+          "year"
+        ],
+        "type": "object",
+        "properties": {
+          "education": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "Stritch School of Medicine"
+              },
+              "uuid": {
+                "type": "string",
+                "format": "uuid",
+                "example": "0b26c31a-d74a-4327-9702-57753b82a126"
+              }
+            }
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "year": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "example": 2007
+          }
+        }
+      }
+    },
+    "insurances": {
+      "type": "array",
+      "description": "List of insurances the provider accepts",
+      "items": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "description": "A UUID uniquely identifying this insurance",
+            "format": "uuid",
+            "example": "d8addf29-1054-4ccb-b179-dda65f7fefdd"
+          },
+          "carrier_association": {
+            "type": "string",
+            "nullable": true,
+            "example": "Aetna"
+          },
+          "carrier_brand": {
+            "type": "string",
+            "nullable": true,
+            "example": "Aetna"
+          },
+          "carrier_name": {
+            "type": "string",
+            "nullable": true,
+            "example": "Aetna"
+          },
+          "state": {
+            "type": "string",
+            "nullable": true,
+            "example": "NY"
+          },
+          "plan_name": {
+            "type": "string",
+            "nullable": true,
+            "example": "Aetna HealthFund Open Choice"
+          },
+          "plan_type": {
+            "type": "string",
+            "nullable": true,
+            "example": "PPO"
+          },
+          "metal_level": {
+            "type": "string",
+            "nullable": true
+          },
+          "display_name": {
+            "type": "string",
+            "example": "Aetna - HealthFund Open Choice - PPO"
+          },
+          "network": {
+            "type": "string",
+            "nullable": true
+          },
+          "confidence": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "example": 4
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "codes": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "provider_types": {
+      "type": "array",
+      "description": "There are high level classifications for different provider types -- e.g. \"Doctor\", \"Optometry\", \"Dental Providers\", \"Nursing\", etc.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "locations": {
+      "type": "array",
+      "description": "List of all locations this provider is known to practice at including any known phone numbers at these locations",
+      "items": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "description": "A UUID uniquely identifying this location",
+            "format": "uuid",
+            "example": "f38b9fd5-1e28-4f6e-953c-1e1493b68e21"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "example": "185 Berry St # 130, San Francisco, CA 94107, US"
+          },
+          "address_details": {
+            "type": "object",
+            "properties": {
+              "street": {
+                "type": "string",
+                "example": "185 Berry St # 130"
+              },
+              "address_line_1": {
+                "type": "string",
+                "example": "185 Berry St"
+              },
+              "address_line_2": {
+                "type": "string",
+                "nullable": true,
+                "example": "# 130"
+              },
+              "city": {
+                "type": "string",
+                "example": "San Francisco"
+              },
+              "state": {
+                "type": "string",
+                "example": "CA"
+              },
+              "zip": {
+                "type": "string",
+                "example": "94107"
+              }
+            }
+          },
+          "latitude": {
+            "type": "number",
+            "example": 37.7765973
+          },
+          "longitude": {
+            "type": "number",
+            "example": -122.3919488
+          },
+          "google_maps_link": {
+            "type": "string",
+            "example": "https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US"
+          },
+          "phone_numbers": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "type": "object",
+              "properties": {
+                "phone": {
+                  "type": "string",
+                  "example": "4155146410"
+                },
+                "details": {
+                  "type": "string",
+                  "example": "primary"
+                }
+              }
+            }
+          },
+          "faxes": {
+            "type": "array",
+            "description": "Fax numbers associated with this location.\n\nThis property only appears for customers purchasing fax data. If you would like this property and are not receiving it, please reach out to support.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "phone": {
+                  "type": "string",
+                  "example": "2121234567"
+                },
+                "details": {
+                  "type": "string",
+                  "example": "secondary"
+                },
+                "confidence": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 3
+                }
+              }
+            }
+          },
+          "confidence": {
+            "type": "integer",
+            "description": "Each location contains a confidence score. This score indicates the probability of the given provider practicing at said location with the included contact information\n\nThis field will only be populated for Ribbon-provided locations. Locations you create yourself will have a confidence score of `null`.",
+            "format": "int32",
+            "nullable": true,
+            "example": 2
+          },
+          "insurances": {
+            "type": "array",
+            "description": "List of insurances the accepted at this location",
+            "items": {
+              "type": "object",
+              "properties": {
+                "uuid": {
+                  "type": "string",
+                  "description": "A UUID uniquely identifying this insurance",
+                  "format": "uuid",
+                  "example": "d8addf29-1054-4ccb-b179-dda65f7fefdd"
+                },
+                "carrier_association": {
+                  "type": "string",
+                  "nullable": true,
+                  "example": "Aetna"
+                },
+                "carrier_brand": {
+                  "type": "string",
+                  "nullable": true,
+                  "example": "Aetna"
+                },
+                "carrier_name": {
+                  "type": "string",
+                  "nullable": true,
+                  "example": "Aetna"
+                },
+                "state": {
+                  "type": "string",
+                  "nullable": true,
+                  "example": "NY"
+                },
+                "plan_name": {
+                  "type": "string",
+                  "nullable": true,
+                  "example": "Aetna HealthFund Open Choice"
+                },
+                "plan_type": {
+                  "type": "string",
+                  "nullable": true,
+                  "example": "PPO"
+                },
+                "metal_level": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "display_name": {
+                  "type": "string",
+                  "example": "Aetna - HealthFund Open Choice - PPO"
+                },
+                "network": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "confidence": {
+                  "type": "integer",
+                  "format": "int32",
+                  "nullable": true,
+                  "example": 4
+                },
+                "category": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "codes": {
+                  "type": "array",
+                  "description": "",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "tins": {
+            "type": "string",
+            "description": "Comma separated list of standard 9-digit identification code(s) used by the IRS for business entities and used for contracting and paying provider/facility claims."
+          }
+        }
+      }
+    },
+    "online_profiles": {
+      "type": "array",
+      "description": "We aggregate profiles across a variety of different online sources, including booking platforms",
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "response_example": {
+    "uuid": "a1dbf998-a65b-4780-8361-648357785d96",
+    "name": "Baptist Health (Jacksonville)",
+    "address": "841 Prudential Dr # 1601, Jacksonville, FL 32207, US",
+    "latitude": 30.3159499,
+    "longitude": 81.6630919
+  }
+}
