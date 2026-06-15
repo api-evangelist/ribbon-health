@@ -6,5 +6,21 @@
     "notes": "RSS feed at h1.co/blog/feed returns valid RSS 2.0 but contains no items (last built 2022-10-19). Blog content is available at h1.co/blog/ via HTML. Previously Ribbon Health blog, now H1 blog after acquisition.",
     "lastChecked": "2026-06-12"
   },
-  "posts": []
+  "posts": [],
+  "repo": "ribbon-health",
+  "feeds": [
+    {
+      "source": "https://www.linkedin.com/company/ribbonhealth",
+      "error": "HTTPError"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-ld/ribbon-health-context.jsonld",
+      "feed_url": "https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-ld/ribbon-health-context.jsonld",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-14T20:42:17Z"
 }
