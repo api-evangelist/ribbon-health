@@ -1,0 +1,79 @@
+arazzo: 1.0.1
+info:
+  title: Ribbon Health Location and Insurance Lookup
+  summary: Find a practice location by address and name, read its detail record, then list the insurances accepted in that state.
+  description: >-
+    A location and accepted-insurance lookup flow aligned with the HL7 Da Vinci
+    Payer Data Exchange (PDex) Plan-Net intent, where a consumer confirms where a
+    practice operates and which plans it honors. A location is found by address
+    and name, its full record is read by location UUID, and the insurances active
+    in the location's state are listed so coverage can be matched. Every step
+    inlines its request so the flow is self-contained.
+  version: 1.0.0
+sourceDescriptions:
+- name: ribbonApi
+  url: ../openapi/ribbon-health-h1-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: location-insurance
+  summary: Find a location by address and name, read its detail, then list the insurances in that state.
+  description: >-
+    Searches locations by address and name, reads the first match by location
+    UUID, and lists the insurances active in the given state.
+  inputs:
+    type: object
+    required:
+    - address
+    - name
+    - state
+    properties:
+      address:
+        type: string
+        description: Street address used to search for the practice location.
+      name:
+        type: string
+        description: Location or practice name used to narrow the location search.
+      state:
+        type: string
+        description: Two-letter US state code used to list the insurances active in the location's region.
+  steps:
+  - stepId: findLocations
+    description: Search for the practice location by address and name.
+    operationId: getCustomLocations
+    parameters:
+    - name: address
+      in: query
+      value: $inputs.address
+    - name: name
+      in: query
+      value: $inputs.name
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      locationUuid: $response.body#/data/0/uuid
+  - stepId: getLocationDetail
+    description: Read the first matched location by its UUID for the full record.
+    operationId: getCustomLocation
+    parameters:
+    - name: location_uuid
+      in: path
+      value: $steps.findLocations.outputs.locationUuid
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      location: $response.body
+  - stepId: searchInsurances
+    description: List the insurances active in the location's state to match coverage.
+    operationId: getInsurances
+    parameters:
+    - name: state
+      in: query
+      value: $inputs.state
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      insurances: $response.body
+  outputs:
+    locationUuid: $steps.findLocations.outputs.locationUuid
+    location: $steps.getLocationDetail.outputs.location
+    insurances: $steps.searchInsurances.outputs.insurances

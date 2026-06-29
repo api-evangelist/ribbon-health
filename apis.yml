@@ -87,6 +87,17 @@ common:
     url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-ld/ribbon-health-context.jsonld
   - type: BlogRSS
     url: https://h1.co/blog/feed
+  - type: ArazzoWorkflows
+    workflows:
+    - url: arazzo/ribbon-health-location-insurance-workflow.yml
+      name: Ribbon Health Location and Insurance Lookup
+      summary: "Find a practice location by address and name, read its detail record, then list the insurances accepted in that state."
+    - url: arazzo/ribbon-health-provider-directory-management-workflow.yml
+      name: Ribbon Health Provider Directory Management
+      summary: "Upsert a custom provider record, set its locations and specialties, then confirm the maintained directory entry."
+    - url: arazzo/ribbon-health-provider-search-workflow.yml
+      name: Ribbon Health Provider Directory Search
+      summary: "Resolve an insurance carrier, find in-network providers by specialty and location, then read the matched provider's detail record."
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

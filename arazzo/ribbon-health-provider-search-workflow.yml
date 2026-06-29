@@ -1,0 +1,83 @@
+arazzo: 1.0.1
+info:
+  title: Ribbon Health Provider Directory Search
+  summary: Resolve an insurance carrier, find in-network providers by specialty and location, then read the matched provider's detail record.
+  description: >-
+    A provider-directory search flow aligned with the HL7 Da Vinci Payer Data
+    Exchange (PDex) Plan-Net intent, where a consumer locates an in-network
+    practitioner by insurance, specialty, and geography. The carrier is resolved
+    first to confirm the plan is recognized, the provider directory is then
+    queried with the specialty, location, and carrier filters, and the first
+    matching provider is read by NPI for the full directory record. Every step
+    inlines its request so the flow is self-contained.
+  version: 1.0.0
+sourceDescriptions:
+- name: ribbonApi
+  url: ../openapi/ribbon-health-h1-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provider-search
+  summary: Find an in-network provider by insurance, specialty, and location, then read the directory record.
+  description: >-
+    Resolves the insurance carrier, searches the provider directory by specialty,
+    location, and carrier, and reads the first matched provider by NPI.
+  inputs:
+    type: object
+    required:
+    - insuranceCarrier
+    - specialty
+    - location
+    properties:
+      insuranceCarrier:
+        type: string
+        description: Insurance carrier name used to confirm the plan and filter the provider directory.
+      specialty:
+        type: string
+        description: Provider specialty to search the directory on.
+      location:
+        type: string
+        description: Geographic location (city, state, or coordinates) used to scope the directory search.
+  steps:
+  - stepId: searchInsurances
+    description: Resolve the insurance carrier to confirm the plan is recognized in the directory.
+    operationId: getInsurances
+    parameters:
+    - name: carrier_name
+      in: query
+      value: $inputs.insuranceCarrier
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      insuranceId: $response.body#/data/0/uuid
+  - stepId: findProviders
+    description: Query the provider directory for practitioners matching the specialty, location, and carrier.
+    operationId: getCustomProviders
+    parameters:
+    - name: specialty
+      in: query
+      value: $inputs.specialty
+    - name: location
+      in: query
+      value: $inputs.location
+    - name: insurance_carrier_name
+      in: query
+      value: $inputs.insuranceCarrier
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      providerNpi: $response.body#/data/0/npi
+  - stepId: getProviderDetail
+    description: Read the first matched provider by NPI for the full directory record.
+    operationId: getCustomProvider
+    parameters:
+    - name: npi
+      in: path
+      value: $steps.findProviders.outputs.providerNpi
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      provider: $response.body
+  outputs:
+    insuranceId: $steps.searchInsurances.outputs.insuranceId
+    providerNpi: $steps.findProviders.outputs.providerNpi
+    provider: $steps.getProviderDetail.outputs.provider

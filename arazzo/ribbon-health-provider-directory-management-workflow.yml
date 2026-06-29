@@ -1,0 +1,95 @@
+arazzo: 1.0.1
+info:
+  title: Ribbon Health Provider Directory Management
+  summary: Upsert a custom provider record, set its locations and specialties, then confirm the maintained directory entry.
+  description: >-
+    A provider-directory maintenance flow supporting the HL7 Da Vinci Payer Data
+    Exchange (PDex) Plan-Net pattern, where a payer or network curates the
+    practitioner record that consumers later search. The provider is upserted by
+    NPI, its practice locations and specialties are written, and the record is
+    read back to confirm the directory entry reflects the updates. Every step
+    inlines its request so the flow is self-contained.
+  version: 1.0.0
+sourceDescriptions:
+- name: ribbonApi
+  url: ../openapi/ribbon-health-h1-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provider-directory-management
+  summary: Maintain a custom provider record by upserting the provider, locations, and specialties, then confirming it.
+  description: >-
+    Upserts the provider by NPI, sets its locations and specialties, and reads the
+    record back to confirm the maintained directory entry.
+  inputs:
+    type: object
+    required:
+    - npi
+    - provider
+    - locations
+    - specialties
+    properties:
+      npi:
+        type: string
+        description: National Provider Identifier for the custom provider record being maintained.
+      provider:
+        type: object
+        description: Provider attributes payload used to upsert the custom provider record.
+      locations:
+        type: object
+        description: Practice locations payload assigned to the provider.
+      specialties:
+        type: object
+        description: Specialties payload assigned to the provider.
+  steps:
+  - stepId: upsertProvider
+    description: Upsert the custom provider record by NPI.
+    operationId: putCustomProvider
+    parameters:
+    - name: npi
+      in: path
+      value: $inputs.npi
+    requestBody:
+      contentType: application/json
+      payload: $inputs.provider
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      providerNpi: $response.body#/npi
+  - stepId: setLocations
+    description: Write the provider's practice locations to the directory record.
+    operationId: putCustomProviderLocations
+    parameters:
+    - name: npi
+      in: path
+      value: $inputs.npi
+    requestBody:
+      contentType: application/json
+      payload: $inputs.locations
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: setSpecialties
+    description: Write the provider's specialties to the directory record.
+    operationId: putCustomProviderSpecialties
+    parameters:
+    - name: npi
+      in: path
+      value: $inputs.npi
+    requestBody:
+      contentType: application/json
+      payload: $inputs.specialties
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: confirmProvider
+    description: Read the provider back by NPI to confirm the maintained directory entry.
+    operationId: getCustomProvider
+    parameters:
+    - name: npi
+      in: path
+      value: $inputs.npi
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      provider: $response.body
+  outputs:
+    providerNpi: $steps.upsertProvider.outputs.providerNpi
+    provider: $steps.confirmProvider.outputs.provider
