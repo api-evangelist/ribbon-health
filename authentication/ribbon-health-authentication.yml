@@ -1,0 +1,12 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/ribbon-health-h1-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/ribbon-health-h1-api-openapi.yml

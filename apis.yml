@@ -59,6 +59,10 @@ apis:
       - type: JSONSchema
         url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getnetworkanalysis.json
 common:
+  - type: DomainSecurity
+    url: security/ribbon-health-domain-security.yml
+  - type: Authentication
+    url: authentication/ribbon-health-authentication.yml
   - type: Website
     url: https://h1.co
   - type: Documentation
