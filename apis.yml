@@ -59,6 +59,8 @@ apis:
       - type: JSONSchema
         url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getnetworkanalysis.json
 common:
+  - type: AgenticAccess
+    url: agentic-access/ribbon-health-agentic-access.yml
   - type: DomainSecurity
     url: security/ribbon-health-domain-security.yml
   - type: Authentication
