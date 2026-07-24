@@ -1,0 +1,2476 @@
+openapi: 3.0.0
+info:
+  title: ribbon-health Cost Estimates Locations API
+  description: 'An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
+
+    '
+  contact: {}
+  version: 1.0.0
+  x-codegen-settings:
+    Nullify404: false
+    GenerateAsyncCode: true
+    UseMethodPrefix: false
+    UseModelPostfix: false
+    UseControllerPrefix: true
+    UseEnumPostfix: true
+    CollectParameters: false
+    UseConstructorsForConfig: false
+    UseCommonSDKLibrary: false
+    iOSUseAppInfoPlist: false
+    AndroidUseAppManifest: false
+    BodySerialization: 0
+    EnableAdditionalModelProperties: false
+    PreserveParameterOrder: true
+    AppendContentHeaders: true
+    iOSGenerateCoreData: false
+    GenerateInterfaces: false
+    NodeHttpClient: NODE_REQUEST
+    ValidateRequiredParameters: false
+    JavaUsePropertiesConfig: false
+    Timeout: 0
+    StoreTimezoneInformation: false
+    EnablePHPComposerVersionString: false
+    EnableLogging: false
+    ArraySerialization: Indexed
+    ModelSerializationScheme: Json
+    UseExceptionPrefix: true
+    RunscopeEnabled: false
+    AndroidHttpClient: ANDROID_OK
+    ObjCHttpClient: UNIREST
+    CSharpHttpClient: UNIREST
+    PHPHttpClient: UNIREST
+    JavaHttpClient: JAVA_OK
+    ParameterArrayFormat: ParamArrayWithIndex
+    SecurityProtocols:
+    - Ssl3
+    - Tls
+    GenerateTravisConfig: false
+    GenerateCircleConfig: false
+    GenerateAppveyorConfig: false
+    GenerateJenkinsConfig: false
+    EnableHttpCache: false
+    Retries: 0
+    RetryInterval: 1
+    GenerateAdvancedDocs: true
+    UnderscoreNumbers: true
+    UseSingletonPattern: true
+    DisableLinting: false
+    ApplyCustomizations: []
+    SortResources: false
+    AllowSkippingSSLCertVerification: false
+    DoNotSplitWords: []
+    EnableGlobalUserAgent: true
+    ReturnCompleteHttpResponse: false
+    GenerateModels: true
+    GenerateExceptions: true
+    IgnoreIfNullJson: false
+    DisableDocs: false
+    LiftParameterDescriptionFromCustomType: false
+    ThrowForHttpErrorStatusCodes: true
+    ResponseMapping:
+      Type: Simple
+    ForceKeywordArgsInRuby: false
+    SymbolizeHashKeysInRuby: false
+    UsageExampleEndpoint:
+      Description: ''
+      EndpointGroupName: ''
+      EndpointName: ''
+    IsLatestVersion: false
+    EnableImmutableModels: false
+    GenerateEnums: true
+    BackoffFactor: 2
+    StatusCodesToRetry:
+    - 408
+    - 413
+    - 429
+    - 500
+    - 502
+    - 503
+    - 504
+    - 521
+    - 522
+    - 524
+    RequestMethodsToRetry:
+    - GET
+    - PUT
+    UserConfigurableRetries: true
+    UseEndpointMethodName: false
+    EncodeTemplateParameters: true
+    GenerateExamplesForOptionalFields: false
+    MultitargetDotnetVersions: false
+    BackoffMax: 0
+    RetryOnTimeout: true
+    EnableCookies: false
+    EnableJsonPassThroughForAny: false
+    PascalCaseEnumForCSharp: false
+    PascalCaseEnumForTypeScript: false
+    DisableMultipleAuth: false
+    AddSingleAuthDeprecatedCode: true
+    EnableExperimentalTypeCombinatorGeneration: false
+    ErrorTemplates: {}
+    UseSecuritySchemeNameForSingleAuth: false
+    EnableModelKeywordArgsInRuby: false
+    NullifyEmptyResponses: false
+    ExtendedAdditionalPropertiesSupport: false
+    EnforceStandardizedCasing: false
+  x-server-configuration:
+    default-environment: production
+    default-server: default
+    environments:
+    - name: production
+      servers:
+      - name: default
+        url: https://api.ribbonhealth.com/v1
+    parameters: []
+  x-image-uri: ''
+servers:
+- url: https://api.ribbonhealth.com/v1
+security:
+- BearerAuth: []
+tags:
+- name: Locations
+  description: ''
+paths:
+  /custom/locations:
+    get:
+      tags:
+      - Locations
+      summary: getCustomLocations
+      description: 'Allows you to search for different service locations, including specific location types.
+
+        '
+      operationId: getCustomLocations
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: The page of the results which was returned.
+        schema:
+          type: integer
+          format: int32
+        example: 1
+      - name: page_size
+        in: query
+        required: false
+        description: How many results are in each page.
+        schema:
+          type: integer
+          format: int32
+        example: 25
+      - name: fields
+        in: query
+        required: false
+        description: 'Comma separated list of fields within the location object to return. Can be used to greatly reduce the size of the response by requesting only data you intend to use.
+
+          Cannot be used in tandem with `_excl_fields`'
+        schema:
+          type: string
+        example: name,address
+      - name: _excl_fields
+        in: query
+        required: false
+        description: Comma separated list of fields within the location object to exclude from the response. Can be used to greatly reduce the size of the response by requesting only data you intend to use.
+        schema:
+          type: string
+        example: phone_numbers,insurances
+      - name: address
+        in: query
+        required: false
+        description: String input of an address that will be interpreted and geocoded in real time.
+        schema:
+          type: string
+        example: New York, NY
+      - name: name
+        in: query
+        required: false
+        description: String input for a 'fuzzy' search on location name.
+        schema:
+          type: string
+        example: Citymd Urgent Care
+      - name: distance
+        in: query
+        required: false
+        description: The proximity radius of locations returned.
+        schema:
+          type: integer
+          format: int32
+        example: 10
+      - name: location_types
+        in: query
+        required: false
+        description: 'Comma separated list of values that filter to what type of facilities to show. We categorize locations into 36 types. Clients can add their own locations with unique location_types, and they will also be included in the search.
+
+          See the Location Types Reference Endpoint for a list of all location types.'
+        schema:
+          type: string
+        example: Urgent Care
+      - name: _excl_location_types
+        in: query
+        required: false
+        description: Comma separated list of the 'types' of locations to exclude. Excludes locations with a matching location type.
+        schema:
+          type: string
+        example: Urgent Care
+      - name: location
+        in: query
+        required: false
+        description: Latitude/longitude pair of coordinates in lieu of a string address.
+        schema:
+          type: string
+        example: 37.7489816,-122.4802092
+      - name: location_ids
+        in: query
+        required: false
+        description: Comma separated list of desired practice location uuids.
+        schema:
+          type: string
+        example: 48d4eb27-d82b-4ea4-8ad0-4bcb2c46a960
+      - name: _excl_location_ids
+        in: query
+        required: false
+        description: Comma separated list of practice location uuids to exclude.
+        schema:
+          type: string
+        example: 48d4eb27-d82b-4ea4-8ad0-4bcb2c46a960
+      - name: insurance_ids
+        in: query
+        required: false
+        description: Comma separated list of desired insurance uuids. See all locations that accept a given insurance(s).
+        schema:
+          type: string
+        example: 24617022-92b3-4b9f-af1c-4df21ad6fb6f
+      - name: _excl_insurance_ids
+        in: query
+        required: false
+        description: Comma separated list of insurance uuids to exclude. Exclude locations that accept a given insurance(s).
+        schema:
+          type: string
+        example: 24617022-92b3-4b9f-af1c-4df21ad6fb6f
+      - name: insurance_carrier_name
+        in: query
+        required: false
+        description: 'String input of carrier_name in order to search for all locations that take at least one plan from a given insurance carrier.
+
+          Find the individual valid carrier_name values from the insurance objects returned in the Insurances Reference Endpoint.
+
+          Note: This input must be an exact string match to work'
+        schema:
+          type: string
+        example: Aetna
+      - name: min_confidence
+        in: query
+        required: false
+        description: Integer input (0-5) of the minimum confidence threshold for returned locations. min_location_confidence=4 will only display locations that have a confidence 4 or higher.
+        schema:
+          type: integer
+          format: int32
+      - name: national_bluecard
+        in: query
+        required: false
+        description: Boolean input that enables an API search to automatically default to the National BlueCard EPO/PPO Network whenever a member searches for out-of-state, in-network care and is covered by a BCBS Association PPO insurance plan. Use the parameter in conjunction with the address parameter and either the insurance_ids or insurance fuzzy search parameters. Defaults to true unless otherwise specified.
+        schema:
+          type: boolean
+        example: true
+      - name: organization_ids
+        in: query
+        required: false
+        description: Comma separated list of desired organization uuids. Filters to only locations that are affiliated with the given organization uuid(s).
+        schema:
+          type: string
+        example: 86722ebb-1dd1-4846-a1a9-a7a9e36c944d
+      - name: _excl_organization_ids
+        in: query
+        required: false
+        description: Comma separated list of organization uuids to exclude. Excludes locations that are affiliated with the given organization uuid(s).
+        schema:
+          type: string
+        example: 86722ebb-1dd1-4846-a1a9-a7a9e36c944d
+      - name: clinical_area
+        in: query
+        required: false
+        description: 'String input that is fuzzy matched to the most relevant `clinical_area.display` field. Only a single clinical area will be selected.
+
+          Returns all location with this clinical area.'
+        schema:
+          type: string
+        example: CT
+      - name: clinical_area_ids
+        in: query
+        required: false
+        description: 'Comma-separated list of desired clinical area ids.
+
+          Returns all locations with a clinical area exactly matching any of the entered IDs.
+
+          (Note: Use the `/clinical_areas/` reference endpoint to identify relevant IDs)'
+        schema:
+          type: string
+        example: 4c03ddb4-f6c0-4574-a51e-508f83c43d69
+      - name: _excl_clinical_area_ids
+        in: query
+        required: false
+        description: 'Comma-separated list of clinical area ids to exclude.
+
+          Returns all locations without a clinical area exactly matching any of the entered IDs.
+
+          (Note: Use the `/clinical_areas/` reference endpoint to identify relevant IDs)'
+        schema:
+          type: string
+        example: 4c03ddb4-f6c0-4574-a51e-508f83c43d69
+      - name: treatment
+        in: query
+        required: false
+        description: 'String input that is fuzzy matched to the most relevant `treatments.display` field. Only a single treatment will be selected.
+
+          Returns all locations with this treatment.'
+        schema:
+          type: string
+        example: Neck X-ray
+      - name: treatment_ids
+        in: query
+        required: false
+        description: 'Comma-separated list of desired treatment ids.
+
+          Returns all locations with a `treatments.uuid` field exactly matching any of the entered IDs.
+
+          (Note: Use the /treatments/ reference endpoint (docs) to identify relevant IDs)'
+        schema:
+          type: string
+        example: e3079513-bf55-41cc-87c6-f7ff5f923085
+      - name: _excl_treatment_ids
+        in: query
+        required: false
+        description: 'Comma-separated list of treatment ids to exclude.
+
+          Returns all locations without a `treatments.uuid` field exactly matching any of the entered IDs.
+
+          (Note: Use the /treatments/ reference endpoint (docs) to identify relevant IDs)'
+        schema:
+          type: string
+        example: e3079513-bf55-41cc-87c6-f7ff5f923085
+      - name: tin_ids
+        in: query
+        required: false
+        description: 'Comma separated list of desired TINs. Filters to only locations that are affiliated with the given TINs.
+
+          Note: This parameter cannot be used in combination with any other TINs related parameters. All other TINs related parameters will be ignored.'
+        schema:
+          type: string
+      - name: tin_name
+        in: query
+        required: false
+        description: String input that is fuzzy matched against the `tins.name` field. Filters to only locations that are affiliated with the given TINs name.
+        schema:
+          type: string
+      - name: tin_legal_name
+        in: query
+        required: false
+        description: String input that is fuzzy matched against the `tins.legal_name` field. Filters to only locations that are affiliated with the given TINs legal name.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns an ordered list of matching locations
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                - parameters
+                type: object
+                properties:
+                  parameters:
+                    type: object
+                    properties:
+                      total_count:
+                        type: integer
+                        description: The total number of results matched, across all pages.
+                        format: int32
+                        example: 141
+                      sort_by:
+                        type: string
+                        description: The main criteria used to sort results in the record set.
+                        example: distance
+                      geo:
+                        type: object
+                        properties:
+                          latitude:
+                            type: number
+                            description: The latitude the search was focused on.
+                            example: 40.7351327
+                          longitude:
+                            type: number
+                            description: The longitude the search was focused on.
+                            example: -73.9881657
+                      page:
+                        type: integer
+                        description: The page of the results which was returned.
+                        format: int32
+                        example: 1
+                      page_size:
+                        type: integer
+                        description: How many results are in each page.
+                        format: int32
+                        example: 25
+                      fields:
+                        type: array
+                        description: 'List of fields within the location object to return. Can be used to greatly reduce the size of the response by requesting only data you intend to use.
+
+
+                          Cannot be used in tandem with `_excl_fields`'
+                        example:
+                        - locations
+                        - age
+                        items:
+                          type: string
+                      _excl_fields:
+                        type: array
+                        description: List of fields within the location object to exclude from the response. Can be used to greatly reduce the size of the response by requesting only data you intend to use.
+                        example:
+                        - locations
+                        - age
+                        items:
+                          type: string
+                      address:
+                        type: string
+                        description: String input of an address that will be interpreted and geocoded in real time.
+                        example: New York, NY
+                      name:
+                        type: string
+                        description: String input for a fuzzy search on location name.
+                        example: Citymd Urgent Care
+                      distance:
+                        type: integer
+                        description: The proximity radius of locations returned.
+                        format: int32
+                        example: 10
+                      location_types:
+                        type: array
+                        description: 'List of values that filter to what type of facilities to show. We categorize locations into 34 types. Clients can add their own locations with unique location_types, and they will also be included in the search.
+
+                          See the Location Types Reference Endpoint for a list of all location types.'
+                        example:
+                        - Urgent Care
+                        items:
+                          type: string
+                      _excl_location_types:
+                        type: array
+                        description: List of the 'types' of locations to exclude. Excludes locations with a matching location type.
+                        example:
+                        - Urgent Care
+                        items:
+                          type: string
+                      insurance_ids:
+                        type: array
+                        description: List of desired insurance uuids. See all locations that accept a given insurance(s).
+                        example:
+                        - e527f6e3-fe42-4932-bf34-d81f1c1fd652
+                        items:
+                          type: string
+                          format: uuid
+                      _excl_insurance_ids:
+                        type: array
+                        description: List of insurance uuids to exclude. Exclude locations that accept a given insurance(s).
+                        example:
+                        - e527f6e3-fe42-4932-bf34-d81f1c1fd652
+                        items:
+                          type: string
+                          format: uuid
+                      insurance_carrier_name:
+                        type: string
+                        description: 'String input of carrier_name in order to search for all locations that take at least one plan from a given insurance carrier.
+
+                          Find the individual valid carrier_name values from the insurance objects returned in the Insurances Reference Endpoint.
+
+                          Note: This input must be an exact string match to work'
+                        example: Aetna
+                      min_confidence:
+                        maximum: 5
+                        minimum: 0
+                        type: integer
+                        description: Integer input (0-5) of the minimum confidence threshold for returned locations. min_location_confidence=4 will only display locations that have a confidence 4 or higher.
+                        format: int32
+                      national_bluecard:
+                        type: boolean
+                        description: Boolean input that enables an API search to automatically default to the National BlueCard EPO/PPO Network whenever a member searches for out-of-state, in-network care and is covered by a BCBS Association PPO insurance plan. Use the parameter in conjunction with the address parameter and either the insurance_ids or insurance fuzzy search parameters. Defaults to true unless otherwise specified.
+                        example: true
+                      organization_ids:
+                        type: array
+                        description: Comma separated list of desired organization uuids. Filters to only locations that are affiliated with the given organization uuid(s).
+                        example:
+                        - 86722ebb-1dd1-4846-a1a9-a7a9e36c944d
+                        items:
+                          type: string
+                      _excl_organization_ids:
+                        type: array
+                        description: Comma separated list of organization uuids to exclude. Excludes locations that are affiliated with the given organization uuid(s).
+                        example:
+                        - 86722ebb-1dd1-4846-a1a9-a7a9e36c944d
+                        items:
+                          type: string
+                      clinical_area:
+                        type: object
+                        properties:
+                          uuid:
+                            type: string
+                            description: A UUID uniquely identifying this clinical area
+                            format: uuid
+                            example: f352b596-dfb0-494f-9a03-224794f5d182
+                          display:
+                            type: string
+                            example: Substance Disorders (e.g. Opioid, Cocaine, Alcohol)
+                          types:
+                            type: array
+                            description: ''
+                            items:
+                              type: string
+                              enum:
+                              - providers
+                              - locations
+                              x-enum-elements:
+                              - name: providers
+                                description: ''
+                              - name: locations
+                                description: ''
+                          conditions:
+                            type: array
+                            description: ''
+                            items:
+                              type: object
+                              properties:
+                                uuid:
+                                  type: string
+                                  description: A UUID uniquely identifying this condition
+                                  format: uuid
+                                  example: 99f4762e-c4c2-4d1d-983a-2b8b303e691d
+                                display:
+                                  type: string
+                                  example: Chronic Depression
+                                types:
+                                  type: array
+                                  description: ''
+                                  items:
+                                    type: string
+                                    enum:
+                                    - focus_areas
+                                    - condition_cost_estimate
+                                    x-enum-elements:
+                                    - name: focus_areas
+                                      description: ''
+                                    - name: condition_cost_estimate
+                                      description: ''
+                                specialties:
+                                  type: array
+                                  description: ''
+                                  items:
+                                    type: object
+                                    properties:
+                                      uuid:
+                                        type: string
+                                        description: A UUID uniquely identifying this specialty
+                                        format: uuid
+                                        example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                                      taxonomy_code:
+                                        example: 207Q00000X
+                                        oneOf:
+                                        - type: string
+                                      board_specialty:
+                                        type: string
+                                        nullable: true
+                                        example: Family Medicine
+                                      board_sub_specialty:
+                                        type: string
+                                        nullable: true
+                                      non_md_specialty:
+                                        type: string
+                                        nullable: true
+                                      non_md_sub_specialty:
+                                        type: string
+                                        nullable: true
+                                        example: None
+                                      provider_name:
+                                        type: string
+                                        nullable: true
+                                        example: Family Medicine Doctor
+                                      colloquial:
+                                        type: string
+                                        nullable: true
+                                      taxonomy_1:
+                                        type: string
+                                        nullable: true
+                                        example: Allopathic & Osteopathic Physicians
+                                      taxonomy_2:
+                                        type: string
+                                        nullable: true
+                                        example: Family Medicine
+                                      taxonomy_3:
+                                        type: string
+                                        nullable: true
+                                      display:
+                                        type: string
+                                        example: Family Medicine
+                                      provider_type:
+                                        type: string
+                                        example: Doctor
+                                      is_primary:
+                                        type: boolean
+                                        description: Whether or not a specialty is a provider's primary specialty
+                                        example: true
+                                modules:
+                                  type: array
+                                  description: ''
+                                  items:
+                                    type: string
+                          treatments:
+                            type: array
+                            description: ''
+                            items:
+                              type: object
+                              properties:
+                                uuid:
+                                  type: string
+                                  description: A UUID uniquely identifying this treatment
+                                  format: uuid
+                                  example: 88a70b34-d0a7-47e2-89ac-4fed203eca2f
+                                display:
+                                  type: string
+                                  example: Knee Replacement
+                                types:
+                                  type: array
+                                  description: ''
+                                  items:
+                                    type: string
+                                    enum:
+                                    - providers
+                                    - locations
+                                    x-enum-elements:
+                                    - name: providers
+                                      description: ''
+                                    - name: locations
+                                      description: ''
+                                specialties:
+                                  type: array
+                                  description: ''
+                                  items:
+                                    type: object
+                                    properties:
+                                      uuid:
+                                        type: string
+                                        description: A UUID uniquely identifying this specialty
+                                        format: uuid
+                                        example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                                      taxonomy_code:
+                                        example: 207Q00000X
+                                        oneOf:
+                                        - type: string
+                                      board_specialty:
+                                        type: string
+                                        nullable: true
+                                        example: Family Medicine
+                                      board_sub_specialty:
+                                        type: string
+                                        nullable: true
+                                      non_md_specialty:
+                                        type: string
+                                        nullable: true
+                                      non_md_sub_specialty:
+                                        type: string
+                                        nullable: true
+                                        example: None
+                                      provider_name:
+                                        type: string
+                                        nullable: true
+                                        example: Family Medicine Doctor
+                                      colloquial:
+                                        type: string
+                                        nullable: true
+                                      taxonomy_1:
+                                        type: string
+                                        nullable: true
+                                        example: Allopathic & Osteopathic Physicians
+                                      taxonomy_2:
+                                        type: string
+                                        nullable: true
+                                        example: Family Medicine
+                                      taxonomy_3:
+                                        type: string
+                                        nullable: true
+                                      display:
+                                        type: string
+                                        example: Family Medicine
+                                      provider_type:
+                                        type: string
+                                        example: Doctor
+                                      is_primary:
+                                        type: boolean
+                                        description: Whether or not a specialty is a provider's primary specialty
+                                        example: true
+                          specialties:
+                            type: array
+                            description: ''
+                            items:
+                              type: object
+                              properties:
+                                uuid:
+                                  type: string
+                                  description: A UUID uniquely identifying this specialty
+                                  format: uuid
+                                  example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                                taxonomy_code:
+                                  example: 207Q00000X
+                                  oneOf:
+                                  - type: string
+                                board_specialty:
+                                  type: string
+                                  nullable: true
+                                  example: Family Medicine
+                                board_sub_specialty:
+                                  type: string
+                                  nullable: true
+                                non_md_specialty:
+                                  type: string
+                                  nullable: true
+                                non_md_sub_specialty:
+                                  type: string
+                                  nullable: true
+                                  example: None
+                                provider_name:
+                                  type: string
+                                  nullable: true
+                                  example: Family Medicine Doctor
+                                colloquial:
+                                  type: string
+                                  nullable: true
+                                taxonomy_1:
+                                  type: string
+                                  nullable: true
+                                  example: Allopathic & Osteopathic Physicians
+                                taxonomy_2:
+                                  type: string
+                                  nullable: true
+                                  example: Family Medicine
+                                taxonomy_3:
+                                  type: string
+                                  nullable: true
+                                display:
+                                  type: string
+                                  example: Family Medicine
+                                provider_type:
+                                  type: string
+                                  example: Doctor
+                                is_primary:
+                                  type: boolean
+                                  description: Whether or not a specialty is a provider's primary specialty
+                                  example: true
+                      clinical_area_ids:
+                        type: array
+                        description: 'List of desired clinical area ids.
+
+                          Returns all locations with a clinical area exactly matching any of the entered IDs.
+
+                          (Note: Use the `/clinical_areas/` reference endpoint to identify relevant IDs)'
+                        example:
+                        - 4c03ddb4-f6c0-4574-a51e-508f83c43d69
+                        items:
+                          type: string
+                      treatment:
+                        type: object
+                        properties:
+                          uuid:
+                            type: string
+                            description: A UUID uniquely identifying this treatment
+                            format: uuid
+                            example: 88a70b34-d0a7-47e2-89ac-4fed203eca2f
+                          display:
+                            type: string
+                            example: Knee Replacement
+                          types:
+                            type: array
+                            description: ''
+                            items:
+                              type: string
+                              enum:
+                              - providers
+                              - locations
+                              x-enum-elements:
+                              - name: providers
+                                description: ''
+                              - name: locations
+                                description: ''
+                          specialties:
+                            type: array
+                            description: ''
+                            items:
+                              type: object
+                              properties:
+                                uuid:
+                                  type: string
+                                  description: A UUID uniquely identifying this specialty
+                                  format: uuid
+                                  example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                                taxonomy_code:
+                                  example: 207Q00000X
+                                  oneOf:
+                                  - type: string
+                                board_specialty:
+                                  type: string
+                                  nullable: true
+                                  example: Family Medicine
+                                board_sub_specialty:
+                                  type: string
+                                  nullable: true
+                                non_md_specialty:
+                                  type: string
+                                  nullable: true
+                                non_md_sub_specialty:
+                                  type: string
+                                  nullable: true
+                                  example: None
+                                provider_name:
+                                  type: string
+                                  nullable: true
+                                  example: Family Medicine Doctor
+                                colloquial:
+                                  type: string
+                                  nullable: true
+                                taxonomy_1:
+                                  type: string
+                                  nullable: true
+                                  example: Allopathic & Osteopathic Physicians
+                                taxonomy_2:
+                                  type: string
+                                  nullable: true
+                                  example: Family Medicine
+                                taxonomy_3:
+                                  type: string
+                                  nullable: true
+                                display:
+                                  type: string
+                                  example: Family Medicine
+                                provider_type:
+                                  type: string
+                                  example: Doctor
+                                is_primary:
+                                  type: boolean
+                                  description: Whether or not a specialty is a provider's primary specialty
+                                  example: true
+                      treatment_ids:
+                        type: array
+                        description: 'List of desired treatment ids.
+
+                          Returns all providers with a `treatments.uuid` field exactly matching any of the entered IDs.
+
+                          (Note: Use the /treatments/ reference endpoint (docs) to identify relevant IDs)'
+                        example:
+                        - e3079513-bf55-41cc-87c6-f7ff5f923085
+                        items:
+                          type: string
+                      tin_ids:
+                        type: string
+                        description: List of desired TINs.
+                      tin_name:
+                        type: string
+                      tin_legal_name:
+                        type: string
+                  data:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        distance:
+                          type: number
+                          description: This location's distance from the center of a geographic search, in miles.
+                          example: 0.4
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this location
+                          format: uuid
+                          example: f38b9fd5-1e28-4f6e-953c-1e1493b68e21
+                        name:
+                          type: string
+                          nullable: true
+                        address:
+                          type: string
+                          example: '185 Berry St # 130, San Francisco, CA 94107, US'
+                        address_details:
+                          type: object
+                          properties:
+                            street:
+                              type: string
+                              example: '185 Berry St # 130'
+                            address_line_1:
+                              type: string
+                              example: 185 Berry St
+                            address_line_2:
+                              type: string
+                              nullable: true
+                              example: '# 130'
+                            city:
+                              type: string
+                              example: San Francisco
+                            state:
+                              type: string
+                              example: CA
+                            zip:
+                              type: string
+                              example: '94107'
+                        latitude:
+                          type: number
+                          example: 37.7765973
+                        longitude:
+                          type: number
+                          example: -122.3919488
+                        google_maps_link:
+                          type: string
+                          example: https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US
+                        phone_numbers:
+                          type: array
+                          description: ''
+                          items:
+                            type: object
+                            properties:
+                              phone:
+                                type: string
+                                example: '4155146410'
+                              details:
+                                type: string
+                                example: primary
+                        faxes:
+                          type: array
+                          description: 'Fax numbers associated with this location.
+
+
+                            This property only appears for customers purchasing fax data. If you would like this property and are not receiving it, please reach out to support.'
+                          items:
+                            type: object
+                            properties:
+                              phone:
+                                type: string
+                                example: '2121234567'
+                              details:
+                                type: string
+                                example: secondary
+                              confidence:
+                                type: integer
+                                format: int32
+                                example: 3
+                        confidence:
+                          type: integer
+                          description: 'Each location contains a confidence score. This score indicates the probability of the given provider practicing at said location with the included contact information
+
+
+                            This field will only be populated for Ribbon-provided locations. Locations you create yourself will have a confidence score of `null`.'
+                          format: int32
+                          nullable: true
+                          example: 2
+                        insurances:
+                          type: array
+                          description: List of insurances the accepted at this location
+                          items:
+                            type: object
+                            properties:
+                              uuid:
+                                type: string
+                                description: A UUID uniquely identifying this insurance
+                                format: uuid
+                                example: d8addf29-1054-4ccb-b179-dda65f7fefdd
+                              carrier_association:
+                                type: string
+                                nullable: true
+                                example: Aetna
+                              carrier_brand:
+                                type: string
+                                nullable: true
+                                example: Aetna
+                              carrier_name:
+                                type: string
+                                nullable: true
+                                example: Aetna
+                              state:
+                                type: string
+                                nullable: true
+                                example: NY
+                              plan_name:
+                                type: string
+                                nullable: true
+                                example: Aetna HealthFund Open Choice
+                              plan_type:
+                                type: string
+                                nullable: true
+                                example: PPO
+                              metal_level:
+                                type: string
+                                nullable: true
+                              display_name:
+                                type: string
+                                example: Aetna - HealthFund Open Choice - PPO
+                              network:
+                                type: string
+                                nullable: true
+                              confidence:
+                                type: integer
+                                format: int32
+                                nullable: true
+                                example: 4
+                              category:
+                                type: string
+                                nullable: true
+                              codes:
+                                type: array
+                                description: ''
+                                items:
+                                  oneOf:
+                                  - type: array
+                                    items:
+                                      type: string
+                        tins:
+                          type: string
+                          description: Comma separated list of standard 9-digit identification code(s) used by the IRS for business entities and used for contracting and paying provider/facility claims.
+        '400':
+          description: The search could not be completed as requested
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '403':
+          description: Account does not have access to custom locations directory
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 403
+                      code:
+                        type: string
+                        enum:
+                        - permission_denied
+                      message:
+                        type: string
+                        example: a trial account does not have access to this functionality
+                description: You are not allow to make this request
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/locations
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getCustomLocations
+        x-testDescription: 'Allows you to search for different service locations, including specific location types.
+
+          '
+    post:
+      tags:
+      - Locations
+      summary: postCustomLocations
+      description: 'Create new locations and facilities.
+
+
+        #### Example Use Case
+
+        You want to add new urgent care locations (or labs, imaging centers, therapy centers, etc.) to an area that are not yet included in the existing Ribbon locations listings.
+
+        '
+      operationId: postCustomLocations
+      parameters: []
+      requestBody:
+        description: A JSON object describing the location you want to create.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uuid:
+                  type: string
+                  description: A UUID uniquely identifying this location
+                  format: uuid
+                  example: f38b9fd5-1e28-4f6e-953c-1e1493b68e21
+                name:
+                  type: string
+                  nullable: true
+                address:
+                  type: string
+                  example: '185 Berry St # 130, San Francisco, CA 94107, US'
+                address_details:
+                  type: object
+                  properties:
+                    street:
+                      type: string
+                      example: '185 Berry St # 130'
+                    address_line_1:
+                      type: string
+                      example: 185 Berry St
+                    address_line_2:
+                      type: string
+                      nullable: true
+                      example: '# 130'
+                    city:
+                      type: string
+                      example: San Francisco
+                    state:
+                      type: string
+                      example: CA
+                    zip:
+                      type: string
+                      example: '94107'
+                latitude:
+                  type: number
+                  example: 37.7765973
+                longitude:
+                  type: number
+                  example: -122.3919488
+                google_maps_link:
+                  type: string
+                  example: https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US
+                phone_numbers:
+                  type: array
+                  description: ''
+                  items:
+                    type: object
+                    properties:
+                      phone:
+                        type: string
+                        example: '4155146410'
+                      details:
+                        type: string
+                        example: primary
+                faxes:
+                  type: array
+                  description: 'Fax numbers associated with this location.
+
+
+                    This property only appears for customers purchasing fax data. If you would like this property and are not receiving it, please reach out to support.'
+                  items:
+                    type: object
+                    properties:
+                      phone:
+                        type: string
+                        example: '2121234567'
+                      details:
+                        type: string
+                        example: secondary
+                      confidence:
+                        type: integer
+                        format: int32
+                        example: 3
+                confidence:
+                  type: integer
+                  description: 'Each location contains a confidence score. This score indicates the probability of the given provider practicing at said location with the included contact information
+
+
+                    This field will only be populated for Ribbon-provided locations. Locations you create yourself will have a confidence score of `null`.'
+                  format: int32
+                  nullable: true
+                  example: 2
+                insurances:
+                  type: array
+                  description: List of insurances UUIDs accepted at this location
+                  items:
+                    type: string
+                    format: uuid
+                tins:
+                  type: string
+                  description: Comma separated list of standard 9-digit identification code(s) used by the IRS for business entities and used for contracting and paying provider/facility claims.
+              description: A JSON object describing the location you want to create.
+        required: true
+      responses:
+        '201':
+          description: Location was successfully created.
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                        description: A UUID uniquely identifying this location
+                        format: uuid
+                        example: f38b9fd5-1e28-4f6e-953c-1e1493b68e21
+                      name:
+                        type: string
+                        nullable: true
+                      address:
+                        type: string
+                        example: '185 Berry St # 130, San Francisco, CA 94107, US'
+                      address_details:
+                        type: object
+                        properties:
+                          street:
+                            type: string
+                            example: '185 Berry St # 130'
+                          address_line_1:
+                            type: string
+                            example: 185 Berry St
+                          address_line_2:
+                            type: string
+                            nullable: true
+                            example: '# 130'
+                          city:
+                            type: string
+                            example: San Francisco
+                          state:
+                            type: string
+                            example: CA
+                          zip:
+                            type: string
+                            example: '94107'
+                      latitude:
+                        type: number
+                        example: 37.7765973
+                      longitude:
+                        type: number
+                        example: -122.3919488
+                      google_maps_link:
+                        type: string
+                        example: https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US
+                      phone_numbers:
+                        type: array
+                        description: ''
+                        items:
+                          type: object
+                          properties:
+                            phone:
+                              type: string
+                              example: '4155146410'
+                            details:
+                              type: string
+                              example: primary
+                      faxes:
+                        type: array
+                        description: 'Fax numbers associated with this location.
+
+
+                          This property only appears for customers purchasing fax data. If you would like this property and are not receiving it, please reach out to support.'
+                        items:
+                          type: object
+                          properties:
+                            phone:
+                              type: string
+                              example: '2121234567'
+                            details:
+                              type: string
+                              example: secondary
+                            confidence:
+                              type: integer
+                              format: int32
+                              example: 3
+                      confidence:
+                        type: integer
+                        description: 'Each location contains a confidence score. This score indicates the probability of the given provider practicing at said location with the included contact information
+
+
+                          This field will only be populated for Ribbon-provided locations. Locations you create yourself will have a confidence score of `null`.'
+                        format: int32
+                        nullable: true
+                        example: 2
+                      insurances:
+                        type: array
+                        description: List of insurances the accepted at this location
+                        items:
+                          type: object
+                          properties:
+                            uuid:
+                              type: string
+                              description: A UUID uniquely identifying this insurance
+                              format: uuid
+                              example: d8addf29-1054-4ccb-b179-dda65f7fefdd
+                            carrier_association:
+                              type: string
+                              nullable: true
+                              example: Aetna
+                            carrier_brand:
+                              type: string
+                              nullable: true
+                              example: Aetna
+                            carrier_name:
+                              type: string
+                              nullable: true
+                              example: Aetna
+                            state:
+                              type: string
+                              nullable: true
+                              example: NY
+                            plan_name:
+                              type: string
+                              nullable: true
+                              example: Aetna HealthFund Open Choice
+                            plan_type:
+                              type: string
+                              nullable: true
+                              example: PPO
+                            metal_level:
+                              type: string
+                              nullable: true
+                            display_name:
+                              type: string
+                              example: Aetna - HealthFund Open Choice - PPO
+                            network:
+                              type: string
+                              nullable: true
+                            confidence:
+                              type: integer
+                              format: int32
+                              nullable: true
+                              example: 4
+                            category:
+                              type: string
+                              nullable: true
+                            codes:
+                              type: array
+                              description: ''
+                              items:
+                                oneOf:
+                                - type: array
+                                  items:
+                                    type: string
+                      tins:
+                        type: string
+                        description: Comma separated list of standard 9-digit identification code(s) used by the IRS for business entities and used for contracting and paying provider/facility claims.
+        '400':
+          description: This request attempted to update with invalid schema or was missing required fields.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '409':
+          description: A location with this `address` and `name` pair already exists.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: Resource with given fields aready exists
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+  /custom/locations/{location_uuid}:
+    get:
+      tags:
+      - Locations
+      summary: getCustomLocation
+      description: 'Retrieve data on a specific location.
+
+        '
+      operationId: getCustomLocation
+      parameters:
+      - name: location_uuid
+        in: path
+        description: The UUID of the target location.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 34ecc98a-e49e-49e3-84f9-b0ab2ff00495
+      responses:
+        '200':
+          description: Returns a single location
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                    description: A UUID uniquely identifying this location
+                    format: uuid
+                    example: f38b9fd5-1e28-4f6e-953c-1e1493b68e21
+                  name:
+                    type: string
+                    nullable: true
+                  address:
+                    type: string
+                    example: '185 Berry St # 130, San Francisco, CA 94107, US'
+                  address_details:
+                    type: object
+                    properties:
+                      street:
+                        type: string
+                        example: '185 Berry St # 130'
+                      address_line_1:
+                        type: string
+                        example: 185 Berry St
+                      address_line_2:
+                        type: string
+                        nullable: true
+                        example: '# 130'
+                      city:
+                        type: string
+                        example: San Francisco
+                      state:
+                        type: string
+                        example: CA
+                      zip:
+                        type: string
+                        example: '94107'
+                  latitude:
+                    type: number
+                    example: 37.7765973
+                  longitude:
+                    type: number
+                    example: -122.3919488
+                  google_maps_link:
+                    type: string
+                    example: https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US
+                  phone_numbers:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        phone:
+                          type: string
+                          example: '4155146410'
+                        details:
+                          type: string
+                          example: primary
+                  faxes:
+                    type: array
+                    description: 'Fax numbers associated with this location.
+
+
+                      This property only appears for customers purchasing fax data. If you would like this property and are not receiving it, please reach out to support.'
+                    items:
+                      type: object
+                      properties:
+                        phone:
+                          type: string
+                          example: '2121234567'
+                        details:
+                          type: string
+                          example: secondary
+                        confidence:
+                          type: integer
+                          format: int32
+                          example: 3
+                  confidence:
+                    type: integer
+                    description: 'Each location contains a confidence score. This score indicates the probability of the given provider practicing at said location with the included contact information
+
+
+                      This field will only be populated for Ribbon-provided locations. Locations you create yourself will have a confidence score of `null`.'
+                    format: int32
+                    nullable: true
+                    example: 2
+                  insurances:
+                    type: array
+                    description: List of insurances the accepted at this location
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this insurance
+                          format: uuid
+                          example: d8addf29-1054-4ccb-b179-dda65f7fefdd
+                        carrier_association:
+                          type: string
+                          nullable: true
+                          example: Aetna
+                        carrier_brand:
+                          type: string
+                          nullable: true
+                          example: Aetna
+                        carrier_name:
+                          type: string
+                          nullable: true
+                          example: Aetna
+                        state:
+                          type: string
+                          nullable: true
+                          example: NY
+                        plan_name:
+                          type: string
+                          nullable: true
+                          example: Aetna HealthFund Open Choice
+                        plan_type:
+                          type: string
+                          nullable: true
+                          example: PPO
+                        metal_level:
+                          type: string
+                          nullable: true
+                        display_name:
+                          type: string
+                          example: Aetna - HealthFund Open Choice - PPO
+                        network:
+                          type: string
+                          nullable: true
+                        confidence:
+                          type: integer
+                          format: int32
+                          nullable: true
+                          example: 4
+                        category:
+                          type: string
+                          nullable: true
+                        codes:
+                          type: array
+                          description: ''
+                          items:
+                            oneOf:
+                            - type: array
+                              items:
+                                type: string
+                  tins:
+                    type: string
+                    description: Comma separated list of standard 9-digit identification code(s) used by the IRS for business entities and used for contracting and paying provider/facility claims.
+        '404':
+          description: The given location UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/locations/34ecc98a-e49e-49e3-84f9-b0ab2ff00495
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getCustomLocation
+        x-testDescription: 'Retrieve data on a specific location.
+
+          '
+    put:
+      tags:
+      - Locations
+      summary: putCustomLocation
+      description: 'Edit all fields that do not fall under `insurances`, `google_maps_link`, `latitude`, or `longitude`. You may also add new fields or remove existing fields.
+
+        '
+      operationId: putCustomLocation
+      parameters:
+      - name: location_uuid
+        in: path
+        description: The UUID of the target location.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 34ecc98a-e49e-49e3-84f9-b0ab2ff00495
+      requestBody:
+        description: A JSON object mapping the name of the field to update to its new value
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                remove_fields:
+                  type: array
+                  description: An optional list of custom fields name to remove from the location
+                  items:
+                    type: string
+              additionalProperties:
+                oneOf:
+                - type: string
+                - type: integer
+                  format: int32
+                - type: boolean
+                - nullable: true
+                x-is-dynamic: true
+              example:
+                location_types: Imaging Center
+                priority_flag: true
+              description: A JSON object mapping the name of the field to update to its new value
+        required: true
+      responses:
+        '200':
+          description: The specified fields were successfully updated or added
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      remove_fields:
+                        type: array
+                        description: An optional list of custom fields name to remove from the location
+                        items:
+                          type: string
+                    additionalProperties:
+                      oneOf:
+                      - type: string
+                      - type: integer
+                        format: int32
+                      - type: boolean
+                      - nullable: true
+                      x-is-dynamic: true
+                    example:
+                      location_types: Imaging Center
+                      priority_flag: true
+        '400':
+          description: This request attempted to update fields which cannot be customized or attempted to set a location_type value which does not exist.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '404':
+          description: The given location UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+    delete:
+      tags:
+      - Locations
+      summary: deleteCustomLocation
+      description: 'Delete a location.
+
+        '
+      operationId: deleteCustomLocation
+      parameters:
+      - name: location_uuid
+        in: path
+        description: The UUID of the target location.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 34ecc98a-e49e-49e3-84f9-b0ab2ff00495
+      responses:
+        '204':
+          description: Location was successfully deleted
+          content: {}
+        '404':
+          description: The given location UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: DELETE
+          uri: /custom/locations/34ecc98a-e49e-49e3-84f9-b0ab2ff00495
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '204'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test deleteCustomLocation
+        x-testDescription: 'Delete a location.
+
+          '
+  /custom/locations/{location_uuid}/insurances:
+    put:
+      tags:
+      - Locations
+      summary: putCustomLocationInsurances
+      description: 'Add or remove insurances from a location using our standard insurance UUIDs.
+
+        '
+      operationId: putCustomLocationInsurances
+      parameters:
+      - name: location_uuid
+        in: path
+        description: The UUID of the target location.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 34ecc98a-e49e-49e3-84f9-b0ab2ff00495
+      requestBody:
+        description: A set of instructions for how to update the location's insurances.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                add:
+                  type: array
+                  description: A list of UUIDs to add to this location's set.
+                  example:
+                  - 003aa14f-31ed-4c20-8888-07055d69afb6
+                  items:
+                    type: string
+                    format: uuid
+                remove:
+                  type: array
+                  description: A list of UUIDs to remove to this location's set.
+                  example:
+                  - 000914b4-d165-4343-bd17-0054505faaa5
+                  items:
+                    type: string
+                    format: uuid
+                override:
+                  type: array
+                  description: 'A list of UUIDs to remove to completely replace this location''s set with.
+
+                    Not supported in combination with either `add` or `remove`.'
+                  items:
+                    type: string
+                    format: uuid
+              example:
+                add:
+                - 003aa14f-31ed-4c20-8888-07055d69afb6
+                remove:
+                - 000914b4-d165-4343-bd17-0054505faaa5
+              description: A set of instructions for how to update the location's insurances.
+        required: true
+      responses:
+        '200':
+          description: The insurances list was successfully modified.
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      add:
+                        type: array
+                        description: A list of UUIDs to add to this location's set.
+                        example:
+                        - 003aa14f-31ed-4c20-8888-07055d69afb6
+                        items:
+                          type: string
+                          format: uuid
+                      remove:
+                        type: array
+                        description: A list of UUIDs to remove to this location's set.
+                        example:
+                        - 000914b4-d165-4343-bd17-0054505faaa5
+                        items:
+                          type: string
+                          format: uuid
+                      override:
+                        type: array
+                        description: 'A list of UUIDs to remove to completely replace this location''s set with.
+
+                          Not supported in combination with either `add` or `remove`.'
+                        items:
+                          type: string
+                          format: uuid
+                    example:
+                      add:
+                      - 003aa14f-31ed-4c20-8888-07055d69afb6
+                      remove:
+                      - 000914b4-d165-4343-bd17-0054505faaa5
+        '400':
+          description: This request attempted to use fields which are not supported, or attempted to use invalid value type.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '404':
+          description: The given location UUID cannot be found, or NPI in request path is not in custom provider directory.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+  /custom/locations/{location_uuid}/organizations:
+    put:
+      tags:
+      - Locations
+      summary: putCustomLocationOrganizations
+      description: 'Add or remove organizations from a location using our standard organization UUIDs.
+
+        '
+      operationId: putCustomLocationOrganizations
+      parameters:
+      - name: location_uuid
+        in: path
+        description: The UUID of the target location.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 34ecc98a-e49e-49e3-84f9-b0ab2ff00495
+      requestBody:
+        description: A set of instructions for how to update the location's organizations.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                add:
+                  type: array
+                  description: A list of UUIDs to add to this location's set.
+                  example:
+                  - 003aa14f-31ed-4c20-8888-07055d69afb6
+                  items:
+                    type: string
+                    format: uuid
+                remove:
+                  type: array
+                  description: A list of UUIDs to remove to this location's set.
+                  example:
+                  - 000914b4-d165-4343-bd17-0054505faaa5
+                  items:
+                    type: string
+                    format: uuid
+                override:
+                  type: array
+                  description: 'A list of UUIDs to remove to completely replace this location''s set with.
+
+                    Not supported in combination with either `add` or `remove`.'
+                  items:
+                    type: string
+                    format: uuid
+              example:
+                add:
+                - 003aa14f-31ed-4c20-8888-07055d69afb6
+                remove:
+                - 000914b4-d165-4343-bd17-0054505faaa5
+              description: A set of instructions for how to update the location's organizations.
+        required: true
+      responses:
+        '200':
+          description: The organizations list was successfully modified.
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      add:
+                        type: array
+                        description: A list of UUIDs to add to this location's set.
+                        example:
+                        - 003aa14f-31ed-4c20-8888-07055d69afb6
+                        items:
+                          type: string
+                          format: uuid
+                      remove:
+                        type: array
+                        description: A list of UUIDs to remove to this location's set.
+                        example:
+                        - 000914b4-d165-4343-bd17-0054505faaa5
+                        items:
+                          type: string
+                          format: uuid
+                      override:
+                        type: array
+                        description: 'A list of UUIDs to remove to completely replace this location''s set with.
+
+                          Not supported in combination with either `add` or `remove`.'
+                        items:
+                          type: string
+                          format: uuid
+                    example:
+                      add:
+                      - 003aa14f-31ed-4c20-8888-07055d69afb6
+                      remove:
+                      - 000914b4-d165-4343-bd17-0054505faaa5
+        '400':
+          description: This request attempted to use fields which are not supported, or attempted to use invalid value type.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '404':
+          description: The given location UUID cannot be found, or NPI in request path is not in custom provider directory.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+  /custom/locations/{location_uuid}/clinical_areas:
+    put:
+      tags:
+      - Locations
+      summary: putCustomLocationClinicalAreas
+      description: 'Add or remove clinical areas from a location using our standard clinical area UUIDs.
+
+        '
+      operationId: putCustomLocationClinicalAreas
+      parameters:
+      - name: location_uuid
+        in: path
+        description: The UUID of the target location.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 34ecc98a-e49e-49e3-84f9-b0ab2ff00495
+      requestBody:
+        description: A set of instructions for how to update the location's clinical areas.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                add:
+                  type: array
+                  description: A list of UUIDs to add to this location's set.
+                  example:
+                  - 003aa14f-31ed-4c20-8888-07055d69afb6
+                  items:
+                    type: string
+                    format: uuid
+                remove:
+                  type: array
+                  description: A list of UUIDs to remove to this location's set.
+                  example:
+                  - 000914b4-d165-4343-bd17-0054505faaa5
+                  items:
+                    type: string
+                    format: uuid
+                override:
+                  type: array
+                  description: 'A list of UUIDs to remove to completely replace this location''s set with.
+
+                    Not supported in combination with either `add` or `remove`.'
+                  items:
+                    type: string
+                    format: uuid
+              example:
+                add:
+                - 003aa14f-31ed-4c20-8888-07055d69afb6
+                remove:
+                - 000914b4-d165-4343-bd17-0054505faaa5
+              description: A set of instructions for how to update the location's clinical areas.
+        required: true
+      responses:
+        '200':
+          description: The clinical areas list was successfully modified.
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      add:
+                        type: array
+                        description: A list of UUIDs to add to this location's set.
+                        example:
+                        - 003aa14f-31ed-4c20-8888-07055d69afb6
+                        items:
+                          type: string
+                          format: uuid
+                      remove:
+                        type: array
+                        description: A list of UUIDs to remove to this location's set.
+                        example:
+                        - 000914b4-d165-4343-bd17-0054505faaa5
+                        items:
+                          type: string
+                          format: uuid
+                      override:
+                        type: array
+                        description: 'A list of UUIDs to remove to completely replace this location''s set with.
+
+                          Not supported in combination with either `add` or `remove`.'
+                        items:
+                          type: string
+                          format: uuid
+                    example:
+                      add:
+                      - 003aa14f-31ed-4c20-8888-07055d69afb6
+                      remove:
+                      - 000914b4-d165-4343-bd17-0054505faaa5
+        '400':
+          description: This request attempted to use fields which are not supported, or attempted to use invalid value type.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '404':
+          description: The given location UUID cannot be found, or NPI in request path is not in custom provider directory.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

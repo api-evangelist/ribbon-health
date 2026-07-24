@@ -1,0 +1,3455 @@
+openapi: 3.0.0
+info:
+  title: ribbon-health Cost Estimates Reference Endpoints API
+  description: 'An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
+
+    '
+  contact: {}
+  version: 1.0.0
+  x-codegen-settings:
+    Nullify404: false
+    GenerateAsyncCode: true
+    UseMethodPrefix: false
+    UseModelPostfix: false
+    UseControllerPrefix: true
+    UseEnumPostfix: true
+    CollectParameters: false
+    UseConstructorsForConfig: false
+    UseCommonSDKLibrary: false
+    iOSUseAppInfoPlist: false
+    AndroidUseAppManifest: false
+    BodySerialization: 0
+    EnableAdditionalModelProperties: false
+    PreserveParameterOrder: true
+    AppendContentHeaders: true
+    iOSGenerateCoreData: false
+    GenerateInterfaces: false
+    NodeHttpClient: NODE_REQUEST
+    ValidateRequiredParameters: false
+    JavaUsePropertiesConfig: false
+    Timeout: 0
+    StoreTimezoneInformation: false
+    EnablePHPComposerVersionString: false
+    EnableLogging: false
+    ArraySerialization: Indexed
+    ModelSerializationScheme: Json
+    UseExceptionPrefix: true
+    RunscopeEnabled: false
+    AndroidHttpClient: ANDROID_OK
+    ObjCHttpClient: UNIREST
+    CSharpHttpClient: UNIREST
+    PHPHttpClient: UNIREST
+    JavaHttpClient: JAVA_OK
+    ParameterArrayFormat: ParamArrayWithIndex
+    SecurityProtocols:
+    - Ssl3
+    - Tls
+    GenerateTravisConfig: false
+    GenerateCircleConfig: false
+    GenerateAppveyorConfig: false
+    GenerateJenkinsConfig: false
+    EnableHttpCache: false
+    Retries: 0
+    RetryInterval: 1
+    GenerateAdvancedDocs: true
+    UnderscoreNumbers: true
+    UseSingletonPattern: true
+    DisableLinting: false
+    ApplyCustomizations: []
+    SortResources: false
+    AllowSkippingSSLCertVerification: false
+    DoNotSplitWords: []
+    EnableGlobalUserAgent: true
+    ReturnCompleteHttpResponse: false
+    GenerateModels: true
+    GenerateExceptions: true
+    IgnoreIfNullJson: false
+    DisableDocs: false
+    LiftParameterDescriptionFromCustomType: false
+    ThrowForHttpErrorStatusCodes: true
+    ResponseMapping:
+      Type: Simple
+    ForceKeywordArgsInRuby: false
+    SymbolizeHashKeysInRuby: false
+    UsageExampleEndpoint:
+      Description: ''
+      EndpointGroupName: ''
+      EndpointName: ''
+    IsLatestVersion: false
+    EnableImmutableModels: false
+    GenerateEnums: true
+    BackoffFactor: 2
+    StatusCodesToRetry:
+    - 408
+    - 413
+    - 429
+    - 500
+    - 502
+    - 503
+    - 504
+    - 521
+    - 522
+    - 524
+    RequestMethodsToRetry:
+    - GET
+    - PUT
+    UserConfigurableRetries: true
+    UseEndpointMethodName: false
+    EncodeTemplateParameters: true
+    GenerateExamplesForOptionalFields: false
+    MultitargetDotnetVersions: false
+    BackoffMax: 0
+    RetryOnTimeout: true
+    EnableCookies: false
+    EnableJsonPassThroughForAny: false
+    PascalCaseEnumForCSharp: false
+    PascalCaseEnumForTypeScript: false
+    DisableMultipleAuth: false
+    AddSingleAuthDeprecatedCode: true
+    EnableExperimentalTypeCombinatorGeneration: false
+    ErrorTemplates: {}
+    UseSecuritySchemeNameForSingleAuth: false
+    EnableModelKeywordArgsInRuby: false
+    NullifyEmptyResponses: false
+    ExtendedAdditionalPropertiesSupport: false
+    EnforceStandardizedCasing: false
+  x-server-configuration:
+    default-environment: production
+    default-server: default
+    environments:
+    - name: production
+      servers:
+      - name: default
+        url: https://api.ribbonhealth.com/v1
+    parameters: []
+  x-image-uri: ''
+servers:
+- url: https://api.ribbonhealth.com/v1
+security:
+- BearerAuth: []
+tags:
+- name: Reference Endpoints
+  description: ''
+paths:
+  /custom/insurances:
+    get:
+      tags:
+      - Reference Endpoints
+      summary: getInsurances
+      description: Search and list insurances that exist within the Ribbon API.
+      operationId: getInsurances
+      parameters:
+      - name: search
+        in: query
+        required: false
+        description: String input that fuzzy searches across `display_name`, `carrier_name`, and `uuid`.
+        schema:
+          type: string
+        example: Aetna
+      - name: carrier_association
+        in: query
+        required: false
+        description: 'Comma separated list of the carrier association of insurances you are searching for.
+
+
+          Note: This input must be an exact string match to work'
+        schema:
+          type: string
+        example: BCBS Association
+      - name: carrier_brand
+        in: query
+        required: false
+        description: 'Comma separated list of the carrier brand of insurances you are searching for.
+
+
+          Note: This input must be an exact string match to work'
+        schema:
+          type: string
+        example: BCBS
+      - name: carrier_name
+        in: query
+        required: false
+        description: 'Comma separated list of the carrier name of insurances you are searching for.
+
+
+          Note: This input must be an exact string match to work'
+        schema:
+          type: string
+        example: Blue Cross Blue Shield of Illinois
+      - name: state
+        in: query
+        required: false
+        description: Two letter abbreviated state code of insurances you are searching for.
+        schema:
+          type: string
+        example: NY
+      - name: plan_name
+        in: query
+        required: false
+        description: Exact string input of the plan name of insurances you are searching for.
+        schema:
+          type: string
+        example: BlueCare Direct
+      - name: plan_type
+        in: query
+        required: false
+        description: Exact string input of the plan type of insurances you are searching for.
+        schema:
+          type: string
+        example: PPO
+      - name: display_name
+        in: query
+        required: false
+        description: Exact string input of the display name of insurances you are searching for.
+        schema:
+          type: string
+        example: Blue Cross Blue Shield of Illinois - BlueCare Direct - HMO
+      - name: category
+        in: query
+        required: false
+        description: 'Comma separated list of the category of insurances you are searching for.
+
+
+          Note: This input must be an exact string match to work'
+        schema:
+          type: string
+        example: Medicare Advantage
+      - name: _excl_category
+        in: query
+        required: false
+        description: 'Comma separated list of the category of insurances you wish to exclude.
+
+
+          Note: This input must be an exact string match to work'
+        schema:
+          type: string
+        example: Medicare Advantage
+      - name: codes
+        in: query
+        required: false
+        description: Single code input to search for plans with an exact string match within the codes field.
+        schema:
+          type: string
+        example: H9572-001
+      - name: partial_codes
+        in: query
+        required: false
+        description: 'Partial string input to match to the codes field.
+
+          For Medicare Advantage plans this is a contract ID (i.e. H9572). For Federal or State Exchange plans this is the first 10 digits of the HIOS ID (i.e. 36096il100)
+
+
+          Note: This parameter can only be used if the `category` param is also utilized with a single category value.'
+        schema:
+          type: string
+        example: H9572
+      responses:
+        '200':
+          description: Insurances returned from a valid request
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - next
+                - previous
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: The total number of results matched, across all pages.
+                    format: int32
+                    example: 141
+                  next:
+                    type: string
+                    nullable: true
+                    example: https://api.ribbonhealth.com/v1/custom/insurances?search=aetna&page=3
+                  previous:
+                    type: string
+                    nullable: true
+                    example: https://api.ribbonhealth.com/v1/custom/insurances?search=aetna&page=1
+                  results:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this insurance
+                          format: uuid
+                          example: d8addf29-1054-4ccb-b179-dda65f7fefdd
+                        carrier_association:
+                          type: string
+                          nullable: true
+                          example: Aetna
+                        carrier_brand:
+                          type: string
+                          nullable: true
+                          example: Aetna
+                        carrier_name:
+                          type: string
+                          nullable: true
+                          example: Aetna
+                        state:
+                          type: string
+                          nullable: true
+                          example: NY
+                        plan_name:
+                          type: string
+                          nullable: true
+                          example: Aetna HealthFund Open Choice
+                        plan_type:
+                          type: string
+                          nullable: true
+                          example: PPO
+                        metal_level:
+                          type: string
+                          nullable: true
+                        display_name:
+                          type: string
+                          example: Aetna - HealthFund Open Choice - PPO
+                        network:
+                          type: string
+                          nullable: true
+                        confidence:
+                          type: integer
+                          format: int32
+                          nullable: true
+                          example: 4
+                        category:
+                          type: string
+                          nullable: true
+                        codes:
+                          type: array
+                          description: ''
+                          items:
+                            oneOf:
+                            - type: array
+                              items:
+                                type: string
+        '400':
+          description: A failure due to a malformed request
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/insurances
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getInsurances
+        x-testDescription: 'Search and list insurances that exist within the Ribbon API.
+
+          '
+    post:
+      tags:
+      - Reference Endpoints
+      summary: postCustomInsurance
+      description: 'Create a insurance with desired field values.
+
+        '
+      operationId: postCustomInsurance
+      parameters: []
+      requestBody:
+        description: A JSON object mapping the name of the field to update to its new value
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uuid:
+                  type: string
+                  description: A UUID uniquely identifying this insurance
+                  format: uuid
+                  example: d8addf29-1054-4ccb-b179-dda65f7fefdd
+                carrier_association:
+                  type: string
+                  nullable: true
+                  example: Aetna
+                carrier_brand:
+                  type: string
+                  nullable: true
+                  example: Aetna
+                carrier_name:
+                  type: string
+                  nullable: true
+                  example: Aetna
+                state:
+                  type: string
+                  nullable: true
+                  example: NY
+                plan_name:
+                  type: string
+                  nullable: true
+                  example: Aetna HealthFund Open Choice
+                plan_type:
+                  type: string
+                  nullable: true
+                  example: PPO
+                metal_level:
+                  type: string
+                  nullable: true
+                display_name:
+                  type: string
+                  example: Aetna - HealthFund Open Choice - PPO
+                network:
+                  type: string
+                  nullable: true
+                confidence:
+                  type: integer
+                  format: int32
+                  nullable: true
+                  example: 4
+                category:
+                  type: string
+                  nullable: true
+                codes:
+                  type: array
+                  description: ''
+                  items:
+                    oneOf:
+                    - type: array
+                      items:
+                        type: string
+              description: A JSON object mapping the name of the field to update to its new value
+        required: true
+      responses:
+        '201':
+          description: Insurance was successfully created.
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                        description: A UUID uniquely identifying this insurance
+                        format: uuid
+                        example: d8addf29-1054-4ccb-b179-dda65f7fefdd
+                      carrier_association:
+                        type: string
+                        nullable: true
+                        example: Aetna
+                      carrier_brand:
+                        type: string
+                        nullable: true
+                        example: Aetna
+                      carrier_name:
+                        type: string
+                        nullable: true
+                        example: Aetna
+                      state:
+                        type: string
+                        nullable: true
+                        example: NY
+                      plan_name:
+                        type: string
+                        nullable: true
+                        example: Aetna HealthFund Open Choice
+                      plan_type:
+                        type: string
+                        nullable: true
+                        example: PPO
+                      metal_level:
+                        type: string
+                        nullable: true
+                      display_name:
+                        type: string
+                        example: Aetna - HealthFund Open Choice - PPO
+                      network:
+                        type: string
+                        nullable: true
+                      confidence:
+                        type: integer
+                        format: int32
+                        nullable: true
+                        example: 4
+                      category:
+                        type: string
+                        nullable: true
+                      codes:
+                        type: array
+                        description: ''
+                        items:
+                          oneOf:
+                          - type: array
+                            items:
+                              type: string
+        '400':
+          description: This request attempted to update with invalid schema or was missing required fields.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '409':
+          description: Insurance object with given fields already exists.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: Resource with given fields aready exists
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+  /custom/insurances/{insurance_uuid}:
+    get:
+      tags:
+      - Reference Endpoints
+      summary: getCustomInsurance
+      description: 'Retrieve data on a specific insurance.
+
+        '
+      operationId: getCustomInsurance
+      parameters:
+      - name: insurance_uuid
+        in: path
+        description: The UUID of the target insurance.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 12403618-49d5-43ee-99ad-5e99194fe05c
+      responses:
+        '200':
+          description: Returns a single insurance
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                    description: A UUID uniquely identifying this insurance
+                    format: uuid
+                    example: d8addf29-1054-4ccb-b179-dda65f7fefdd
+                  carrier_association:
+                    type: string
+                    nullable: true
+                    example: Aetna
+                  carrier_brand:
+                    type: string
+                    nullable: true
+                    example: Aetna
+                  carrier_name:
+                    type: string
+                    nullable: true
+                    example: Aetna
+                  state:
+                    type: string
+                    nullable: true
+                    example: NY
+                  plan_name:
+                    type: string
+                    nullable: true
+                    example: Aetna HealthFund Open Choice
+                  plan_type:
+                    type: string
+                    nullable: true
+                    example: PPO
+                  metal_level:
+                    type: string
+                    nullable: true
+                  display_name:
+                    type: string
+                    example: Aetna - HealthFund Open Choice - PPO
+                  network:
+                    type: string
+                    nullable: true
+                  confidence:
+                    type: integer
+                    format: int32
+                    nullable: true
+                    example: 4
+                  category:
+                    type: string
+                    nullable: true
+                  codes:
+                    type: array
+                    description: ''
+                    items:
+                      oneOf:
+                      - type: array
+                        items:
+                          type: string
+        '404':
+          description: The given insurance UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/insurances/12403618-49d5-43ee-99ad-5e99194fe05c
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getCustomInsurance
+        x-testDescription: 'Retrieve data on a specific insurance.
+
+          '
+    put:
+      tags:
+      - Reference Endpoints
+      summary: putCustomInsurance
+      description: 'Edit fields of a custom created insurance or a Ribbon created insurance.
+
+        '
+      operationId: putCustomInsurance
+      parameters:
+      - name: insurance_uuid
+        in: path
+        description: The UUID of the target insurance.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 12403618-49d5-43ee-99ad-5e99194fe05c
+      requestBody:
+        description: A JSON object mapping the name of the field to update to its new value
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uuid:
+                  type: string
+                  description: A UUID uniquely identifying this insurance
+                  format: uuid
+                  example: d8addf29-1054-4ccb-b179-dda65f7fefdd
+                carrier_association:
+                  type: string
+                  nullable: true
+                  example: Aetna
+                carrier_brand:
+                  type: string
+                  nullable: true
+                  example: Aetna
+                carrier_name:
+                  type: string
+                  nullable: true
+                  example: Aetna
+                state:
+                  type: string
+                  nullable: true
+                  example: NY
+                plan_name:
+                  type: string
+                  nullable: true
+                  example: Aetna HealthFund Open Choice
+                plan_type:
+                  type: string
+                  nullable: true
+                  example: PPO
+                metal_level:
+                  type: string
+                  nullable: true
+                display_name:
+                  type: string
+                  example: Aetna - HealthFund Open Choice - PPO
+                network:
+                  type: string
+                  nullable: true
+                confidence:
+                  type: integer
+                  format: int32
+                  nullable: true
+                  example: 4
+                category:
+                  type: string
+                  nullable: true
+                codes:
+                  type: array
+                  description: ''
+                  items:
+                    oneOf:
+                    - type: array
+                      items:
+                        type: string
+              description: A JSON object mapping the name of the field to update to its new value
+        required: true
+      responses:
+        '200':
+          description: The insurance object was successfully updated.
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                        description: A UUID uniquely identifying this insurance
+                        format: uuid
+                        example: d8addf29-1054-4ccb-b179-dda65f7fefdd
+                      carrier_association:
+                        type: string
+                        nullable: true
+                        example: Aetna
+                      carrier_brand:
+                        type: string
+                        nullable: true
+                        example: Aetna
+                      carrier_name:
+                        type: string
+                        nullable: true
+                        example: Aetna
+                      state:
+                        type: string
+                        nullable: true
+                        example: NY
+                      plan_name:
+                        type: string
+                        nullable: true
+                        example: Aetna HealthFund Open Choice
+                      plan_type:
+                        type: string
+                        nullable: true
+                        example: PPO
+                      metal_level:
+                        type: string
+                        nullable: true
+                      display_name:
+                        type: string
+                        example: Aetna - HealthFund Open Choice - PPO
+                      network:
+                        type: string
+                        nullable: true
+                      confidence:
+                        type: integer
+                        format: int32
+                        nullable: true
+                        example: 4
+                      category:
+                        type: string
+                        nullable: true
+                      codes:
+                        type: array
+                        description: ''
+                        items:
+                          oneOf:
+                          - type: array
+                            items:
+                              type: string
+        '400':
+          description: This request attempted to update with invalid schema or was missing required fields.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '404':
+          description: The given insurance UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+        '409':
+          description: Insurance object with given fields already exists.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: Resource with given fields aready exists
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+    delete:
+      tags:
+      - Reference Endpoints
+      summary: deleteCustomInsurance
+      description: 'Delete an insurance.
+
+
+        Note: If you''ve added this insurance to doctors, you are deleting all instances of this UUID, and Ribbon will not be able to regenerate them.
+
+        '
+      operationId: deleteCustomInsurance
+      parameters:
+      - name: insurance_uuid
+        in: path
+        description: The UUID of the target insurance.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 12403618-49d5-43ee-99ad-5e99194fe05c
+      responses:
+        '204':
+          description: Insurance was successfully deleted
+          content: {}
+        '404':
+          description: The given insurance UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: DELETE
+          uri: /custom/insurances/12403618-49d5-43ee-99ad-5e99194fe05c
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '204'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test deleteCustomInsurance
+        x-testDescription: 'Delete an insurance.
+
+
+          Note: If you''ve added this insurance to doctors, you are deleting all instances of this UUID, and Ribbon will not be able to regenerate them.
+
+          '
+  /custom/specialties:
+    get:
+      tags:
+      - Reference Endpoints
+      summary: getSpecialties
+      description: 'Search and list specialties that exist within the Ribbon API.
+
+        '
+      operationId: getSpecialties
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: The page of the results which was returned.
+        schema:
+          type: integer
+          format: int32
+        example: 1
+      - name: page_size
+        in: query
+        required: false
+        description: How many results are in each page.
+        schema:
+          type: integer
+          format: int32
+        example: 25
+      - name: search
+        in: query
+        required: false
+        description: String input that fuzzy searches against key fields within each specialties object to return the most relevant options.
+        schema:
+          type: string
+        example: Gastroenterology
+      - name: provider_type
+        in: query
+        required: false
+        description: '''Type'' of provider specialty to filter results on. Here are a few key provider types:
+
+          - Doctor
+
+          - Nursing
+
+          - Dental Providers'
+        schema:
+          type: string
+        example: Doctor
+      responses:
+        '200':
+          description: Specialties returned from a valid request
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - next
+                - previous
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: The total number of results matched, across all pages.
+                    format: int32
+                    example: 141
+                  next:
+                    type: string
+                    nullable: true
+                    example: https://api.ribbonhealth.com/v1/custom/specialties?page=3
+                  previous:
+                    type: string
+                    nullable: true
+                    example: https://api.ribbonhealth.com/v1/custom/specialties?page=1
+                  results:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this specialty
+                          format: uuid
+                          example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                        taxonomy_code:
+                          example: 207Q00000X
+                          oneOf:
+                          - type: string
+                        board_specialty:
+                          type: string
+                          nullable: true
+                          example: Family Medicine
+                        board_sub_specialty:
+                          type: string
+                          nullable: true
+                        non_md_specialty:
+                          type: string
+                          nullable: true
+                        non_md_sub_specialty:
+                          type: string
+                          nullable: true
+                          example: None
+                        provider_name:
+                          type: string
+                          nullable: true
+                          example: Family Medicine Doctor
+                        colloquial:
+                          type: string
+                          nullable: true
+                        taxonomy_1:
+                          type: string
+                          nullable: true
+                          example: Allopathic & Osteopathic Physicians
+                        taxonomy_2:
+                          type: string
+                          nullable: true
+                          example: Family Medicine
+                        taxonomy_3:
+                          type: string
+                          nullable: true
+                        display:
+                          type: string
+                          example: Family Medicine
+                        provider_type:
+                          type: string
+                          example: Doctor
+                        is_primary:
+                          type: boolean
+                          description: Whether or not a specialty is a provider's primary specialty
+                          example: true
+        '403':
+          description: Trial accounts do not have access to custom specialties
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 403
+                      code:
+                        type: string
+                        enum:
+                        - permission_denied
+                      message:
+                        type: string
+                        example: a trial account does not have access to this functionality
+                description: You are not allow to make this request
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/specialties
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getSpecialties
+        x-testDescription: 'Search and list specialties that exist within the Ribbon API.
+
+          '
+    post:
+      tags:
+      - Reference Endpoints
+      summary: postCustomSpecialty
+      description: 'Create a custom specialty with desired field values.
+
+        '
+      operationId: postCustomSpecialty
+      parameters: []
+      requestBody:
+        description: A JSON object mapping the name of the field to update to its new value
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uuid:
+                  type: string
+                  description: A UUID uniquely identifying this specialty
+                  format: uuid
+                  example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                taxonomy_code:
+                  example: 207Q00000X
+                  oneOf:
+                  - type: string
+                board_specialty:
+                  type: string
+                  nullable: true
+                  example: Family Medicine
+                board_sub_specialty:
+                  type: string
+                  nullable: true
+                non_md_specialty:
+                  type: string
+                  nullable: true
+                non_md_sub_specialty:
+                  type: string
+                  nullable: true
+                  example: None
+                provider_name:
+                  type: string
+                  nullable: true
+                  example: Family Medicine Doctor
+                colloquial:
+                  type: string
+                  nullable: true
+                taxonomy_1:
+                  type: string
+                  nullable: true
+                  example: Allopathic & Osteopathic Physicians
+                taxonomy_2:
+                  type: string
+                  nullable: true
+                  example: Family Medicine
+                taxonomy_3:
+                  type: string
+                  nullable: true
+                display:
+                  type: string
+                  example: Family Medicine
+                provider_type:
+                  type: string
+                  example: Doctor
+                is_primary:
+                  type: boolean
+                  description: Whether or not a specialty is a provider's primary specialty
+                  example: true
+              description: A JSON object mapping the name of the field to update to its new value
+        required: true
+      responses:
+        '201':
+          description: Specialty was successfully created.
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                        description: A UUID uniquely identifying this specialty
+                        format: uuid
+                        example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                      taxonomy_code:
+                        example: 207Q00000X
+                        oneOf:
+                        - type: string
+                      board_specialty:
+                        type: string
+                        nullable: true
+                        example: Family Medicine
+                      board_sub_specialty:
+                        type: string
+                        nullable: true
+                      non_md_specialty:
+                        type: string
+                        nullable: true
+                      non_md_sub_specialty:
+                        type: string
+                        nullable: true
+                        example: None
+                      provider_name:
+                        type: string
+                        nullable: true
+                        example: Family Medicine Doctor
+                      colloquial:
+                        type: string
+                        nullable: true
+                      taxonomy_1:
+                        type: string
+                        nullable: true
+                        example: Allopathic & Osteopathic Physicians
+                      taxonomy_2:
+                        type: string
+                        nullable: true
+                        example: Family Medicine
+                      taxonomy_3:
+                        type: string
+                        nullable: true
+                      display:
+                        type: string
+                        example: Family Medicine
+                      provider_type:
+                        type: string
+                        example: Doctor
+                      is_primary:
+                        type: boolean
+                        description: Whether or not a specialty is a provider's primary specialty
+                        example: true
+        '400':
+          description: This request attempted to update with invalid schema or was missing required fields.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '409':
+          description: Specialty object with given fields already exists.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: Resource with given fields aready exists
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+  /custom/specialties/{specialty_uuid}:
+    get:
+      tags:
+      - Reference Endpoints
+      summary: getCustomSpecialty
+      description: 'Retrieve data on a specific specialty.
+
+        '
+      operationId: getCustomSpecialty
+      parameters:
+      - name: specialty_uuid
+        in: path
+        description: The UUID of the target specialty.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: a77d23ba-29f1-4afd-a0c4-62d2f0444cf7
+      responses:
+        '200':
+          description: Returns a single specialty
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                    description: A UUID uniquely identifying this specialty
+                    format: uuid
+                    example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                  taxonomy_code:
+                    example: 207Q00000X
+                    oneOf:
+                    - type: string
+                  board_specialty:
+                    type: string
+                    nullable: true
+                    example: Family Medicine
+                  board_sub_specialty:
+                    type: string
+                    nullable: true
+                  non_md_specialty:
+                    type: string
+                    nullable: true
+                  non_md_sub_specialty:
+                    type: string
+                    nullable: true
+                    example: None
+                  provider_name:
+                    type: string
+                    nullable: true
+                    example: Family Medicine Doctor
+                  colloquial:
+                    type: string
+                    nullable: true
+                  taxonomy_1:
+                    type: string
+                    nullable: true
+                    example: Allopathic & Osteopathic Physicians
+                  taxonomy_2:
+                    type: string
+                    nullable: true
+                    example: Family Medicine
+                  taxonomy_3:
+                    type: string
+                    nullable: true
+                  display:
+                    type: string
+                    example: Family Medicine
+                  provider_type:
+                    type: string
+                    example: Doctor
+                  is_primary:
+                    type: boolean
+                    description: Whether or not a specialty is a provider's primary specialty
+                    example: true
+        '404':
+          description: The given specialty UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/specialties/a77d23ba-29f1-4afd-a0c4-62d2f0444cf7
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getCustomSpecialty
+        x-testDescription: 'Retrieve data on a specific specialty.
+
+          '
+    put:
+      tags:
+      - Reference Endpoints
+      summary: putCustomSpecialty
+      description: 'Edit fields of a custom created specialty.
+
+
+        Note: You cannot edit a Ribbon created specialty.
+
+        '
+      operationId: putCustomSpecialty
+      parameters:
+      - name: specialty_uuid
+        in: path
+        description: The UUID of the target specialty.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: a77d23ba-29f1-4afd-a0c4-62d2f0444cf7
+      requestBody:
+        description: A JSON object mapping the name of the field to update to its new value
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uuid:
+                  type: string
+                  description: A UUID uniquely identifying this specialty
+                  format: uuid
+                  example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                taxonomy_code:
+                  example: 207Q00000X
+                  oneOf:
+                  - type: string
+                board_specialty:
+                  type: string
+                  nullable: true
+                  example: Family Medicine
+                board_sub_specialty:
+                  type: string
+                  nullable: true
+                non_md_specialty:
+                  type: string
+                  nullable: true
+                non_md_sub_specialty:
+                  type: string
+                  nullable: true
+                  example: None
+                provider_name:
+                  type: string
+                  nullable: true
+                  example: Family Medicine Doctor
+                colloquial:
+                  type: string
+                  nullable: true
+                taxonomy_1:
+                  type: string
+                  nullable: true
+                  example: Allopathic & Osteopathic Physicians
+                taxonomy_2:
+                  type: string
+                  nullable: true
+                  example: Family Medicine
+                taxonomy_3:
+                  type: string
+                  nullable: true
+                display:
+                  type: string
+                  example: Family Medicine
+                provider_type:
+                  type: string
+                  example: Doctor
+                is_primary:
+                  type: boolean
+                  description: Whether or not a specialty is a provider's primary specialty
+                  example: true
+              description: A JSON object mapping the name of the field to update to its new value
+        required: true
+      responses:
+        '200':
+          description: The specialty object was successfully updated.
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                        description: A UUID uniquely identifying this specialty
+                        format: uuid
+                        example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                      taxonomy_code:
+                        example: 207Q00000X
+                        oneOf:
+                        - type: string
+                      board_specialty:
+                        type: string
+                        nullable: true
+                        example: Family Medicine
+                      board_sub_specialty:
+                        type: string
+                        nullable: true
+                      non_md_specialty:
+                        type: string
+                        nullable: true
+                      non_md_sub_specialty:
+                        type: string
+                        nullable: true
+                        example: None
+                      provider_name:
+                        type: string
+                        nullable: true
+                        example: Family Medicine Doctor
+                      colloquial:
+                        type: string
+                        nullable: true
+                      taxonomy_1:
+                        type: string
+                        nullable: true
+                        example: Allopathic & Osteopathic Physicians
+                      taxonomy_2:
+                        type: string
+                        nullable: true
+                        example: Family Medicine
+                      taxonomy_3:
+                        type: string
+                        nullable: true
+                      display:
+                        type: string
+                        example: Family Medicine
+                      provider_type:
+                        type: string
+                        example: Doctor
+                      is_primary:
+                        type: boolean
+                        description: Whether or not a specialty is a provider's primary specialty
+                        example: true
+        '400':
+          description: This request attempted to update with invalid schema or was missing required fields.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '404':
+          description: The given specialty UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+        '409':
+          description: Specialty object with given fields already exists.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: Resource with given fields aready exists
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+    delete:
+      tags:
+      - Reference Endpoints
+      summary: deleteCustomSpecialty
+      description: 'Delete a specialty.
+
+
+        Note: You cannot delete a Ribbon created specialty.
+
+        '
+      operationId: deleteCustomSpecialty
+      parameters:
+      - name: specialty_uuid
+        in: path
+        description: The UUID of the target specialty.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: a77d23ba-29f1-4afd-a0c4-62d2f0444cf7
+      responses:
+        '204':
+          description: Specialty was successfully deleted
+          content: {}
+        '404':
+          description: The given specialty UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: DELETE
+          uri: /custom/specialties/a77d23ba-29f1-4afd-a0c4-62d2f0444cf7
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '204'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test deleteCustomSpecialty
+        x-testDescription: 'Delete a specialty.
+
+
+          Note: You cannot delete a Ribbon created specialty.
+
+          '
+  /provider_types:
+    get:
+      tags:
+      - Reference Endpoints
+      summary: getCustomProviderTypes
+      description: 'Search and list provider types that exist within the Ribbon API.
+
+        '
+      operationId: getCustomProviderTypes
+      parameters:
+      - name: search
+        in: query
+        description: Search parameter for reference endpoints (Provider Type, Location Type, Languages)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: '["Pediatrician","Clinic","Spanish"]'
+      responses:
+        '200':
+          description: Provider types returned from a valid request
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: The total number of results matched, across all pages.
+                    format: int32
+                    example: 23
+                  results:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this provider type
+                          format: uuid
+                          example: 854a242b-9fa6-4427-b36f-ae7ba858e2c8
+                        display_name:
+                          type: string
+                          example: Pediatrician
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /provider_types?search=%5B%22Pediatrician%22%2C%22Clinic%22%2C%22Spanish%22%5D
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getCustomProviderTypes
+        x-testDescription: 'Search and list provider types that exist within the Ribbon API.
+
+          '
+  /custom/provider_types:
+    post:
+      tags:
+      - Reference Endpoints
+      summary: postCustomProviderType
+      description: 'Create a custom provider type with desired field values.
+
+        '
+      operationId: postCustomProviderType
+      parameters: []
+      requestBody:
+        description: A JSON object mapping the name of the field to update to its new value
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                display_name:
+                  type: string
+                  example: Certified Nurse Midwife
+              description: A JSON object mapping the name of the field to update to its new value
+        required: true
+      responses:
+        '201':
+          description: Provider type was successfully created.
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                        description: A UUID uniquely identifying this provider type
+                        format: uuid
+                        example: 854a242b-9fa6-4427-b36f-ae7ba858e2c8
+                      display_name:
+                        type: string
+                        example: Pediatrician
+        '400':
+          description: This request attempted to create with invalid schema or was missing required fields.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '409':
+          description: Provider type object with given display_name already exists.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: Resource with given fields aready exists
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+  /custom/provider_types/{provider_type_uuid}:
+    get:
+      tags:
+      - Reference Endpoints
+      summary: getCustomProviderType
+      description: 'Retrieve data on a specific provider type.
+
+        '
+      operationId: getCustomProviderType
+      parameters:
+      - name: provider_type_uuid
+        in: path
+        description: The UUID of the target provider type.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: edeb875a-494a-4907-babb-5377ef1f49f9
+      responses:
+        '200':
+          description: Returns a single provider type
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                    description: A UUID uniquely identifying this provider type
+                    format: uuid
+                    example: 854a242b-9fa6-4427-b36f-ae7ba858e2c8
+                  display_name:
+                    type: string
+                    example: Pediatrician
+        '404':
+          description: The given provider type UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/provider_types/edeb875a-494a-4907-babb-5377ef1f49f9
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getCustomProviderType
+        x-testDescription: 'Retrieve data on a specific provider type.
+
+          '
+    put:
+      tags:
+      - Reference Endpoints
+      summary: putCustomProviderType
+      description: 'Edit fields of a custom created provider type.
+
+
+        Note: You cannot edit a Ribbon created provider type.
+
+        '
+      operationId: putCustomProviderType
+      parameters:
+      - name: provider_type_uuid
+        in: path
+        description: The UUID of the target provider type.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: edeb875a-494a-4907-babb-5377ef1f49f9
+      requestBody:
+        description: A JSON object mapping the name of the field to update to its new value
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                display_name:
+                  type: string
+                  example: Certified Nurse Midwife
+              description: A JSON object mapping the name of the field to update to its new value
+        required: true
+      responses:
+        '200':
+          description: The provider type object was successfully updated.
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                        description: A UUID uniquely identifying this provider type
+                        format: uuid
+                        example: 854a242b-9fa6-4427-b36f-ae7ba858e2c8
+                      display_name:
+                        type: string
+                        example: Pediatrician
+        '400':
+          description: This request attempted to update with invalid schema or was missing required fields.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '403':
+          description: This resource is managed by Ribbon and cannot be modified.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 403
+                      code:
+                        type: string
+                        enum:
+                        - permission_denied
+                      message:
+                        type: string
+                        example: a trial account does not have access to this functionality
+                description: You are not allow to make this request
+        '404':
+          description: The given provider type UUID cannot be found.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+        '409':
+          description: Provider Type object with given display_name already exists.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: Resource with given fields aready exists
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+    delete:
+      tags:
+      - Reference Endpoints
+      summary: deleteCustomProviderType
+      description: 'Delete a provider type.
+
+
+        Note: You cannot edit a Ribbon created provider type.
+
+        '
+      operationId: deleteCustomProviderType
+      parameters:
+      - name: provider_type_uuid
+        in: path
+        description: The UUID of the target provider type.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: edeb875a-494a-4907-babb-5377ef1f49f9
+      responses:
+        '204':
+          description: Provider type was successfully deleted
+          content: {}
+        '403':
+          description: This resource is managed by Ribbon and cannot be deleted.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 403
+                      code:
+                        type: string
+                        enum:
+                        - permission_denied
+                      message:
+                        type: string
+                        example: a trial account does not have access to this functionality
+                description: You are not allow to make this request
+        '404':
+          description: The given provider type UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: DELETE
+          uri: /custom/provider_types/edeb875a-494a-4907-babb-5377ef1f49f9
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '204'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test deleteCustomProviderType
+        x-testDescription: 'Delete a provider type.
+
+
+          Note: You cannot edit a Ribbon created provider type.
+
+          '
+  /location_types:
+    get:
+      tags:
+      - Reference Endpoints
+      summary: getCustomLocationTypes
+      description: 'Search and list location types that exist within the Ribbon API.
+
+        '
+      operationId: getCustomLocationTypes
+      parameters:
+      - name: search
+        in: query
+        description: Search parameter for reference endpoints (Provider Type, Location Type, Languages)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: '["Pediatrician","Clinic","Spanish"]'
+      responses:
+        '200':
+          description: Location types returned from a valid request
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: The total number of results matched, across all pages.
+                    format: int32
+                    example: 7
+                  results:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this location type
+                          format: uuid
+                          example: cd7f242d-3016-4db6-94f4-77b8237127a3
+                        display_name:
+                          type: string
+                          example: Radiology
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /location_types?search=%5B%22Pediatrician%22%2C%22Clinic%22%2C%22Spanish%22%5D
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getCustomLocationTypes
+        x-testDescription: 'Search and list location types that exist within the Ribbon API.
+
+          '
+  /custom/location_types:
+    post:
+      tags:
+      - Reference Endpoints
+      summary: postCustomLocationType
+      description: 'Create a location type with desired field values.
+
+        '
+      operationId: postCustomLocationType
+      parameters: []
+      requestBody:
+        description: A JSON object mapping the name of the field to update to its new value
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                display_name:
+                  type: string
+                  example: Certified Nurse Midwife
+              description: A JSON object mapping the name of the field to update to its new value
+        required: true
+      responses:
+        '201':
+          description: Location type was successfully created.
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                        description: A UUID uniquely identifying this location type
+                        format: uuid
+                        example: cd7f242d-3016-4db6-94f4-77b8237127a3
+                      display_name:
+                        type: string
+                        example: Radiology
+        '400':
+          description: This request attempted to create with invalid schema or was missing required fields.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '409':
+          description: Location type object with given display_name already exists.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: Resource with given fields aready exists
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+  /custom/location_types/{location_type_uuid}:
+    get:
+      tags:
+      - Reference Endpoints
+      summary: getCustomLocationType
+      description: 'Retrieve data on a specific location type.
+
+        '
+      operationId: getCustomLocationType
+      parameters:
+      - name: location_type_uuid
+        in: path
+        description: The UUID of the target location type.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: b5458763-968e-4690-bc70-f29d3a7459a9
+      responses:
+        '200':
+          description: Returns a single location type
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                    description: A UUID uniquely identifying this location type
+                    format: uuid
+                    example: cd7f242d-3016-4db6-94f4-77b8237127a3
+                  display_name:
+                    type: string
+                    example: Radiology
+        '404':
+          description: The given location type UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/location_types/b5458763-968e-4690-bc70-f29d3a7459a9
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getCustomLocationType
+        x-testDescription: 'Retrieve data on a specific location type.
+
+          '
+    put:
+      tags:
+      - Reference Endpoints
+      summary: putCustomLocationType
+      description: 'Edit fields of a custom created location type.
+
+
+        Note: You cannot edit a Ribbon created location type.
+
+        '
+      operationId: putCustomLocationType
+      parameters:
+      - name: location_type_uuid
+        in: path
+        description: The UUID of the target location type.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: b5458763-968e-4690-bc70-f29d3a7459a9
+      requestBody:
+        description: A JSON object mapping the name of the field to update to its new value
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                display_name:
+                  type: string
+                  example: Certified Nurse Midwife
+              description: A JSON object mapping the name of the field to update to its new value
+        required: true
+      responses:
+        '200':
+          description: The location type object was successfully updated.
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                        description: A UUID uniquely identifying this location type
+                        format: uuid
+                        example: cd7f242d-3016-4db6-94f4-77b8237127a3
+                      display_name:
+                        type: string
+                        example: Radiology
+        '400':
+          description: This request attempted to update with invalid schema or was missing required fields.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '403':
+          description: This resource is managed by Ribbon and cannot be modified.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 403
+                      code:
+                        type: string
+                        enum:
+                        - permission_denied
+                      message:
+                        type: string
+                        example: a trial account does not have access to this functionality
+                description: You are not allow to make this request
+        '404':
+          description: The given location type UUID cannot be found.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+        '409':
+          description: Location Type object with given display_name already exists.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: Resource with given fields aready exists
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+    delete:
+      tags:
+      - Reference Endpoints
+      summary: deleteCustomLocationType
+      description: 'Delete a location type.
+
+
+        Note: You cannot edit a Ribbon created location type.
+
+        '
+      operationId: deleteCustomLocationType
+      parameters:
+      - name: location_type_uuid
+        in: path
+        description: The UUID of the target location type.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: b5458763-968e-4690-bc70-f29d3a7459a9
+      responses:
+        '204':
+          description: Location type was successfully deleted
+          content: {}
+        '403':
+          description: This resource is managed by Ribbon and cannot be deleted.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 403
+                      code:
+                        type: string
+                        enum:
+                        - permission_denied
+                      message:
+                        type: string
+                        example: a trial account does not have access to this functionality
+                description: You are not allow to make this request
+        '404':
+          description: The given location type UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: DELETE
+          uri: /custom/location_types/b5458763-968e-4690-bc70-f29d3a7459a9
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '204'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test deleteCustomLocationType
+        x-testDescription: 'Delete a location type.
+
+
+          Note: You cannot edit a Ribbon created location type.
+
+          '
+  /procedures:
+    get:
+      tags:
+      - Reference Endpoints
+      summary: getProcedures
+      description: 'Search and list procedures that exist within the Ribbon API.
+
+        '
+      operationId: getProcedures
+      parameters:
+      - name: search
+        in: query
+        description: Search parameter for reference endpoints (Provider Type, Location Type, Languages)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: '["Pediatrician","Clinic","Spanish"]'
+      - name: procedure_code
+        in: query
+        description: A specific billing code (e.g., CPT, DRG) to search for
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: '73222'
+      - name: page
+        in: query
+        description: The page of the results which was returned.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 1
+      - name: page_size
+        in: query
+        description: How many results are in each page.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 15
+      responses:
+        '200':
+          description: Procedures returned from a valid request
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - next
+                - previous
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: The total number of results matched, across all pages.
+                    format: int32
+                    example: 141
+                  next:
+                    type: string
+                    nullable: true
+                    example: https://api.ribbonhealth.com/v1/procedures?page=3
+                  previous:
+                    type: string
+                    nullable: true
+                    example: https://api.ribbonhealth.com/v1/procedures?page=1
+                  results:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this procedure
+                          format: uuid
+                          example: 0a9a245f-2f52-4cc0-a5c3-77a811acc6f7
+                        display_name:
+                          type: string
+                          example: MRI, arm
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /procedures?search=%5B%22Pediatrician%22%2C%22Clinic%22%2C%22Spanish%22%5D&procedure_code=73222&page=1&page_size=15
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getProcedures
+        x-testDescription: 'Search and list procedures that exist within the Ribbon API.
+
+          '
+  /procedures/{procedure_uuid}:
+    get:
+      tags:
+      - Reference Endpoints
+      summary: getProcedure
+      description: 'Retrieve data on a specific procedure.
+
+        '
+      operationId: getProcedure
+      parameters:
+      - name: procedure_uuid
+        in: path
+        description: The UUID of the target procedure.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 3c51144e-3385-4933-b581-4081c84b3cb9
+      responses:
+        '200':
+          description: Returns a single procedure
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                    description: A UUID uniquely identifying this procedure
+                    format: uuid
+                    example: 0a9a245f-2f52-4cc0-a5c3-77a811acc6f7
+                  display:
+                    type: string
+                    example: MRI, arm
+                  procedure_code_count:
+                    type: integer
+                    format: int32
+                    example: 7
+                  procedure_codes:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: '73222'
+                        type:
+                          type: string
+                          example: CPT
+                        description:
+                          type: string
+                          example: MRI, arm
+        '404':
+          description: The given procedure UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /procedures/3c51144e-3385-4933-b581-4081c84b3cb9
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getProcedure
+        x-testDescription: 'Retrieve data on a specific procedure.
+
+          '
+  /languages:
+    get:
+      tags:
+      - Reference Endpoints
+      summary: getLanguages
+      description: 'Search and list provider languages that exist in the Ribbon API.
+
+        '
+      operationId: getLanguages
+      parameters:
+      - name: search
+        in: query
+        description: Search parameter for reference endpoints (Provider Type, Location Type, Languages)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: '["Pediatrician","Clinic","Spanish"]'
+      responses:
+        '200':
+          description: Languages returned from a valid request
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: The total number of results matched, across all pages.
+                    format: int32
+                    example: 333
+                  results:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this language
+                          format: uuid
+                          example: 9b79819b-a1e3-489d-8010-b0b9f591c201
+                        display_name:
+                          type: string
+                          example: arabic
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /languages?search=%5B%22Pediatrician%22%2C%22Clinic%22%2C%22Spanish%22%5D
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getLanguages
+        x-testDescription: 'Search and list provider languages that exist in the Ribbon API.
+
+          '
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

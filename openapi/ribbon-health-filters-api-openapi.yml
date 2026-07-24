@@ -1,0 +1,1660 @@
+openapi: 3.0.0
+info:
+  title: ribbon-health Cost Estimates Filters API
+  description: 'An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
+
+    '
+  contact: {}
+  version: 1.0.0
+  x-codegen-settings:
+    Nullify404: false
+    GenerateAsyncCode: true
+    UseMethodPrefix: false
+    UseModelPostfix: false
+    UseControllerPrefix: true
+    UseEnumPostfix: true
+    CollectParameters: false
+    UseConstructorsForConfig: false
+    UseCommonSDKLibrary: false
+    iOSUseAppInfoPlist: false
+    AndroidUseAppManifest: false
+    BodySerialization: 0
+    EnableAdditionalModelProperties: false
+    PreserveParameterOrder: true
+    AppendContentHeaders: true
+    iOSGenerateCoreData: false
+    GenerateInterfaces: false
+    NodeHttpClient: NODE_REQUEST
+    ValidateRequiredParameters: false
+    JavaUsePropertiesConfig: false
+    Timeout: 0
+    StoreTimezoneInformation: false
+    EnablePHPComposerVersionString: false
+    EnableLogging: false
+    ArraySerialization: Indexed
+    ModelSerializationScheme: Json
+    UseExceptionPrefix: true
+    RunscopeEnabled: false
+    AndroidHttpClient: ANDROID_OK
+    ObjCHttpClient: UNIREST
+    CSharpHttpClient: UNIREST
+    PHPHttpClient: UNIREST
+    JavaHttpClient: JAVA_OK
+    ParameterArrayFormat: ParamArrayWithIndex
+    SecurityProtocols:
+    - Ssl3
+    - Tls
+    GenerateTravisConfig: false
+    GenerateCircleConfig: false
+    GenerateAppveyorConfig: false
+    GenerateJenkinsConfig: false
+    EnableHttpCache: false
+    Retries: 0
+    RetryInterval: 1
+    GenerateAdvancedDocs: true
+    UnderscoreNumbers: true
+    UseSingletonPattern: true
+    DisableLinting: false
+    ApplyCustomizations: []
+    SortResources: false
+    AllowSkippingSSLCertVerification: false
+    DoNotSplitWords: []
+    EnableGlobalUserAgent: true
+    ReturnCompleteHttpResponse: false
+    GenerateModels: true
+    GenerateExceptions: true
+    IgnoreIfNullJson: false
+    DisableDocs: false
+    LiftParameterDescriptionFromCustomType: false
+    ThrowForHttpErrorStatusCodes: true
+    ResponseMapping:
+      Type: Simple
+    ForceKeywordArgsInRuby: false
+    SymbolizeHashKeysInRuby: false
+    UsageExampleEndpoint:
+      Description: ''
+      EndpointGroupName: ''
+      EndpointName: ''
+    IsLatestVersion: false
+    EnableImmutableModels: false
+    GenerateEnums: true
+    BackoffFactor: 2
+    StatusCodesToRetry:
+    - 408
+    - 413
+    - 429
+    - 500
+    - 502
+    - 503
+    - 504
+    - 521
+    - 522
+    - 524
+    RequestMethodsToRetry:
+    - GET
+    - PUT
+    UserConfigurableRetries: true
+    UseEndpointMethodName: false
+    EncodeTemplateParameters: true
+    GenerateExamplesForOptionalFields: false
+    MultitargetDotnetVersions: false
+    BackoffMax: 0
+    RetryOnTimeout: true
+    EnableCookies: false
+    EnableJsonPassThroughForAny: false
+    PascalCaseEnumForCSharp: false
+    PascalCaseEnumForTypeScript: false
+    DisableMultipleAuth: false
+    AddSingleAuthDeprecatedCode: true
+    EnableExperimentalTypeCombinatorGeneration: false
+    ErrorTemplates: {}
+    UseSecuritySchemeNameForSingleAuth: false
+    EnableModelKeywordArgsInRuby: false
+    NullifyEmptyResponses: false
+    ExtendedAdditionalPropertiesSupport: false
+    EnforceStandardizedCasing: false
+  x-server-configuration:
+    default-environment: production
+    default-server: default
+    environments:
+    - name: production
+      servers:
+      - name: default
+        url: https://api.ribbonhealth.com/v1
+    parameters: []
+  x-image-uri: ''
+servers:
+- url: https://api.ribbonhealth.com/v1
+security:
+- BearerAuth: []
+tags:
+- name: Filters
+  description: ''
+paths:
+  /custom/providers/filters:
+    get:
+      tags:
+      - Filters
+      summary: getCustomProviderFilters
+      description: 'Fetch all previously created filters for providers.
+
+        '
+      operationId: getCustomProviderFilters
+      parameters: []
+      responses:
+        '200':
+          description: Returns a list of provider filters
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: ''
+                    items:
+                      required:
+                      - filter
+                      - uuid
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this filter
+                          format: uuid
+                          example: 9da04268-65e4-4422-a095-98208695b8b9
+                        filter:
+                          required:
+                          - field
+                          - filter_type
+                          - parameter
+                          - value_type
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: The name of filter which will be used when applying to a search
+                              example: max_c_section_rate
+                            field:
+                              type: string
+                              description: 'The name of the field that the filter will be applied to
+
+
+                                You can specify nested fields by placing a `.` between each level within the JSON object. For example, `educations.education.uuid`'
+                              example: c_section_rate
+                            value_type:
+                              type: string
+                              description: The data type of the value passed into this filter
+                              enum:
+                              - string
+                              - float
+                              - integer
+                              - boolean
+                              - list
+                              x-enum-elements:
+                              - name: string
+                                description: ''
+                              - name: float
+                                description: ''
+                              - name: integer
+                                description: ''
+                              - name: boolean
+                                description: ''
+                              - name: list
+                                description: ''
+                            filter_type:
+                              type: string
+                              description: "The type of comparison that will occur between the value passed into this filter and the field specified in the `field` parameter\n\nNote that `boost` filters have several limitations:\n- A Boost Filter cannot use the following `value_type`s: `float`\n- If a Boost Filter's `field` targets something that is within a list of objects, such as ‘educations.education.name’, we will not reorder the list to bring these items to the front. We will merely boost records where there is an entry in the list that matches the filter, wherever it is.\n  - There is one exception to this: `locations`. If you search for a provider and boost fields nested within the `locations` list, we will reorder the locations to put matching locations first."
+                              enum:
+                              - less_than
+                              - greater_than
+                              - equals
+                              - contains
+                              - boost
+                              - equals_any
+                              - contains_any
+                              - fuzzy
+                              x-enum-elements:
+                              - name: less_than
+                                description: ''
+                              - name: greater_than
+                                description: ''
+                              - name: equals
+                                description: ''
+                              - name: contains
+                                description: ''
+                              - name: boost
+                                description: ''
+                              - name: equals_any
+                                description: ''
+                              - name: contains_any
+                                description: ''
+                              - name: fuzzy
+                                description: ''
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/providers/filters
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getCustomProviderFilters
+        x-testDescription: 'Fetch all previously created filters for providers.
+
+          '
+    post:
+      tags:
+      - Filters
+      summary: createCustomProviderFilter
+      description: "Create new filters to be used when searching for providers in the [Search Providers](./getcustomproviders) endpoint. \nYou can create filters for both Ribbon's existing data fields as well as any custom data fields you create.\n\n#### Example Use Case:\nLet's say you add a new field to a bunch of providers that match your use case, for instance `c_section_rate`. You could make this field searchable so that your search through [Search Providers](./getcustomproviders) when you pass through a certain parameter that specifies a maximum threshold.\n"
+      operationId: createCustomProviderFilter
+      parameters: []
+      requestBody:
+        description: The new filter to create
+        content:
+          application/json:
+            schema:
+              required:
+              - field
+              - filter_type
+              - parameter
+              - value_type
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  description: The name of filter which will be used when applying to a search
+                  example: max_c_section_rate
+                field:
+                  type: string
+                  description: 'The name of the field that the filter will be applied to
+
+
+                    You can specify nested fields by placing a `.` between each level within the JSON object. For example, `educations.education.uuid`'
+                  example: c_section_rate
+                value_type:
+                  type: string
+                  description: The data type of the value passed into this filter
+                  enum:
+                  - string
+                  - float
+                  - integer
+                  - boolean
+                  - list
+                  x-enum-elements:
+                  - name: string
+                    description: ''
+                  - name: float
+                    description: ''
+                  - name: integer
+                    description: ''
+                  - name: boolean
+                    description: ''
+                  - name: list
+                    description: ''
+                filter_type:
+                  type: string
+                  description: "The type of comparison that will occur between the value passed into this filter and the field specified in the `field` parameter\n\nNote that `boost` filters have several limitations:\n- A Boost Filter cannot use the following `value_type`s: `float`\n- If a Boost Filter's `field` targets something that is within a list of objects, such as ‘educations.education.name’, we will not reorder the list to bring these items to the front. We will merely boost records where there is an entry in the list that matches the filter, wherever it is.\n  - There is one exception to this: `locations`. If you search for a provider and boost fields nested within the `locations` list, we will reorder the locations to put matching locations first."
+                  enum:
+                  - less_than
+                  - greater_than
+                  - equals
+                  - contains
+                  - boost
+                  - equals_any
+                  - contains_any
+                  - fuzzy
+                  x-enum-elements:
+                  - name: less_than
+                    description: ''
+                  - name: greater_than
+                    description: ''
+                  - name: equals
+                    description: ''
+                  - name: contains
+                    description: ''
+                  - name: boost
+                    description: ''
+                  - name: equals_any
+                    description: ''
+                  - name: contains_any
+                    description: ''
+                  - name: fuzzy
+                    description: ''
+              description: The new filter to create
+        required: true
+      responses:
+        '201':
+          description: The specified filter was successfully created
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    required:
+                    - filter
+                    - uuid
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                        description: A UUID uniquely identifying this filter
+                        format: uuid
+                        example: 9da04268-65e4-4422-a095-98208695b8b9
+                      filter:
+                        required:
+                        - field
+                        - filter_type
+                        - parameter
+                        - value_type
+                        type: object
+                        properties:
+                          parameter:
+                            type: string
+                            description: The name of filter which will be used when applying to a search
+                            example: max_c_section_rate
+                          field:
+                            type: string
+                            description: 'The name of the field that the filter will be applied to
+
+
+                              You can specify nested fields by placing a `.` between each level within the JSON object. For example, `educations.education.uuid`'
+                            example: c_section_rate
+                          value_type:
+                            type: string
+                            description: The data type of the value passed into this filter
+                            enum:
+                            - string
+                            - float
+                            - integer
+                            - boolean
+                            - list
+                            x-enum-elements:
+                            - name: string
+                              description: ''
+                            - name: float
+                              description: ''
+                            - name: integer
+                              description: ''
+                            - name: boolean
+                              description: ''
+                            - name: list
+                              description: ''
+                          filter_type:
+                            type: string
+                            description: "The type of comparison that will occur between the value passed into this filter and the field specified in the `field` parameter\n\nNote that `boost` filters have several limitations:\n- A Boost Filter cannot use the following `value_type`s: `float`\n- If a Boost Filter's `field` targets something that is within a list of objects, such as ‘educations.education.name’, we will not reorder the list to bring these items to the front. We will merely boost records where there is an entry in the list that matches the filter, wherever it is.\n  - There is one exception to this: `locations`. If you search for a provider and boost fields nested within the `locations` list, we will reorder the locations to put matching locations first."
+                            enum:
+                            - less_than
+                            - greater_than
+                            - equals
+                            - contains
+                            - boost
+                            - equals_any
+                            - contains_any
+                            - fuzzy
+                            x-enum-elements:
+                            - name: less_than
+                              description: ''
+                            - name: greater_than
+                              description: ''
+                            - name: equals
+                              description: ''
+                            - name: contains
+                              description: ''
+                            - name: boost
+                              description: ''
+                            - name: equals_any
+                              description: ''
+                            - name: contains_any
+                              description: ''
+                            - name: fuzzy
+                              description: ''
+        '400':
+          description: The filter you attempted to create was malformed
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '409':
+          description: A filter with the given `parameter` name already exists
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+  /custom/providers/filters/{filter_uuid}:
+    put:
+      tags:
+      - Filters
+      summary: editCustomProviderFilter
+      description: 'Edit any of the fields in a custom provider filter you have already created.
+
+        '
+      operationId: editCustomProviderFilter
+      parameters:
+      - name: filter_uuid
+        in: path
+        description: The UUID of the filter you want to edit.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: b5458763-968e-4690-bc70-f29d3a7459a9
+      requestBody:
+        description: A JSON object mapping the name of the field to update to its new value.
+        content:
+          application/json:
+            schema:
+              required:
+              - field
+              - filter_type
+              - parameter
+              - value_type
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  description: The name of filter which will be used when applying to a search
+                  example: max_c_section_rate
+                field:
+                  type: string
+                  description: 'The name of the field that the filter will be applied to
+
+
+                    You can specify nested fields by placing a `.` between each level within the JSON object. For example, `educations.education.uuid`'
+                  example: c_section_rate
+                value_type:
+                  type: string
+                  description: The data type of the value passed into this filter
+                  enum:
+                  - string
+                  - float
+                  - integer
+                  - boolean
+                  - list
+                  x-enum-elements:
+                  - name: string
+                    description: ''
+                  - name: float
+                    description: ''
+                  - name: integer
+                    description: ''
+                  - name: boolean
+                    description: ''
+                  - name: list
+                    description: ''
+                filter_type:
+                  type: string
+                  description: "The type of comparison that will occur between the value passed into this filter and the field specified in the `field` parameter\n\nNote that `boost` filters have several limitations:\n- A Boost Filter cannot use the following `value_type`s: `float`\n- If a Boost Filter's `field` targets something that is within a list of objects, such as ‘educations.education.name’, we will not reorder the list to bring these items to the front. We will merely boost records where there is an entry in the list that matches the filter, wherever it is.\n  - There is one exception to this: `locations`. If you search for a provider and boost fields nested within the `locations` list, we will reorder the locations to put matching locations first."
+                  enum:
+                  - less_than
+                  - greater_than
+                  - equals
+                  - contains
+                  - boost
+                  - equals_any
+                  - contains_any
+                  - fuzzy
+                  x-enum-elements:
+                  - name: less_than
+                    description: ''
+                  - name: greater_than
+                    description: ''
+                  - name: equals
+                    description: ''
+                  - name: contains
+                    description: ''
+                  - name: boost
+                    description: ''
+                  - name: equals_any
+                    description: ''
+                  - name: contains_any
+                    description: ''
+                  - name: fuzzy
+                    description: ''
+              description: A JSON object mapping the name of the field to update to its new value.
+        required: true
+      responses:
+        '200':
+          description: The specified filter was successfully updated.
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    required:
+                    - filter
+                    - uuid
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                        description: A UUID uniquely identifying this filter
+                        format: uuid
+                        example: 9da04268-65e4-4422-a095-98208695b8b9
+                      filter:
+                        required:
+                        - field
+                        - filter_type
+                        - parameter
+                        - value_type
+                        type: object
+                        properties:
+                          parameter:
+                            type: string
+                            description: The name of filter which will be used when applying to a search
+                            example: max_c_section_rate
+                          field:
+                            type: string
+                            description: 'The name of the field that the filter will be applied to
+
+
+                              You can specify nested fields by placing a `.` between each level within the JSON object. For example, `educations.education.uuid`'
+                            example: c_section_rate
+                          value_type:
+                            type: string
+                            description: The data type of the value passed into this filter
+                            enum:
+                            - string
+                            - float
+                            - integer
+                            - boolean
+                            - list
+                            x-enum-elements:
+                            - name: string
+                              description: ''
+                            - name: float
+                              description: ''
+                            - name: integer
+                              description: ''
+                            - name: boolean
+                              description: ''
+                            - name: list
+                              description: ''
+                          filter_type:
+                            type: string
+                            description: "The type of comparison that will occur between the value passed into this filter and the field specified in the `field` parameter\n\nNote that `boost` filters have several limitations:\n- A Boost Filter cannot use the following `value_type`s: `float`\n- If a Boost Filter's `field` targets something that is within a list of objects, such as ‘educations.education.name’, we will not reorder the list to bring these items to the front. We will merely boost records where there is an entry in the list that matches the filter, wherever it is.\n  - There is one exception to this: `locations`. If you search for a provider and boost fields nested within the `locations` list, we will reorder the locations to put matching locations first."
+                            enum:
+                            - less_than
+                            - greater_than
+                            - equals
+                            - contains
+                            - boost
+                            - equals_any
+                            - contains_any
+                            - fuzzy
+                            x-enum-elements:
+                            - name: less_than
+                              description: ''
+                            - name: greater_than
+                              description: ''
+                            - name: equals
+                              description: ''
+                            - name: contains
+                              description: ''
+                            - name: boost
+                              description: ''
+                            - name: equals_any
+                              description: ''
+                            - name: contains_any
+                              description: ''
+                            - name: fuzzy
+                              description: ''
+        '400':
+          description: The filter updates you are trying to make are invalid or malformed.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '404':
+          description: The given filter UUID cannot be found.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+        '409':
+          description: A filter with the given parameter already exists.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: Resource with given fields aready exists
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+    delete:
+      tags:
+      - Filters
+      summary: deleteCustomProviderFilter
+      description: 'Delete a provider filter.
+
+        '
+      operationId: deleteCustomProviderFilter
+      parameters:
+      - name: filter_uuid
+        in: path
+        description: The UUID of the filter you want to delete.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: b5458763-968e-4690-bc70-f29d3a7459a9
+      responses:
+        '204':
+          description: Filter was successfully deleted
+          content: {}
+        '404':
+          description: The given filter UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: DELETE
+          uri: /custom/providers/filters/b5458763-968e-4690-bc70-f29d3a7459a9
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '204'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test deleteCustomProviderFilter
+        x-testDescription: 'Delete a provider filter.
+
+          '
+  /custom/locations/filters:
+    get:
+      tags:
+      - Filters
+      summary: getCustomLocationFilters
+      description: 'Fetch all previously created custom filters for locations.
+
+        '
+      operationId: getCustomLocationFilters
+      parameters: []
+      responses:
+        '200':
+          description: Returns a list of location filters
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: ''
+                    items:
+                      required:
+                      - filter
+                      - uuid
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this filter
+                          format: uuid
+                          example: 9da04268-65e4-4422-a095-98208695b8b9
+                        filter:
+                          required:
+                          - field
+                          - filter_type
+                          - parameter
+                          - value_type
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: The name of filter which will be used when applying to a search
+                              example: max_c_section_rate
+                            field:
+                              type: string
+                              description: 'The name of the field that the filter will be applied to
+
+
+                                You can specify nested fields by placing a `.` between each level within the JSON object. For example, `educations.education.uuid`'
+                              example: c_section_rate
+                            value_type:
+                              type: string
+                              description: The data type of the value passed into this filter
+                              enum:
+                              - string
+                              - float
+                              - integer
+                              - boolean
+                              - list
+                              x-enum-elements:
+                              - name: string
+                                description: ''
+                              - name: float
+                                description: ''
+                              - name: integer
+                                description: ''
+                              - name: boolean
+                                description: ''
+                              - name: list
+                                description: ''
+                            filter_type:
+                              type: string
+                              description: "The type of comparison that will occur between the value passed into this filter and the field specified in the `field` parameter\n\nNote that `boost` filters have several limitations:\n- A Boost Filter cannot use the following `value_type`s: `float`\n- If a Boost Filter's `field` targets something that is within a list of objects, such as ‘educations.education.name’, we will not reorder the list to bring these items to the front. We will merely boost records where there is an entry in the list that matches the filter, wherever it is.\n  - There is one exception to this: `locations`. If you search for a provider and boost fields nested within the `locations` list, we will reorder the locations to put matching locations first."
+                              enum:
+                              - less_than
+                              - greater_than
+                              - equals
+                              - contains
+                              - boost
+                              - equals_any
+                              - contains_any
+                              - fuzzy
+                              x-enum-elements:
+                              - name: less_than
+                                description: ''
+                              - name: greater_than
+                                description: ''
+                              - name: equals
+                                description: ''
+                              - name: contains
+                                description: ''
+                              - name: boost
+                                description: ''
+                              - name: equals_any
+                                description: ''
+                              - name: contains_any
+                                description: ''
+                              - name: fuzzy
+                                description: ''
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/locations/filters
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getCustomLocationFilters
+        x-testDescription: 'Fetch all previously created custom filters for locations.
+
+          '
+    post:
+      tags:
+      - Filters
+      summary: createCustomLocationFilter
+      description: "Create new filters to be used when searching for locations in the [Search Locations](./getcustomlocations) endpoint. \nYou can create filters for both Ribbon's existing data fields as well as any custom data fields you create.\n\n#### Example Use Case:\nLet's say you add a new field to a bunch of locations that match your use case, for instance `c_section_rate`. You could make this field searchable so that your search through [Search Locations](./getcustomlocations) when you pass through a certain parameter that specifies a maximum threshold.\n"
+      operationId: createCustomLocationFilter
+      parameters: []
+      requestBody:
+        description: The new filter to create
+        content:
+          application/json:
+            schema:
+              required:
+              - field
+              - filter_type
+              - parameter
+              - value_type
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  description: The name of filter which will be used when applying to a search
+                  example: max_c_section_rate
+                field:
+                  type: string
+                  description: 'The name of the field that the filter will be applied to
+
+
+                    You can specify nested fields by placing a `.` between each level within the JSON object. For example, `educations.education.uuid`'
+                  example: c_section_rate
+                value_type:
+                  type: string
+                  description: The data type of the value passed into this filter
+                  enum:
+                  - string
+                  - float
+                  - integer
+                  - boolean
+                  - list
+                  x-enum-elements:
+                  - name: string
+                    description: ''
+                  - name: float
+                    description: ''
+                  - name: integer
+                    description: ''
+                  - name: boolean
+                    description: ''
+                  - name: list
+                    description: ''
+                filter_type:
+                  type: string
+                  description: "The type of comparison that will occur between the value passed into this filter and the field specified in the `field` parameter\n\nNote that `boost` filters have several limitations:\n- A Boost Filter cannot use the following `value_type`s: `float`\n- If a Boost Filter's `field` targets something that is within a list of objects, such as ‘educations.education.name’, we will not reorder the list to bring these items to the front. We will merely boost records where there is an entry in the list that matches the filter, wherever it is.\n  - There is one exception to this: `locations`. If you search for a provider and boost fields nested within the `locations` list, we will reorder the locations to put matching locations first."
+                  enum:
+                  - less_than
+                  - greater_than
+                  - equals
+                  - contains
+                  - boost
+                  - equals_any
+                  - contains_any
+                  - fuzzy
+                  x-enum-elements:
+                  - name: less_than
+                    description: ''
+                  - name: greater_than
+                    description: ''
+                  - name: equals
+                    description: ''
+                  - name: contains
+                    description: ''
+                  - name: boost
+                    description: ''
+                  - name: equals_any
+                    description: ''
+                  - name: contains_any
+                    description: ''
+                  - name: fuzzy
+                    description: ''
+              description: The new filter to create
+        required: true
+      responses:
+        '201':
+          description: The specified filter was successfully created
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    required:
+                    - filter
+                    - uuid
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                        description: A UUID uniquely identifying this filter
+                        format: uuid
+                        example: 9da04268-65e4-4422-a095-98208695b8b9
+                      filter:
+                        required:
+                        - field
+                        - filter_type
+                        - parameter
+                        - value_type
+                        type: object
+                        properties:
+                          parameter:
+                            type: string
+                            description: The name of filter which will be used when applying to a search
+                            example: max_c_section_rate
+                          field:
+                            type: string
+                            description: 'The name of the field that the filter will be applied to
+
+
+                              You can specify nested fields by placing a `.` between each level within the JSON object. For example, `educations.education.uuid`'
+                            example: c_section_rate
+                          value_type:
+                            type: string
+                            description: The data type of the value passed into this filter
+                            enum:
+                            - string
+                            - float
+                            - integer
+                            - boolean
+                            - list
+                            x-enum-elements:
+                            - name: string
+                              description: ''
+                            - name: float
+                              description: ''
+                            - name: integer
+                              description: ''
+                            - name: boolean
+                              description: ''
+                            - name: list
+                              description: ''
+                          filter_type:
+                            type: string
+                            description: "The type of comparison that will occur between the value passed into this filter and the field specified in the `field` parameter\n\nNote that `boost` filters have several limitations:\n- A Boost Filter cannot use the following `value_type`s: `float`\n- If a Boost Filter's `field` targets something that is within a list of objects, such as ‘educations.education.name’, we will not reorder the list to bring these items to the front. We will merely boost records where there is an entry in the list that matches the filter, wherever it is.\n  - There is one exception to this: `locations`. If you search for a provider and boost fields nested within the `locations` list, we will reorder the locations to put matching locations first."
+                            enum:
+                            - less_than
+                            - greater_than
+                            - equals
+                            - contains
+                            - boost
+                            - equals_any
+                            - contains_any
+                            - fuzzy
+                            x-enum-elements:
+                            - name: less_than
+                              description: ''
+                            - name: greater_than
+                              description: ''
+                            - name: equals
+                              description: ''
+                            - name: contains
+                              description: ''
+                            - name: boost
+                              description: ''
+                            - name: equals_any
+                              description: ''
+                            - name: contains_any
+                              description: ''
+                            - name: fuzzy
+                              description: ''
+        '400':
+          description: The filter you attempted to create was malformed
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '409':
+          description: A filter with the given `parameter` name already exists
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+  /custom/locations/filters/{filter_uuid}:
+    put:
+      tags:
+      - Filters
+      summary: editCustomLocationFilter
+      description: 'Edit any of the fields in a custom location filter you have already created.
+
+        '
+      operationId: editCustomLocationFilter
+      parameters:
+      - name: filter_uuid
+        in: path
+        description: The UUID of the filter you want to edit.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: b5458763-968e-4690-bc70-f29d3a7459a9
+      requestBody:
+        description: A JSON object mapping the name of the field to update to its new value.
+        content:
+          application/json:
+            schema:
+              required:
+              - field
+              - filter_type
+              - parameter
+              - value_type
+              type: object
+              properties:
+                parameter:
+                  type: string
+                  description: The name of filter which will be used when applying to a search
+                  example: location_types_filter
+                field:
+                  type: string
+                  description: 'The name of the field that the filter will be applied to
+
+
+                    You can specify nested fields by placing a `.` between each level within the JSON object. For example, `address_details.state`'
+                  example: location_types
+                value_type:
+                  type: string
+                  description: The data type of the value passed into this filter
+                  enum:
+                  - string
+                  - float
+                  - integer
+                  - boolean
+                  - list
+                  x-enum-elements:
+                  - name: string
+                    description: ''
+                  - name: float
+                    description: ''
+                  - name: integer
+                    description: ''
+                  - name: boolean
+                    description: ''
+                  - name: list
+                    description: ''
+                  example: list
+                filter_type:
+                  type: string
+                  description: "The type of comparison that will occur between the value passed into this filter and the field specified in the `field` parameter\n\nNote that `boost` filters have several limitations:\n- A Boost Filter cannot use the following `value_type`s: `float`\n- If a Boost Filter's `field` targets something that is within a list of objects, such as ‘educations.education.name’, we will not reorder the list to bring these items to the front. We will merely boost records where there is an entry in the list that matches the filter, wherever it is.\n  - There is one exception to this: `locations`. If you search for a provider and boost fields nested within the `locations` list, we will reorder the locations to put matching locations first."
+                  enum:
+                  - less_than
+                  - greater_than
+                  - equals
+                  - contains
+                  - boost
+                  - equals_any
+                  - contains_any
+                  - fuzzy
+                  x-enum-elements:
+                  - name: less_than
+                    description: ''
+                  - name: greater_than
+                    description: ''
+                  - name: equals
+                    description: ''
+                  - name: contains
+                    description: ''
+                  - name: boost
+                    description: ''
+                  - name: equals_any
+                    description: ''
+                  - name: contains_any
+                    description: ''
+                  - name: fuzzy
+                    description: ''
+                  example: contains_any
+              description: A JSON object mapping the name of the field to update to its new value.
+        required: true
+      responses:
+        '200':
+          description: The specified filter was successfully updated.
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    required:
+                    - filter
+                    - uuid
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                        description: A UUID uniquely identifying this filter
+                        format: uuid
+                        example: 9da04268-65e4-4422-a095-98208695b8b9
+                      filter:
+                        required:
+                        - field
+                        - filter_type
+                        - parameter
+                        - value_type
+                        type: object
+                        properties:
+                          parameter:
+                            type: string
+                            description: The name of filter which will be used when applying to a search
+                            example: location_types_filter
+                          field:
+                            type: string
+                            description: 'The name of the field that the filter will be applied to
+
+
+                              You can specify nested fields by placing a `.` between each level within the JSON object. For example, `address_details.state`'
+                            example: location_types
+                          value_type:
+                            type: string
+                            description: The data type of the value passed into this filter
+                            enum:
+                            - string
+                            - float
+                            - integer
+                            - boolean
+                            - list
+                            x-enum-elements:
+                            - name: string
+                              description: ''
+                            - name: float
+                              description: ''
+                            - name: integer
+                              description: ''
+                            - name: boolean
+                              description: ''
+                            - name: list
+                              description: ''
+                            example: list
+                          filter_type:
+                            type: string
+                            description: "The type of comparison that will occur between the value passed into this filter and the field specified in the `field` parameter\n\nNote that `boost` filters have several limitations:\n- A Boost Filter cannot use the following `value_type`s: `float`\n- If a Boost Filter's `field` targets something that is within a list of objects, such as ‘educations.education.name’, we will not reorder the list to bring these items to the front. We will merely boost records where there is an entry in the list that matches the filter, wherever it is.\n  - There is one exception to this: `locations`. If you search for a provider and boost fields nested within the `locations` list, we will reorder the locations to put matching locations first."
+                            enum:
+                            - less_than
+                            - greater_than
+                            - equals
+                            - contains
+                            - boost
+                            - equals_any
+                            - contains_any
+                            - fuzzy
+                            x-enum-elements:
+                            - name: less_than
+                              description: ''
+                            - name: greater_than
+                              description: ''
+                            - name: equals
+                              description: ''
+                            - name: contains
+                              description: ''
+                            - name: boost
+                              description: ''
+                            - name: equals_any
+                              description: ''
+                            - name: contains_any
+                              description: ''
+                            - name: fuzzy
+                              description: ''
+                            example: contains_any
+        '400':
+          description: The filter updates you are trying to make are invalid or malformed.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '404':
+          description: The given filter UUID cannot be found.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+        '409':
+          description: A filter with the given parameter already exists.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: Resource with given fields aready exists
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+    delete:
+      tags:
+      - Filters
+      summary: deleteCustomLocationFilter
+      description: 'Delete a location filter.
+
+        '
+      operationId: deleteCustomLocationFilter
+      parameters:
+      - name: filter_uuid
+        in: path
+        description: The UUID of the filter you want to delete.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: b5458763-968e-4690-bc70-f29d3a7459a9
+      responses:
+        '204':
+          description: Filter was successfully deleted
+          content: {}
+        '404':
+          description: The given filter UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: DELETE
+          uri: /custom/locations/filters/b5458763-968e-4690-bc70-f29d3a7459a9
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '204'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test deleteCustomLocationFilter
+        x-testDescription: 'Delete a location filter.
+
+          '
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

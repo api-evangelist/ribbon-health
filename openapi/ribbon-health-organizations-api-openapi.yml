@@ -1,0 +1,552 @@
+openapi: 3.0.0
+info:
+  title: ribbon-health Cost Estimates Organizations API
+  description: 'An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
+
+    '
+  contact: {}
+  version: 1.0.0
+  x-codegen-settings:
+    Nullify404: false
+    GenerateAsyncCode: true
+    UseMethodPrefix: false
+    UseModelPostfix: false
+    UseControllerPrefix: true
+    UseEnumPostfix: true
+    CollectParameters: false
+    UseConstructorsForConfig: false
+    UseCommonSDKLibrary: false
+    iOSUseAppInfoPlist: false
+    AndroidUseAppManifest: false
+    BodySerialization: 0
+    EnableAdditionalModelProperties: false
+    PreserveParameterOrder: true
+    AppendContentHeaders: true
+    iOSGenerateCoreData: false
+    GenerateInterfaces: false
+    NodeHttpClient: NODE_REQUEST
+    ValidateRequiredParameters: false
+    JavaUsePropertiesConfig: false
+    Timeout: 0
+    StoreTimezoneInformation: false
+    EnablePHPComposerVersionString: false
+    EnableLogging: false
+    ArraySerialization: Indexed
+    ModelSerializationScheme: Json
+    UseExceptionPrefix: true
+    RunscopeEnabled: false
+    AndroidHttpClient: ANDROID_OK
+    ObjCHttpClient: UNIREST
+    CSharpHttpClient: UNIREST
+    PHPHttpClient: UNIREST
+    JavaHttpClient: JAVA_OK
+    ParameterArrayFormat: ParamArrayWithIndex
+    SecurityProtocols:
+    - Ssl3
+    - Tls
+    GenerateTravisConfig: false
+    GenerateCircleConfig: false
+    GenerateAppveyorConfig: false
+    GenerateJenkinsConfig: false
+    EnableHttpCache: false
+    Retries: 0
+    RetryInterval: 1
+    GenerateAdvancedDocs: true
+    UnderscoreNumbers: true
+    UseSingletonPattern: true
+    DisableLinting: false
+    ApplyCustomizations: []
+    SortResources: false
+    AllowSkippingSSLCertVerification: false
+    DoNotSplitWords: []
+    EnableGlobalUserAgent: true
+    ReturnCompleteHttpResponse: false
+    GenerateModels: true
+    GenerateExceptions: true
+    IgnoreIfNullJson: false
+    DisableDocs: false
+    LiftParameterDescriptionFromCustomType: false
+    ThrowForHttpErrorStatusCodes: true
+    ResponseMapping:
+      Type: Simple
+    ForceKeywordArgsInRuby: false
+    SymbolizeHashKeysInRuby: false
+    UsageExampleEndpoint:
+      Description: ''
+      EndpointGroupName: ''
+      EndpointName: ''
+    IsLatestVersion: false
+    EnableImmutableModels: false
+    GenerateEnums: true
+    BackoffFactor: 2
+    StatusCodesToRetry:
+    - 408
+    - 413
+    - 429
+    - 500
+    - 502
+    - 503
+    - 504
+    - 521
+    - 522
+    - 524
+    RequestMethodsToRetry:
+    - GET
+    - PUT
+    UserConfigurableRetries: true
+    UseEndpointMethodName: false
+    EncodeTemplateParameters: true
+    GenerateExamplesForOptionalFields: false
+    MultitargetDotnetVersions: false
+    BackoffMax: 0
+    RetryOnTimeout: true
+    EnableCookies: false
+    EnableJsonPassThroughForAny: false
+    PascalCaseEnumForCSharp: false
+    PascalCaseEnumForTypeScript: false
+    DisableMultipleAuth: false
+    AddSingleAuthDeprecatedCode: true
+    EnableExperimentalTypeCombinatorGeneration: false
+    ErrorTemplates: {}
+    UseSecuritySchemeNameForSingleAuth: false
+    EnableModelKeywordArgsInRuby: false
+    NullifyEmptyResponses: false
+    ExtendedAdditionalPropertiesSupport: false
+    EnforceStandardizedCasing: false
+  x-server-configuration:
+    default-environment: production
+    default-server: default
+    environments:
+    - name: production
+      servers:
+      - name: default
+        url: https://api.ribbonhealth.com/v1
+    parameters: []
+  x-image-uri: ''
+servers:
+- url: https://api.ribbonhealth.com/v1
+security:
+- BearerAuth: []
+tags:
+- name: Organizations
+  description: ''
+paths:
+  /custom/organizations:
+    get:
+      tags:
+      - Organizations
+      summary: getOrganizations
+      description: 'Search for different organizations.
+
+
+        #### Example Use Case
+
+        Display a map of all of all nearby health systems and their relevant information so that a patient can find care.
+
+        '
+      operationId: getOrganizations
+      parameters:
+      - name: address
+        in: query
+        description: String input of an address that will be interpreted and geocoded in real time.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: New York, NY
+      - name: name
+        in: query
+        description: String input that is fuzzy matched to against the `organization.name` field.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: baptist
+      - name: distance
+        in: query
+        description: Constrains the search to within this many miles of the center point
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 10
+      - name: location
+        in: query
+        description: Latitude/longitude pair of coordinates in lieu of a string address.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: 37.7489816,-122.4802092
+      - name: page
+        in: query
+        description: The page of the results which was returned.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 1
+      - name: page_size
+        in: query
+        description: How many results are in each page.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 15
+      responses:
+        '200':
+          description: Specialties returned from a valid request
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                - parameters
+                type: object
+                properties:
+                  parameters:
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                        description: The page of the results which was returned.
+                        format: int32
+                        example: 1
+                      page_size:
+                        type: integer
+                        description: How many results are in each page.
+                        format: int32
+                        example: 25
+                      total_count:
+                        type: integer
+                        description: The total number of results matched, across all pages.
+                        format: int32
+                        example: 141
+                      sort_by:
+                        type: string
+                        description: The main criteria used to sort results in the record set.
+                        example: distance
+                      distance:
+                        type: integer
+                        description: The proximity radius of locations returned.
+                        format: int32
+                        example: 10
+                      geo:
+                        type: object
+                        properties:
+                          latitude:
+                            type: number
+                            description: The latitude the search was focused on.
+                            example: 40.7351327
+                          longitude:
+                            type: number
+                            description: The longitude the search was focused on.
+                            example: -73.9881657
+                      address:
+                        type: string
+                        description: String input of an address that will be interpreted and geocoded in real time.
+                        nullable: true
+                        example: Jacksonville, FL, USA
+                      name:
+                        type: string
+                        description: String input that is fuzzy matched to against the `organization.name` field.
+                        example: baptist
+                  data:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this organization
+                          format: uuid
+                          example: a1dbf998-a65b-4780-8361-648357785d96
+                        name:
+                          type: string
+                          example: Baptist Health (Jacksonville)
+                        organization_types:
+                          type: array
+                          description: The types of this organization. We currently only support `Health System` organizations, but plan to expand this in the future
+                          items:
+                            type: string
+                            enum:
+                            - Health System
+                            x-enum-elements:
+                            - name: Enum_Health System
+                              description: ''
+                        websites:
+                          type: array
+                          description: Website(s) of this organization
+                          items:
+                            type: object
+                            properties:
+                              url:
+                                type: string
+                                example: https://www.baptistjax.com/
+                        ids:
+                          type: array
+                          description: ''
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                example: '5'
+                              id_type:
+                                type: string
+                                example: AHA_ID
+                        address:
+                          type: string
+                          example: '841 Prudential Dr # 1601, Jacksonville, FL 32207, US'
+                        address_details:
+                          type: object
+                          properties:
+                            zip:
+                              type: string
+                              example: '32207'
+                            city:
+                              type: string
+                              example: Jacksonville
+                            state:
+                              type: string
+                              example: FL
+                            street:
+                              type: string
+                              example: '841 Prudential Dr # 1601'
+                            address_line_1:
+                              type: string
+                              example: 841 Prudential Dr
+                            address_line_2:
+                              type: string
+                              example: '# 1601'
+                        latitude:
+                          type: number
+                          example: 30.3159499
+                        longitude:
+                          type: number
+                          example: 81.6630919
+                        phone_numbers:
+                          type: array
+                          description: ''
+                          items:
+                            type: object
+                            properties:
+                              phone:
+                                type: string
+                                example: '9042022000'
+                              detail:
+                                type: string
+                                example: primary
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/organizations?address=New%20York%2C%20NY&name=baptist&distance=10&location=37.7489816%2C-122.4802092&page=1&page_size=15
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getOrganizations
+        x-testDescription: 'Search for different organizations.
+
+
+          #### Example Use Case
+
+          Display a map of all of all nearby health systems and their relevant information so that a patient can find care.
+
+          '
+  /custom/organizations/{organization_uuid}:
+    get:
+      tags:
+      - Organizations
+      summary: getOrganization
+      description: 'Retrieve detailed information for any organization given its UUID
+
+        '
+      operationId: getOrganization
+      parameters:
+      - name: organization_uuid
+        in: path
+        description: The UUID of the target organization.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: a1dbf998-a65b-4780-8361-648357785d96
+      responses:
+        '200':
+          description: The requested organization is returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                    description: A UUID uniquely identifying this organization
+                    format: uuid
+                    example: a1dbf998-a65b-4780-8361-648357785d96
+                  name:
+                    type: string
+                    example: Baptist Health (Jacksonville)
+                  organization_types:
+                    type: array
+                    description: The types of this organization. We currently only support `Health System` organizations, but plan to expand this in the future
+                    items:
+                      type: string
+                      enum:
+                      - Health System
+                      x-enum-elements:
+                      - name: Enum_Health System
+                        description: ''
+                  websites:
+                    type: array
+                    description: Website(s) of this organization
+                    items:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                          example: https://www.baptistjax.com/
+                  ids:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: '5'
+                        id_type:
+                          type: string
+                          example: AHA_ID
+                  address:
+                    type: string
+                    example: '841 Prudential Dr # 1601, Jacksonville, FL 32207, US'
+                  address_details:
+                    type: object
+                    properties:
+                      zip:
+                        type: string
+                        example: '32207'
+                      city:
+                        type: string
+                        example: Jacksonville
+                      state:
+                        type: string
+                        example: FL
+                      street:
+                        type: string
+                        example: '841 Prudential Dr # 1601'
+                      address_line_1:
+                        type: string
+                        example: 841 Prudential Dr
+                      address_line_2:
+                        type: string
+                        example: '# 1601'
+                  latitude:
+                    type: number
+                    example: 30.3159499
+                  longitude:
+                    type: number
+                    example: 81.6630919
+                  phone_numbers:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        phone:
+                          type: string
+                          example: '9042022000'
+                        detail:
+                          type: string
+                          example: primary
+        '404':
+          description: The given UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/organizations/a1dbf998-a65b-4780-8361-648357785d96
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getOrganization
+        x-testDescription: 'Retrieve detailed information for any organization given its UUID
+
+          '
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

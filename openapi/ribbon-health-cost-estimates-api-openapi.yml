@@ -1,0 +1,1742 @@
+openapi: 3.0.0
+info:
+  title: ribbon-health Cost Estimates API
+  description: 'An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
+
+    '
+  contact: {}
+  version: 1.0.0
+  x-codegen-settings:
+    Nullify404: false
+    GenerateAsyncCode: true
+    UseMethodPrefix: false
+    UseModelPostfix: false
+    UseControllerPrefix: true
+    UseEnumPostfix: true
+    CollectParameters: false
+    UseConstructorsForConfig: false
+    UseCommonSDKLibrary: false
+    iOSUseAppInfoPlist: false
+    AndroidUseAppManifest: false
+    BodySerialization: 0
+    EnableAdditionalModelProperties: false
+    PreserveParameterOrder: true
+    AppendContentHeaders: true
+    iOSGenerateCoreData: false
+    GenerateInterfaces: false
+    NodeHttpClient: NODE_REQUEST
+    ValidateRequiredParameters: false
+    JavaUsePropertiesConfig: false
+    Timeout: 0
+    StoreTimezoneInformation: false
+    EnablePHPComposerVersionString: false
+    EnableLogging: false
+    ArraySerialization: Indexed
+    ModelSerializationScheme: Json
+    UseExceptionPrefix: true
+    RunscopeEnabled: false
+    AndroidHttpClient: ANDROID_OK
+    ObjCHttpClient: UNIREST
+    CSharpHttpClient: UNIREST
+    PHPHttpClient: UNIREST
+    JavaHttpClient: JAVA_OK
+    ParameterArrayFormat: ParamArrayWithIndex
+    SecurityProtocols:
+    - Ssl3
+    - Tls
+    GenerateTravisConfig: false
+    GenerateCircleConfig: false
+    GenerateAppveyorConfig: false
+    GenerateJenkinsConfig: false
+    EnableHttpCache: false
+    Retries: 0
+    RetryInterval: 1
+    GenerateAdvancedDocs: true
+    UnderscoreNumbers: true
+    UseSingletonPattern: true
+    DisableLinting: false
+    ApplyCustomizations: []
+    SortResources: false
+    AllowSkippingSSLCertVerification: false
+    DoNotSplitWords: []
+    EnableGlobalUserAgent: true
+    ReturnCompleteHttpResponse: false
+    GenerateModels: true
+    GenerateExceptions: true
+    IgnoreIfNullJson: false
+    DisableDocs: false
+    LiftParameterDescriptionFromCustomType: false
+    ThrowForHttpErrorStatusCodes: true
+    ResponseMapping:
+      Type: Simple
+    ForceKeywordArgsInRuby: false
+    SymbolizeHashKeysInRuby: false
+    UsageExampleEndpoint:
+      Description: ''
+      EndpointGroupName: ''
+      EndpointName: ''
+    IsLatestVersion: false
+    EnableImmutableModels: false
+    GenerateEnums: true
+    BackoffFactor: 2
+    StatusCodesToRetry:
+    - 408
+    - 413
+    - 429
+    - 500
+    - 502
+    - 503
+    - 504
+    - 521
+    - 522
+    - 524
+    RequestMethodsToRetry:
+    - GET
+    - PUT
+    UserConfigurableRetries: true
+    UseEndpointMethodName: false
+    EncodeTemplateParameters: true
+    GenerateExamplesForOptionalFields: false
+    MultitargetDotnetVersions: false
+    BackoffMax: 0
+    RetryOnTimeout: true
+    EnableCookies: false
+    EnableJsonPassThroughForAny: false
+    PascalCaseEnumForCSharp: false
+    PascalCaseEnumForTypeScript: false
+    DisableMultipleAuth: false
+    AddSingleAuthDeprecatedCode: true
+    EnableExperimentalTypeCombinatorGeneration: false
+    ErrorTemplates: {}
+    UseSecuritySchemeNameForSingleAuth: false
+    EnableModelKeywordArgsInRuby: false
+    NullifyEmptyResponses: false
+    ExtendedAdditionalPropertiesSupport: false
+    EnforceStandardizedCasing: false
+  x-server-configuration:
+    default-environment: production
+    default-server: default
+    environments:
+    - name: production
+      servers:
+      - name: default
+        url: https://api.ribbonhealth.com/v1
+    parameters: []
+  x-image-uri: ''
+servers:
+- url: https://api.ribbonhealth.com/v1
+security:
+- BearerAuth: []
+tags:
+- name: Cost Estimates
+  description: ''
+paths:
+  /eligibility:
+    post:
+      tags:
+      - Cost Estimates
+      summary: getEligibility
+      description: 'Verify a member''s current insurance coverage and benefits. You can access detailed information including a member’s progress on their Deductible and Out-of-pocket, as well as Copay and Coinsurance information for different services.
+
+
+        #### Example Use Case
+
+        Inform a member of their current progress against their Deductible as well as their Copay and Coinsurance summaries so they can better estimate their out-of pocket costs.
+
+        '
+      operationId: getEligibility
+      parameters:
+      - name: include_full_response
+        in: query
+        description: Whether to return the full eligibility response from the payer. Defaults to `false` when not provided.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          example: true
+          default: false
+      requestBody:
+        description: Identifying information for the member to be checked
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                member_id:
+                  type: string
+                  description: The member's identification number
+                  example: 000000000-00
+                first_name:
+                  type: string
+                  description: The member's first name
+                  example: John
+                last_name:
+                  type: string
+                  description: The member's last name
+                  example: Doe
+                birth_date:
+                  type: string
+                  description: The member's birth date as an ISO-format date string
+                  format: date
+                  example: 1980-12-31
+                insurance_partner:
+                  type: string
+                  description: The identifier for this insurance partner in the Ribbon API
+                  example: aetna_better_health_il
+              description: Identifying information for the member to be checked
+        required: true
+      responses:
+        '200':
+          description: Eligibility information for the given member
+          content:
+            application/json:
+              schema:
+                required:
+                - parameters
+                - request_id
+                - status
+                type: object
+                properties:
+                  parameters:
+                    type: object
+                    properties:
+                      member_id:
+                        type: string
+                        description: The member's identification number
+                        example: 000000000-00
+                      first_name:
+                        type: string
+                        description: The member's first name
+                        example: John
+                      last_name:
+                        type: string
+                        description: The member's last name
+                        example: Doe
+                      birth_date:
+                        type: string
+                        description: The member's birth date as an ISO-format date string
+                        format: date
+                        example: 1980-12-31
+                      insurance_partner:
+                        type: string
+                        description: The identifier for this insurance partner in the Ribbon API
+                        example: aetna_better_health_il
+                  status:
+                    type: object
+                    properties:
+                      is_valid:
+                        type: boolean
+                        description: Whether the eligibility check was successful
+                        example: true
+                      error:
+                        type: string
+                        description: If `is_valid` is `true`, an error code explaining what went wrong. When `is_valid` is `false`, this will be `null`.
+                        nullable: true
+                  request_id:
+                    type: string
+                    description: A unique identifier for the given response which Ribbon can use to find it in our logs during support requests
+                    example: '40610978'
+                  plan_info:
+                    type: object
+                    properties:
+                      insurance_partner:
+                        type: string
+                        description: The identifier for this insurance partner in the Ribbon API
+                        example: aetna_better_health_il
+                      plan_name:
+                        type: string
+                        description: User-friendly display name for this insurance partner
+                        example: Aetna Better Health of Illinois
+                      is_active:
+                        type: boolean
+                        description: Whether the member is actively covered by this plan
+                        example: true
+                      plan_start_date:
+                        type: string
+                        description: The starting date for the member's coverage by this plan
+                        format: date
+                        example: 2012-02-01
+                      plan_end_date:
+                        type: string
+                        description: The ending date for the member's coverage by this plan
+                        format: date
+                        nullable: true
+                        example: 2024-01-01
+                  deductible_detail:
+                    type: object
+                    properties:
+                      individual:
+                        type: object
+                        properties:
+                          in_network:
+                            type: object
+                            properties:
+                              spend:
+                                type: string
+                                description: The amount the member has paid towards in-network deductibles, in dollars
+                                nullable: true
+                                example: '16.43'
+                              maximum:
+                                type: string
+                                description: The maximum amount the member can pay towards in-network deductibles, in dollars
+                                nullable: true
+                                example: '3000'
+                              remaining:
+                                type: string
+                                description: The remaining amount the member can pay towards in-network deductibles, in dollars
+                                example: '2983.57'
+                          out_of_network:
+                            type: object
+                            properties:
+                              spend:
+                                type: string
+                                description: The amount the member has paid towards out-of-network deductibles, in dollars
+                                nullable: true
+                                example: '16.43'
+                              maximum:
+                                type: string
+                                description: The maximum amount the member can pay towards out-of-network deductibles, in dollars
+                                nullable: true
+                                example: '6000'
+                              remaining:
+                                type: string
+                                description: The remaining amount the member can pay towards out-of-network deductibles, in dollars
+                                nullable: true
+                                example: '5983.57'
+                      family:
+                        type: object
+                        properties:
+                          in_network:
+                            type: object
+                            properties:
+                              spend:
+                                type: string
+                                description: The amount the member has paid towards in-network deductibles, in dollars
+                                nullable: true
+                                example: '16.43'
+                              maximum:
+                                type: string
+                                description: The maximum amount the member can pay towards in-network deductibles, in dollars
+                                nullable: true
+                                example: '6000'
+                              remaining:
+                                type: string
+                                description: The remaining amount the member can pay towards in-network deductibles, in dollars
+                                nullable: true
+                                example: '5983.57'
+                          out_of_network:
+                            type: object
+                            properties:
+                              spend:
+                                type: string
+                                description: The amount the member has paid towards out-of-network deductibles, in dollars
+                                nullable: true
+                                example: '16.43'
+                              maximum:
+                                type: string
+                                description: The maximum amount the member can pay towards out-of-network deductibles, in dollars
+                                nullable: true
+                                example: '6000'
+                              remaining:
+                                type: string
+                                description: The remaining amount the member can pay towards out-of-network deductibles, in dollars
+                                nullable: true
+                                example: '5983.57'
+                  out_of_pocket_detail:
+                    type: object
+                    properties:
+                      individual:
+                        type: object
+                        properties:
+                          in_network:
+                            type: object
+                            properties:
+                              spend:
+                                type: string
+                                description: The amount the member has paid towards their in-network out-of-pocket maximum, in dollars
+                                nullable: true
+                                example: '16.43'
+                              maximum:
+                                type: string
+                                description: The maximum amount the member can pay towards their in-network out-of-pocket maximum, in dollars
+                                nullable: true
+                                example: '3000'
+                              remaining:
+                                type: string
+                                description: The remaining amount the member can pay towards their in-network out-of-pocket maximum, in dollars
+                                nullable: true
+                                example: '2983.57'
+                          out_of_network:
+                            type: object
+                            properties:
+                              spend:
+                                type: string
+                                description: The amount the member has paid towards their out-of-network out-of-pocket maximum, in dollars
+                                nullable: true
+                                example: '16.43'
+                              maximum:
+                                type: string
+                                description: The maximum amount the member can pay towards their out-of-network out-of-pocket maximum, in dollars
+                                nullable: true
+                                example: '6000'
+                              remaining:
+                                type: string
+                                description: The remaining amount the member can pay towards their out-of-network out-of-pocket maximum, in dollars
+                                nullable: true
+                                example: '5983.57'
+                      family:
+                        type: object
+                        properties:
+                          in_network:
+                            type: object
+                            properties:
+                              spend:
+                                type: string
+                                description: The amount the member has paid towards their in-network out-of-pocket maximum, in dollars
+                                nullable: true
+                                example: '16.43'
+                              maximum:
+                                type: string
+                                description: The maximum amount the member can pay towards their in-network out-of-pocket maximum, in dollars
+                                nullable: true
+                                example: '3000'
+                              remaining:
+                                type: string
+                                description: The remaining amount the member can pay towards their in-network out-of-pocket maximum, in dollars
+                                nullable: true
+                                example: '2983.57'
+                          out_of_network:
+                            type: object
+                            properties:
+                              spend:
+                                type: string
+                                description: The amount the member has paid towards their out-of-network out-of-pocket maximum, in dollars
+                                nullable: true
+                                example: '16.43'
+                              maximum:
+                                type: string
+                                description: The maximum amount the member can pay towards their out-of-network out-of-pocket maximum, in dollars
+                                nullable: true
+                                example: '6000'
+                              remaining:
+                                type: string
+                                description: The remaining amount the member can pay towards their out-of-network out-of-pocket maximum, in dollars
+                                nullable: true
+                                example: '5983.57'
+                  primary_care_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  dme_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  oncology_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  vision_optometry_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  physical_therapy_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  specialist_office_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  mental_health_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  surgical_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  urgent_care_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  diagnostic_lab_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  asc_facility_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  chiropractic_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  mri_ct_scan_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  x_ray_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  speech_therapy_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  occupational_therapy_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  emergency_medical_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  wellness_or_routine_visit_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  podiatry_office_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  outpatient_professional_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  anesthesia_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  substance_abuse_professional_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  substance_abuse_in_patient_facility_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  substance_abuse_out_patient_facility_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  flu_vaccination_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  hospital_inpatient_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  pharmacy_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  hospital_outpatient_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  telemedicine_primary_care_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  telemedicine_specialist_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  telemedicine_urgent_care_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  telemedicine_physical_therapy_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  telemedicine_mental_health_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  psychotherapy_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  snf_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  snf_room_board_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  home_health_care_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  hospice_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                  professional_physician_visit_inpatient_summary:
+                    type: object
+                    properties:
+                      in_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's in-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+                      out_of_network:
+                        type: object
+                        properties:
+                          copay:
+                            type: string
+                            description: The amount of the member's out-of-network copay, in dollars
+                            example: '30.0'
+                          coinsurance:
+                            type: string
+                            nullable: true
+                            example: '0.0'
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests: []
+      x-readme:
+        explorer-enabled: false
+  /eligibility_insurance_partners:
+    get:
+      tags:
+      - Cost Estimates
+      summary: getEligibilityInsurancePartners
+      description: 'Search or list all insurance partners supported by our eligibility features.
+
+        '
+      operationId: getEligibilityInsurancePartners
+      parameters:
+      - name: search
+        in: query
+        description: Fuzzy search input for insurance names
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: aetna
+      responses:
+        '200':
+          description: Returns a list of supported insurances
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - data
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: The total number of results matched.
+                    format: int32
+                    example: 332
+                  data:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        insurance_partner:
+                          type: string
+                          description: Identifier for this insurance partner used by other endpoints in the Ribbon API
+                          example: aetna_better_health_il
+                        display:
+                          type: string
+                          description: User-friendly display name for this insurance partner
+                          example: Aetna Better Health of Illinois
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /eligibility_insurance_partners?search=aetna
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getEligibilityInsurancePartners
+        x-testDescription: 'Search or list all insurance partners supported by our eligibility features.
+
+          '
+  /eligibility_insurance_partners/{insurance_partner}:
+    get:
+      tags:
+      - Cost Estimates
+      summary: getEligibilityInsurancePartner
+      description: 'Fetch an insurance partner supported by our eligibility features.
+
+        '
+      operationId: getEligibilityInsurancePartner
+      parameters:
+      - name: insurance_partner
+        in: path
+        description: The identifier for this insurance partner in the Ribbon API
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: aetna_better_health_il
+      responses:
+        '200':
+          description: Returns a single supported insurance
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  insurance_partner:
+                    type: string
+                    description: Identifier for this insurance partner used by other endpoints in the Ribbon API
+                    example: aetna_better_health_il
+                  display:
+                    type: string
+                    description: User-friendly display name for this insurance partner
+                    example: Aetna Better Health of Illinois
+        '404':
+          description: The given insurance partner identifier cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /eligibility_insurance_partners/aetna_better_health_il
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getEligibilityInsurancePartner
+        x-testDescription: 'Fetch an insurance partner supported by our eligibility features.
+
+          '
+  /procedure_cost_estimate:
+    get:
+      tags:
+      - Cost Estimates
+      summary: getProcedureCostEstimate
+      description: 'Calculates estimated costs for a given procedure based on a user''s location.
+
+
+        #### Example Use Case
+
+        Estimate the cost of a knee replacement surgery for a user in Boston so they can plan their personal finances accordingly.
+
+        '
+      operationId: getProcedureCostEstimate
+      parameters:
+      - name: procedure_ids
+        in: query
+        description: The UUIDs of the procedures to filter results to, as a comma-delimited string
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: 9f3fd9e8-96b0-4cc7-ab2c-8d538e9164ae,fbb223e6-9806-45b5-95b1-4d7a36cc9164
+      - name: member_zip
+        in: query
+        description: The zip code of the member we are generating cost estimates for
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: '60606'
+      - name: type
+        in: query
+        description: 'The type of data to base cost estimates on: `claims` data or payer-filed `price_transparency` data. Defaults to `claims`.'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: price_transparency
+          enum:
+          - claims
+          - price_transparency
+          x-enum-elements:
+          - name: claims
+            description: ''
+          - name: price_transparency
+            description: ''
+          description: 'The type of data to base cost estimates on: `claims` data or payer-filed `price_transparency` data. Defaults to `claims`.'
+      - name: plan_id
+        in: query
+        description: The UUID of the insurance plan to use when fetching negotiated rates with providers. Necessary only if searching for estimates using the 'price_transparency' `type`.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: uuid
+          example: a5a0c8ff-c62b-4a9e-af86-55e52bd7dc55
+      responses:
+        '200':
+          description: Estimated costs for the given procedures
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  parameters:
+                    type: object
+                    properties:
+                      procedures:
+                        type: array
+                        description: ''
+                        items:
+                          type: object
+                          properties:
+                            uuid:
+                              type: string
+                              description: A UUID uniquely identifying this procedure
+                              format: uuid
+                              example: 0a9a245f-2f52-4cc0-a5c3-77a811acc6f7
+                            display:
+                              type: string
+                              example: MRI, arm
+                            procedure_code_count:
+                              type: integer
+                              format: int32
+                              example: 7
+                            procedure_codes:
+                              type: array
+                              description: ''
+                              items:
+                                type: object
+                                properties:
+                                  code:
+                                    type: string
+                                    example: '73222'
+                                  type:
+                                    type: string
+                                    example: CPT
+                                  description:
+                                    type: string
+                                    example: MRI, arm
+                      member_zip:
+                        type: string
+                        example: '60606'
+                  data:
+                    type: object
+                    properties:
+                      cost_estimates:
+                        type: object
+                        properties:
+                          minimum:
+                            type: number
+                            description: Minimum cost for all of the given procedures combined.
+                            example: 100
+                          median:
+                            type: number
+                            description: Median cost for all of the given procedures combined.
+                            example: 300
+                          maximum:
+                            type: number
+                            description: Maximum cost for all of the given procedures combined.
+                            example: 500
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /procedure_cost_estimate?procedure_ids=9f3fd9e8-96b0-4cc7-ab2c-8d538e9164ae%2Cfbb223e6-9806-45b5-95b1-4d7a36cc9164&member_zip=60606&type=claims&plan_id=a5a0c8ff-c62b-4a9e-af86-55e52bd7dc55
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getProcedureCostEstimate
+        x-testDescription: 'Calculates estimated costs for a given procedure based on a user''s location.
+
+
+          #### Example Use Case
+
+          Estimate the cost of a knee replacement surgery for a user in Boston so they can plan their personal finances accordingly.
+
+          '
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

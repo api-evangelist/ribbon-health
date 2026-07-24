@@ -1,0 +1,1680 @@
+openapi: 3.0.0
+info:
+  title: ribbon-health Cost Estimates Focus Area Endpoints API
+  description: 'An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
+
+    '
+  contact: {}
+  version: 1.0.0
+  x-codegen-settings:
+    Nullify404: false
+    GenerateAsyncCode: true
+    UseMethodPrefix: false
+    UseModelPostfix: false
+    UseControllerPrefix: true
+    UseEnumPostfix: true
+    CollectParameters: false
+    UseConstructorsForConfig: false
+    UseCommonSDKLibrary: false
+    iOSUseAppInfoPlist: false
+    AndroidUseAppManifest: false
+    BodySerialization: 0
+    EnableAdditionalModelProperties: false
+    PreserveParameterOrder: true
+    AppendContentHeaders: true
+    iOSGenerateCoreData: false
+    GenerateInterfaces: false
+    NodeHttpClient: NODE_REQUEST
+    ValidateRequiredParameters: false
+    JavaUsePropertiesConfig: false
+    Timeout: 0
+    StoreTimezoneInformation: false
+    EnablePHPComposerVersionString: false
+    EnableLogging: false
+    ArraySerialization: Indexed
+    ModelSerializationScheme: Json
+    UseExceptionPrefix: true
+    RunscopeEnabled: false
+    AndroidHttpClient: ANDROID_OK
+    ObjCHttpClient: UNIREST
+    CSharpHttpClient: UNIREST
+    PHPHttpClient: UNIREST
+    JavaHttpClient: JAVA_OK
+    ParameterArrayFormat: ParamArrayWithIndex
+    SecurityProtocols:
+    - Ssl3
+    - Tls
+    GenerateTravisConfig: false
+    GenerateCircleConfig: false
+    GenerateAppveyorConfig: false
+    GenerateJenkinsConfig: false
+    EnableHttpCache: false
+    Retries: 0
+    RetryInterval: 1
+    GenerateAdvancedDocs: true
+    UnderscoreNumbers: true
+    UseSingletonPattern: true
+    DisableLinting: false
+    ApplyCustomizations: []
+    SortResources: false
+    AllowSkippingSSLCertVerification: false
+    DoNotSplitWords: []
+    EnableGlobalUserAgent: true
+    ReturnCompleteHttpResponse: false
+    GenerateModels: true
+    GenerateExceptions: true
+    IgnoreIfNullJson: false
+    DisableDocs: false
+    LiftParameterDescriptionFromCustomType: false
+    ThrowForHttpErrorStatusCodes: true
+    ResponseMapping:
+      Type: Simple
+    ForceKeywordArgsInRuby: false
+    SymbolizeHashKeysInRuby: false
+    UsageExampleEndpoint:
+      Description: ''
+      EndpointGroupName: ''
+      EndpointName: ''
+    IsLatestVersion: false
+    EnableImmutableModels: false
+    GenerateEnums: true
+    BackoffFactor: 2
+    StatusCodesToRetry:
+    - 408
+    - 413
+    - 429
+    - 500
+    - 502
+    - 503
+    - 504
+    - 521
+    - 522
+    - 524
+    RequestMethodsToRetry:
+    - GET
+    - PUT
+    UserConfigurableRetries: true
+    UseEndpointMethodName: false
+    EncodeTemplateParameters: true
+    GenerateExamplesForOptionalFields: false
+    MultitargetDotnetVersions: false
+    BackoffMax: 0
+    RetryOnTimeout: true
+    EnableCookies: false
+    EnableJsonPassThroughForAny: false
+    PascalCaseEnumForCSharp: false
+    PascalCaseEnumForTypeScript: false
+    DisableMultipleAuth: false
+    AddSingleAuthDeprecatedCode: true
+    EnableExperimentalTypeCombinatorGeneration: false
+    ErrorTemplates: {}
+    UseSecuritySchemeNameForSingleAuth: false
+    EnableModelKeywordArgsInRuby: false
+    NullifyEmptyResponses: false
+    ExtendedAdditionalPropertiesSupport: false
+    EnforceStandardizedCasing: false
+  x-server-configuration:
+    default-environment: production
+    default-server: default
+    environments:
+    - name: production
+      servers:
+      - name: default
+        url: https://api.ribbonhealth.com/v1
+    parameters: []
+  x-image-uri: ''
+servers:
+- url: https://api.ribbonhealth.com/v1
+security:
+- BearerAuth: []
+tags:
+- name: Focus Area Endpoints
+  description: ''
+paths:
+  /custom/clinical_areas:
+    get:
+      tags:
+      - Focus Area Endpoints
+      summary: getClinicalAreas
+      description: 'Returns clinical areas that exist within the Ribbon API.
+
+        '
+      operationId: getClinicalAreas
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: The page of the results which was returned.
+        schema:
+          type: integer
+        example: 1
+      - name: page_size
+        in: query
+        required: false
+        description: How many results are in each page.
+        schema:
+          type: integer
+        example: 25
+      - name: search
+        in: query
+        required: false
+        description: String input that fuzzy searches against key fields within each clinical area object to return the most relevant options.
+        schema:
+          type: string
+        example: X-ray
+      - name: clinical_area
+        in: query
+        required: false
+        description: String input that fuzzy searches on `display` field.
+        schema:
+          type: string
+        example: Nutrition
+      - name: _excl_clinical_area_ids
+        in: query
+        required: false
+        description: Comma separated list of clinical area UUIDs to exclude from search results.
+        schema:
+          type: string
+        example: ffce41b2-aba4-4202-beba-6aa9dc51ef37,fe7d808b-5f53-4024-af9d-2662515bcd83
+      - name: specialty_ids
+        in: query
+        required: false
+        description: Comma separated list of specialty UUIDs.
+        schema:
+          type: string
+        example: fcc9a22c-7a0f-4405-b0c9-c5f8ad83b93e,8b5d3998-d7e2-4b9e-91d1-17c19cd089f5
+      - name: condition
+        in: query
+        required: false
+        description: String input that fuzzy searches on `condition.display` field.
+        schema:
+          type: string
+        example: Sleep Disorders
+      - name: condition_ids
+        in: query
+        required: false
+        description: Comma separated list of condition UUIDs.
+        schema:
+          type: string
+        example: 45c9a22c-7a0f-4405-b0c9-c5f8ad83ba32,219d3998-d7e2-4b9e-91d1-17c19cd0bbc2
+      - name: treatment
+        in: query
+        required: false
+        description: String input that fuzzy searches on `treatment.display` field.
+        schema:
+          type: string
+        example: ACL Surgery
+      - name: treatment_ids
+        in: query
+        required: false
+        description: Comma separated list of treatment UUIDs.
+        schema:
+          type: string
+        example: bb2ca22c-7a0f-4405-b0c9-c5f8ad839898,2ce33998-d7e2-4b9e-91d1-17c19cd06012
+      - name: type
+        in: query
+        required: false
+        description: 'String input of the type of clinical areas to return. Options for input are either `providers` or `locations`.
+
+          Note: Defaults to returning all clinical areas of any type.'
+        schema:
+          type: string
+        example: providers
+      responses:
+        '200':
+          description: Clinical areas returned from a valid request
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - next
+                - parameters
+                - previous
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: The total number of results matched, across all pages.
+                    format: int32
+                    example: 107
+                  next:
+                    type: string
+                    nullable: true
+                    example: https://api.ribbonhealth.com/v1/custom/clinical_areas?page=3
+                  previous:
+                    type: string
+                    nullable: true
+                    example: https://api.ribbonhealth.com/v1/custom/clinical_areas?page=1
+                  parameters: {}
+                  results:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this clinical area
+                          format: uuid
+                          example: f352b596-dfb0-494f-9a03-224794f5d182
+                        display:
+                          type: string
+                          example: Substance Disorders (e.g. Opioid, Cocaine, Alcohol)
+                        types:
+                          type: array
+                          description: ''
+                          items:
+                            type: string
+                            enum:
+                            - providers
+                            - locations
+                            x-enum-elements:
+                            - name: providers
+                              description: ''
+                            - name: locations
+                              description: ''
+                        conditions:
+                          type: array
+                          description: ''
+                          items:
+                            type: object
+                            properties:
+                              uuid:
+                                type: string
+                                description: A UUID uniquely identifying this condition
+                                format: uuid
+                                example: 99f4762e-c4c2-4d1d-983a-2b8b303e691d
+                              display:
+                                type: string
+                                example: Chronic Depression
+                              types:
+                                type: array
+                                description: ''
+                                items:
+                                  type: string
+                                  enum:
+                                  - focus_areas
+                                  - condition_cost_estimate
+                                  x-enum-elements:
+                                  - name: focus_areas
+                                    description: ''
+                                  - name: condition_cost_estimate
+                                    description: ''
+                              specialties:
+                                type: array
+                                description: ''
+                                items:
+                                  type: object
+                                  properties:
+                                    uuid:
+                                      type: string
+                                      description: A UUID uniquely identifying this specialty
+                                      format: uuid
+                                      example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                                    taxonomy_code:
+                                      example: 207Q00000X
+                                      oneOf:
+                                      - type: string
+                                    board_specialty:
+                                      type: string
+                                      nullable: true
+                                      example: Family Medicine
+                                    board_sub_specialty:
+                                      type: string
+                                      nullable: true
+                                    non_md_specialty:
+                                      type: string
+                                      nullable: true
+                                    non_md_sub_specialty:
+                                      type: string
+                                      nullable: true
+                                      example: None
+                                    provider_name:
+                                      type: string
+                                      nullable: true
+                                      example: Family Medicine Doctor
+                                    colloquial:
+                                      type: string
+                                      nullable: true
+                                    taxonomy_1:
+                                      type: string
+                                      nullable: true
+                                      example: Allopathic & Osteopathic Physicians
+                                    taxonomy_2:
+                                      type: string
+                                      nullable: true
+                                      example: Family Medicine
+                                    taxonomy_3:
+                                      type: string
+                                      nullable: true
+                                    display:
+                                      type: string
+                                      example: Family Medicine
+                                    provider_type:
+                                      type: string
+                                      example: Doctor
+                                    is_primary:
+                                      type: boolean
+                                      description: Whether or not a specialty is a provider's primary specialty
+                                      example: true
+                              modules:
+                                type: array
+                                description: ''
+                                items:
+                                  type: string
+                        treatments:
+                          type: array
+                          description: ''
+                          items:
+                            type: object
+                            properties:
+                              uuid:
+                                type: string
+                                description: A UUID uniquely identifying this treatment
+                                format: uuid
+                                example: 88a70b34-d0a7-47e2-89ac-4fed203eca2f
+                              display:
+                                type: string
+                                example: Knee Replacement
+                              types:
+                                type: array
+                                description: ''
+                                items:
+                                  type: string
+                                  enum:
+                                  - providers
+                                  - locations
+                                  x-enum-elements:
+                                  - name: providers
+                                    description: ''
+                                  - name: locations
+                                    description: ''
+                              specialties:
+                                type: array
+                                description: ''
+                                items:
+                                  type: object
+                                  properties:
+                                    uuid:
+                                      type: string
+                                      description: A UUID uniquely identifying this specialty
+                                      format: uuid
+                                      example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                                    taxonomy_code:
+                                      example: 207Q00000X
+                                      oneOf:
+                                      - type: string
+                                    board_specialty:
+                                      type: string
+                                      nullable: true
+                                      example: Family Medicine
+                                    board_sub_specialty:
+                                      type: string
+                                      nullable: true
+                                    non_md_specialty:
+                                      type: string
+                                      nullable: true
+                                    non_md_sub_specialty:
+                                      type: string
+                                      nullable: true
+                                      example: None
+                                    provider_name:
+                                      type: string
+                                      nullable: true
+                                      example: Family Medicine Doctor
+                                    colloquial:
+                                      type: string
+                                      nullable: true
+                                    taxonomy_1:
+                                      type: string
+                                      nullable: true
+                                      example: Allopathic & Osteopathic Physicians
+                                    taxonomy_2:
+                                      type: string
+                                      nullable: true
+                                      example: Family Medicine
+                                    taxonomy_3:
+                                      type: string
+                                      nullable: true
+                                    display:
+                                      type: string
+                                      example: Family Medicine
+                                    provider_type:
+                                      type: string
+                                      example: Doctor
+                                    is_primary:
+                                      type: boolean
+                                      description: Whether or not a specialty is a provider's primary specialty
+                                      example: true
+                        specialties:
+                          type: array
+                          description: ''
+                          items:
+                            type: object
+                            properties:
+                              uuid:
+                                type: string
+                                description: A UUID uniquely identifying this specialty
+                                format: uuid
+                                example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                              taxonomy_code:
+                                example: 207Q00000X
+                                oneOf:
+                                - type: string
+                              board_specialty:
+                                type: string
+                                nullable: true
+                                example: Family Medicine
+                              board_sub_specialty:
+                                type: string
+                                nullable: true
+                              non_md_specialty:
+                                type: string
+                                nullable: true
+                              non_md_sub_specialty:
+                                type: string
+                                nullable: true
+                                example: None
+                              provider_name:
+                                type: string
+                                nullable: true
+                                example: Family Medicine Doctor
+                              colloquial:
+                                type: string
+                                nullable: true
+                              taxonomy_1:
+                                type: string
+                                nullable: true
+                                example: Allopathic & Osteopathic Physicians
+                              taxonomy_2:
+                                type: string
+                                nullable: true
+                                example: Family Medicine
+                              taxonomy_3:
+                                type: string
+                                nullable: true
+                              display:
+                                type: string
+                                example: Family Medicine
+                              provider_type:
+                                type: string
+                                example: Doctor
+                              is_primary:
+                                type: boolean
+                                description: Whether or not a specialty is a provider's primary specialty
+                                example: true
+        '400':
+          description: Each request can only perform one search
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/clinical_areas
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getClinicalAreas
+        x-testDescription: 'Returns clinical areas that exist within the Ribbon API.
+
+          '
+  /custom/clinical_areas/{clinical_area_uuid}:
+    get:
+      tags:
+      - Focus Area Endpoints
+      summary: getClinicalArea
+      description: 'Retrieve data on a specific clinical area.
+
+        '
+      operationId: getClinicalArea
+      parameters:
+      - name: clinical_area_uuid
+        in: path
+        description: The UUID of the target clinical area.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: f352b596-dfb0-494f-9a03-224794f5d182
+      responses:
+        '200':
+          description: Returns a single clinical area
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                    description: A UUID uniquely identifying this clinical area
+                    format: uuid
+                    example: f352b596-dfb0-494f-9a03-224794f5d182
+                  display:
+                    type: string
+                    example: Substance Disorders (e.g. Opioid, Cocaine, Alcohol)
+                  types:
+                    type: array
+                    description: ''
+                    items:
+                      type: string
+                      enum:
+                      - providers
+                      - locations
+                      x-enum-elements:
+                      - name: providers
+                        description: ''
+                      - name: locations
+                        description: ''
+                  conditions:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this condition
+                          format: uuid
+                          example: 99f4762e-c4c2-4d1d-983a-2b8b303e691d
+                        display:
+                          type: string
+                          example: Chronic Depression
+                        types:
+                          type: array
+                          description: ''
+                          items:
+                            type: string
+                            enum:
+                            - focus_areas
+                            - condition_cost_estimate
+                            x-enum-elements:
+                            - name: focus_areas
+                              description: ''
+                            - name: condition_cost_estimate
+                              description: ''
+                        specialties:
+                          type: array
+                          description: ''
+                          items:
+                            type: object
+                            properties:
+                              uuid:
+                                type: string
+                                description: A UUID uniquely identifying this specialty
+                                format: uuid
+                                example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                              taxonomy_code:
+                                example: 207Q00000X
+                                oneOf:
+                                - type: string
+                              board_specialty:
+                                type: string
+                                nullable: true
+                                example: Family Medicine
+                              board_sub_specialty:
+                                type: string
+                                nullable: true
+                              non_md_specialty:
+                                type: string
+                                nullable: true
+                              non_md_sub_specialty:
+                                type: string
+                                nullable: true
+                                example: None
+                              provider_name:
+                                type: string
+                                nullable: true
+                                example: Family Medicine Doctor
+                              colloquial:
+                                type: string
+                                nullable: true
+                              taxonomy_1:
+                                type: string
+                                nullable: true
+                                example: Allopathic & Osteopathic Physicians
+                              taxonomy_2:
+                                type: string
+                                nullable: true
+                                example: Family Medicine
+                              taxonomy_3:
+                                type: string
+                                nullable: true
+                              display:
+                                type: string
+                                example: Family Medicine
+                              provider_type:
+                                type: string
+                                example: Doctor
+                              is_primary:
+                                type: boolean
+                                description: Whether or not a specialty is a provider's primary specialty
+                                example: true
+                        modules:
+                          type: array
+                          description: ''
+                          items:
+                            type: string
+                  treatments:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this treatment
+                          format: uuid
+                          example: 88a70b34-d0a7-47e2-89ac-4fed203eca2f
+                        display:
+                          type: string
+                          example: Knee Replacement
+                        types:
+                          type: array
+                          description: ''
+                          items:
+                            type: string
+                            enum:
+                            - providers
+                            - locations
+                            x-enum-elements:
+                            - name: providers
+                              description: ''
+                            - name: locations
+                              description: ''
+                        specialties:
+                          type: array
+                          description: ''
+                          items:
+                            type: object
+                            properties:
+                              uuid:
+                                type: string
+                                description: A UUID uniquely identifying this specialty
+                                format: uuid
+                                example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                              taxonomy_code:
+                                example: 207Q00000X
+                                oneOf:
+                                - type: string
+                              board_specialty:
+                                type: string
+                                nullable: true
+                                example: Family Medicine
+                              board_sub_specialty:
+                                type: string
+                                nullable: true
+                              non_md_specialty:
+                                type: string
+                                nullable: true
+                              non_md_sub_specialty:
+                                type: string
+                                nullable: true
+                                example: None
+                              provider_name:
+                                type: string
+                                nullable: true
+                                example: Family Medicine Doctor
+                              colloquial:
+                                type: string
+                                nullable: true
+                              taxonomy_1:
+                                type: string
+                                nullable: true
+                                example: Allopathic & Osteopathic Physicians
+                              taxonomy_2:
+                                type: string
+                                nullable: true
+                                example: Family Medicine
+                              taxonomy_3:
+                                type: string
+                                nullable: true
+                              display:
+                                type: string
+                                example: Family Medicine
+                              provider_type:
+                                type: string
+                                example: Doctor
+                              is_primary:
+                                type: boolean
+                                description: Whether or not a specialty is a provider's primary specialty
+                                example: true
+                  specialties:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this specialty
+                          format: uuid
+                          example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                        taxonomy_code:
+                          example: 207Q00000X
+                          oneOf:
+                          - type: string
+                        board_specialty:
+                          type: string
+                          nullable: true
+                          example: Family Medicine
+                        board_sub_specialty:
+                          type: string
+                          nullable: true
+                        non_md_specialty:
+                          type: string
+                          nullable: true
+                        non_md_sub_specialty:
+                          type: string
+                          nullable: true
+                          example: None
+                        provider_name:
+                          type: string
+                          nullable: true
+                          example: Family Medicine Doctor
+                        colloquial:
+                          type: string
+                          nullable: true
+                        taxonomy_1:
+                          type: string
+                          nullable: true
+                          example: Allopathic & Osteopathic Physicians
+                        taxonomy_2:
+                          type: string
+                          nullable: true
+                          example: Family Medicine
+                        taxonomy_3:
+                          type: string
+                          nullable: true
+                        display:
+                          type: string
+                          example: Family Medicine
+                        provider_type:
+                          type: string
+                          example: Doctor
+                        is_primary:
+                          type: boolean
+                          description: Whether or not a specialty is a provider's primary specialty
+                          example: true
+        '404':
+          description: The given clinical area UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/clinical_areas/f352b596-dfb0-494f-9a03-224794f5d182
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getClinicalArea
+        x-testDescription: 'Retrieve data on a specific clinical area.
+
+          '
+  /custom/conditions:
+    get:
+      tags:
+      - Focus Area Endpoints
+      summary: getConditions
+      description: 'Returns conditions that exist within the Ribbon API.
+
+        '
+      operationId: getConditions
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: The page of the results which was returned.
+        schema:
+          type: integer
+          format: int32
+        example: 1
+      - name: page_size
+        in: query
+        required: false
+        description: How many results are in each page.
+        schema:
+          type: integer
+          format: int32
+        example: 25
+      - name: search
+        in: query
+        required: false
+        description: String input that fuzzy searches against key fields within each condition object to return the most relevant options.
+        schema:
+          type: string
+        example: depression
+      - name: _excl_condition_ids
+        in: query
+        required: false
+        description: Comma separated list of condition UUIDs to exclude from search results.
+        schema:
+          type: string
+        example: 2938baf9-f064-44d6-8251-6e4b9fbb6fd2,c9d21735-8a78-45fe-982b-d216cb94beb7
+      - name: specialty_ids
+        in: query
+        required: false
+        description: Comma separated list of specialty UUIDs.
+        schema:
+          type: string
+        example: fcc9a22c-7a0f-4405-b0c9-c5f8ad83b93e,8b5d3998-d7e2-4b9e-91d1-17c19cd089f5
+      - name: module
+        in: query
+        required: false
+        description: 'String input of the type of clinical areas to return. Options for input are either `focus_areas` or `condition_cost_estimate`.
+
+          Note: This input must be an exact string match to work'
+        schema:
+          type: string
+        example: focus_areas
+      responses:
+        '200':
+          description: Conditions returned from a valid request
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - next
+                - parameters
+                - previous
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: The total number of results matched, across all pages.
+                    format: int32
+                    example: 480
+                  next:
+                    type: string
+                    nullable: true
+                    example: https://api.ribbonhealth.com/v1/custom/conditions?page=3
+                  previous:
+                    type: string
+                    nullable: true
+                    example: https://api.ribbonhealth.com/v1/custom/conditions?page=1
+                  parameters: {}
+                  results:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this condition
+                          format: uuid
+                          example: 99f4762e-c4c2-4d1d-983a-2b8b303e691d
+                        display:
+                          type: string
+                          example: Chronic Depression
+                        types:
+                          type: array
+                          description: ''
+                          items:
+                            type: string
+                            enum:
+                            - focus_areas
+                            - condition_cost_estimate
+                            x-enum-elements:
+                            - name: focus_areas
+                              description: ''
+                            - name: condition_cost_estimate
+                              description: ''
+                        specialties:
+                          type: array
+                          description: ''
+                          items:
+                            type: object
+                            properties:
+                              uuid:
+                                type: string
+                                description: A UUID uniquely identifying this specialty
+                                format: uuid
+                                example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                              taxonomy_code:
+                                example: 207Q00000X
+                                oneOf:
+                                - type: string
+                              board_specialty:
+                                type: string
+                                nullable: true
+                                example: Family Medicine
+                              board_sub_specialty:
+                                type: string
+                                nullable: true
+                              non_md_specialty:
+                                type: string
+                                nullable: true
+                              non_md_sub_specialty:
+                                type: string
+                                nullable: true
+                                example: None
+                              provider_name:
+                                type: string
+                                nullable: true
+                                example: Family Medicine Doctor
+                              colloquial:
+                                type: string
+                                nullable: true
+                              taxonomy_1:
+                                type: string
+                                nullable: true
+                                example: Allopathic & Osteopathic Physicians
+                              taxonomy_2:
+                                type: string
+                                nullable: true
+                                example: Family Medicine
+                              taxonomy_3:
+                                type: string
+                                nullable: true
+                              display:
+                                type: string
+                                example: Family Medicine
+                              provider_type:
+                                type: string
+                                example: Doctor
+                              is_primary:
+                                type: boolean
+                                description: Whether or not a specialty is a provider's primary specialty
+                                example: true
+                        modules:
+                          type: array
+                          description: ''
+                          items:
+                            type: string
+        '400':
+          description: Module does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/conditions
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getConditions
+        x-testDescription: 'Returns conditions that exist within the Ribbon API.
+
+          '
+  /custom/conditions/{condition_uuid}:
+    get:
+      tags:
+      - Focus Area Endpoints
+      summary: getCondition
+      description: 'Retrieve data on a specific condition.
+
+        '
+      operationId: getCondition
+      parameters:
+      - name: condition_uuid
+        in: path
+        description: The UUID of the target condition.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: fd7c10f3-fbec-482a-929b-be94a8bb3bc1
+      responses:
+        '200':
+          description: Returns a single condition
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                    description: A UUID uniquely identifying this condition
+                    format: uuid
+                    example: 99f4762e-c4c2-4d1d-983a-2b8b303e691d
+                  display:
+                    type: string
+                    example: Chronic Depression
+                  types:
+                    type: array
+                    description: ''
+                    items:
+                      type: string
+                      enum:
+                      - focus_areas
+                      - condition_cost_estimate
+                      x-enum-elements:
+                      - name: focus_areas
+                        description: ''
+                      - name: condition_cost_estimate
+                        description: ''
+                  specialties:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this specialty
+                          format: uuid
+                          example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                        taxonomy_code:
+                          example: 207Q00000X
+                          oneOf:
+                          - type: string
+                        board_specialty:
+                          type: string
+                          nullable: true
+                          example: Family Medicine
+                        board_sub_specialty:
+                          type: string
+                          nullable: true
+                        non_md_specialty:
+                          type: string
+                          nullable: true
+                        non_md_sub_specialty:
+                          type: string
+                          nullable: true
+                          example: None
+                        provider_name:
+                          type: string
+                          nullable: true
+                          example: Family Medicine Doctor
+                        colloquial:
+                          type: string
+                          nullable: true
+                        taxonomy_1:
+                          type: string
+                          nullable: true
+                          example: Allopathic & Osteopathic Physicians
+                        taxonomy_2:
+                          type: string
+                          nullable: true
+                          example: Family Medicine
+                        taxonomy_3:
+                          type: string
+                          nullable: true
+                        display:
+                          type: string
+                          example: Family Medicine
+                        provider_type:
+                          type: string
+                          example: Doctor
+                        is_primary:
+                          type: boolean
+                          description: Whether or not a specialty is a provider's primary specialty
+                          example: true
+                  modules:
+                    type: array
+                    description: ''
+                    items:
+                      type: string
+        '404':
+          description: The given condition UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/conditions/fd7c10f3-fbec-482a-929b-be94a8bb3bc1
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getCondition
+        x-testDescription: 'Retrieve data on a specific condition.
+
+          '
+  /custom/treatments:
+    get:
+      tags:
+      - Focus Area Endpoints
+      summary: getTreatments
+      description: 'Returns treatments that exist within the Ribbon API.
+
+        '
+      operationId: getTreatments
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: The page of the results which was returned.
+        schema:
+          type: integer
+          format: int32
+        example: 1
+      - name: page_size
+        in: query
+        required: false
+        description: How many results are in each page.
+        schema:
+          type: integer
+          format: int32
+        example: 25
+      - name: search
+        in: query
+        required: false
+        description: String input that fuzzy searches against key fields within each treatment object to return the most relevant options.
+        schema:
+          type: string
+        example: Ankle X-Ray
+      - name: _excl_treatment_ids
+        in: query
+        required: false
+        description: Comma separated list of treatment UUIDs to exclude from search results.
+        schema:
+          type: string
+        example: ffb31993-8265-45f6-98ac-18a495d614b5,ff36f4f1-7031-46b0-a297-e85b73aa8e90
+      - name: specialty_ids
+        in: query
+        required: false
+        description: Comma separated list of specialty UUIDs.
+        schema:
+          type: string
+        example: fcc9a22c-7a0f-4405-b0c9-c5f8ad83b93e,8b5d3998-d7e2-4b9e-91d1-17c19cd089f5
+      - name: type
+        in: query
+        required: false
+        description: 'String input of the type of clinical areas to return. Options for input are either `providers` or `locations`.
+
+          Note: Defaults to returning all clinical areas of any type.'
+        schema:
+          type: string
+        example: providers
+      responses:
+        '200':
+          description: Treatments returned from a valid request
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - next
+                - parameters
+                - previous
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: The total number of results matched, across all pages.
+                    format: int32
+                    example: 477
+                  next:
+                    type: string
+                    nullable: true
+                    example: https://api.ribbonhealth.com/v1/custom/treatments?page=3
+                  previous:
+                    type: string
+                    nullable: true
+                    example: https://api.ribbonhealth.com/v1/custom/treatments?page=1
+                  parameters: {}
+                  results:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this treatment
+                          format: uuid
+                          example: 88a70b34-d0a7-47e2-89ac-4fed203eca2f
+                        display:
+                          type: string
+                          example: Knee Replacement
+                        types:
+                          type: array
+                          description: ''
+                          items:
+                            type: string
+                            enum:
+                            - providers
+                            - locations
+                            x-enum-elements:
+                            - name: providers
+                              description: ''
+                            - name: locations
+                              description: ''
+                        specialties:
+                          type: array
+                          description: ''
+                          items:
+                            type: object
+                            properties:
+                              uuid:
+                                type: string
+                                description: A UUID uniquely identifying this specialty
+                                format: uuid
+                                example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                              taxonomy_code:
+                                example: 207Q00000X
+                                oneOf:
+                                - type: string
+                              board_specialty:
+                                type: string
+                                nullable: true
+                                example: Family Medicine
+                              board_sub_specialty:
+                                type: string
+                                nullable: true
+                              non_md_specialty:
+                                type: string
+                                nullable: true
+                              non_md_sub_specialty:
+                                type: string
+                                nullable: true
+                                example: None
+                              provider_name:
+                                type: string
+                                nullable: true
+                                example: Family Medicine Doctor
+                              colloquial:
+                                type: string
+                                nullable: true
+                              taxonomy_1:
+                                type: string
+                                nullable: true
+                                example: Allopathic & Osteopathic Physicians
+                              taxonomy_2:
+                                type: string
+                                nullable: true
+                                example: Family Medicine
+                              taxonomy_3:
+                                type: string
+                                nullable: true
+                              display:
+                                type: string
+                                example: Family Medicine
+                              provider_type:
+                                type: string
+                                example: Doctor
+                              is_primary:
+                                type: boolean
+                                description: Whether or not a specialty is a provider's primary specialty
+                                example: true
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/treatments
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getTreatments
+        x-testDescription: 'Returns treatments that exist within the Ribbon API.
+
+          '
+  /custom/treatments/{treatment_uuid}:
+    get:
+      tags:
+      - Focus Area Endpoints
+      summary: getTreatment
+      description: 'Retrieve data on a specific treatment.
+
+        '
+      operationId: getTreatment
+      parameters:
+      - name: treatment_uuid
+        in: path
+        description: The UUID of the target treatment.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 88a70b34-d0a7-47e2-89ac-4fed203eca2f
+      responses:
+        '200':
+          description: Returns a single treatment
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                    description: A UUID uniquely identifying this treatment
+                    format: uuid
+                    example: 88a70b34-d0a7-47e2-89ac-4fed203eca2f
+                  display:
+                    type: string
+                    example: Knee Replacement
+                  types:
+                    type: array
+                    description: ''
+                    items:
+                      type: string
+                      enum:
+                      - providers
+                      - locations
+                      x-enum-elements:
+                      - name: providers
+                        description: ''
+                      - name: locations
+                        description: ''
+                  specialties:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this specialty
+                          format: uuid
+                          example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                        taxonomy_code:
+                          example: 207Q00000X
+                          oneOf:
+                          - type: string
+                        board_specialty:
+                          type: string
+                          nullable: true
+                          example: Family Medicine
+                        board_sub_specialty:
+                          type: string
+                          nullable: true
+                        non_md_specialty:
+                          type: string
+                          nullable: true
+                        non_md_sub_specialty:
+                          type: string
+                          nullable: true
+                          example: None
+                        provider_name:
+                          type: string
+                          nullable: true
+                          example: Family Medicine Doctor
+                        colloquial:
+                          type: string
+                          nullable: true
+                        taxonomy_1:
+                          type: string
+                          nullable: true
+                          example: Allopathic & Osteopathic Physicians
+                        taxonomy_2:
+                          type: string
+                          nullable: true
+                          example: Family Medicine
+                        taxonomy_3:
+                          type: string
+                          nullable: true
+                        display:
+                          type: string
+                          example: Family Medicine
+                        provider_type:
+                          type: string
+                          example: Doctor
+                        is_primary:
+                          type: boolean
+                          description: Whether or not a specialty is a provider's primary specialty
+                          example: true
+        '404':
+          description: The given treatment UUID cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /custom/treatments/88a70b34-d0a7-47e2-89ac-4fed203eca2f
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getTreatment
+        x-testDescription: 'Retrieve data on a specific treatment.
+
+          '
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

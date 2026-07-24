@@ -1,0 +1,2385 @@
+openapi: 3.0.0
+info:
+  title: ribbon-health Cost Estimates Price Transparency API
+  description: 'An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
+
+    '
+  contact: {}
+  version: 1.0.0
+  x-codegen-settings:
+    Nullify404: false
+    GenerateAsyncCode: true
+    UseMethodPrefix: false
+    UseModelPostfix: false
+    UseControllerPrefix: true
+    UseEnumPostfix: true
+    CollectParameters: false
+    UseConstructorsForConfig: false
+    UseCommonSDKLibrary: false
+    iOSUseAppInfoPlist: false
+    AndroidUseAppManifest: false
+    BodySerialization: 0
+    EnableAdditionalModelProperties: false
+    PreserveParameterOrder: true
+    AppendContentHeaders: true
+    iOSGenerateCoreData: false
+    GenerateInterfaces: false
+    NodeHttpClient: NODE_REQUEST
+    ValidateRequiredParameters: false
+    JavaUsePropertiesConfig: false
+    Timeout: 0
+    StoreTimezoneInformation: false
+    EnablePHPComposerVersionString: false
+    EnableLogging: false
+    ArraySerialization: Indexed
+    ModelSerializationScheme: Json
+    UseExceptionPrefix: true
+    RunscopeEnabled: false
+    AndroidHttpClient: ANDROID_OK
+    ObjCHttpClient: UNIREST
+    CSharpHttpClient: UNIREST
+    PHPHttpClient: UNIREST
+    JavaHttpClient: JAVA_OK
+    ParameterArrayFormat: ParamArrayWithIndex
+    SecurityProtocols:
+    - Ssl3
+    - Tls
+    GenerateTravisConfig: false
+    GenerateCircleConfig: false
+    GenerateAppveyorConfig: false
+    GenerateJenkinsConfig: false
+    EnableHttpCache: false
+    Retries: 0
+    RetryInterval: 1
+    GenerateAdvancedDocs: true
+    UnderscoreNumbers: true
+    UseSingletonPattern: true
+    DisableLinting: false
+    ApplyCustomizations: []
+    SortResources: false
+    AllowSkippingSSLCertVerification: false
+    DoNotSplitWords: []
+    EnableGlobalUserAgent: true
+    ReturnCompleteHttpResponse: false
+    GenerateModels: true
+    GenerateExceptions: true
+    IgnoreIfNullJson: false
+    DisableDocs: false
+    LiftParameterDescriptionFromCustomType: false
+    ThrowForHttpErrorStatusCodes: true
+    ResponseMapping:
+      Type: Simple
+    ForceKeywordArgsInRuby: false
+    SymbolizeHashKeysInRuby: false
+    UsageExampleEndpoint:
+      Description: ''
+      EndpointGroupName: ''
+      EndpointName: ''
+    IsLatestVersion: false
+    EnableImmutableModels: false
+    GenerateEnums: true
+    BackoffFactor: 2
+    StatusCodesToRetry:
+    - 408
+    - 413
+    - 429
+    - 500
+    - 502
+    - 503
+    - 504
+    - 521
+    - 522
+    - 524
+    RequestMethodsToRetry:
+    - GET
+    - PUT
+    UserConfigurableRetries: true
+    UseEndpointMethodName: false
+    EncodeTemplateParameters: true
+    GenerateExamplesForOptionalFields: false
+    MultitargetDotnetVersions: false
+    BackoffMax: 0
+    RetryOnTimeout: true
+    EnableCookies: false
+    EnableJsonPassThroughForAny: false
+    PascalCaseEnumForCSharp: false
+    PascalCaseEnumForTypeScript: false
+    DisableMultipleAuth: false
+    AddSingleAuthDeprecatedCode: true
+    EnableExperimentalTypeCombinatorGeneration: false
+    ErrorTemplates: {}
+    UseSecuritySchemeNameForSingleAuth: false
+    EnableModelKeywordArgsInRuby: false
+    NullifyEmptyResponses: false
+    ExtendedAdditionalPropertiesSupport: false
+    EnforceStandardizedCasing: false
+  x-server-configuration:
+    default-environment: production
+    default-server: default
+    environments:
+    - name: production
+      servers:
+      - name: default
+        url: https://api.ribbonhealth.com/v1
+    parameters: []
+  x-image-uri: ''
+servers:
+- url: https://api.ribbonhealth.com/v1
+security:
+- BearerAuth: []
+tags:
+- name: Price Transparency
+  description: ''
+paths:
+  /pricing/providers:
+    get:
+      tags:
+      - Price Transparency
+      summary: getPricingProviders
+      description: 'Search for providers that perform a given procedure and find the lowest insurance-specific price for a procedure in your area.
+
+
+        #### Example Use Case
+
+        Search for all applicable provider negotiated rates, given a specific insurance and procedure (and optionally, a specific location/address and distance). For example, search for all providers near me who perform Leg MRIs and who take a given insurance, sorted by lowest price.
+
+        '
+      operationId: getPricingProviders
+      parameters:
+      - name: procedure_id
+        in: query
+        required: false
+        description: 'Search for prices for the procedure with the given UUID.
+
+
+          If the given ID is for a procedure bundle but do not have data for the insurance specified by the `plan_id` parameter, we will return data for its anchor procedure instead.
+
+
+          Exactly one of `procedure`, `procedure_id`, or `procedure_code` must be specified.'
+        schema:
+          type: string
+          format: uuid
+        example: 7ad7c4ef-baf9-4789-8e58-51d2308a1143
+      - name: procedure
+        in: query
+        required: false
+        description: 'Search for prices for the given procedure. This input is fuzzy matched to the most relevant procedure `display` field.
+
+
+          We will preferentially match procedure bundles. If we match a procedure bundle but do not have data for the insurance specified by the `plan_id` parameter, we will return data for its anchor procedure instead.
+
+
+          Exactly one of `procedure`, `procedure_id`, or `procedure_code` must be specified.'
+        schema:
+          type: string
+        example: MRI, thoracic spine
+      - name: procedure_code
+        in: query
+        required: false
+        description: 'Search for prices for procedures with the given billing code.
+
+
+          We will preferentially match procedure bundles. If we match a procedure bundle but do not have data for the insurance specified by the `plan_id` parameter, we will return data for its anchor procedure instead.
+
+
+          Exactly one of `procedure`, `procedure_id`, or `procedure_code` must be specified.'
+        schema:
+          type: string
+        example: '73720'
+      - name: page
+        in: query
+        required: false
+        description: The page of the results which was returned.
+        schema:
+          type: integer
+          format: int32
+        example: 1
+      - name: page_size
+        in: query
+        required: false
+        description: How many results are in each page.
+        schema:
+          type: integer
+          format: int32
+        example: 25
+      - name: plan_id
+        in: query
+        required: false
+        description: Search for negotiated rates for the insurance plan with this UUID.
+        schema:
+          type: string
+          format: uuid
+        example: 81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902
+      - name: specialty_ids
+        in: query
+        required: false
+        description: A comma separated list of specialty UUIDs. Filter to providers with any of the given specialties.
+        schema:
+          type: string
+        example: fcc9a22c-7a0f-4405-b0c9-c5f8ad83b93e,8b5d3998-d7e2-4b9e-91d1-17c19cd089f5,44b0284c-f360-4312-a17d-d601651cb0ea
+      - name: specialty
+        in: query
+        required: false
+        description: String input of a provider specialty that will be interpreted and matched to the single closest specialty, dealing with basic typos and colloquial names for providers.
+        schema:
+          type: string
+        example: gastroenterology
+      - name: address
+        in: query
+        required: false
+        description: String input of an address that will be interpreted and geocoded in real time.
+        schema:
+          type: string
+        example: 2074 23rd Ave, San Francisco, CA 94116
+      - name: location
+        in: query
+        required: false
+        description: Latitude/longitude pair of coordinates in lieu of a string address.
+        schema:
+          type: string
+        example: 37.7489816,-122.4802092
+      - name: distance
+        in: query
+        required: false
+        description: The proximity radius of providers returned.
+        schema:
+          type: integer
+          format: int32
+        example: 10
+      - name: fields
+        in: query
+        required: false
+        description: 'Comma-separated list of fields within the provider object to return. Can be used to greatly reduce the size of the response by requesting only data you intend to use.
+
+
+          Note that all price information is nested under the `matched_location` field. You almost certainly want to return this field.
+
+
+          Cannot be used in tandem with `_excl_fields`.'
+        schema:
+          type: string
+        example: matched_location,npi
+      - name: _excl_fields
+        in: query
+        required: false
+        description: 'Comma-separated list of fields within the provider object to exclude from the response. Can be used to greatly reduce the size of the response by requesting only data you intend to use.
+
+
+          Cannot be used in tandem with `fields`.'
+        schema:
+          type: string
+        example: insurances,age
+      responses:
+        '200':
+          description: Returns per provider prices for the given procedure
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                - parameters
+                type: object
+                properties:
+                  parameters:
+                    type: object
+                    properties:
+                      total_count:
+                        type: integer
+                        description: The total number of results matched, across all pages.
+                        format: int32
+                        example: 141
+                      page:
+                        type: integer
+                        description: The page of the results which was returned.
+                        format: int32
+                        example: 1
+                      page_size:
+                        type: integer
+                        description: How many results are in each page.
+                        format: int32
+                        example: 25
+                      procedure_id:
+                        type: string
+                        description: 'The UUID of the procedure that results were filtered to.
+
+
+                          Only populated when the `procedure_id` search parameter was used.'
+                        format: uuid
+                        example: 7ad7c4ef-baf9-4789-8e58-51d2308a1143
+                      procedure:
+                        type: object
+                        properties:
+                          uuid:
+                            type: string
+                            description: A UUID uniquely identifying this procedure
+                            format: uuid
+                            example: 0a9a245f-2f52-4cc0-a5c3-77a811acc6f7
+                          display:
+                            type: string
+                            example: MRI, arm
+                          procedure_code_count:
+                            type: integer
+                            format: int32
+                            example: 7
+                          procedure_codes:
+                            type: array
+                            description: ''
+                            items:
+                              type: object
+                              properties:
+                                code:
+                                  type: string
+                                  example: '73222'
+                                type:
+                                  type: string
+                                  example: CPT
+                                description:
+                                  type: string
+                                  example: MRI, arm
+                      insurances:
+                        type: array
+                        description: List of insurance UUIDs for this provider.
+                        items:
+                          type: string
+                          format: uuid
+                      insurance:
+                        type: object
+                        properties:
+                          uuid:
+                            type: string
+                            description: A UUID uniquely identifying this insurance
+                            format: uuid
+                            example: d8addf29-1054-4ccb-b179-dda65f7fefdd
+                          plan_name:
+                            type: string
+                            nullable: true
+                            example: Aetna HealthFund Open Choice
+                          carrier_name:
+                            type: string
+                            nullable: true
+                            example: Aetna
+                      specialty_ids:
+                        type: array
+                        description: A comma separated list of specialty UUIDs. Filter to providers with any of the given specialties.
+                        example:
+                        - fcc9a22c-7a0f-4405-b0c9-c5f8ad83b93e
+                        - 8b5d3998-d7e2-4b9e-91d1-17c19cd089f5
+                        - 44b0284c-f360-4312-a17d-d601651cb0ea
+                        items:
+                          type: string
+                          format: uuid
+                      specialty:
+                        type: object
+                        properties:
+                          uuid:
+                            type: string
+                            description: A UUID uniquely identifying this specialty
+                            format: uuid
+                            example: 18d8ad26-7e5f-44ac-9afa-966efb375344
+                          taxonomy_code:
+                            example: 207Q00000X
+                            oneOf:
+                            - type: string
+                          board_specialty:
+                            type: string
+                            nullable: true
+                            example: Family Medicine
+                          board_sub_specialty:
+                            type: string
+                            nullable: true
+                          non_md_specialty:
+                            type: string
+                            nullable: true
+                          non_md_sub_specialty:
+                            type: string
+                            nullable: true
+                            example: None
+                          provider_name:
+                            type: string
+                            nullable: true
+                            example: Family Medicine Doctor
+                          colloquial:
+                            type: string
+                            nullable: true
+                          taxonomy_1:
+                            type: string
+                            nullable: true
+                            example: Allopathic & Osteopathic Physicians
+                          taxonomy_2:
+                            type: string
+                            nullable: true
+                            example: Family Medicine
+                          taxonomy_3:
+                            type: string
+                            nullable: true
+                          display:
+                            type: string
+                            example: Family Medicine
+                          provider_type:
+                            type: string
+                            example: Doctor
+                          is_primary:
+                            type: boolean
+                            description: Whether or not a specialty is a provider's primary specialty
+                            example: true
+                      address:
+                        type: string
+                        description: String input of an address that will be interpreted and geocoded in real time.
+                        example: 2074 23rd Ave, San Francisco, CA 94116
+                      location:
+                        type: string
+                        description: Latitude/longitude pair of coordinates in lieu of a string address.
+                        example: 37.7489816,-122.4802092
+                      distance:
+                        type: integer
+                        description: The proximity radius of providers returned.
+                        format: int32
+                        example: 10
+                      fields:
+                        type: array
+                        description: 'List of fields within the provider object to return. Can be used to greatly reduce the size of the response by requesting only data you intend to use.
+
+
+                          Note that all price information is nested under the `matched_location` field. You almost certainly want to return this field.
+
+
+                          Cannot be used in tandem with `_excl_fields`'
+                        example:
+                        - matched_location
+                        - npi
+                        items:
+                          type: string
+                      _excl_fields:
+                        type: array
+                        description: 'List of fields within the provider object to exclude from the response. Can be used to greatly reduce the size of the response by requesting only data you intend to use.
+
+
+                          Cannot be used in tandem with `fields`'
+                        example:
+                        - insurances
+                        - age
+                        items:
+                          type: string
+                  data:
+                    type: array
+                    description: All of the metadata on a specific provider plus a `matched_location` key showing the costs at the least expensive location.
+                    items:
+                      type: object
+                      properties:
+                        insurance:
+                          type: object
+                          properties:
+                            uuid:
+                              type: string
+                              description: The UUID of the insurance these prices correspond to.
+                              format: uuid
+                              example: ef704f14-c906-4857-acd4-d811f1394c32
+                            plan_name:
+                              type: string
+                              description: The name of the insurance plan this UUID represents.
+                              example: Aetna
+                            carrier_name:
+                              type: string
+                              description: The carrier that this insurance plan is associated with, if any.
+                              nullable: true
+                        procedure:
+                          type: object
+                          properties:
+                            uuid:
+                              type: string
+                              description: The UUID of the procedure these prices correspond to.
+                              format: uuid
+                              example: 7ad7c4ef-baf9-4789-8e58-51d2308a1143
+                            name:
+                              type: string
+                              description: The name of the procedure these prices correspond to.
+                              example: MRI, leg
+                        matched_location:
+                          type: object
+                          properties:
+                            costs:
+                              type: object
+                              properties:
+                                min:
+                                  type: string
+                                  description: The minimum cost for this procedure in dollars
+                                  example: '239.0'
+                                median:
+                                  type: string
+                                  description: The median cost for this procedure in dollars
+                                  example: '520.5350000000001'
+                                max:
+                                  type: string
+                                  description: The maximum cost for this procedure in dollars
+                                  example: '714.93'
+                                is_bundle:
+                                  type: boolean
+                                  description: Where this data is the costs for a procedure bundle rather than a regular procedure.
+                                  example: true
+                                outpatient:
+                                  oneOf:
+                                  - nullable: true
+                                  - required:
+                                    - components
+                                    - is_bundle
+                                    - max
+                                    - median
+                                    - min
+                                    type: object
+                                    properties:
+                                      min:
+                                        type: number
+                                        description: The minimum cost for this procedure in this place of service, in dollars.
+                                        example: 239
+                                      median:
+                                        type: number
+                                        description: The median cost for this procedure in this place of service, in dollars.
+                                        example: 520.535
+                                      max:
+                                        type: number
+                                        description: The maximum cost for this procedure in this place of service, in dollars.
+                                        example: 714.93
+                                      is_bundle:
+                                        type: boolean
+                                        description: Where this data is the costs for a procedure bundle rather than a regular procedure.
+                                        example: true
+                                      components:
+                                        type: array
+                                        description: 'Individual costs for the components that make up this procedure bundle.
+
+
+                                          For a regular procedure, this field will always be `null`.'
+                                        nullable: true
+                                        items:
+                                          type: object
+                                          properties:
+                                            display:
+                                              type: string
+                                              description: The display name for this component of a procedure bundle.
+                                              example: Knee replacement surgery
+                                            min:
+                                              type: number
+                                              description: The minimum cost for this component in this place of service, in dollars.
+                                              example: 239
+                                            median:
+                                              type: number
+                                              description: The median cost for this component in this place of service, in dollars.
+                                              example: 520.535
+                                            max:
+                                              type: number
+                                              description: The maximum cost for this component in this place of service, in dollars.
+                                              example: 714.93
+                                    description: 'Costs associated with this procedure in an outpatient setting.
+
+
+                                      This key will only be populated for procedure bundles, and only if we have relevant data. A regular procedure will always have a `null` value here.'
+                                  description: 'Costs associated with this procedure in an outpatient setting.
+
+
+                                    This key will only be populated for procedure bundles, and only if we have relevant data. A regular procedure will always have a `null` value here.'
+                                inpatient:
+                                  oneOf:
+                                  - nullable: true
+                                  - required:
+                                    - components
+                                    - is_bundle
+                                    - max
+                                    - median
+                                    - min
+                                    type: object
+                                    properties:
+                                      min:
+                                        type: number
+                                        description: The minimum cost for this procedure in this place of service, in dollars.
+                                        example: 239
+                                      median:
+                                        type: number
+                                        description: The median cost for this procedure in this place of service, in dollars.
+                                        example: 520.535
+                                      max:
+                                        type: number
+                                        description: The maximum cost for this procedure in this place of service, in dollars.
+                                        example: 714.93
+                                      is_bundle:
+                                        type: boolean
+                                        description: Where this data is the costs for a procedure bundle rather than a regular procedure.
+                                        example: true
+                                      components:
+                                        type: array
+                                        description: 'Individual costs for the components that make up this procedure bundle.
+
+
+                                          For a regular procedure, this field will always be `null`.'
+                                        nullable: true
+                                        items:
+                                          type: object
+                                          properties:
+                                            display:
+                                              type: string
+                                              description: The display name for this component of a procedure bundle.
+                                              example: Knee replacement surgery
+                                            min:
+                                              type: number
+                                              description: The minimum cost for this component in this place of service, in dollars.
+                                              example: 239
+                                            median:
+                                              type: number
+                                              description: The median cost for this component in this place of service, in dollars.
+                                              example: 520.535
+                                            max:
+                                              type: number
+                                              description: The maximum cost for this component in this place of service, in dollars.
+                                              example: 714.93
+                                    description: 'Costs associated with this procedure in an inpatient setting.
+
+
+                                      This key will only be populated for procedure bundles, and only if we have relevant data. A regular procedure will always have a `null` value here.'
+                                  description: 'Costs associated with this procedure in an inpatient setting.
+
+
+                                    This key will only be populated for procedure bundles, and only if we have relevant data. A regular procedure will always have a `null` value here.'
+                              description: The costs associated with this location.
+                            uuid:
+                              type: string
+                              description: A UUID uniquely identifying this location
+                              format: uuid
+                              example: f38b9fd5-1e28-4f6e-953c-1e1493b68e21
+                            name:
+                              type: string
+                              nullable: true
+                            address:
+                              type: string
+                              example: '185 Berry St # 130, San Francisco, CA 94107, US'
+                            address_details:
+                              type: object
+                              properties:
+                                street:
+                                  type: string
+                                  example: '185 Berry St # 130'
+                                address_line_1:
+                                  type: string
+                                  example: 185 Berry St
+                                address_line_2:
+                                  type: string
+                                  nullable: true
+                                  example: '# 130'
+                                city:
+                                  type: string
+                                  example: San Francisco
+                                state:
+                                  type: string
+                                  example: CA
+                                zip:
+                                  type: string
+                                  example: '94107'
+                            latitude:
+                              type: number
+                              example: 37.7765973
+                            longitude:
+                              type: number
+                              example: -122.3919488
+                            google_maps_link:
+                              type: string
+                              example: https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US
+                            phone_numbers:
+                              type: array
+                              description: ''
+                              items:
+                                type: object
+                                properties:
+                                  phone:
+                                    type: string
+                                    example: '4155146410'
+                                  details:
+                                    type: string
+                                    example: primary
+                            faxes:
+                              type: array
+                              description: 'Fax numbers associated with this location.
+
+
+                                This property only appears for customers purchasing fax data. If you would like this property and are not receiving it, please reach out to support.'
+                              items:
+                                type: object
+                                properties:
+                                  phone:
+                                    type: string
+                                    example: '2121234567'
+                                  details:
+                                    type: string
+                                    example: secondary
+                                  confidence:
+                                    type: integer
+                                    format: int32
+                                    example: 3
+                            confidence:
+                              type: integer
+                              description: 'Each location contains a confidence score. This score indicates the probability of the given provider practicing at said location with the included contact information
+
+
+                                This field will only be populated for Ribbon-provided locations. Locations you create yourself will have a confidence score of `null`.'
+                              format: int32
+                              nullable: true
+                              example: 2
+                            insurances:
+                              type: array
+                              description: List of insurances the accepted at this location
+                              items:
+                                type: object
+                                properties:
+                                  uuid:
+                                    type: string
+                                    description: A UUID uniquely identifying this insurance
+                                    format: uuid
+                                    example: d8addf29-1054-4ccb-b179-dda65f7fefdd
+                                  carrier_association:
+                                    type: string
+                                    nullable: true
+                                    example: Aetna
+                                  carrier_brand:
+                                    type: string
+                                    nullable: true
+                                    example: Aetna
+                                  carrier_name:
+                                    type: string
+                                    nullable: true
+                                    example: Aetna
+                                  state:
+                                    type: string
+                                    nullable: true
+                                    example: NY
+                                  plan_name:
+                                    type: string
+                                    nullable: true
+                                    example: Aetna HealthFund Open Choice
+                                  plan_type:
+                                    type: string
+                                    nullable: true
+                                    example: PPO
+                                  metal_level:
+                                    type: string
+                                    nullable: true
+                                  display_name:
+                                    type: string
+                                    example: Aetna - HealthFund Open Choice - PPO
+                                  network:
+                                    type: string
+                                    nullable: true
+                                  confidence:
+                                    type: integer
+                                    format: int32
+                                    nullable: true
+                                    example: 4
+                                  category:
+                                    type: string
+                                    nullable: true
+                                  codes:
+                                    type: array
+                                    description: ''
+                                    items:
+                                      oneOf:
+                                      - type: array
+                                        items:
+                                          type: string
+                            tins:
+                              type: string
+                              description: Comma separated list of standard 9-digit identification code(s) used by the IRS for business entities and used for contracting and paying provider/facility claims.
+                          description: All of the metadata on the matched location plus a `costs` key.
+                        npi:
+                          maximum: 9999999999
+                          minimum: 1000000000
+                          type: integer
+                          description: The healthcare provider's 10-digit National Provider Identifier (NPI)
+                          format: int32
+                          example: 1861664294
+                        first_name:
+                          type: string
+                          description: First name of the provider
+                          example: Jane
+                        middle_name:
+                          type: string
+                          description: Middle name of the provider
+                          nullable: true
+                          example: J
+                        last_name:
+                          type: string
+                          description: Last name of the provider
+                          example: Doe
+                        age:
+                          type: integer
+                          description: The estimated age of the provider
+                          format: int32
+                          nullable: true
+                          example: 38
+                        gender:
+                          type: string
+                          description: The gender of the provider
+                          enum:
+                          - m
+                          - f
+                          x-enum-elements:
+                          - name: m
+                            description: ''
+                          - name: f
+                            description: ''
+                        ratings_count:
+                          type: integer
+                          description: Total number of ratings collected across different sources
+                          format: int32
+                          example: 20
+                        ratings_avg:
+                          type: number
+                          description: Average patient satisfaction rating out of 10 points across multiple sources
+                          nullable: true
+                          example: 9.8
+                        degrees:
+                          type: array
+                          description: Lists all degrees associated with this provider (e.g. MD, OD, PhD)
+                          items:
+                            type: string
+                        specialties:
+                          type: array
+                          description: This lists the UUIDs of all the specialties for a given provider
+                          items:
+                            type: string
+                            format: uuid
+                        languages:
+                          type: array
+                          description: List of confirmed languages spoken
+                          items:
+                            type: string
+                        educations:
+                          type: array
+                          description: List of the schools attended by the provider
+                          items:
+                            required:
+                            - education
+                            - type
+                            - year
+                            type: object
+                            properties:
+                              education:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                    example: Stritch School of Medicine
+                                  uuid:
+                                    type: string
+                                    format: uuid
+                                    example: 0b26c31a-d74a-4327-9702-57753b82a126
+                              type:
+                                type: string
+                                nullable: true
+                              year:
+                                type: integer
+                                format: int32
+                                nullable: true
+                                example: 2007
+                        insurances:
+                          type: array
+                          description: List of the UUIDs of insurances the provider accepts
+                          items:
+                            type: string
+                            format: uuid
+                        provider_types:
+                          type: array
+                          description: There are high level classifications for different provider types -- e.g. "Doctor", "Optometry", "Dental Providers", "Nursing", etc.
+                          items:
+                            type: string
+                        locations:
+                          type: array
+                          description: List of all locations this provider is known to practice at including any known phone numbers at these locations
+                          items:
+                            type: object
+                            properties:
+                              uuid:
+                                type: string
+                                description: A UUID uniquely identifying this location
+                                format: uuid
+                                example: f38b9fd5-1e28-4f6e-953c-1e1493b68e21
+                              name:
+                                type: string
+                                nullable: true
+                              address:
+                                type: string
+                                example: '185 Berry St # 130, San Francisco, CA 94107, US'
+                              address_details:
+                                type: object
+                                properties:
+                                  street:
+                                    type: string
+                                    example: '185 Berry St # 130'
+                                  address_line_1:
+                                    type: string
+                                    example: 185 Berry St
+                                  address_line_2:
+                                    type: string
+                                    nullable: true
+                                    example: '# 130'
+                                  city:
+                                    type: string
+                                    example: San Francisco
+                                  state:
+                                    type: string
+                                    example: CA
+                                  zip:
+                                    type: string
+                                    example: '94107'
+                              latitude:
+                                type: number
+                                example: 37.7765973
+                              longitude:
+                                type: number
+                                example: -122.3919488
+                              google_maps_link:
+                                type: string
+                                example: https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US
+                              phone_numbers:
+                                type: array
+                                description: ''
+                                items:
+                                  type: object
+                                  properties:
+                                    phone:
+                                      type: string
+                                      example: '4155146410'
+                                    details:
+                                      type: string
+                                      example: primary
+                              faxes:
+                                type: array
+                                description: 'Fax numbers associated with this location.
+
+
+                                  This property only appears for customers purchasing fax data. If you would like this property and are not receiving it, please reach out to support.'
+                                items:
+                                  type: object
+                                  properties:
+                                    phone:
+                                      type: string
+                                      example: '2121234567'
+                                    details:
+                                      type: string
+                                      example: secondary
+                                    confidence:
+                                      type: integer
+                                      format: int32
+                                      example: 3
+                              confidence:
+                                type: integer
+                                description: 'Each location contains a confidence score. This score indicates the probability of the given provider practicing at said location with the included contact information
+
+
+                                  This field will only be populated for Ribbon-provided locations. Locations you create yourself will have a confidence score of `null`.'
+                                format: int32
+                                nullable: true
+                                example: 2
+                              insurances:
+                                type: array
+                                description: List of insurances the accepted at this location
+                                items:
+                                  type: object
+                                  properties:
+                                    uuid:
+                                      type: string
+                                      description: A UUID uniquely identifying this insurance
+                                      format: uuid
+                                      example: d8addf29-1054-4ccb-b179-dda65f7fefdd
+                                    carrier_association:
+                                      type: string
+                                      nullable: true
+                                      example: Aetna
+                                    carrier_brand:
+                                      type: string
+                                      nullable: true
+                                      example: Aetna
+                                    carrier_name:
+                                      type: string
+                                      nullable: true
+                                      example: Aetna
+                                    state:
+                                      type: string
+                                      nullable: true
+                                      example: NY
+                                    plan_name:
+                                      type: string
+                                      nullable: true
+                                      example: Aetna HealthFund Open Choice
+                                    plan_type:
+                                      type: string
+                                      nullable: true
+                                      example: PPO
+                                    metal_level:
+                                      type: string
+                                      nullable: true
+                                    display_name:
+                                      type: string
+                                      example: Aetna - HealthFund Open Choice - PPO
+                                    network:
+                                      type: string
+                                      nullable: true
+                                    confidence:
+                                      type: integer
+                                      format: int32
+                                      nullable: true
+                                      example: 4
+                                    category:
+                                      type: string
+                                      nullable: true
+                                    codes:
+                                      type: array
+                                      description: ''
+                                      items:
+                                        oneOf:
+                                        - type: array
+                                          items:
+                                            type: string
+                              tins:
+                                type: string
+                                description: Comma separated list of standard 9-digit identification code(s) used by the IRS for business entities and used for contracting and paying provider/facility claims.
+                        online_profiles:
+                          type: array
+                          description: We aggregate profiles across a variety of different online sources, including booking platforms
+                          items:
+                            type: object
+                            properties:
+                              url:
+                                type: string
+        '400':
+          description: The given search was not valid. It combined parameters that may not be combined, or did not specify a procedure in any way, or the specified procedure could not be found, etc.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /pricing/providers
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getPricingProviders
+        x-testDescription: 'Search for providers that perform a given procedure and find the lowest insurance-specific price for a procedure in your area.
+
+
+          #### Example Use Case
+
+          Search for all applicable provider negotiated rates, given a specific insurance and procedure (and optionally, a specific location/address and distance). For example, search for all providers near me who perform Leg MRIs and who take a given insurance, sorted by lowest price.
+
+          '
+  /pricing/providers/{npi}/procedures:
+    get:
+      tags:
+      - Price Transparency
+      summary: getPricingProviderProcedures
+      description: 'Fetch the list of procedures that a single provider performs, with the lowest available negotiated rates specific to a given insurance for each procedure.
+
+
+        #### Example Use Case
+
+        For a given provider, search the full list of procedures that they are likely to perform where there are negotiated rates available for a particular insurance, and return the minimum price for each procedure.
+
+        '
+      operationId: getPricingProviderProcedures
+      parameters:
+      - name: npi
+        in: path
+        description: The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^\d{10}$
+          type: string
+          example: '1861664294'
+      - name: plan_id
+        in: query
+        description: Search for negotiated rates for the insurance plan with this UUID.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: uuid
+          example: 81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902
+      - name: page
+        in: query
+        description: The page of the results which was returned.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 1
+      - name: page_size
+        in: query
+        description: How many results are in each page.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 15
+      responses:
+        '200':
+          description: Returns the procedures for the given provider for which we have price data
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                - parameters
+                type: object
+                properties:
+                  parameters:
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                        description: The page of the results which was returned.
+                        format: int32
+                        example: 1
+                      page_size:
+                        type: integer
+                        description: How many results are in each page.
+                        format: int32
+                        example: 25
+                      insurance:
+                        type: object
+                        properties:
+                          uuid:
+                            type: string
+                            description: A UUID uniquely identifying this insurance
+                            format: uuid
+                            example: d8addf29-1054-4ccb-b179-dda65f7fefdd
+                          display:
+                            example: Aetna
+                            oneOf:
+                            - type: string
+                  data:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: The UUID of the procedure these prices correspond to.
+                          format: uuid
+                          example: 7ad7c4ef-baf9-4789-8e58-51d2308a1143
+                        display:
+                          type: string
+                          description: The name of the procedure these prices correspond to.
+                          example: MRI, leg
+                        min_cost:
+                          type: number
+                          description: The minimum cost for this procedure with this provider, in dollars.
+        '400':
+          description: The given search was not valid. The given insurance could not be found, etc.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '404':
+          description: The given NPI cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /pricing/providers/1861664294/procedures?plan_id=81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902&page=1&page_size=15
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getPricingProviderProcedures
+        x-testDescription: 'Fetch the list of procedures that a single provider performs, with the lowest available negotiated rates specific to a given insurance for each procedure.
+
+
+          #### Example Use Case
+
+          For a given provider, search the full list of procedures that they are likely to perform where there are negotiated rates available for a particular insurance, and return the minimum price for each procedure.
+
+          '
+  /pricing/providers/{npi}/procedures/{procedure_uuid}:
+    get:
+      tags:
+      - Price Transparency
+      summary: getPricingProviderProcedure
+      description: 'Find the prices offered by a single provider for a specific procedure, with a given insurance, across practice locations.
+
+
+        #### Example Use Case
+
+        Compare insurance-specific price estimates of a Leg MRI for a single provider at multiple relevant practices (e.g., compare this provider''s rates when performing the procedure at both the provider''s private outpatient facility, as well as a nearby hospital system clinic where they also practice).
+
+        '
+      operationId: getPricingProviderProcedure
+      parameters:
+      - name: npi
+        in: path
+        description: The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^\d{10}$
+          type: string
+          example: '1861664294'
+      - name: procedure_uuid
+        in: path
+        description: The UUID of the target procedure. If the target procedure is a procedure bundle but we do not have any data for it, we will return data for its anchor procedure instead.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 3c51144e-3385-4933-b581-4081c84b3cb9
+      - name: plan_id
+        in: query
+        description: Search for negotiated rates for the insurance plan with this UUID.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: uuid
+          example: 81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902
+      - name: page
+        in: query
+        description: The page of the results which was returned.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 1
+      - name: page_size
+        in: query
+        description: How many results are in each page.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 15
+      responses:
+        '200':
+          description: Returns costs for the given procedure with the given provider at each location
+          content:
+            application/json:
+              schema:
+                required:
+                - locations
+                - parameters
+                type: object
+                properties:
+                  parameters:
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                        description: The page of the results which was returned.
+                        format: int32
+                        example: 1
+                      page_size:
+                        type: integer
+                        description: How many results are in each page.
+                        format: int32
+                        example: 25
+                      insurance:
+                        type: object
+                        properties:
+                          uuid:
+                            type: string
+                            description: A UUID uniquely identifying this insurance
+                            format: uuid
+                            example: d8addf29-1054-4ccb-b179-dda65f7fefdd
+                          display:
+                            example: Aetna
+                            oneOf:
+                            - type: string
+                  locations:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: The UUID of the location these prices correspond to.
+                          format: uuid
+                          example: 7ad7c4ef-baf9-4789-8e58-51d2308a1143
+                        costs:
+                          type: object
+                          properties:
+                            min:
+                              type: number
+                              description: The minimum cost for this procedure in dollars
+                              example: 239
+                            avg:
+                              type: number
+                              description: 'The median cost for this procedure in dollars
+
+
+                                This key is misnamed. For backwards compatibility, we have retained the legacy name.'
+                              example: 520.535
+                            max:
+                              type: number
+                              description: The maximum cost for this procedure in dollars
+                              example: 714.93
+                            is_bundle:
+                              type: boolean
+                              description: Where this data is the costs for a procedure bundle rather than a regular procedure.
+                              example: true
+                            outpatient:
+                              oneOf:
+                              - nullable: true
+                              - required:
+                                - components
+                                - is_bundle
+                                - max
+                                - median
+                                - min
+                                type: object
+                                properties:
+                                  min:
+                                    type: number
+                                    description: The minimum cost for this procedure in this place of service, in dollars.
+                                    example: 239
+                                  median:
+                                    type: number
+                                    description: The median cost for this procedure in this place of service, in dollars.
+                                    example: 520.535
+                                  max:
+                                    type: number
+                                    description: The maximum cost for this procedure in this place of service, in dollars.
+                                    example: 714.93
+                                  is_bundle:
+                                    type: boolean
+                                    description: Where this data is the costs for a procedure bundle rather than a regular procedure.
+                                    example: true
+                                  components:
+                                    type: array
+                                    description: 'Individual costs for the components that make up this procedure bundle.
+
+
+                                      For a regular procedure, this field will always be `null`.'
+                                    nullable: true
+                                    items:
+                                      type: object
+                                      properties:
+                                        display:
+                                          type: string
+                                          description: The display name for this component of a procedure bundle.
+                                          example: Knee replacement surgery
+                                        min:
+                                          type: number
+                                          description: The minimum cost for this component in this place of service, in dollars.
+                                          example: 239
+                                        median:
+                                          type: number
+                                          description: The median cost for this component in this place of service, in dollars.
+                                          example: 520.535
+                                        max:
+                                          type: number
+                                          description: The maximum cost for this component in this place of service, in dollars.
+                                          example: 714.93
+                                description: 'Costs associated with this procedure in an outpatient setting.
+
+
+                                  This key will only be populated for procedure bundles, and only if we have relevant data. A regular procedure will always have a `null` value here.'
+                              description: 'Costs associated with this procedure in an outpatient setting.
+
+
+                                This key will only be populated for procedure bundles, and only if we have relevant data. A regular procedure will always have a `null` value here.'
+                            inpatient:
+                              oneOf:
+                              - nullable: true
+                              - required:
+                                - components
+                                - is_bundle
+                                - max
+                                - median
+                                - min
+                                type: object
+                                properties:
+                                  min:
+                                    type: number
+                                    description: The minimum cost for this procedure in this place of service, in dollars.
+                                    example: 239
+                                  median:
+                                    type: number
+                                    description: The median cost for this procedure in this place of service, in dollars.
+                                    example: 520.535
+                                  max:
+                                    type: number
+                                    description: The maximum cost for this procedure in this place of service, in dollars.
+                                    example: 714.93
+                                  is_bundle:
+                                    type: boolean
+                                    description: Where this data is the costs for a procedure bundle rather than a regular procedure.
+                                    example: true
+                                  components:
+                                    type: array
+                                    description: 'Individual costs for the components that make up this procedure bundle.
+
+
+                                      For a regular procedure, this field will always be `null`.'
+                                    nullable: true
+                                    items:
+                                      type: object
+                                      properties:
+                                        display:
+                                          type: string
+                                          description: The display name for this component of a procedure bundle.
+                                          example: Knee replacement surgery
+                                        min:
+                                          type: number
+                                          description: The minimum cost for this component in this place of service, in dollars.
+                                          example: 239
+                                        median:
+                                          type: number
+                                          description: The median cost for this component in this place of service, in dollars.
+                                          example: 520.535
+                                        max:
+                                          type: number
+                                          description: The maximum cost for this component in this place of service, in dollars.
+                                          example: 714.93
+                                description: 'Costs associated with this procedure in an inpatient setting.
+
+
+                                  This key will only be populated for procedure bundles, and only if we have relevant data. A regular procedure will always have a `null` value here.'
+                              description: 'Costs associated with this procedure in an inpatient setting.
+
+
+                                This key will only be populated for procedure bundles, and only if we have relevant data. A regular procedure will always have a `null` value here.'
+        '400':
+          description: The given search was not valid. The given insurance could not be found, etc.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '404':
+          description: The given NPI cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /pricing/providers/1861664294/procedures/3c51144e-3385-4933-b581-4081c84b3cb9?plan_id=81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902&page=1&page_size=15
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getPricingProviderProcedure
+        x-testDescription: 'Find the prices offered by a single provider for a specific procedure, with a given insurance, across practice locations.
+
+
+          #### Example Use Case
+
+          Compare insurance-specific price estimates of a Leg MRI for a single provider at multiple relevant practices (e.g., compare this provider''s rates when performing the procedure at both the provider''s private outpatient facility, as well as a nearby hospital system clinic where they also practice).
+
+          '
+  /pricing/providers/{npi}/procedures/{procedure_uuid}/locations/{location_uuid}:
+    get:
+      tags:
+      - Price Transparency
+      summary: getPricingProviderProcedureLocation
+      description: 'Search for a price estimate for a specific procedure from a specific provider at a specific location, with a given insurance plan.
+
+
+        #### Example Use Case
+
+        Given an insurance, identify the expected price of a particular procedure from a specific provider at a known facility.
+
+        '
+      operationId: getPricingProviderProcedureLocation
+      parameters:
+      - name: npi
+        in: path
+        description: The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^\d{10}$
+          type: string
+          example: '1861664294'
+      - name: procedure_uuid
+        in: path
+        description: The UUID of the target procedure. If the target procedure is a procedure bundle but we do not have any data for it, we will return data for its anchor procedure instead.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 3c51144e-3385-4933-b581-4081c84b3cb9
+      - name: location_uuid
+        in: path
+        description: The UUID of the target location.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 34ecc98a-e49e-49e3-84f9-b0ab2ff00495
+      - name: plan_id
+        in: query
+        description: Search for negotiated rates for the insurance plan with this UUID.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: uuid
+          example: 81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902
+      responses:
+        '200':
+          description: Returns the costs associated with the given provider, procedure, and location
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                - parameters
+                type: object
+                properties:
+                  parameters:
+                    type: object
+                    properties:
+                      insurance:
+                        type: object
+                        properties:
+                          uuid:
+                            type: string
+                            description: A UUID uniquely identifying this insurance
+                            format: uuid
+                            example: d8addf29-1054-4ccb-b179-dda65f7fefdd
+                          carrier_association:
+                            type: string
+                            nullable: true
+                            example: Aetna
+                          carrier_brand:
+                            type: string
+                            nullable: true
+                            example: Aetna
+                          carrier_name:
+                            type: string
+                            nullable: true
+                            example: Aetna
+                          state:
+                            type: string
+                            nullable: true
+                            example: NY
+                          plan_name:
+                            type: string
+                            nullable: true
+                            example: Aetna HealthFund Open Choice
+                          plan_type:
+                            type: string
+                            nullable: true
+                            example: PPO
+                          metal_level:
+                            type: string
+                            nullable: true
+                          display_name:
+                            type: string
+                            example: Aetna - HealthFund Open Choice - PPO
+                          network:
+                            type: string
+                            nullable: true
+                          confidence:
+                            type: integer
+                            format: int32
+                            nullable: true
+                            example: 4
+                          category:
+                            type: string
+                            nullable: true
+                          codes:
+                            type: array
+                            description: ''
+                            items:
+                              oneOf:
+                              - type: array
+                                items:
+                                  type: string
+                  data:
+                    type: object
+                    properties:
+                      costs:
+                        type: object
+                        properties:
+                          min:
+                            type: number
+                            description: The minimum cost for this procedure in dollars
+                            example: 239
+                          avg:
+                            type: number
+                            description: 'The median cost for this procedure in dollars
+
+
+                              This key is misnamed. For backwards compatibility, we have retained the legacy name.'
+                            example: 520.535
+                          max:
+                            type: number
+                            description: The maximum cost for this procedure in dollars
+                            example: 714.93
+                          is_bundle:
+                            type: boolean
+                            description: Where this data is the costs for a procedure bundle rather than a regular procedure.
+                            example: true
+                          outpatient:
+                            oneOf:
+                            - nullable: true
+                            - required:
+                              - components
+                              - is_bundle
+                              - max
+                              - median
+                              - min
+                              type: object
+                              properties:
+                                min:
+                                  type: number
+                                  description: The minimum cost for this procedure in this place of service, in dollars.
+                                  example: 239
+                                median:
+                                  type: number
+                                  description: The median cost for this procedure in this place of service, in dollars.
+                                  example: 520.535
+                                max:
+                                  type: number
+                                  description: The maximum cost for this procedure in this place of service, in dollars.
+                                  example: 714.93
+                                is_bundle:
+                                  type: boolean
+                                  description: Where this data is the costs for a procedure bundle rather than a regular procedure.
+                                  example: true
+                                components:
+                                  type: array
+                                  description: 'Individual costs for the components that make up this procedure bundle.
+
+
+                                    For a regular procedure, this field will always be `null`.'
+                                  nullable: true
+                                  items:
+                                    type: object
+                                    properties:
+                                      display:
+                                        type: string
+                                        description: The display name for this component of a procedure bundle.
+                                        example: Knee replacement surgery
+                                      min:
+                                        type: number
+                                        description: The minimum cost for this component in this place of service, in dollars.
+                                        example: 239
+                                      median:
+                                        type: number
+                                        description: The median cost for this component in this place of service, in dollars.
+                                        example: 520.535
+                                      max:
+                                        type: number
+                                        description: The maximum cost for this component in this place of service, in dollars.
+                                        example: 714.93
+                              description: 'Costs associated with this procedure in an outpatient setting.
+
+
+                                This key will only be populated for procedure bundles, and only if we have relevant data. A regular procedure will always have a `null` value here.'
+                            description: 'Costs associated with this procedure in an outpatient setting.
+
+
+                              This key will only be populated for procedure bundles, and only if we have relevant data. A regular procedure will always have a `null` value here.'
+                          inpatient:
+                            oneOf:
+                            - nullable: true
+                            - required:
+                              - components
+                              - is_bundle
+                              - max
+                              - median
+                              - min
+                              type: object
+                              properties:
+                                min:
+                                  type: number
+                                  description: The minimum cost for this procedure in this place of service, in dollars.
+                                  example: 239
+                                median:
+                                  type: number
+                                  description: The median cost for this procedure in this place of service, in dollars.
+                                  example: 520.535
+                                max:
+                                  type: number
+                                  description: The maximum cost for this procedure in this place of service, in dollars.
+                                  example: 714.93
+                                is_bundle:
+                                  type: boolean
+                                  description: Where this data is the costs for a procedure bundle rather than a regular procedure.
+                                  example: true
+                                components:
+                                  type: array
+                                  description: 'Individual costs for the components that make up this procedure bundle.
+
+
+                                    For a regular procedure, this field will always be `null`.'
+                                  nullable: true
+                                  items:
+                                    type: object
+                                    properties:
+                                      display:
+                                        type: string
+                                        description: The display name for this component of a procedure bundle.
+                                        example: Knee replacement surgery
+                                      min:
+                                        type: number
+                                        description: The minimum cost for this component in this place of service, in dollars.
+                                        example: 239
+                                      median:
+                                        type: number
+                                        description: The median cost for this component in this place of service, in dollars.
+                                        example: 520.535
+                                      max:
+                                        type: number
+                                        description: The maximum cost for this component in this place of service, in dollars.
+                                        example: 714.93
+                              description: 'Costs associated with this procedure in an inpatient setting.
+
+
+                                This key will only be populated for procedure bundles, and only if we have relevant data. A regular procedure will always have a `null` value here.'
+                            description: 'Costs associated with this procedure in an inpatient setting.
+
+
+                              This key will only be populated for procedure bundles, and only if we have relevant data. A regular procedure will always have a `null` value here.'
+        '400':
+          description: The given search was not valid. The given insurance could not be found, etc.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+        '404':
+          description: The given NPI cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /pricing/providers/1861664294/procedures/3c51144e-3385-4933-b581-4081c84b3cb9/locations/34ecc98a-e49e-49e3-84f9-b0ab2ff00495?plan_id=81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getPricingProviderProcedureLocation
+        x-testDescription: 'Search for a price estimate for a specific procedure from a specific provider at a specific location, with a given insurance plan.
+
+
+          #### Example Use Case
+
+          Given an insurance, identify the expected price of a particular procedure from a specific provider at a known facility.
+
+          '
+  /pricing/carriers:
+    get:
+      tags:
+      - Price Transparency
+      summary: getPricingCarriers
+      description: 'This endpoint will show the carriers for which we have data. This can be used to fetch the recency of the data used per carrier.
+
+        '
+      operationId: getPricingCarriers
+      parameters: []
+      responses:
+        '200':
+          description: Returns all carriers we have price data for
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: ''
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                          description: A UUID uniquely identifying this carrier
+                          format: uuid
+                          example: ef704f14-c906-4857-acd4-d811f1394c32
+                        name:
+                          type: string
+                          description: A human-friendly name for this carrier
+                          example: Aetna
+                        last_updated:
+                          type: string
+                          description: A month-granularity ISO-format date representing when we last updated price data for this carrier
+                          example: 2023-01
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /pricing/carriers
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getPricingCarriers
+        x-testDescription: 'This endpoint will show the carriers for which we have data. This can be used to fetch the recency of the data used per carrier.
+
+          '
+  /pricing/carrier/{carrier_uuid}:
+    get:
+      tags:
+      - Price Transparency
+      summary: getPricingCarrier
+      description: 'Fetch metadata including the recency of the pricing data used for a specific carrier.
+
+        '
+      operationId: getPricingCarrier
+      parameters:
+      - name: carrier_uuid
+        in: path
+        description: The UUID of the insurance carrier.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: ef704f14-c906-4857-acd4-d811f1394c32
+      responses:
+        '200':
+          description: Returns metadata for the given carrier
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                    description: A UUID uniquely identifying this carrier
+                    format: uuid
+                    example: ef704f14-c906-4857-acd4-d811f1394c32
+                  name:
+                    type: string
+                    description: A human-friendly name for this carrier
+                    example: Aetna
+                  last_updated:
+                    type: string
+                    description: A month-granularity ISO-format date representing when we last updated price data for this carrier
+                    example: 2023-01
+        '404':
+          description: The given carrier cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /pricing/carrier/ef704f14-c906-4857-acd4-d811f1394c32
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getPricingCarrier
+        x-testDescription: 'Fetch metadata including the recency of the pricing data used for a specific carrier.
+
+          '
+  /pricing/version:
+    get:
+      tags:
+      - Price Transparency
+      summary: getPricingCarrierNames
+      description: 'This endpoint will the names of the carriers for which we have data. This can be used to fetch the recency of the data used per carrier.
+
+
+        This endpoint is deprecated. Please use [List Carriers](./getpricingcarriers) instead.
+
+        '
+      operationId: getPricingCarrierNames
+      parameters: []
+      responses:
+        '200':
+          description: Returns all carriers we have price data for
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  carriers:
+                    type: array
+                    description: The name of the insurance carriers we have pricing data for
+                    example:
+                    - Aetna
+                    - Cigna
+                    items:
+                      type: string
+      deprecated: true
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /pricing/version
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getPricingCarrierNames
+        x-testDescription: 'This endpoint will the names of the carriers for which we have data. This can be used to fetch the recency of the data used per carrier.
+
+
+          This endpoint is deprecated. Please use [List Carriers](./getpricingcarriers) instead.
+
+          '
+  /pricing/version/{carrier_name}:
+    get:
+      tags:
+      - Price Transparency
+      summary: getPricingVersionCarrier
+      description: 'Fetch the recency of the pricing data used for a specific carrier by name.
+
+
+        This endpoint is deprecated. Please use [Get Carrier](./getpricingcarrier) instead.
+
+        '
+      operationId: getPricingVersionCarrier
+      parameters:
+      - name: carrier_name
+        in: path
+        description: The name of the insurance carrier.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: Aetna
+      responses:
+        '200':
+          description: Returns the recency for the given carrier
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_updated:
+                    type: string
+                    description: A month-granularity ISO-format date representing when we last updated price data for this carrier
+                    example: 2023-01
+        '404':
+          description: The given carrier cannot be found
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        format: int32
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                description: The requested resource could not be found
+      deprecated: true
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /pricing/version/Aetna
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getPricingVersionCarrier
+        x-testDescription: 'Fetch the recency of the pricing data used for a specific carrier by name.
+
+
+          This endpoint is deprecated. Please use [Get Carrier](./getpricingcarrier) instead.
+
+          '
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

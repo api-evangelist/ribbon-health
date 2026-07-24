@@ -1,0 +1,325 @@
+openapi: 3.0.0
+info:
+  title: ribbon-health Cost Estimates Networks API
+  description: 'An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
+
+    '
+  contact: {}
+  version: 1.0.0
+  x-codegen-settings:
+    Nullify404: false
+    GenerateAsyncCode: true
+    UseMethodPrefix: false
+    UseModelPostfix: false
+    UseControllerPrefix: true
+    UseEnumPostfix: true
+    CollectParameters: false
+    UseConstructorsForConfig: false
+    UseCommonSDKLibrary: false
+    iOSUseAppInfoPlist: false
+    AndroidUseAppManifest: false
+    BodySerialization: 0
+    EnableAdditionalModelProperties: false
+    PreserveParameterOrder: true
+    AppendContentHeaders: true
+    iOSGenerateCoreData: false
+    GenerateInterfaces: false
+    NodeHttpClient: NODE_REQUEST
+    ValidateRequiredParameters: false
+    JavaUsePropertiesConfig: false
+    Timeout: 0
+    StoreTimezoneInformation: false
+    EnablePHPComposerVersionString: false
+    EnableLogging: false
+    ArraySerialization: Indexed
+    ModelSerializationScheme: Json
+    UseExceptionPrefix: true
+    RunscopeEnabled: false
+    AndroidHttpClient: ANDROID_OK
+    ObjCHttpClient: UNIREST
+    CSharpHttpClient: UNIREST
+    PHPHttpClient: UNIREST
+    JavaHttpClient: JAVA_OK
+    ParameterArrayFormat: ParamArrayWithIndex
+    SecurityProtocols:
+    - Ssl3
+    - Tls
+    GenerateTravisConfig: false
+    GenerateCircleConfig: false
+    GenerateAppveyorConfig: false
+    GenerateJenkinsConfig: false
+    EnableHttpCache: false
+    Retries: 0
+    RetryInterval: 1
+    GenerateAdvancedDocs: true
+    UnderscoreNumbers: true
+    UseSingletonPattern: true
+    DisableLinting: false
+    ApplyCustomizations: []
+    SortResources: false
+    AllowSkippingSSLCertVerification: false
+    DoNotSplitWords: []
+    EnableGlobalUserAgent: true
+    ReturnCompleteHttpResponse: false
+    GenerateModels: true
+    GenerateExceptions: true
+    IgnoreIfNullJson: false
+    DisableDocs: false
+    LiftParameterDescriptionFromCustomType: false
+    ThrowForHttpErrorStatusCodes: true
+    ResponseMapping:
+      Type: Simple
+    ForceKeywordArgsInRuby: false
+    SymbolizeHashKeysInRuby: false
+    UsageExampleEndpoint:
+      Description: ''
+      EndpointGroupName: ''
+      EndpointName: ''
+    IsLatestVersion: false
+    EnableImmutableModels: false
+    GenerateEnums: true
+    BackoffFactor: 2
+    StatusCodesToRetry:
+    - 408
+    - 413
+    - 429
+    - 500
+    - 502
+    - 503
+    - 504
+    - 521
+    - 522
+    - 524
+    RequestMethodsToRetry:
+    - GET
+    - PUT
+    UserConfigurableRetries: true
+    UseEndpointMethodName: false
+    EncodeTemplateParameters: true
+    GenerateExamplesForOptionalFields: false
+    MultitargetDotnetVersions: false
+    BackoffMax: 0
+    RetryOnTimeout: true
+    EnableCookies: false
+    EnableJsonPassThroughForAny: false
+    PascalCaseEnumForCSharp: false
+    PascalCaseEnumForTypeScript: false
+    DisableMultipleAuth: false
+    AddSingleAuthDeprecatedCode: true
+    EnableExperimentalTypeCombinatorGeneration: false
+    ErrorTemplates: {}
+    UseSecuritySchemeNameForSingleAuth: false
+    EnableModelKeywordArgsInRuby: false
+    NullifyEmptyResponses: false
+    ExtendedAdditionalPropertiesSupport: false
+    EnforceStandardizedCasing: false
+  x-server-configuration:
+    default-environment: production
+    default-server: default
+    environments:
+    - name: production
+      servers:
+      - name: default
+        url: https://api.ribbonhealth.com/v1
+    parameters: []
+  x-image-uri: ''
+servers:
+- url: https://api.ribbonhealth.com/v1
+security:
+- BearerAuth: []
+tags:
+- name: Networks
+  description: ''
+paths:
+  /network_analysis:
+    get:
+      tags:
+      - Networks
+      summary: getNetworkAnalysis
+      description: 'View a provider network across different geographies (i.e. counties).
+
+
+        #### Example Use Case
+
+        In looking to expand to a new region, analyze existing provider networks in the region to understand how best to construct your own.
+
+        '
+      operationId: getNetworkAnalysis
+      parameters:
+      - name: insurance_id
+        in: query
+        description: A unique identifier for a single provider network from the Insurances reference endpoint.
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: uuid
+          example: 000912ad-5674-4c23-9b00-dca4e76aaa07
+      - name: ssa_codes
+        in: query
+        description: "SSA codes of the counties to run a network analysis on. \n\nA maximum of 50 codes may be included in a single request."
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: 14141,14150
+      - name: exclude_npis
+        in: query
+        description: 'When set to `true` the response will not list specific NPIs in the network but will continue to include the `npi_count` fields to let you know how many there are.
+
+
+          This parameter can be used to greater lower the amount of data sent back when specific NPIs are not necessary.'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          example: true
+          default: false
+      responses:
+        '200':
+          description: Returns the size of the provider network for the given insurance in the given counties.
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                - parameters
+                type: object
+                properties:
+                  parameters:
+                    required:
+                    - insurance_id
+                    - npi_count
+                    - ssa_codes
+                    type: object
+                    properties:
+                      insurance_id:
+                        type: string
+                        description: A unique identifier for a single provider network from the Insurances reference endpoint.
+                        format: uuid
+                        example: 000912ad-5674-4c23-9b00-dca4e76aaa07
+                      ssa_codes:
+                        type: array
+                        description: The SSA codes the network analysis was run on.
+                        example:
+                        - '14141'
+                        - '14150'
+                        items:
+                          type: string
+                      npi_count:
+                        type: integer
+                        description: How many unique NPIs accept the given insurance across all requested counties.
+                        format: int32
+                        example: 2999
+                  data:
+                    type: array
+                    description: ''
+                    items:
+                      required:
+                      - display
+                      - npi_count
+                      - ssa_code
+                      type: object
+                      properties:
+                        ssa_code:
+                          type: string
+                          description: The SSA code of the county this data is for.
+                          example: '14141'
+                        display:
+                          type: string
+                          description: The display name of the county this data is for.
+                          example: Cook, IL
+                        npi_count:
+                          type: integer
+                          description: How many unique NPIs accept the given insurance in this county.
+                          format: int32
+                          example: 2103
+                        npis:
+                          type: array
+                          description: 'The NPIs of providers who accept the given insurance in this county.
+
+
+                            If the `exclude_npis` parameter was set to true, this key will not be present.'
+                          items:
+                            type: string
+        '400':
+          description: The given request was invalid - the required parameters were missing or invalid, or it specified too many SSA codes.
+          content:
+            application/json:
+              schema:
+                required:
+                - error
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - message
+                    - status
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        format: int32
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                        x-enum-elements:
+                        - name: invalid_query_params
+                          description: ''
+                        - name: bad_request
+                          description: ''
+                      message:
+                        description: An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+                        oneOf:
+                        - type: object
+                        - type: string
+                description: An error returned from the API
+      deprecated: false
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+        ErrorTemplates: {}
+        SkipAdditionalHeaders: false
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /network_analysis?insurance_id=000912ad-5674-4c23-9b00-dca4e76aaa07&ssa_codes=14141%2C14150&exclude_npis=false
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers:
+            Content-Type: application/json
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Test getNetworkAnalysis
+        x-testDescription: 'View a provider network across different geographies (i.e. counties).
+
+
+          #### Example Use Case
+
+          In looking to expand to a new region, analyze existing provider networks in the region to understand how best to construct your own.
+
+          '
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
