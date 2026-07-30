@@ -8,7 +8,20 @@ description: >
   scores across the United States, enabling health plans, providers, and digital
   health solutions to build accurate provider directories and care navigation tools.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ribbon-health.png
 url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/apis.yml
 created: 2026-06-12
 modified: 2026-06-12
@@ -25,39 +38,278 @@ tags:
   - Health Plans
   - Digital Health
 apis:
-  - aid: ribbon-health:h1-api
-    name: H1 API (Ribbon Health)
-    description: >
-      The H1 REST API provides healthcare enterprises with accurate data on
-      providers, insurance plans, costs, and quality of care. Key capabilities
-      include provider search and lookup by NPI, location search, insurance
-      network verification, eligibility checking, procedure cost estimation,
-      and custom provider directory management.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
-    baseURL: https://api.ribbonhealth.com/v1
-    tags:
-      - Healthcare
-      - Provider Directory
-      - Insurance
-      - Eligibility
-      - Price Transparency
-      - Clinical Data
-    properties:
-      - type: Documentation
-        url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/openapi/ribbon-health-h1-api-openapi.yml
-      - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomproviders.json
-      - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomlocation.json
-      - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/geteligibility.json
-      - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getprocedurecoststimate.json
-      - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getnetworkanalysis.json
+- aid: ribbon-health:ribbon-health-cost-estimates-api
+  name: Ribbon Health Cost Estimates API
+  description: The Cost Estimates API from Ribbon Health — 4 operation(s) for cost estimates.
+  humanURL: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  baseURL: https://api.ribbonhealth.com/v1
+  tags:
+  - Cost Estimates
+  properties:
+  - type: OpenAPI
+    url: openapi/ribbon-health-cost-estimates-api-openapi.yml
+  - type: Documentation
+    url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomproviders.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomlocation.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/geteligibility.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getprocedurecoststimate.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getnetworkanalysis.json
+- aid: ribbon-health:ribbon-health-filters-api
+  name: Ribbon Health Filters API
+  description: The Filters API from Ribbon Health — 4 operation(s) for filters.
+  humanURL: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  baseURL: https://api.ribbonhealth.com/v1
+  tags:
+  - Filters
+  properties:
+  - type: OpenAPI
+    url: openapi/ribbon-health-filters-api-openapi.yml
+  - type: Documentation
+    url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomproviders.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomlocation.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/geteligibility.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getprocedurecoststimate.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getnetworkanalysis.json
+- aid: ribbon-health:ribbon-health-focus-area-endpoints-api
+  name: Ribbon Health Focus Area Endpoints API
+  description: >-
+    The Focus Area Endpoints API from Ribbon Health — 6 operation(s) for focus area endpoints.
+  humanURL: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  baseURL: https://api.ribbonhealth.com/v1
+  tags:
+  - Focus Area Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/ribbon-health-focus-area-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomproviders.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomlocation.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/geteligibility.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getprocedurecoststimate.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getnetworkanalysis.json
+- aid: ribbon-health:ribbon-health-locations-api
+  name: Ribbon Health Locations API
+  description: The Locations API from Ribbon Health — 5 operation(s) for locations.
+  humanURL: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  baseURL: https://api.ribbonhealth.com/v1
+  tags:
+  - Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/ribbon-health-locations-api-openapi.yml
+  - type: Documentation
+    url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomproviders.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomlocation.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/geteligibility.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getprocedurecoststimate.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getnetworkanalysis.json
+- aid: ribbon-health:ribbon-health-networks-api
+  name: Ribbon Health Networks API
+  description: The Networks API from Ribbon Health — 1 operation(s) for networks.
+  humanURL: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  baseURL: https://api.ribbonhealth.com/v1
+  tags:
+  - Networks
+  properties:
+  - type: OpenAPI
+    url: openapi/ribbon-health-networks-api-openapi.yml
+  - type: Documentation
+    url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomproviders.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomlocation.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/geteligibility.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getprocedurecoststimate.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getnetworkanalysis.json
+- aid: ribbon-health:ribbon-health-organizations-api
+  name: Ribbon Health Organizations API
+  description: The Organizations API from Ribbon Health — 2 operation(s) for organizations.
+  humanURL: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  baseURL: https://api.ribbonhealth.com/v1
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/ribbon-health-organizations-api-openapi.yml
+  - type: Documentation
+    url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomproviders.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomlocation.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/geteligibility.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getprocedurecoststimate.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getnetworkanalysis.json
+- aid: ribbon-health:ribbon-health-price-transparency-api
+  name: Ribbon Health Price Transparency API
+  description: The Price Transparency API from Ribbon Health — 8 operation(s) for price transparency.
+  humanURL: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  baseURL: https://api.ribbonhealth.com/v1
+  tags:
+  - Price Transparency
+  properties:
+  - type: OpenAPI
+    url: openapi/ribbon-health-price-transparency-api-openapi.yml
+  - type: Documentation
+    url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomproviders.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomlocation.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/geteligibility.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getprocedurecoststimate.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getnetworkanalysis.json
+- aid: ribbon-health:ribbon-health-providers-api
+  name: Ribbon Health Providers API
+  description: The Providers API from Ribbon Health — 10 operation(s) for providers.
+  humanURL: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  baseURL: https://api.ribbonhealth.com/v1
+  tags:
+  - Providers
+  properties:
+  - type: OpenAPI
+    url: openapi/ribbon-health-providers-api-openapi.yml
+  - type: Documentation
+    url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomproviders.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomlocation.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/geteligibility.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getprocedurecoststimate.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getnetworkanalysis.json
+- aid: ribbon-health:ribbon-health-reference-endpoints-api
+  name: Ribbon Health Reference Endpoints API
+  description: >-
+    The Reference Endpoints API from Ribbon Health — 13 operation(s) for reference endpoints.
+  humanURL: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  baseURL: https://api.ribbonhealth.com/v1
+  tags:
+  - Reference Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/ribbon-health-reference-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomproviders.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomlocation.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/geteligibility.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getprocedurecoststimate.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getnetworkanalysis.json
+- aid: ribbon-health:ribbon-health-tins-api
+  name: Ribbon Health TINs API
+  description: The TINs API from Ribbon Health — 2 operation(s) for tins.
+  humanURL: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  baseURL: https://api.ribbonhealth.com/v1
+  tags:
+  - TINs
+  properties:
+  - type: OpenAPI
+    url: openapi/ribbon-health-tins-api-openapi.yml
+  - type: Documentation
+    url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomproviders.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getcustomlocation.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/geteligibility.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getprocedurecoststimate.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getnetworkanalysis.json
 common:
   - type: AgenticAccess
     url: agentic-access/ribbon-health-agentic-access.yml
