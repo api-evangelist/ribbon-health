@@ -17,9 +17,12 @@
     },
     {
       "source": "https://www.linkedin.com/company/ribbonhealth",
-      "error": "HTTPError"
+      "feed_url": "https://www.linkedin.com/company/ribbonhealth",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-07-11T11:50:51Z",
-  "post_count": 16
+  "fetched": "2026-08-01T15:49:00Z",
+  "post_count": 17
 }

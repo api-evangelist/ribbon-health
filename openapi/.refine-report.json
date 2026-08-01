@@ -1,0 +1,32 @@
+{
+  "provider": "ribbon-health",
+  "sources": [
+    "ribbon-health-cost-estimates-api-openapi.yml",
+    "ribbon-health-filters-api-openapi.yml",
+    "ribbon-health-focus-area-endpoints-api-openapi.yml",
+    "ribbon-health-locations-api-openapi.yml",
+    "ribbon-health-networks-api-openapi.yml",
+    "ribbon-health-organizations-api-openapi.yml",
+    "ribbon-health-price-transparency-api-openapi.yml",
+    "ribbon-health-providers-api-openapi.yml",
+    "ribbon-health-reference-endpoints-api-openapi.yml",
+    "ribbon-health-tins-api-openapi.yml"
+  ],
+  "outputs": [
+    "ribbon-health-cost-estimates-api-openapi.yml",
+    "ribbon-health-filters-api-openapi.yml",
+    "ribbon-health-focus-area-endpoints-api-openapi.yml",
+    "ribbon-health-locations-api-openapi.yml",
+    "ribbon-health-networks-api-openapi.yml",
+    "ribbon-health-organizations-api-openapi.yml",
+    "ribbon-health-price-transparency-api-openapi.yml",
+    "ribbon-health-providers-api-openapi.yml",
+    "ribbon-health-reference-endpoints-api-openapi.yml",
+    "ribbon-health-tins-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
