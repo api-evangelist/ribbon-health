@@ -1,0 +1,292 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ribbon-health Cost Estimates Price Transparency API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Price Transparency",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getPricingProviders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/pricing/providers",
+            "params": [
+              {
+                "name": "procedure_id",
+                "value": "7ad7c4ef-baf9-4789-8e58-51d2308a1143",
+                "type": "query",
+                "description": "Search for prices for the procedure with the given UUID.\n\nIf the given ID is for a procedure bundle but do not have data for the insurance specified by the `plan_id` parameter, we will return data for its anchor procedure instead.\n\nExactly one of `procedure`, `procedure_id`, or `procedure_code` must be specified."
+              },
+              {
+                "name": "procedure",
+                "value": "MRI, thoracic spine",
+                "type": "query",
+                "description": "Search for prices for the given procedure. This input is fuzzy matched to the most relevant procedure `display` field.\n\nWe will preferentially match procedure bundles. If we match a procedure bundle but do not have data for the insurance specified by the `plan_id` parameter, we will return data for its anchor procedure instead.\n\nExactly one of `procedure`, `procedure_id`, or `procedure_code` must be specified."
+              },
+              {
+                "name": "procedure_code",
+                "value": "73720",
+                "type": "query",
+                "description": "Search for prices for procedures with the given billing code.\n\nWe will preferentially match procedure bundles. If we match a procedure bundle but do not have data for the insurance specified by the `plan_id` parameter, we will return data for its anchor procedure instead.\n\nExactly one of `procedure`, `procedure_id`, or `procedure_code` must be specified."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "The page of the results which was returned."
+              },
+              {
+                "name": "page_size",
+                "value": "25",
+                "type": "query",
+                "description": "How many results are in each page."
+              },
+              {
+                "name": "plan_id",
+                "value": "81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902",
+                "type": "query",
+                "description": "Search for negotiated rates for the insurance plan with this UUID."
+              },
+              {
+                "name": "specialty_ids",
+                "value": "fcc9a22c-7a0f-4405-b0c9-c5f8ad83b93e,8b5d3998-d7e2-4b9e-91d1-17c19cd089f5,44b0284c-f360-4312-a17d-d601651cb0ea",
+                "type": "query",
+                "description": "A comma separated list of specialty UUIDs. Filter to providers with any of the given specialties."
+              },
+              {
+                "name": "specialty",
+                "value": "gastroenterology",
+                "type": "query",
+                "description": "String input of a provider specialty that will be interpreted and matched to the single closest specialty, dealing with basic typos and colloquial names for providers."
+              },
+              {
+                "name": "address",
+                "value": "2074 23rd Ave, San Francisco, CA 94116",
+                "type": "query",
+                "description": "String input of an address that will be interpreted and geocoded in real time."
+              },
+              {
+                "name": "location",
+                "value": "37.7489816,-122.4802092",
+                "type": "query",
+                "description": "Latitude/longitude pair of coordinates in lieu of a string address."
+              },
+              {
+                "name": "distance",
+                "value": "10",
+                "type": "query",
+                "description": "The proximity radius of providers returned."
+              },
+              {
+                "name": "fields",
+                "value": "matched_location,npi",
+                "type": "query",
+                "description": "Comma-separated list of fields within the provider object to return. Can be used to greatly reduce the size of the response by requesting only data you intend to use.\n\nNote that all price information is nested under the `matched_location` field. You almost certainly want to return this field.\n\nCannot be used in tandem with `_excl_fields`."
+              },
+              {
+                "name": "_excl_fields",
+                "value": "insurances,age",
+                "type": "query",
+                "description": "Comma-separated list of fields within the provider object to exclude from the response. Can be used to greatly reduce the size of the response by requesting only data you intend to use.\n\nCannot be used in tandem with `fields`."
+              }
+            ]
+          },
+          "docs": "Search for providers that perform a given procedure and find the lowest insurance-specific price for a procedure in your area.\n\n#### Example Use Case\nSearch for all applicable provider negotiated rates, given a specific insurance and procedure (and optionally, a specific location/address and distance). For example, search for all providers near me who perform Leg MRIs and who take a given insurance, sorted by lowest price.\n"
+        },
+        {
+          "info": {
+            "name": "getPricingProviderProcedures",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/pricing/providers/:npi/procedures",
+            "params": [
+              {
+                "name": "npi",
+                "value": "",
+                "type": "path",
+                "description": "The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+              },
+              {
+                "name": "plan_id",
+                "value": "",
+                "type": "query",
+                "description": "Search for negotiated rates for the insurance plan with this UUID."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of the results which was returned."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "How many results are in each page."
+              }
+            ]
+          },
+          "docs": "Fetch the list of procedures that a single provider performs, with the lowest available negotiated rates specific to a given insurance for each procedure.\n\n#### Example Use Case\nFor a given provider, search the full list of procedures that they are likely to perform where there are negotiated rates available for a particular insurance, and return the minimum price for each procedure.\n"
+        },
+        {
+          "info": {
+            "name": "getPricingProviderProcedure",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/pricing/providers/:npi/procedures/:procedure_uuid",
+            "params": [
+              {
+                "name": "npi",
+                "value": "",
+                "type": "path",
+                "description": "The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+              },
+              {
+                "name": "procedure_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target procedure. If the target procedure is a procedure bundle but we do not have any data for it, we will return data for its anchor procedure instead."
+              },
+              {
+                "name": "plan_id",
+                "value": "",
+                "type": "query",
+                "description": "Search for negotiated rates for the insurance plan with this UUID."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of the results which was returned."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "How many results are in each page."
+              }
+            ]
+          },
+          "docs": "Find the prices offered by a single provider for a specific procedure, with a given insurance, across practice locations.\n\n#### Example Use Case\nCompare insurance-specific price estimates of a Leg MRI for a single provider at multiple relevant practices (e.g., compare this provider's rates when performing the procedure at both the provider's private outpatient facility, as well as a nearby hospital system clinic where they also practice).\n"
+        },
+        {
+          "info": {
+            "name": "getPricingProviderProcedureLocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/pricing/providers/:npi/procedures/:procedure_uuid/locations/:location_uuid",
+            "params": [
+              {
+                "name": "npi",
+                "value": "",
+                "type": "path",
+                "description": "The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+              },
+              {
+                "name": "procedure_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target procedure. If the target procedure is a procedure bundle but we do not have any data for it, we will return data for its anchor procedure instead."
+              },
+              {
+                "name": "location_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target location."
+              },
+              {
+                "name": "plan_id",
+                "value": "",
+                "type": "query",
+                "description": "Search for negotiated rates for the insurance plan with this UUID."
+              }
+            ]
+          },
+          "docs": "Search for a price estimate for a specific procedure from a specific provider at a specific location, with a given insurance plan.\n\n#### Example Use Case\nGiven an insurance, identify the expected price of a particular procedure from a specific provider at a known facility.\n"
+        },
+        {
+          "info": {
+            "name": "getPricingCarriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/pricing/carriers"
+          },
+          "docs": "This endpoint will show the carriers for which we have data. This can be used to fetch the recency of the data used per carrier.\n"
+        },
+        {
+          "info": {
+            "name": "getPricingCarrier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/pricing/carrier/:carrier_uuid",
+            "params": [
+              {
+                "name": "carrier_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the insurance carrier."
+              }
+            ]
+          },
+          "docs": "Fetch metadata including the recency of the pricing data used for a specific carrier.\n"
+        },
+        {
+          "info": {
+            "name": "getPricingCarrierNames",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/pricing/version"
+          },
+          "docs": "This endpoint will the names of the carriers for which we have data. This can be used to fetch the recency of the data used per carrier.\n\nThis endpoint is deprecated. Please use [List Carriers](./getpricingcarriers) instead.\n"
+        },
+        {
+          "info": {
+            "name": "getPricingVersionCarrier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/pricing/version/:carrier_name",
+            "params": [
+              {
+                "name": "carrier_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the insurance carrier."
+              }
+            ]
+          },
+          "docs": "Fetch the recency of the pricing data used for a specific carrier by name.\n\nThis endpoint is deprecated. Please use [Get Carrier](./getpricingcarrier) instead.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

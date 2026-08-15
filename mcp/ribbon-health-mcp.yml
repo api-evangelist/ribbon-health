@@ -1,0 +1,185 @@
+generated: '2026-08-14'
+method: derived
+status: candidate
+source: openapi/ribbon-health-*-openapi.yml
+search_evidence: >-
+  No hosted or local MCP server is published by Ribbon Health or H1. Searched the docs index
+  (https://ribbon.readme.io/llms.txt — 122 pages, zero occurrences of "MCP", "model context
+  protocol", or "agent"), the npm registry, the verified H1 GitHub organization
+  (https://github.com/h1insights — 0 public repositories), and the web. Probed
+  https://api.ribbonhealth.com/.well-known/oauth-authorization-server and
+  /.well-known/oauth-protected-resource (both 404), which is what a remote MCP deployment would
+  normally advertise.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+  note: >-
+    mode is `none` because nobody ships a server — neither a remote endpoint an agent could POST
+    to nor a stdio package a human could install. The tools[] list below is a DERIVED candidate
+    surface computed from the provider's OpenAPI operationIds so a builder can see what an MCP
+    server over this API would look like. It is not an agent surface and must never be read as one.
+pointer_decision: >-
+  NO `MCPServer` pointer is emitted in apis.yml. The scoring checks that read `MCPServer`
+  (mcp_server_present, 4 pts ergonomics; mcp_server, 12 pts agent readiness) assert that the
+  PROVIDER ships a server. H1 does not. Pointing at a derived candidate would credit H1 with 16
+  points for an agent surface that does not exist — the same failure mode as an agent card
+  authored on a provider's behalf. This file stays on disk as a design input for whoever builds
+  the server; it is not a claim.
+server:
+  name: ribbon-health
+  transport: null
+  url: null
+candidate_basis: >-
+  One candidate tool per read-oriented OpenAPI operationId, grouped by product module. The write
+  surface (the ~30 PUT/POST/DELETE custom-directory operations) is deliberately excluded from the
+  candidate tool list: those operations mutate a customer's live provider directory, the API
+  documents no idempotency key (see conventions/ribbon-health-conventions.yml), and an agent
+  retrying a failed PUT has no safe replay primitive.
+tool_count: 31
+tools:
+  - name: search_providers
+    category: providers
+    description: Search the provider directory by geography, insurance, specialty and quality criteria.
+    source_operation: openapi/ribbon-health-providers-api-openapi.yml#getCustomProviders
+  - name: get_provider
+    category: providers
+    description: Retrieve a provider's full record by NPI.
+    source_operation: openapi/ribbon-health-providers-api-openapi.yml#getCustomProvider
+  - name: search_locations
+    category: locations
+    description: Search practice locations and facilities by geography and location type.
+    source_operation: openapi/ribbon-health-locations-api-openapi.yml#getCustomLocations
+  - name: get_location
+    category: locations
+    description: Retrieve a single location by UUID.
+    source_operation: openapi/ribbon-health-locations-api-openapi.yml#getCustomLocation
+  - name: search_insurances
+    category: networks
+    description: Search insurance carriers and plans known to the H1 network graph.
+    source_operation: openapi/ribbon-health-reference-endpoints-api-openapi.yml#getInsurances
+  - name: get_insurance
+    category: networks
+    description: Retrieve a single insurance record by UUID.
+    source_operation: openapi/ribbon-health-reference-endpoints-api-openapi.yml#getCustomInsurance
+  - name: network_analysis
+    category: networks
+    description: Analyze a provider network across geographies such as counties.
+    source_operation: openapi/ribbon-health-networks-api-openapi.yml#getNetworkAnalysis
+  - name: search_specialties
+    category: reference
+    description: Search the specialty taxonomy.
+    source_operation: openapi/ribbon-health-reference-endpoints-api-openapi.yml#getSpecialties
+  - name: get_specialty
+    category: reference
+    description: Retrieve a single specialty by UUID.
+    source_operation: openapi/ribbon-health-reference-endpoints-api-openapi.yml#getCustomSpecialty
+  - name: search_provider_types
+    category: reference
+    description: Search provider types.
+    source_operation: openapi/ribbon-health-reference-endpoints-api-openapi.yml#getCustomProviderTypes
+  - name: get_provider_type
+    category: reference
+    description: Retrieve a single provider type by UUID.
+    source_operation: openapi/ribbon-health-reference-endpoints-api-openapi.yml#getCustomProviderType
+  - name: search_location_types
+    category: reference
+    description: Search location types.
+    source_operation: openapi/ribbon-health-reference-endpoints-api-openapi.yml#getCustomLocationTypes
+  - name: get_location_type
+    category: reference
+    description: Retrieve a single location type by UUID.
+    source_operation: openapi/ribbon-health-reference-endpoints-api-openapi.yml#getCustomLocationType
+  - name: search_languages
+    category: reference
+    description: Search provider languages.
+    source_operation: openapi/ribbon-health-reference-endpoints-api-openapi.yml#getLanguages
+  - name: search_procedures
+    category: reference
+    description: Search the procedure dictionary.
+    source_operation: openapi/ribbon-health-reference-endpoints-api-openapi.yml#getProcedures
+  - name: get_procedure
+    category: reference
+    description: Retrieve a single procedure by UUID.
+    source_operation: openapi/ribbon-health-reference-endpoints-api-openapi.yml#getProcedure
+  - name: search_clinical_areas
+    category: focus-areas
+    description: Search clinical areas (focus areas).
+    source_operation: openapi/ribbon-health-focus-area-endpoints-api-openapi.yml#getClinicalAreas
+  - name: get_clinical_area
+    category: focus-areas
+    description: Retrieve a single clinical area by UUID.
+    source_operation: openapi/ribbon-health-focus-area-endpoints-api-openapi.yml#getClinicalArea
+  - name: search_conditions
+    category: focus-areas
+    description: Search conditions.
+    source_operation: openapi/ribbon-health-focus-area-endpoints-api-openapi.yml#getConditions
+  - name: search_treatments
+    category: focus-areas
+    description: Search treatments.
+    source_operation: openapi/ribbon-health-focus-area-endpoints-api-openapi.yml#getTreatments
+  - name: search_organizations
+    category: organizations
+    description: Search health systems and other organizations.
+    source_operation: openapi/ribbon-health-organizations-api-openapi.yml#getOrganizations
+  - name: get_organization
+    category: organizations
+    description: Retrieve a single organization by UUID.
+    source_operation: openapi/ribbon-health-organizations-api-openapi.yml#getOrganization
+  - name: search_provider_prices
+    category: price-transparency
+    description: Find providers performing a procedure and the lowest insurance-specific negotiated rate.
+    source_operation: openapi/ribbon-health-price-transparency-api-openapi.yml#getPricingProviders
+  - name: procedure_cost_estimate
+    category: cost-estimates
+    description: Estimate the cost of a procedure for a member at a location.
+    source_operation: openapi/ribbon-health-cost-estimates-api-openapi.yml#getProcedureCostEstimate
+  - name: check_eligibility
+    category: eligibility
+    description: >-
+      Verify a member's coverage, deductible, out-of-pocket progress, copay and coinsurance.
+      HIGH SENSITIVITY — this operation transmits member PHI; see
+      agentic-access/ribbon-health-agentic-access.yml before exposing it to an agent.
+    source_operation: openapi/ribbon-health-cost-estimates-api-openapi.yml#getEligibility
+  - name: list_procedures_v2
+    category: price-transparency-v2
+    description: Browse or search the Price Transparency v2 procedure code dictionary (CPT and other codes).
+    source_operation: openapi/ribbon-health-price-transparency-v2-api-openapi.yml#getV2Procedures
+  - name: list_care_clusters_v2
+    category: price-transparency-v2
+    description: Browse care-cluster (bundle) definitions and the procedures each cluster includes.
+    source_operation: openapi/ribbon-health-price-transparency-v2-api-openapi.yml#getV2CareClusters
+  - name: list_carriers_v2
+    category: price-transparency-v2
+    description: >-
+      List carriers in the v2 pricing data set. NOTE these identifiers are a different space from
+      the v1 /v1/pricing/carriers UUIDs.
+    source_operation: openapi/ribbon-health-price-transparency-v2-api-openapi.yml#getV2Carriers
+  - name: location_procedure_pricing_v2
+    category: price-transparency-v2
+    description: All procedure-level negotiated rates for one facility, cheapest first.
+    source_operation: openapi/ribbon-health-price-transparency-v2-api-openapi.yml#getV2LocationProcedurePricing
+  - name: location_care_cluster_pricing_v2
+    category: price-transparency-v2
+    description: Care-cluster bundle prices for one facility, with per-bundle completeness fields.
+    source_operation: openapi/ribbon-health-price-transparency-v2-api-openapi.yml#getV2LocationCareClusterPricing
+  - name: search_location_procedure_prices_v2
+    category: price-transparency-v2
+    description: >-
+      Shop-around-me search for procedure prices near an address or lat/lng. Requires an explicit
+      location — v2 returns 400 rather than defaulting, unlike v1.
+    source_operation: openapi/ribbon-health-price-transparency-v2-api-openapi.yml#getV2PricingLocationProcedures
+  - name: search_location_care_cluster_prices_v2
+    category: price-transparency-v2
+    description: Shop-around-me search for care-cluster bundle prices near an address or lat/lng.
+    source_operation: openapi/ribbon-health-price-transparency-v2-api-openapi.yml#getV2PricingLocationCareClusters
+not_covered:
+  - surface: none
+    note: >-
+      The Price Transparency v2 gap flagged earlier in this pass was closed by harvesting the
+      provider's own OpenAPI 3.1.0 slices from the ReadMe reference pages into
+      openapi/ribbon-health-price-transparency-v2-api-openapi.yml. All 31 candidate tools above
+      are now grounded in a real operationId.

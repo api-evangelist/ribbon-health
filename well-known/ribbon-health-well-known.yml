@@ -1,0 +1,127 @@
+generated: '2026-08-14'
+method: probed
+source: live probes of /.well-known/ on every Ribbon Health / H1 host
+summary: >-
+  Nothing is served. Every /.well-known/ path 404s on every host Ribbon Health / H1 controls —
+  the API host (api.ribbonhealth.com), the docs host (ribbon.readme.io), the corporate site
+  (h1.co, which 301s to h1.com) and the retired ribbonhealth.com. No WellKnown pointer is
+  emitted and no SecurityTxt pointer is emitted, because the provider serves neither.
+pointer_basis: >-
+  NO WellKnown pointer. NO SecurityTxt pointer. The only 200 on any probed /.well-known/ path in
+  this repo is Atlassian's own security.txt served by the Statuspage platform that hosts
+  status.ribbonhealth.com — see vendor_false_positive below. Crediting Ribbon Health for it
+  would credit H1 with a vulnerability-disclosure posture that belongs to its status-page vendor.
+vendor_false_positive:
+  host: https://status.ribbonhealth.com
+  path: /.well-known/security.txt
+  status: 200
+  belongs_to: Atlassian (Statuspage)
+  evidence: >-
+    Body is a PGP-signed RFC 9116 document whose Contact is
+    https://www.atlassian.com/trust/security/report-a-vulnerability, whose Canonical is
+    https://www.atlassian.com/.well-known/security.txt, and which is signed by
+    security@atlassian.com. It is served on every *.statuspage.io-backed custom domain and says
+    nothing about Ribbon Health or H1.
+  decision: recorded as a miss; NOT saved as ribbon-health-security.txt, NOT pointed at.
+hosts:
+  - host: https://api.ribbonhealth.com
+    note: >-
+      Live API host. Returns the API's own JSON 404 envelope
+      ({"error":{"status":404,"code":"not_found","message":"resource not found"}}) for every
+      /.well-known/ path — a real, confirmed absence, not an edge interstitial.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /llms.txt
+        status: 404
+  - host: https://ribbon.readme.io
+    note: >-
+      Docs host (ReadMe-hosted). No /.well-known/ documents, but DOES serve a real
+      /llms.txt — saved verbatim to llms/ribbon-health-llms.txt and pointed at with type LLMsTxt.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /llms.txt
+        status: 200
+        file: ../llms/ribbon-health-llms.txt
+        bytes: 23552
+  - host: https://h1.co
+    note: >-
+      Corporate site. h1.co 301s to h1.com; both were probed and both 404 every path.
+      NOTE: https://h1.co/security/ answers 200 only because the site redirects unknown paths to
+      https://h1.com/health-plans/ — a soft-200 marketing page, not a security policy. Recorded
+      as a miss.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /llms.txt
+        status: 404
+  - host: https://h1.com
+    note: Canonical corporate host after the h1.co -> h1.com redirect.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /llms.txt
+        status: 404
+  - host: https://ribbonhealth.com
+    note: >-
+      Retired brand domain. Serves a "Site Not Configured | 404 Not Found" holding page on every
+      path including the apex. The live product domain is h1.com; the live API host is
+      api.ribbonhealth.com.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /llms.txt
+        status: 404
+a2a:
+  agent_card_found: false
+  note: >-
+    /.well-known/agent-card.json and the legacy /.well-known/agent.json were probed on all five
+    hosts. Every one 404d. Per the pipeline contract nothing is written to a2a/ — no stub, no
+    candidate manifest, no AgentCard pointer.

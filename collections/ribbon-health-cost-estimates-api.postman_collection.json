@@ -1,0 +1,510 @@
+{
+  "item": [
+    {
+      "id": "e3d261bb-1e99-437c-9ffa-1a3f9cc5cd7a",
+      "name": "Cost Estimates",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "11b473ab-8770-4e0f-ac08-f518f3d44ad9",
+          "name": "getEligibility",
+          "request": {
+            "name": "getEligibility",
+            "description": {
+              "content": "Verify a member's current insurance coverage and benefits. You can access detailed information including a member’s progress on their Deductible and Out-of-pocket, as well as Copay and Coinsurance information for different services.\n\n#### Example Use Case\nInform a member of their current progress against their Deductible as well as their Copay and Coinsurance summaries so they can better estimate their out-of pocket costs.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "eligibility"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_full_response",
+                  "value": "false",
+                  "description": "Whether to return the full eligibility response from the payer. Defaults to `false` when not provided."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"member_id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"birth_date\": \"<date>\",\n  \"insurance_partner\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ff72e277-bf99-4761-9194-113a244e41ab",
+              "name": "Eligibility information for the given member",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eligibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_full_response",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"member_id\": \"000000000-00\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"birth_date\": \"1980-12-31\",\n  \"insurance_partner\": \"aetna_better_health_il\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"parameters\": {\n    \"member_id\": \"000000000-00\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"birth_date\": \"1980-12-31\",\n    \"insurance_partner\": \"aetna_better_health_il\"\n  },\n  \"request_id\": \"40610978\",\n  \"status\": {\n    \"is_valid\": true,\n    \"error\": \"string\"\n  },\n  \"plan_info\": {\n    \"insurance_partner\": \"aetna_better_health_il\",\n    \"plan_name\": \"Aetna Better Health of Illinois\",\n    \"is_active\": true,\n    \"plan_start_date\": \"2012-02-01\",\n    \"plan_end_date\": \"2024-01-01\"\n  },\n  \"deductible_detail\": {\n    \"individual\": {\n      \"in_network\": {\n        \"spend\": \"16.43\",\n        \"maximum\": \"3000\",\n        \"remaining\": \"2983.57\"\n      },\n      \"out_of_network\": {\n        \"spend\": \"16.43\",\n        \"maximum\": \"6000\",\n        \"remaining\": \"5983.57\"\n      }\n    },\n    \"family\": {\n      \"in_network\": {\n        \"spend\": \"16.43\",\n        \"maximum\": \"6000\",\n        \"remaining\": \"5983.57\"\n      },\n      \"out_of_network\": {\n        \"spend\": \"16.43\",\n        \"maximum\": \"6000\",\n        \"remaining\": \"5983.57\"\n      }\n    }\n  },\n  \"out_of_pocket_detail\": {\n    \"individual\": {\n      \"in_network\": {\n        \"spend\": \"16.43\",\n        \"maximum\": \"3000\",\n        \"remaining\": \"2983.57\"\n      },\n      \"out_of_network\": {\n        \"spend\": \"16.43\",\n        \"maximum\": \"6000\",\n        \"remaining\": \"5983.57\"\n      }\n    },\n    \"family\": {\n      \"in_network\": {\n        \"spend\": \"16.43\",\n        \"maximum\": \"3000\",\n        \"remaining\": \"2983.57\"\n      },\n      \"out_of_network\": {\n        \"spend\": \"16.43\",\n        \"maximum\": \"6000\",\n        \"remaining\": \"5983.57\"\n      }\n    }\n  },\n  \"primary_care_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"dme_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"oncology_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"vision_optometry_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"physical_therapy_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"specialist_office_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"mental_health_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"surgical_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"urgent_care_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"diagnostic_lab_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"asc_facility_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"chiropractic_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"mri_ct_scan_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"x_ray_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"speech_therapy_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"occupational_therapy_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"emergency_medical_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"wellness_or_routine_visit_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"podiatry_office_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"outpatient_professional_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"anesthesia_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"substance_abuse_professional_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"substance_abuse_in_patient_facility_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"substance_abuse_out_patient_facility_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"flu_vaccination_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"hospital_inpatient_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"pharmacy_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"hospital_outpatient_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"telemedicine_primary_care_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"telemedicine_specialist_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"telemedicine_urgent_care_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"telemedicine_physical_therapy_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"telemedicine_mental_health_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"psychotherapy_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"snf_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"snf_room_board_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"home_health_care_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"hospice_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  },\n  \"professional_physician_visit_inpatient_summary\": {\n    \"in_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    },\n    \"out_of_network\": {\n      \"copay\": \"30.0\",\n      \"coinsurance\": \"0.0\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67b12e7e-aebe-47f5-b126-e45af16f0e9b",
+          "name": "getEligibilityInsurancePartners",
+          "request": {
+            "name": "getEligibilityInsurancePartners",
+            "description": {
+              "content": "Search or list all insurance partners supported by our eligibility features.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "eligibility_insurance_partners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Fuzzy search input for insurance names"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8703934-fa8b-417b-87f3-ed000f479f4d",
+              "name": "Returns a list of supported insurances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eligibility_insurance_partners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "aetna"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 332,\n  \"data\": [\n    {\n      \"insurance_partner\": \"aetna_better_health_il\",\n      \"display\": \"Aetna Better Health of Illinois\"\n    },\n    {\n      \"insurance_partner\": \"aetna_better_health_il\",\n      \"display\": \"Aetna Better Health of Illinois\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "871d43e6-629c-40a0-a61a-a95be2c233f5",
+          "name": "getEligibilityInsurancePartner",
+          "request": {
+            "name": "getEligibilityInsurancePartner",
+            "description": {
+              "content": "Fetch an insurance partner supported by our eligibility features.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "eligibility_insurance_partners",
+                ":insurance_partner"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "insurance_partner",
+                  "description": "(Required) The identifier for this insurance partner in the Ribbon API"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "489b14d4-24c5-4662-8817-29d0a68c68c2",
+              "name": "Returns a single supported insurance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eligibility_insurance_partners",
+                    ":insurance_partner"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "insurance_partner",
+                      "description": "(Required) The identifier for this insurance partner in the Ribbon API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"insurance_partner\": \"aetna_better_health_il\",\n  \"display\": \"Aetna Better Health of Illinois\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4150c700-d101-4984-970c-1ca927f3140f",
+              "name": "The given insurance partner identifier cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eligibility_insurance_partners",
+                    ":insurance_partner"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "insurance_partner",
+                      "description": "(Required) The identifier for this insurance partner in the Ribbon API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e179d25e-66ab-4623-9451-4f5f99e97b5c",
+          "name": "getProcedureCostEstimate",
+          "request": {
+            "name": "getProcedureCostEstimate",
+            "description": {
+              "content": "Calculates estimated costs for a given procedure based on a user's location.\n\n#### Example Use Case\nEstimate the cost of a knee replacement surgery for a user in Boston so they can plan their personal finances accordingly.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "procedure_cost_estimate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "procedure_ids",
+                  "value": "<string>",
+                  "description": "(Required) The UUIDs of the procedures to filter results to, as a comma-delimited string"
+                },
+                {
+                  "disabled": false,
+                  "key": "member_zip",
+                  "value": "<string>",
+                  "description": "(Required) The zip code of the member we are generating cost estimates for"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "The type of data to base cost estimates on: `claims` data or payer-filed `price_transparency` data. Defaults to `claims`."
+                },
+                {
+                  "disabled": false,
+                  "key": "plan_id",
+                  "value": "<uuid>",
+                  "description": "The UUID of the insurance plan to use when fetching negotiated rates with providers. Necessary only if searching for estimates using the 'price_transparency' `type`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7fb37c90-0aef-4b4e-ab42-b880abdfee62",
+              "name": "Estimated costs for the given procedures",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "procedure_cost_estimate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "procedure_ids",
+                      "value": "9f3fd9e8-96b0-4cc7-ab2c-8d538e9164ae,fbb223e6-9806-45b5-95b1-4d7a36cc9164"
+                    },
+                    {
+                      "key": "member_zip",
+                      "value": "60606"
+                    },
+                    {
+                      "key": "type",
+                      "value": "price_transparency"
+                    },
+                    {
+                      "key": "plan_id",
+                      "value": "a5a0c8ff-c62b-4a9e-af86-55e52bd7dc55"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"parameters\": {\n    \"procedures\": [\n      {\n        \"uuid\": \"0a9a245f-2f52-4cc0-a5c3-77a811acc6f7\",\n        \"display\": \"MRI, arm\",\n        \"procedure_code_count\": 7,\n        \"procedure_codes\": [\n          {\n            \"code\": \"73222\",\n            \"type\": \"CPT\",\n            \"description\": \"MRI, arm\"\n          },\n          {\n            \"code\": \"73222\",\n            \"type\": \"CPT\",\n            \"description\": \"MRI, arm\"\n          }\n        ]\n      },\n      {\n        \"uuid\": \"0a9a245f-2f52-4cc0-a5c3-77a811acc6f7\",\n        \"display\": \"MRI, arm\",\n        \"procedure_code_count\": 7,\n        \"procedure_codes\": [\n          {\n            \"code\": \"73222\",\n            \"type\": \"CPT\",\n            \"description\": \"MRI, arm\"\n          },\n          {\n            \"code\": \"73222\",\n            \"type\": \"CPT\",\n            \"description\": \"MRI, arm\"\n          }\n        ]\n      }\n    ],\n    \"member_zip\": \"60606\"\n  },\n  \"data\": {\n    \"cost_estimates\": {\n      \"minimum\": 100,\n      \"median\": 300,\n      \"maximum\": 500\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ribbonhealth.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9a8f1dbc-4d56-4ec9-a81c-d955f859a5be",
+    "name": "ribbon-health Cost Estimates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.\n",
+      "type": "text/plain"
+    }
+  }
+}

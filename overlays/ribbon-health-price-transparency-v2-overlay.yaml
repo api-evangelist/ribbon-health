@@ -1,0 +1,45 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for H1's API — Price Transparency v2
+  version: 1.0.0
+extends: openapi/ribbon-health-price-transparency-v2-api-openapi.yml
+x-apievangelist:
+  generated: '2026-08-14'
+  method: generated
+  source: openapi/ribbon-health-price-transparency-v2-api-openapi.yml + https://ribbon.readme.io/llms.txt + live
+    probes of https://api.ribbonhealth.com
+actions:
+- target: $.info
+  update:
+    x-apievangelist-source: https://ribbon.readme.io/reference/ (per-operation OpenAPI 3.1.0 slices)
+    x-apievangelist-provider: ribbon-health
+    x-apievangelist-conventions: conventions/ribbon-health-conventions.yml
+    x-apievangelist-errors: errors/ribbon-health-problem-types.yml
+    x-apievangelist-lifecycle: lifecycle/ribbon-health-lifecycle.yml
+- target: $
+  update:
+    x-apievangelist-v1-v2-divergence:
+      carrier_ids: v2 carriers use string business ids; v1 /v1/pricing/carriers uses UUIDs. Not interchangeable.
+      geo_required: v2 requires address, or both lat and lng; missing or partial location returns 400. v1 silently
+        defaulted to a New York City address.
+      shape: v2 is location-first; v1 pricing is provider-first.
+      plan_id: Accepted in the contract but returns 501. carrier_id and plan_id together return 400.
+      entitlement: doctors.can_price_transparency
+      source: https://ribbon.readme.io/llms.txt and the operation descriptions in the harvested spec
+    x-apievangelist-rate-limit-signal:
+      documented_limit: 1000 requests per minute
+      response_headers: none
+      status_on_exhaustion: 429
+      method: probed
+      note: No X-RateLimit-*/RateLimit-*/Retry-After header returned on any observed response.
+    x-apievangelist-request-id-header:
+      name: ribbon-request-id
+      method: probed
+    x-apievangelist-envelope:
+      fields:
+      - parameters
+      - total_count
+      - page
+      - page_size
+      - data
+      note: Shared by every v2 endpoint, and different from both v1 envelopes. See conventions/.

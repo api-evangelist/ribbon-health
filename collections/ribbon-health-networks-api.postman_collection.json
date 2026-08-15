@@ -1,0 +1,207 @@
+{
+  "item": [
+    {
+      "id": "c07feac0-5c2c-4109-af74-95c640beea24",
+      "name": "Networks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3bc938dd-076b-4849-be70-26ed84fa1d25",
+          "name": "getNetworkAnalysis",
+          "request": {
+            "name": "getNetworkAnalysis",
+            "description": {
+              "content": "View a provider network across different geographies (i.e. counties).\n\n#### Example Use Case\nIn looking to expand to a new region, analyze existing provider networks in the region to understand how best to construct your own.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "network_analysis"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "insurance_id",
+                  "value": "<uuid>",
+                  "description": "(Required) A unique identifier for a single provider network from the Insurances reference endpoint."
+                },
+                {
+                  "disabled": false,
+                  "key": "ssa_codes",
+                  "value": "<string>",
+                  "description": "(Required) SSA codes of the counties to run a network analysis on. \n\nA maximum of 50 codes may be included in a single request."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_npis",
+                  "value": "false",
+                  "description": "When set to `true` the response will not list specific NPIs in the network but will continue to include the `npi_count` fields to let you know how many there are.\n\nThis parameter can be used to greater lower the amount of data sent back when specific NPIs are not necessary."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4b8d52ff-eb7e-49fe-8612-7b039111249f",
+              "name": "Returns the size of the provider network for the given insurance in the given counties.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "network_analysis"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "insurance_id",
+                      "value": "000912ad-5674-4c23-9b00-dca4e76aaa07"
+                    },
+                    {
+                      "key": "ssa_codes",
+                      "value": "14141,14150"
+                    },
+                    {
+                      "key": "exclude_npis",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"display\": \"Cook, IL\",\n      \"npi_count\": 2103,\n      \"ssa_code\": \"14141\",\n      \"npis\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"display\": \"Cook, IL\",\n      \"npi_count\": 2103,\n      \"ssa_code\": \"14141\",\n      \"npis\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"parameters\": {\n    \"insurance_id\": \"000912ad-5674-4c23-9b00-dca4e76aaa07\",\n    \"npi_count\": 2999,\n    \"ssa_codes\": [\n      \"14141\",\n      \"14150\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4f72da9-8bba-47a5-9b5e-37c61db8f932",
+              "name": "The given request was invalid - the required parameters were missing or invalid, or it specified too many SSA codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "network_analysis"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "insurance_id",
+                      "value": "000912ad-5674-4c23-9b00-dca4e76aaa07"
+                    },
+                    {
+                      "key": "ssa_codes",
+                      "value": "14141,14150"
+                    },
+                    {
+                      "key": "exclude_npis",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"invalid_query_params\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ribbonhealth.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c2e8c3d5-1e74-45fd-bd61-dc65a206bc3a",
+    "name": "ribbon-health Cost Estimates Networks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.\n",
+      "type": "text/plain"
+    }
+  }
+}

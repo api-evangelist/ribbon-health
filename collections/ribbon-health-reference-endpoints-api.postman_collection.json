@@ -1,0 +1,4505 @@
+{
+  "item": [
+    {
+      "id": "516c92a4-29bb-427e-b251-8c0cec59af8c",
+      "name": "Reference Endpoints",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "26c61e70-c7f6-4642-ac8c-57b23ec72039",
+          "name": "getInsurances",
+          "request": {
+            "name": "getInsurances",
+            "description": {
+              "content": "Search and list insurances that exist within the Ribbon API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "insurances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "String input that fuzzy searches across `display_name`, `carrier_name`, and `uuid`."
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_association",
+                  "value": "<string>",
+                  "description": "Comma separated list of the carrier association of insurances you are searching for.\n\nNote: This input must be an exact string match to work"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_brand",
+                  "value": "<string>",
+                  "description": "Comma separated list of the carrier brand of insurances you are searching for.\n\nNote: This input must be an exact string match to work"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_name",
+                  "value": "<string>",
+                  "description": "Comma separated list of the carrier name of insurances you are searching for.\n\nNote: This input must be an exact string match to work"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Two letter abbreviated state code of insurances you are searching for."
+                },
+                {
+                  "disabled": false,
+                  "key": "plan_name",
+                  "value": "<string>",
+                  "description": "Exact string input of the plan name of insurances you are searching for."
+                },
+                {
+                  "disabled": false,
+                  "key": "plan_type",
+                  "value": "<string>",
+                  "description": "Exact string input of the plan type of insurances you are searching for."
+                },
+                {
+                  "disabled": false,
+                  "key": "display_name",
+                  "value": "<string>",
+                  "description": "Exact string input of the display name of insurances you are searching for."
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "Comma separated list of the category of insurances you are searching for.\n\nNote: This input must be an exact string match to work"
+                },
+                {
+                  "disabled": false,
+                  "key": "_excl_category",
+                  "value": "<string>",
+                  "description": "Comma separated list of the category of insurances you wish to exclude.\n\nNote: This input must be an exact string match to work"
+                },
+                {
+                  "disabled": false,
+                  "key": "codes",
+                  "value": "<string>",
+                  "description": "Single code input to search for plans with an exact string match within the codes field."
+                },
+                {
+                  "disabled": false,
+                  "key": "partial_codes",
+                  "value": "<string>",
+                  "description": "Partial string input to match to the codes field.\nFor Medicare Advantage plans this is a contract ID (i.e. H9572). For Federal or State Exchange plans this is the first 10 digits of the HIOS ID (i.e. 36096il100)\n\nNote: This parameter can only be used if the `category` param is also utilized with a single category value."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ac15e43-a6a5-4864-8d48-ba5ab0b8b133",
+              "name": "Insurances returned from a valid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "insurances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "Aetna"
+                    },
+                    {
+                      "key": "carrier_association",
+                      "value": "BCBS Association"
+                    },
+                    {
+                      "key": "carrier_brand",
+                      "value": "BCBS"
+                    },
+                    {
+                      "key": "carrier_name",
+                      "value": "Blue Cross Blue Shield of Illinois"
+                    },
+                    {
+                      "key": "state",
+                      "value": "NY"
+                    },
+                    {
+                      "key": "plan_name",
+                      "value": "BlueCare Direct"
+                    },
+                    {
+                      "key": "plan_type",
+                      "value": "PPO"
+                    },
+                    {
+                      "key": "display_name",
+                      "value": "Blue Cross Blue Shield of Illinois - BlueCare Direct - HMO"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Medicare Advantage"
+                    },
+                    {
+                      "key": "_excl_category",
+                      "value": "Medicare Advantage"
+                    },
+                    {
+                      "key": "codes",
+                      "value": "H9572-001"
+                    },
+                    {
+                      "key": "partial_codes",
+                      "value": "H9572"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 141,\n  \"next\": \"https://api.ribbonhealth.com/v1/custom/insurances?search=aetna&page=3\",\n  \"previous\": \"https://api.ribbonhealth.com/v1/custom/insurances?search=aetna&page=1\",\n  \"results\": [\n    {\n      \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n      \"carrier_association\": \"Aetna\",\n      \"carrier_brand\": \"Aetna\",\n      \"carrier_name\": \"Aetna\",\n      \"state\": \"NY\",\n      \"plan_name\": \"Aetna HealthFund Open Choice\",\n      \"plan_type\": \"PPO\",\n      \"metal_level\": \"string\",\n      \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n      \"network\": \"string\",\n      \"confidence\": 4,\n      \"category\": \"string\",\n      \"codes\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ]\n    },\n    {\n      \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n      \"carrier_association\": \"Aetna\",\n      \"carrier_brand\": \"Aetna\",\n      \"carrier_name\": \"Aetna\",\n      \"state\": \"NY\",\n      \"plan_name\": \"Aetna HealthFund Open Choice\",\n      \"plan_type\": \"PPO\",\n      \"metal_level\": \"string\",\n      \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n      \"network\": \"string\",\n      \"confidence\": 4,\n      \"category\": \"string\",\n      \"codes\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "543b6a21-866e-4875-b31f-37712b26c7a6",
+              "name": "A failure due to a malformed request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "insurances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "Aetna"
+                    },
+                    {
+                      "key": "carrier_association",
+                      "value": "BCBS Association"
+                    },
+                    {
+                      "key": "carrier_brand",
+                      "value": "BCBS"
+                    },
+                    {
+                      "key": "carrier_name",
+                      "value": "Blue Cross Blue Shield of Illinois"
+                    },
+                    {
+                      "key": "state",
+                      "value": "NY"
+                    },
+                    {
+                      "key": "plan_name",
+                      "value": "BlueCare Direct"
+                    },
+                    {
+                      "key": "plan_type",
+                      "value": "PPO"
+                    },
+                    {
+                      "key": "display_name",
+                      "value": "Blue Cross Blue Shield of Illinois - BlueCare Direct - HMO"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Medicare Advantage"
+                    },
+                    {
+                      "key": "_excl_category",
+                      "value": "Medicare Advantage"
+                    },
+                    {
+                      "key": "codes",
+                      "value": "H9572-001"
+                    },
+                    {
+                      "key": "partial_codes",
+                      "value": "H9572"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"invalid_query_params\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd066e00-8bf0-4f62-9e02-9cc45a4f28c4",
+          "name": "postCustomInsurance",
+          "request": {
+            "name": "postCustomInsurance",
+            "description": {
+              "content": "Create a insurance with desired field values.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "insurances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uuid\": \"<uuid>\",\n  \"carrier_association\": \"<string>\",\n  \"carrier_brand\": \"<string>\",\n  \"carrier_name\": \"<string>\",\n  \"state\": \"<string>\",\n  \"plan_name\": \"<string>\",\n  \"plan_type\": \"<string>\",\n  \"metal_level\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"network\": \"<string>\",\n  \"confidence\": \"<integer>\",\n  \"category\": \"<string>\",\n  \"codes\": [\n    [\n      \"<string>\",\n      \"<string>\"\n    ],\n    [\n      \"<string>\",\n      \"<string>\"\n    ]\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "112a769f-74fb-4fcb-8eb8-aa59a0cbca5a",
+              "name": "Insurance was successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "insurances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n  \"carrier_association\": \"Aetna\",\n  \"carrier_brand\": \"Aetna\",\n  \"carrier_name\": \"Aetna\",\n  \"state\": \"NY\",\n  \"plan_name\": \"Aetna HealthFund Open Choice\",\n  \"plan_type\": \"PPO\",\n  \"metal_level\": \"<string>\",\n  \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n  \"network\": \"<string>\",\n  \"confidence\": 4,\n  \"category\": \"<string>\",\n  \"codes\": [\n    [\n      \"<string>\",\n      \"<string>\"\n    ],\n    [\n      \"<string>\",\n      \"<string>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n    \"carrier_association\": \"Aetna\",\n    \"carrier_brand\": \"Aetna\",\n    \"carrier_name\": \"Aetna\",\n    \"state\": \"NY\",\n    \"plan_name\": \"Aetna HealthFund Open Choice\",\n    \"plan_type\": \"PPO\",\n    \"metal_level\": \"string\",\n    \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n    \"network\": \"string\",\n    \"confidence\": 4,\n    \"category\": \"string\",\n    \"codes\": [\n      [\n        \"string\",\n        \"string\"\n      ],\n      [\n        \"string\",\n        \"string\"\n      ]\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f456a68-0648-4ccd-8b12-e84ca99e5e77",
+              "name": "This request attempted to update with invalid schema or was missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "insurances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n  \"carrier_association\": \"Aetna\",\n  \"carrier_brand\": \"Aetna\",\n  \"carrier_name\": \"Aetna\",\n  \"state\": \"NY\",\n  \"plan_name\": \"Aetna HealthFund Open Choice\",\n  \"plan_type\": \"PPO\",\n  \"metal_level\": \"<string>\",\n  \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n  \"network\": \"<string>\",\n  \"confidence\": 4,\n  \"category\": \"<string>\",\n  \"codes\": [\n    [\n      \"<string>\",\n      \"<string>\"\n    ],\n    [\n      \"<string>\",\n      \"<string>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"invalid_query_params\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fb14b52-5012-4c61-8069-84b05215c120",
+              "name": "Insurance object with given fields already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "insurances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n  \"carrier_association\": \"Aetna\",\n  \"carrier_brand\": \"Aetna\",\n  \"carrier_name\": \"Aetna\",\n  \"state\": \"NY\",\n  \"plan_name\": \"Aetna HealthFund Open Choice\",\n  \"plan_type\": \"PPO\",\n  \"metal_level\": \"<string>\",\n  \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n  \"network\": \"<string>\",\n  \"confidence\": 4,\n  \"category\": \"<string>\",\n  \"codes\": [\n    [\n      \"<string>\",\n      \"<string>\"\n    ],\n    [\n      \"<string>\",\n      \"<string>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22407f25-b753-4def-bd80-28e52956f4c2",
+          "name": "getCustomInsurance",
+          "request": {
+            "name": "getCustomInsurance",
+            "description": {
+              "content": "Retrieve data on a specific insurance.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "insurances",
+                ":insurance_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "insurance_uuid",
+                  "description": "(Required) The UUID of the target insurance."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc8d3f20-ada5-47fa-b264-659f2448a110",
+              "name": "Returns a single insurance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "insurances",
+                    ":insurance_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "insurance_uuid",
+                      "description": "(Required) The UUID of the target insurance."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n  \"carrier_association\": \"Aetna\",\n  \"carrier_brand\": \"Aetna\",\n  \"carrier_name\": \"Aetna\",\n  \"state\": \"NY\",\n  \"plan_name\": \"Aetna HealthFund Open Choice\",\n  \"plan_type\": \"PPO\",\n  \"metal_level\": \"string\",\n  \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n  \"network\": \"string\",\n  \"confidence\": 4,\n  \"category\": \"string\",\n  \"codes\": [\n    [\n      \"string\",\n      \"string\"\n    ],\n    [\n      \"string\",\n      \"string\"\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2ed50bf-c9ef-45cd-bb55-a769ce4e1ace",
+              "name": "The given insurance UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "insurances",
+                    ":insurance_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "insurance_uuid",
+                      "description": "(Required) The UUID of the target insurance."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4e2fa4f-4544-40a4-b9ce-e845b8462d1b",
+          "name": "putCustomInsurance",
+          "request": {
+            "name": "putCustomInsurance",
+            "description": {
+              "content": "Edit fields of a custom created insurance or a Ribbon created insurance.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "insurances",
+                ":insurance_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "insurance_uuid",
+                  "description": "(Required) The UUID of the target insurance."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uuid\": \"<uuid>\",\n  \"carrier_association\": \"<string>\",\n  \"carrier_brand\": \"<string>\",\n  \"carrier_name\": \"<string>\",\n  \"state\": \"<string>\",\n  \"plan_name\": \"<string>\",\n  \"plan_type\": \"<string>\",\n  \"metal_level\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"network\": \"<string>\",\n  \"confidence\": \"<integer>\",\n  \"category\": \"<string>\",\n  \"codes\": [\n    [\n      \"<string>\",\n      \"<string>\"\n    ],\n    [\n      \"<string>\",\n      \"<string>\"\n    ]\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2a3ed3ab-b01e-4045-88c0-39606277022b",
+              "name": "The insurance object was successfully updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "insurances",
+                    ":insurance_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "insurance_uuid",
+                      "description": "(Required) The UUID of the target insurance."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n  \"carrier_association\": \"Aetna\",\n  \"carrier_brand\": \"Aetna\",\n  \"carrier_name\": \"Aetna\",\n  \"state\": \"NY\",\n  \"plan_name\": \"Aetna HealthFund Open Choice\",\n  \"plan_type\": \"PPO\",\n  \"metal_level\": \"<string>\",\n  \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n  \"network\": \"<string>\",\n  \"confidence\": 4,\n  \"category\": \"<string>\",\n  \"codes\": [\n    [\n      \"<string>\",\n      \"<string>\"\n    ],\n    [\n      \"<string>\",\n      \"<string>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n    \"carrier_association\": \"Aetna\",\n    \"carrier_brand\": \"Aetna\",\n    \"carrier_name\": \"Aetna\",\n    \"state\": \"NY\",\n    \"plan_name\": \"Aetna HealthFund Open Choice\",\n    \"plan_type\": \"PPO\",\n    \"metal_level\": \"string\",\n    \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n    \"network\": \"string\",\n    \"confidence\": 4,\n    \"category\": \"string\",\n    \"codes\": [\n      [\n        \"string\",\n        \"string\"\n      ],\n      [\n        \"string\",\n        \"string\"\n      ]\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70502d2c-7d23-4fc8-9d5f-11ea945762bc",
+              "name": "This request attempted to update with invalid schema or was missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "insurances",
+                    ":insurance_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "insurance_uuid",
+                      "description": "(Required) The UUID of the target insurance."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n  \"carrier_association\": \"Aetna\",\n  \"carrier_brand\": \"Aetna\",\n  \"carrier_name\": \"Aetna\",\n  \"state\": \"NY\",\n  \"plan_name\": \"Aetna HealthFund Open Choice\",\n  \"plan_type\": \"PPO\",\n  \"metal_level\": \"<string>\",\n  \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n  \"network\": \"<string>\",\n  \"confidence\": 4,\n  \"category\": \"<string>\",\n  \"codes\": [\n    [\n      \"<string>\",\n      \"<string>\"\n    ],\n    [\n      \"<string>\",\n      \"<string>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"invalid_query_params\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9455b0d5-6bcb-46a9-b1c5-4fd7269f23e5",
+              "name": "The given insurance UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "insurances",
+                    ":insurance_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "insurance_uuid",
+                      "description": "(Required) The UUID of the target insurance."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n  \"carrier_association\": \"Aetna\",\n  \"carrier_brand\": \"Aetna\",\n  \"carrier_name\": \"Aetna\",\n  \"state\": \"NY\",\n  \"plan_name\": \"Aetna HealthFund Open Choice\",\n  \"plan_type\": \"PPO\",\n  \"metal_level\": \"<string>\",\n  \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n  \"network\": \"<string>\",\n  \"confidence\": 4,\n  \"category\": \"<string>\",\n  \"codes\": [\n    [\n      \"<string>\",\n      \"<string>\"\n    ],\n    [\n      \"<string>\",\n      \"<string>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "325a48ed-2cf6-4fc1-ab92-12b2f5d4980e",
+              "name": "Insurance object with given fields already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "insurances",
+                    ":insurance_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "insurance_uuid",
+                      "description": "(Required) The UUID of the target insurance."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n  \"carrier_association\": \"Aetna\",\n  \"carrier_brand\": \"Aetna\",\n  \"carrier_name\": \"Aetna\",\n  \"state\": \"NY\",\n  \"plan_name\": \"Aetna HealthFund Open Choice\",\n  \"plan_type\": \"PPO\",\n  \"metal_level\": \"<string>\",\n  \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n  \"network\": \"<string>\",\n  \"confidence\": 4,\n  \"category\": \"<string>\",\n  \"codes\": [\n    [\n      \"<string>\",\n      \"<string>\"\n    ],\n    [\n      \"<string>\",\n      \"<string>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1b87f0a-4abd-4dcc-bcee-febe6091fa0e",
+          "name": "deleteCustomInsurance",
+          "request": {
+            "name": "deleteCustomInsurance",
+            "description": {
+              "content": "Delete an insurance.\n\nNote: If you've added this insurance to doctors, you are deleting all instances of this UUID, and Ribbon will not be able to regenerate them.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "insurances",
+                ":insurance_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "insurance_uuid",
+                  "description": "(Required) The UUID of the target insurance."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7f86300c-37b5-4855-8566-1285e938a88e",
+              "name": "Insurance was successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "insurances",
+                    ":insurance_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "insurance_uuid",
+                      "description": "(Required) The UUID of the target insurance."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "16adb7ea-a39d-4f49-9e9c-b970c8acf03c",
+              "name": "The given insurance UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "insurances",
+                    ":insurance_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "insurance_uuid",
+                      "description": "(Required) The UUID of the target insurance."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa15459c-c38f-47e1-8af8-bae483350c4e",
+          "name": "getSpecialties",
+          "request": {
+            "name": "getSpecialties",
+            "description": {
+              "content": "Search and list specialties that exist within the Ribbon API.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "specialties"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "The page of the results which was returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "How many results are in each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "String input that fuzzy searches against key fields within each specialties object to return the most relevant options."
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_type",
+                  "value": "<string>",
+                  "description": "'Type' of provider specialty to filter results on. Here are a few key provider types:\n- Doctor\n- Nursing\n- Dental Providers"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cd81fc4e-3292-4a24-ae93-789fb99d0797",
+              "name": "Specialties returned from a valid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "specialties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "25"
+                    },
+                    {
+                      "key": "search",
+                      "value": "Gastroenterology"
+                    },
+                    {
+                      "key": "provider_type",
+                      "value": "Doctor"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 141,\n  \"next\": \"https://api.ribbonhealth.com/v1/custom/specialties?page=3\",\n  \"previous\": \"https://api.ribbonhealth.com/v1/custom/specialties?page=1\",\n  \"results\": [\n    {\n      \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n      \"taxonomy_code\": \"string\",\n      \"board_specialty\": \"Family Medicine\",\n      \"board_sub_specialty\": \"string\",\n      \"non_md_specialty\": \"string\",\n      \"non_md_sub_specialty\": \"None\",\n      \"provider_name\": \"Family Medicine Doctor\",\n      \"colloquial\": \"string\",\n      \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n      \"taxonomy_2\": \"Family Medicine\",\n      \"taxonomy_3\": \"string\",\n      \"display\": \"Family Medicine\",\n      \"provider_type\": \"Doctor\",\n      \"is_primary\": true\n    },\n    {\n      \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n      \"taxonomy_code\": \"string\",\n      \"board_specialty\": \"Family Medicine\",\n      \"board_sub_specialty\": \"string\",\n      \"non_md_specialty\": \"string\",\n      \"non_md_sub_specialty\": \"None\",\n      \"provider_name\": \"Family Medicine Doctor\",\n      \"colloquial\": \"string\",\n      \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n      \"taxonomy_2\": \"Family Medicine\",\n      \"taxonomy_3\": \"string\",\n      \"display\": \"Family Medicine\",\n      \"provider_type\": \"Doctor\",\n      \"is_primary\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "016692c3-562e-4ded-9967-4e9d4eb80872",
+              "name": "Trial accounts do not have access to custom specialties",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "specialties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "25"
+                    },
+                    {
+                      "key": "search",
+                      "value": "Gastroenterology"
+                    },
+                    {
+                      "key": "provider_type",
+                      "value": "Doctor"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"permission_denied\",\n    \"message\": \"a trial account does not have access to this functionality\",\n    \"status\": 403\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1effca1-c734-4bc0-a71d-260d6c7d8f43",
+          "name": "postCustomSpecialty",
+          "request": {
+            "name": "postCustomSpecialty",
+            "description": {
+              "content": "Create a custom specialty with desired field values.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "specialties"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uuid\": \"<uuid>\",\n  \"taxonomy_code\": \"<string>\",\n  \"board_specialty\": \"<string>\",\n  \"board_sub_specialty\": \"<string>\",\n  \"non_md_specialty\": \"<string>\",\n  \"non_md_sub_specialty\": \"<string>\",\n  \"provider_name\": \"<string>\",\n  \"colloquial\": \"<string>\",\n  \"taxonomy_1\": \"<string>\",\n  \"taxonomy_2\": \"<string>\",\n  \"taxonomy_3\": \"<string>\",\n  \"display\": \"<string>\",\n  \"provider_type\": \"<string>\",\n  \"is_primary\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "21367f78-308c-4122-bbe2-af960bd9ca43",
+              "name": "Specialty was successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "specialties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n  \"taxonomy_code\": \"<string>\",\n  \"board_specialty\": \"Family Medicine\",\n  \"board_sub_specialty\": \"<string>\",\n  \"non_md_specialty\": \"<string>\",\n  \"non_md_sub_specialty\": \"None\",\n  \"provider_name\": \"Family Medicine Doctor\",\n  \"colloquial\": \"<string>\",\n  \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n  \"taxonomy_2\": \"Family Medicine\",\n  \"taxonomy_3\": \"<string>\",\n  \"display\": \"Family Medicine\",\n  \"provider_type\": \"Doctor\",\n  \"is_primary\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n    \"taxonomy_code\": \"string\",\n    \"board_specialty\": \"Family Medicine\",\n    \"board_sub_specialty\": \"string\",\n    \"non_md_specialty\": \"string\",\n    \"non_md_sub_specialty\": \"None\",\n    \"provider_name\": \"Family Medicine Doctor\",\n    \"colloquial\": \"string\",\n    \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n    \"taxonomy_2\": \"Family Medicine\",\n    \"taxonomy_3\": \"string\",\n    \"display\": \"Family Medicine\",\n    \"provider_type\": \"Doctor\",\n    \"is_primary\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba6d2841-ee0d-4c81-8038-9b78c5e4b66c",
+              "name": "This request attempted to update with invalid schema or was missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "specialties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n  \"taxonomy_code\": \"<string>\",\n  \"board_specialty\": \"Family Medicine\",\n  \"board_sub_specialty\": \"<string>\",\n  \"non_md_specialty\": \"<string>\",\n  \"non_md_sub_specialty\": \"None\",\n  \"provider_name\": \"Family Medicine Doctor\",\n  \"colloquial\": \"<string>\",\n  \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n  \"taxonomy_2\": \"Family Medicine\",\n  \"taxonomy_3\": \"<string>\",\n  \"display\": \"Family Medicine\",\n  \"provider_type\": \"Doctor\",\n  \"is_primary\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"invalid_query_params\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcb151b2-2a3e-4cae-a218-58b8db60adf2",
+              "name": "Specialty object with given fields already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "specialties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n  \"taxonomy_code\": \"<string>\",\n  \"board_specialty\": \"Family Medicine\",\n  \"board_sub_specialty\": \"<string>\",\n  \"non_md_specialty\": \"<string>\",\n  \"non_md_sub_specialty\": \"None\",\n  \"provider_name\": \"Family Medicine Doctor\",\n  \"colloquial\": \"<string>\",\n  \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n  \"taxonomy_2\": \"Family Medicine\",\n  \"taxonomy_3\": \"<string>\",\n  \"display\": \"Family Medicine\",\n  \"provider_type\": \"Doctor\",\n  \"is_primary\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "682061b7-972d-4c19-9729-c08cfb5ec90b",
+          "name": "getCustomSpecialty",
+          "request": {
+            "name": "getCustomSpecialty",
+            "description": {
+              "content": "Retrieve data on a specific specialty.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "specialties",
+                ":specialty_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "specialty_uuid",
+                  "description": "(Required) The UUID of the target specialty."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "70ccea31-2f20-4f72-bced-66b3b660e560",
+              "name": "Returns a single specialty",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "specialties",
+                    ":specialty_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "specialty_uuid",
+                      "description": "(Required) The UUID of the target specialty."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n  \"taxonomy_code\": \"string\",\n  \"board_specialty\": \"Family Medicine\",\n  \"board_sub_specialty\": \"string\",\n  \"non_md_specialty\": \"string\",\n  \"non_md_sub_specialty\": \"None\",\n  \"provider_name\": \"Family Medicine Doctor\",\n  \"colloquial\": \"string\",\n  \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n  \"taxonomy_2\": \"Family Medicine\",\n  \"taxonomy_3\": \"string\",\n  \"display\": \"Family Medicine\",\n  \"provider_type\": \"Doctor\",\n  \"is_primary\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41fa3d0a-8fba-4e56-b3b0-112e0d57c85e",
+              "name": "The given specialty UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "specialties",
+                    ":specialty_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "specialty_uuid",
+                      "description": "(Required) The UUID of the target specialty."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9967abcb-dcc8-4350-93ae-8fffd115e427",
+          "name": "putCustomSpecialty",
+          "request": {
+            "name": "putCustomSpecialty",
+            "description": {
+              "content": "Edit fields of a custom created specialty.\n\nNote: You cannot edit a Ribbon created specialty.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "specialties",
+                ":specialty_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "specialty_uuid",
+                  "description": "(Required) The UUID of the target specialty."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uuid\": \"<uuid>\",\n  \"taxonomy_code\": \"<string>\",\n  \"board_specialty\": \"<string>\",\n  \"board_sub_specialty\": \"<string>\",\n  \"non_md_specialty\": \"<string>\",\n  \"non_md_sub_specialty\": \"<string>\",\n  \"provider_name\": \"<string>\",\n  \"colloquial\": \"<string>\",\n  \"taxonomy_1\": \"<string>\",\n  \"taxonomy_2\": \"<string>\",\n  \"taxonomy_3\": \"<string>\",\n  \"display\": \"<string>\",\n  \"provider_type\": \"<string>\",\n  \"is_primary\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ba1a059-63b2-4d6c-afb8-966ee6ca45f5",
+              "name": "The specialty object was successfully updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "specialties",
+                    ":specialty_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "specialty_uuid",
+                      "description": "(Required) The UUID of the target specialty."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n  \"taxonomy_code\": \"<string>\",\n  \"board_specialty\": \"Family Medicine\",\n  \"board_sub_specialty\": \"<string>\",\n  \"non_md_specialty\": \"<string>\",\n  \"non_md_sub_specialty\": \"None\",\n  \"provider_name\": \"Family Medicine Doctor\",\n  \"colloquial\": \"<string>\",\n  \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n  \"taxonomy_2\": \"Family Medicine\",\n  \"taxonomy_3\": \"<string>\",\n  \"display\": \"Family Medicine\",\n  \"provider_type\": \"Doctor\",\n  \"is_primary\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n    \"taxonomy_code\": \"string\",\n    \"board_specialty\": \"Family Medicine\",\n    \"board_sub_specialty\": \"string\",\n    \"non_md_specialty\": \"string\",\n    \"non_md_sub_specialty\": \"None\",\n    \"provider_name\": \"Family Medicine Doctor\",\n    \"colloquial\": \"string\",\n    \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n    \"taxonomy_2\": \"Family Medicine\",\n    \"taxonomy_3\": \"string\",\n    \"display\": \"Family Medicine\",\n    \"provider_type\": \"Doctor\",\n    \"is_primary\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3f2a922-5485-452c-aa72-b3d90409503c",
+              "name": "This request attempted to update with invalid schema or was missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "specialties",
+                    ":specialty_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "specialty_uuid",
+                      "description": "(Required) The UUID of the target specialty."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n  \"taxonomy_code\": \"<string>\",\n  \"board_specialty\": \"Family Medicine\",\n  \"board_sub_specialty\": \"<string>\",\n  \"non_md_specialty\": \"<string>\",\n  \"non_md_sub_specialty\": \"None\",\n  \"provider_name\": \"Family Medicine Doctor\",\n  \"colloquial\": \"<string>\",\n  \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n  \"taxonomy_2\": \"Family Medicine\",\n  \"taxonomy_3\": \"<string>\",\n  \"display\": \"Family Medicine\",\n  \"provider_type\": \"Doctor\",\n  \"is_primary\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"invalid_query_params\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e25521c-641a-4996-9101-a5a0facc4c45",
+              "name": "The given specialty UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "specialties",
+                    ":specialty_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "specialty_uuid",
+                      "description": "(Required) The UUID of the target specialty."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n  \"taxonomy_code\": \"<string>\",\n  \"board_specialty\": \"Family Medicine\",\n  \"board_sub_specialty\": \"<string>\",\n  \"non_md_specialty\": \"<string>\",\n  \"non_md_sub_specialty\": \"None\",\n  \"provider_name\": \"Family Medicine Doctor\",\n  \"colloquial\": \"<string>\",\n  \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n  \"taxonomy_2\": \"Family Medicine\",\n  \"taxonomy_3\": \"<string>\",\n  \"display\": \"Family Medicine\",\n  \"provider_type\": \"Doctor\",\n  \"is_primary\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4bf2d5a-7201-4f57-a58e-4b8aa585decf",
+              "name": "Specialty object with given fields already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "specialties",
+                    ":specialty_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "specialty_uuid",
+                      "description": "(Required) The UUID of the target specialty."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n  \"taxonomy_code\": \"<string>\",\n  \"board_specialty\": \"Family Medicine\",\n  \"board_sub_specialty\": \"<string>\",\n  \"non_md_specialty\": \"<string>\",\n  \"non_md_sub_specialty\": \"None\",\n  \"provider_name\": \"Family Medicine Doctor\",\n  \"colloquial\": \"<string>\",\n  \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n  \"taxonomy_2\": \"Family Medicine\",\n  \"taxonomy_3\": \"<string>\",\n  \"display\": \"Family Medicine\",\n  \"provider_type\": \"Doctor\",\n  \"is_primary\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd80cef5-70c7-43ff-b4a2-e96b051e4fc9",
+          "name": "deleteCustomSpecialty",
+          "request": {
+            "name": "deleteCustomSpecialty",
+            "description": {
+              "content": "Delete a specialty.\n\nNote: You cannot delete a Ribbon created specialty.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "specialties",
+                ":specialty_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "specialty_uuid",
+                  "description": "(Required) The UUID of the target specialty."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e48d908b-b72d-4763-ae48-a4b478e4ae50",
+              "name": "Specialty was successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "specialties",
+                    ":specialty_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "specialty_uuid",
+                      "description": "(Required) The UUID of the target specialty."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "52f550ef-baf5-4725-a865-657914b9f751",
+              "name": "The given specialty UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "specialties",
+                    ":specialty_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "specialty_uuid",
+                      "description": "(Required) The UUID of the target specialty."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bce7839b-b3ee-4344-a4e6-1ec257d644cc",
+          "name": "getCustomProviderTypes",
+          "request": {
+            "name": "getCustomProviderTypes",
+            "description": {
+              "content": "Search and list provider types that exist within the Ribbon API.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "provider_types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search parameter for reference endpoints (Provider Type, Location Type, Languages)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cf86a9f0-b57b-49e0-960c-7fdc9a452c45",
+              "name": "Provider types returned from a valid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "provider_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "[\"Pediatrician\",\"Clinic\",\"Spanish\"]"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 23,\n  \"results\": [\n    {\n      \"uuid\": \"854a242b-9fa6-4427-b36f-ae7ba858e2c8\",\n      \"display_name\": \"Pediatrician\"\n    },\n    {\n      \"uuid\": \"854a242b-9fa6-4427-b36f-ae7ba858e2c8\",\n      \"display_name\": \"Pediatrician\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b68a314-b3f7-4628-a999-7e78aa6a3030",
+          "name": "postCustomProviderType",
+          "request": {
+            "name": "postCustomProviderType",
+            "description": {
+              "content": "Create a custom provider type with desired field values.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "provider_types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"display_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7179d91b-dc12-4a21-9cea-d6a30e22efb4",
+              "name": "Provider type was successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "provider_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"Certified Nurse Midwife\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"uuid\": \"854a242b-9fa6-4427-b36f-ae7ba858e2c8\",\n    \"display_name\": \"Pediatrician\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b08a358-0b17-4f9c-9231-6080a5843aa9",
+              "name": "This request attempted to create with invalid schema or was missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "provider_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"Certified Nurse Midwife\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"invalid_query_params\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf1744d6-180d-40e7-aa56-5bd56bdf0c7e",
+              "name": "Provider type object with given display_name already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "provider_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"Certified Nurse Midwife\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3ddc9f0-6f16-4846-862a-cc93c567642f",
+          "name": "getCustomProviderType",
+          "request": {
+            "name": "getCustomProviderType",
+            "description": {
+              "content": "Retrieve data on a specific provider type.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "provider_types",
+                ":provider_type_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "provider_type_uuid",
+                  "description": "(Required) The UUID of the target provider type."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5dc1907e-7916-4092-a553-83638a8b9c31",
+              "name": "Returns a single provider type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "provider_types",
+                    ":provider_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provider_type_uuid",
+                      "description": "(Required) The UUID of the target provider type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"854a242b-9fa6-4427-b36f-ae7ba858e2c8\",\n  \"display_name\": \"Pediatrician\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8441b7ba-05ff-4b52-b2b6-3d0b0fed88c7",
+              "name": "The given provider type UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "provider_types",
+                    ":provider_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provider_type_uuid",
+                      "description": "(Required) The UUID of the target provider type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0c4f4f6-085f-49fe-b21f-ebd0de9479f0",
+          "name": "putCustomProviderType",
+          "request": {
+            "name": "putCustomProviderType",
+            "description": {
+              "content": "Edit fields of a custom created provider type.\n\nNote: You cannot edit a Ribbon created provider type.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "provider_types",
+                ":provider_type_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "provider_type_uuid",
+                  "description": "(Required) The UUID of the target provider type."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"display_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0c04d99e-0757-462a-910a-c9f9e553585f",
+              "name": "The provider type object was successfully updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "provider_types",
+                    ":provider_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provider_type_uuid",
+                      "description": "(Required) The UUID of the target provider type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"Certified Nurse Midwife\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"uuid\": \"854a242b-9fa6-4427-b36f-ae7ba858e2c8\",\n    \"display_name\": \"Pediatrician\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9ceed2f-ed50-44e9-acc9-1ca38d8f512f",
+              "name": "This request attempted to update with invalid schema or was missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "provider_types",
+                    ":provider_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provider_type_uuid",
+                      "description": "(Required) The UUID of the target provider type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"Certified Nurse Midwife\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"invalid_query_params\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bf82b42-8869-417b-8296-37d60597385f",
+              "name": "This resource is managed by Ribbon and cannot be modified.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "provider_types",
+                    ":provider_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provider_type_uuid",
+                      "description": "(Required) The UUID of the target provider type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"Certified Nurse Midwife\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"permission_denied\",\n    \"message\": \"a trial account does not have access to this functionality\",\n    \"status\": 403\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef345897-f800-45c5-a7ae-2f1a240fb566",
+              "name": "The given provider type UUID cannot be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "provider_types",
+                    ":provider_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provider_type_uuid",
+                      "description": "(Required) The UUID of the target provider type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"Certified Nurse Midwife\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d2b08b9-db9d-42fd-83b1-03f07d7720ab",
+              "name": "Provider Type object with given display_name already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "provider_types",
+                    ":provider_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provider_type_uuid",
+                      "description": "(Required) The UUID of the target provider type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"Certified Nurse Midwife\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e86038d-98df-476a-8f4e-8d6132578931",
+          "name": "deleteCustomProviderType",
+          "request": {
+            "name": "deleteCustomProviderType",
+            "description": {
+              "content": "Delete a provider type.\n\nNote: You cannot edit a Ribbon created provider type.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "provider_types",
+                ":provider_type_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "provider_type_uuid",
+                  "description": "(Required) The UUID of the target provider type."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c523b677-e582-42c6-9262-fa8574ef302b",
+              "name": "Provider type was successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "provider_types",
+                    ":provider_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provider_type_uuid",
+                      "description": "(Required) The UUID of the target provider type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6c04a501-2322-48ec-a4c1-1da08ddf26f2",
+              "name": "This resource is managed by Ribbon and cannot be deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "provider_types",
+                    ":provider_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provider_type_uuid",
+                      "description": "(Required) The UUID of the target provider type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"permission_denied\",\n    \"message\": \"a trial account does not have access to this functionality\",\n    \"status\": 403\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "244aefbd-3528-42aa-bc72-c858ea114449",
+              "name": "The given provider type UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "provider_types",
+                    ":provider_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provider_type_uuid",
+                      "description": "(Required) The UUID of the target provider type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07b35371-ed00-42d0-b2f0-ebce69e40b50",
+          "name": "getCustomLocationTypes",
+          "request": {
+            "name": "getCustomLocationTypes",
+            "description": {
+              "content": "Search and list location types that exist within the Ribbon API.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "location_types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search parameter for reference endpoints (Provider Type, Location Type, Languages)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ee31fab-6642-4111-b14d-c33399d49907",
+              "name": "Location types returned from a valid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "[\"Pediatrician\",\"Clinic\",\"Spanish\"]"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 7,\n  \"results\": [\n    {\n      \"uuid\": \"cd7f242d-3016-4db6-94f4-77b8237127a3\",\n      \"display_name\": \"Radiology\"\n    },\n    {\n      \"uuid\": \"cd7f242d-3016-4db6-94f4-77b8237127a3\",\n      \"display_name\": \"Radiology\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "245f62c4-d19a-47b9-b4e9-38718e66fd14",
+          "name": "postCustomLocationType",
+          "request": {
+            "name": "postCustomLocationType",
+            "description": {
+              "content": "Create a location type with desired field values.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "location_types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"display_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "267c1213-d370-403c-afa9-c19296a359f8",
+              "name": "Location type was successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "location_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"Certified Nurse Midwife\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"uuid\": \"cd7f242d-3016-4db6-94f4-77b8237127a3\",\n    \"display_name\": \"Radiology\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1af6e83a-3260-4bd3-851a-2a00db08aeca",
+              "name": "This request attempted to create with invalid schema or was missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "location_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"Certified Nurse Midwife\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"invalid_query_params\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "969a2c42-e7d7-4e98-a2ac-307f539f7c77",
+              "name": "Location type object with given display_name already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "location_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"Certified Nurse Midwife\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "33807a7f-ea85-454b-9286-10f8be5cc8b4",
+          "name": "getCustomLocationType",
+          "request": {
+            "name": "getCustomLocationType",
+            "description": {
+              "content": "Retrieve data on a specific location type.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "location_types",
+                ":location_type_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "location_type_uuid",
+                  "description": "(Required) The UUID of the target location type."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "47a862a2-3536-4181-8231-174442626f33",
+              "name": "Returns a single location type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "location_types",
+                    ":location_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_type_uuid",
+                      "description": "(Required) The UUID of the target location type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"cd7f242d-3016-4db6-94f4-77b8237127a3\",\n  \"display_name\": \"Radiology\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3eb00823-ad1b-4db2-8cb5-36d972eb58d9",
+              "name": "The given location type UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "location_types",
+                    ":location_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_type_uuid",
+                      "description": "(Required) The UUID of the target location type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ef950cf6-cf9b-48fb-80b3-c7817e5cf23c",
+          "name": "putCustomLocationType",
+          "request": {
+            "name": "putCustomLocationType",
+            "description": {
+              "content": "Edit fields of a custom created location type.\n\nNote: You cannot edit a Ribbon created location type.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "location_types",
+                ":location_type_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "location_type_uuid",
+                  "description": "(Required) The UUID of the target location type."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"display_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "25ea44c2-7ce4-411d-8f0c-e689ae52a43f",
+              "name": "The location type object was successfully updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "location_types",
+                    ":location_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_type_uuid",
+                      "description": "(Required) The UUID of the target location type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"Certified Nurse Midwife\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"uuid\": \"cd7f242d-3016-4db6-94f4-77b8237127a3\",\n    \"display_name\": \"Radiology\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0b5c8d5-2744-49b8-bf43-8275def925bb",
+              "name": "This request attempted to update with invalid schema or was missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "location_types",
+                    ":location_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_type_uuid",
+                      "description": "(Required) The UUID of the target location type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"Certified Nurse Midwife\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"invalid_query_params\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b741bf37-2266-4524-ab6f-8c620fba6e84",
+              "name": "This resource is managed by Ribbon and cannot be modified.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "location_types",
+                    ":location_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_type_uuid",
+                      "description": "(Required) The UUID of the target location type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"Certified Nurse Midwife\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"permission_denied\",\n    \"message\": \"a trial account does not have access to this functionality\",\n    \"status\": 403\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d1b5e62-b90c-45d3-aa73-774986a60057",
+              "name": "The given location type UUID cannot be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "location_types",
+                    ":location_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_type_uuid",
+                      "description": "(Required) The UUID of the target location type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"Certified Nurse Midwife\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c121af16-40be-41f5-8f1b-13ea0367f521",
+              "name": "Location Type object with given display_name already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "location_types",
+                    ":location_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_type_uuid",
+                      "description": "(Required) The UUID of the target location type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"Certified Nurse Midwife\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c29bea6-045a-4bbc-b9b9-614904ab5e2b",
+          "name": "deleteCustomLocationType",
+          "request": {
+            "name": "deleteCustomLocationType",
+            "description": {
+              "content": "Delete a location type.\n\nNote: You cannot edit a Ribbon created location type.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "location_types",
+                ":location_type_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "location_type_uuid",
+                  "description": "(Required) The UUID of the target location type."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a75a052c-bcb6-469d-9c2b-baba0af30e64",
+              "name": "Location type was successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "location_types",
+                    ":location_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_type_uuid",
+                      "description": "(Required) The UUID of the target location type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "be260176-57c2-47b2-9d6d-8e41a8008f64",
+              "name": "This resource is managed by Ribbon and cannot be deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "location_types",
+                    ":location_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_type_uuid",
+                      "description": "(Required) The UUID of the target location type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"permission_denied\",\n    \"message\": \"a trial account does not have access to this functionality\",\n    \"status\": 403\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a321f08-76c3-477a-8890-e8ab5e0055a7",
+              "name": "The given location type UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "location_types",
+                    ":location_type_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_type_uuid",
+                      "description": "(Required) The UUID of the target location type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "db3eb3db-dc9f-49f7-bbe4-6384da51e480",
+          "name": "getProcedures",
+          "request": {
+            "name": "getProcedures",
+            "description": {
+              "content": "Search and list procedures that exist within the Ribbon API.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "procedures"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search parameter for reference endpoints (Provider Type, Location Type, Languages)"
+                },
+                {
+                  "disabled": false,
+                  "key": "procedure_code",
+                  "value": "<string>",
+                  "description": "A specific billing code (e.g., CPT, DRG) to search for"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "The page of the results which was returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "How many results are in each page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc9fb724-3775-456c-a086-c210274132fc",
+              "name": "Procedures returned from a valid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "procedures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "[\"Pediatrician\",\"Clinic\",\"Spanish\"]"
+                    },
+                    {
+                      "key": "procedure_code",
+                      "value": "73222"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "15"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 141,\n  \"next\": \"https://api.ribbonhealth.com/v1/procedures?page=3\",\n  \"previous\": \"https://api.ribbonhealth.com/v1/procedures?page=1\",\n  \"results\": [\n    {\n      \"uuid\": \"0a9a245f-2f52-4cc0-a5c3-77a811acc6f7\",\n      \"display_name\": \"MRI, arm\"\n    },\n    {\n      \"uuid\": \"0a9a245f-2f52-4cc0-a5c3-77a811acc6f7\",\n      \"display_name\": \"MRI, arm\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05ac7a0b-42b2-439c-806c-669b0aa429cb",
+          "name": "getProcedure",
+          "request": {
+            "name": "getProcedure",
+            "description": {
+              "content": "Retrieve data on a specific procedure.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "procedures",
+                ":procedure_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "procedure_uuid",
+                  "description": "(Required) The UUID of the target procedure."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "321ab5bb-4c67-41ed-9746-0e43566efa9b",
+              "name": "Returns a single procedure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "procedures",
+                    ":procedure_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "procedure_uuid",
+                      "description": "(Required) The UUID of the target procedure."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"0a9a245f-2f52-4cc0-a5c3-77a811acc6f7\",\n  \"display\": \"MRI, arm\",\n  \"procedure_code_count\": 7,\n  \"procedure_codes\": [\n    {\n      \"code\": \"73222\",\n      \"type\": \"CPT\",\n      \"description\": \"MRI, arm\"\n    },\n    {\n      \"code\": \"73222\",\n      \"type\": \"CPT\",\n      \"description\": \"MRI, arm\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0eeba77f-3c2e-4981-9fde-c98d28cb509b",
+              "name": "The given procedure UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "procedures",
+                    ":procedure_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "procedure_uuid",
+                      "description": "(Required) The UUID of the target procedure."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b30c0f2e-0db1-4c08-a5bc-a117f6deb0a1",
+          "name": "getLanguages",
+          "request": {
+            "name": "getLanguages",
+            "description": {
+              "content": "Search and list provider languages that exist in the Ribbon API.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "languages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search parameter for reference endpoints (Provider Type, Location Type, Languages)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d92da99f-033f-41e9-8f91-0b7b9aef8be1",
+              "name": "Languages returned from a valid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "languages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "[\"Pediatrician\",\"Clinic\",\"Spanish\"]"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 333,\n  \"results\": [\n    {\n      \"uuid\": \"9b79819b-a1e3-489d-8010-b0b9f591c201\",\n      \"display_name\": \"arabic\"\n    },\n    {\n      \"uuid\": \"9b79819b-a1e3-489d-8010-b0b9f591c201\",\n      \"display_name\": \"arabic\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ribbonhealth.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c1aedddb-d192-445b-9892-4b1078503eb8",
+    "name": "ribbon-health Cost Estimates Reference Endpoints API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.\n",
+      "type": "text/plain"
+    }
+  }
+}

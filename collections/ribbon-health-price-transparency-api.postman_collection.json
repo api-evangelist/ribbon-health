@@ -1,0 +1,1674 @@
+{
+  "item": [
+    {
+      "id": "b0c0734e-3db7-43fc-8d25-d648b8939fac",
+      "name": "Price Transparency",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c1c29dab-3e39-4606-b10f-b281d4cdc2d8",
+          "name": "getPricingProviders",
+          "request": {
+            "name": "getPricingProviders",
+            "description": {
+              "content": "Search for providers that perform a given procedure and find the lowest insurance-specific price for a procedure in your area.\n\n#### Example Use Case\nSearch for all applicable provider negotiated rates, given a specific insurance and procedure (and optionally, a specific location/address and distance). For example, search for all providers near me who perform Leg MRIs and who take a given insurance, sorted by lowest price.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing",
+                "providers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "procedure_id",
+                  "value": "<uuid>",
+                  "description": "Search for prices for the procedure with the given UUID.\n\nIf the given ID is for a procedure bundle but do not have data for the insurance specified by the `plan_id` parameter, we will return data for its anchor procedure instead.\n\nExactly one of `procedure`, `procedure_id`, or `procedure_code` must be specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "procedure",
+                  "value": "<string>",
+                  "description": "Search for prices for the given procedure. This input is fuzzy matched to the most relevant procedure `display` field.\n\nWe will preferentially match procedure bundles. If we match a procedure bundle but do not have data for the insurance specified by the `plan_id` parameter, we will return data for its anchor procedure instead.\n\nExactly one of `procedure`, `procedure_id`, or `procedure_code` must be specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "procedure_code",
+                  "value": "<string>",
+                  "description": "Search for prices for procedures with the given billing code.\n\nWe will preferentially match procedure bundles. If we match a procedure bundle but do not have data for the insurance specified by the `plan_id` parameter, we will return data for its anchor procedure instead.\n\nExactly one of `procedure`, `procedure_id`, or `procedure_code` must be specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "The page of the results which was returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "How many results are in each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "plan_id",
+                  "value": "<uuid>",
+                  "description": "Search for negotiated rates for the insurance plan with this UUID."
+                },
+                {
+                  "disabled": false,
+                  "key": "specialty_ids",
+                  "value": "<string>",
+                  "description": "A comma separated list of specialty UUIDs. Filter to providers with any of the given specialties."
+                },
+                {
+                  "disabled": false,
+                  "key": "specialty",
+                  "value": "<string>",
+                  "description": "String input of a provider specialty that will be interpreted and matched to the single closest specialty, dealing with basic typos and colloquial names for providers."
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "String input of an address that will be interpreted and geocoded in real time."
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>",
+                  "description": "Latitude/longitude pair of coordinates in lieu of a string address."
+                },
+                {
+                  "disabled": false,
+                  "key": "distance",
+                  "value": "<integer>",
+                  "description": "The proximity radius of providers returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Comma-separated list of fields within the provider object to return. Can be used to greatly reduce the size of the response by requesting only data you intend to use.\n\nNote that all price information is nested under the `matched_location` field. You almost certainly want to return this field.\n\nCannot be used in tandem with `_excl_fields`."
+                },
+                {
+                  "disabled": false,
+                  "key": "_excl_fields",
+                  "value": "<string>",
+                  "description": "Comma-separated list of fields within the provider object to exclude from the response. Can be used to greatly reduce the size of the response by requesting only data you intend to use.\n\nCannot be used in tandem with `fields`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc8a75cd-8c02-4ddc-aac3-ec2d1dedd9e4",
+              "name": "Returns per provider prices for the given procedure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "procedure_id",
+                      "value": "7ad7c4ef-baf9-4789-8e58-51d2308a1143"
+                    },
+                    {
+                      "key": "procedure",
+                      "value": "MRI, thoracic spine"
+                    },
+                    {
+                      "key": "procedure_code",
+                      "value": "73720"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "25"
+                    },
+                    {
+                      "key": "plan_id",
+                      "value": "81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902"
+                    },
+                    {
+                      "key": "specialty_ids",
+                      "value": "fcc9a22c-7a0f-4405-b0c9-c5f8ad83b93e,8b5d3998-d7e2-4b9e-91d1-17c19cd089f5,44b0284c-f360-4312-a17d-d601651cb0ea"
+                    },
+                    {
+                      "key": "specialty",
+                      "value": "gastroenterology"
+                    },
+                    {
+                      "key": "address",
+                      "value": "2074 23rd Ave, San Francisco, CA 94116"
+                    },
+                    {
+                      "key": "location",
+                      "value": "37.7489816,-122.4802092"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "matched_location,npi"
+                    },
+                    {
+                      "key": "_excl_fields",
+                      "value": "insurances,age"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"insurance\": {\n        \"uuid\": \"ef704f14-c906-4857-acd4-d811f1394c32\",\n        \"plan_name\": \"Aetna\",\n        \"carrier_name\": \"string\"\n      },\n      \"procedure\": {\n        \"uuid\": \"7ad7c4ef-baf9-4789-8e58-51d2308a1143\",\n        \"name\": \"MRI, leg\"\n      },\n      \"matched_location\": {\n        \"costs\": {\n          \"min\": \"239.0\",\n          \"median\": \"520.5350000000001\",\n          \"max\": \"714.93\",\n          \"is_bundle\": true,\n          \"outpatient\": {},\n          \"inpatient\": {}\n        },\n        \"uuid\": \"f38b9fd5-1e28-4f6e-953c-1e1493b68e21\",\n        \"name\": \"string\",\n        \"address\": \"185 Berry St # 130, San Francisco, CA 94107, US\",\n        \"address_details\": {\n          \"street\": \"185 Berry St # 130\",\n          \"address_line_1\": \"185 Berry St\",\n          \"address_line_2\": \"# 130\",\n          \"city\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"zip\": \"94107\"\n        },\n        \"latitude\": 37.7765973,\n        \"longitude\": -122.3919488,\n        \"google_maps_link\": \"https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US\",\n        \"phone_numbers\": [\n          {\n            \"phone\": \"4155146410\",\n            \"details\": \"primary\"\n          },\n          {\n            \"phone\": \"4155146410\",\n            \"details\": \"primary\"\n          }\n        ],\n        \"faxes\": [\n          {\n            \"phone\": \"2121234567\",\n            \"details\": \"secondary\",\n            \"confidence\": 3\n          },\n          {\n            \"phone\": \"2121234567\",\n            \"details\": \"secondary\",\n            \"confidence\": 3\n          }\n        ],\n        \"confidence\": 2,\n        \"insurances\": [\n          {\n            \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n            \"carrier_association\": \"Aetna\",\n            \"carrier_brand\": \"Aetna\",\n            \"carrier_name\": \"Aetna\",\n            \"state\": \"NY\",\n            \"plan_name\": \"Aetna HealthFund Open Choice\",\n            \"plan_type\": \"PPO\",\n            \"metal_level\": \"string\",\n            \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n            \"network\": \"string\",\n            \"confidence\": 4,\n            \"category\": \"string\",\n            \"codes\": [\n              [\n                \"string\",\n                \"string\"\n              ],\n              [\n                \"string\",\n                \"string\"\n              ]\n            ]\n          },\n          {\n            \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n            \"carrier_association\": \"Aetna\",\n            \"carrier_brand\": \"Aetna\",\n            \"carrier_name\": \"Aetna\",\n            \"state\": \"NY\",\n            \"plan_name\": \"Aetna HealthFund Open Choice\",\n            \"plan_type\": \"PPO\",\n            \"metal_level\": \"string\",\n            \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n            \"network\": \"string\",\n            \"confidence\": 4,\n            \"category\": \"string\",\n            \"codes\": [\n              [\n                \"string\",\n                \"string\"\n              ],\n              [\n                \"string\",\n                \"string\"\n              ]\n            ]\n          }\n        ],\n        \"tins\": \"string\"\n      },\n      \"npi\": 1861664294,\n      \"first_name\": \"Jane\",\n      \"middle_name\": \"J\",\n      \"last_name\": \"Doe\",\n      \"age\": 38,\n      \"gender\": \"f\",\n      \"ratings_count\": 20,\n      \"ratings_avg\": 9.8,\n      \"degrees\": [\n        \"string\",\n        \"string\"\n      ],\n      \"specialties\": [\n        \"ea497331-9b81-20e0-e0b3-4b7f2f55fdb6\",\n        \"7eab660c-acf3-9bf4-aaa9-ff7c558813e0\"\n      ],\n      \"languages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"educations\": [\n        {\n          \"education\": {\n            \"name\": \"Stritch School of Medicine\",\n            \"uuid\": \"0b26c31a-d74a-4327-9702-57753b82a126\"\n          },\n          \"type\": \"string\",\n          \"year\": 2007\n        },\n        {\n          \"education\": {\n            \"name\": \"Stritch School of Medicine\",\n            \"uuid\": \"0b26c31a-d74a-4327-9702-57753b82a126\"\n          },\n          \"type\": \"string\",\n          \"year\": 2007\n        }\n      ],\n      \"insurances\": [\n        \"78dc1daf-c57e-c4db-19e7-5a849c8e4d32\",\n        \"1c5e2af3-e6e7-8214-4f69-938666f81b66\"\n      ],\n      \"provider_types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"locations\": [\n        {\n          \"uuid\": \"f38b9fd5-1e28-4f6e-953c-1e1493b68e21\",\n          \"name\": \"string\",\n          \"address\": \"185 Berry St # 130, San Francisco, CA 94107, US\",\n          \"address_details\": {\n            \"street\": \"185 Berry St # 130\",\n            \"address_line_1\": \"185 Berry St\",\n            \"address_line_2\": \"# 130\",\n            \"city\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"zip\": \"94107\"\n          },\n          \"latitude\": 37.7765973,\n          \"longitude\": -122.3919488,\n          \"google_maps_link\": \"https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US\",\n          \"phone_numbers\": [\n            {\n              \"phone\": \"4155146410\",\n              \"details\": \"primary\"\n            },\n            {\n              \"phone\": \"4155146410\",\n              \"details\": \"primary\"\n            }\n          ],\n          \"faxes\": [\n            {\n              \"phone\": \"2121234567\",\n              \"details\": \"secondary\",\n              \"confidence\": 3\n            },\n            {\n              \"phone\": \"2121234567\",\n              \"details\": \"secondary\",\n              \"confidence\": 3\n            }\n          ],\n          \"confidence\": 2,\n          \"insurances\": [\n            {\n              \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n              \"carrier_association\": \"Aetna\",\n              \"carrier_brand\": \"Aetna\",\n              \"carrier_name\": \"Aetna\",\n              \"state\": \"NY\",\n              \"plan_name\": \"Aetna HealthFund Open Choice\",\n              \"plan_type\": \"PPO\",\n              \"metal_level\": \"string\",\n              \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n              \"network\": \"string\",\n              \"confidence\": 4,\n              \"category\": \"string\",\n              \"codes\": [\n                [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ]\n              ]\n            },\n            {\n              \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n              \"carrier_association\": \"Aetna\",\n              \"carrier_brand\": \"Aetna\",\n              \"carrier_name\": \"Aetna\",\n              \"state\": \"NY\",\n              \"plan_name\": \"Aetna HealthFund Open Choice\",\n              \"plan_type\": \"PPO\",\n              \"metal_level\": \"string\",\n              \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n              \"network\": \"string\",\n              \"confidence\": 4,\n              \"category\": \"string\",\n              \"codes\": [\n                [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ]\n              ]\n            }\n          ],\n          \"tins\": \"string\"\n        },\n        {\n          \"uuid\": \"f38b9fd5-1e28-4f6e-953c-1e1493b68e21\",\n          \"name\": \"string\",\n          \"address\": \"185 Berry St # 130, San Francisco, CA 94107, US\",\n          \"address_details\": {\n            \"street\": \"185 Berry St # 130\",\n            \"address_line_1\": \"185 Berry St\",\n            \"address_line_2\": \"# 130\",\n            \"city\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"zip\": \"94107\"\n          },\n          \"latitude\": 37.7765973,\n          \"longitude\": -122.3919488,\n          \"google_maps_link\": \"https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US\",\n          \"phone_numbers\": [\n            {\n              \"phone\": \"4155146410\",\n              \"details\": \"primary\"\n            },\n            {\n              \"phone\": \"4155146410\",\n              \"details\": \"primary\"\n            }\n          ],\n          \"faxes\": [\n            {\n              \"phone\": \"2121234567\",\n              \"details\": \"secondary\",\n              \"confidence\": 3\n            },\n            {\n              \"phone\": \"2121234567\",\n              \"details\": \"secondary\",\n              \"confidence\": 3\n            }\n          ],\n          \"confidence\": 2,\n          \"insurances\": [\n            {\n              \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n              \"carrier_association\": \"Aetna\",\n              \"carrier_brand\": \"Aetna\",\n              \"carrier_name\": \"Aetna\",\n              \"state\": \"NY\",\n              \"plan_name\": \"Aetna HealthFund Open Choice\",\n              \"plan_type\": \"PPO\",\n              \"metal_level\": \"string\",\n              \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n              \"network\": \"string\",\n              \"confidence\": 4,\n              \"category\": \"string\",\n              \"codes\": [\n                [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ]\n              ]\n            },\n            {\n              \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n              \"carrier_association\": \"Aetna\",\n              \"carrier_brand\": \"Aetna\",\n              \"carrier_name\": \"Aetna\",\n              \"state\": \"NY\",\n              \"plan_name\": \"Aetna HealthFund Open Choice\",\n              \"plan_type\": \"PPO\",\n              \"metal_level\": \"string\",\n              \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n              \"network\": \"string\",\n              \"confidence\": 4,\n              \"category\": \"string\",\n              \"codes\": [\n                [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ]\n              ]\n            }\n          ],\n          \"tins\": \"string\"\n        }\n      ],\n      \"online_profiles\": [\n        {\n          \"url\": \"string\"\n        },\n        {\n          \"url\": \"string\"\n        }\n      ]\n    },\n    {\n      \"insurance\": {\n        \"uuid\": \"ef704f14-c906-4857-acd4-d811f1394c32\",\n        \"plan_name\": \"Aetna\",\n        \"carrier_name\": \"string\"\n      },\n      \"procedure\": {\n        \"uuid\": \"7ad7c4ef-baf9-4789-8e58-51d2308a1143\",\n        \"name\": \"MRI, leg\"\n      },\n      \"matched_location\": {\n        \"costs\": {\n          \"min\": \"239.0\",\n          \"median\": \"520.5350000000001\",\n          \"max\": \"714.93\",\n          \"is_bundle\": true,\n          \"outpatient\": {},\n          \"inpatient\": {}\n        },\n        \"uuid\": \"f38b9fd5-1e28-4f6e-953c-1e1493b68e21\",\n        \"name\": \"string\",\n        \"address\": \"185 Berry St # 130, San Francisco, CA 94107, US\",\n        \"address_details\": {\n          \"street\": \"185 Berry St # 130\",\n          \"address_line_1\": \"185 Berry St\",\n          \"address_line_2\": \"# 130\",\n          \"city\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"zip\": \"94107\"\n        },\n        \"latitude\": 37.7765973,\n        \"longitude\": -122.3919488,\n        \"google_maps_link\": \"https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US\",\n        \"phone_numbers\": [\n          {\n            \"phone\": \"4155146410\",\n            \"details\": \"primary\"\n          },\n          {\n            \"phone\": \"4155146410\",\n            \"details\": \"primary\"\n          }\n        ],\n        \"faxes\": [\n          {\n            \"phone\": \"2121234567\",\n            \"details\": \"secondary\",\n            \"confidence\": 3\n          },\n          {\n            \"phone\": \"2121234567\",\n            \"details\": \"secondary\",\n            \"confidence\": 3\n          }\n        ],\n        \"confidence\": 2,\n        \"insurances\": [\n          {\n            \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n            \"carrier_association\": \"Aetna\",\n            \"carrier_brand\": \"Aetna\",\n            \"carrier_name\": \"Aetna\",\n            \"state\": \"NY\",\n            \"plan_name\": \"Aetna HealthFund Open Choice\",\n            \"plan_type\": \"PPO\",\n            \"metal_level\": \"string\",\n            \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n            \"network\": \"string\",\n            \"confidence\": 4,\n            \"category\": \"string\",\n            \"codes\": [\n              [\n                \"string\",\n                \"string\"\n              ],\n              [\n                \"string\",\n                \"string\"\n              ]\n            ]\n          },\n          {\n            \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n            \"carrier_association\": \"Aetna\",\n            \"carrier_brand\": \"Aetna\",\n            \"carrier_name\": \"Aetna\",\n            \"state\": \"NY\",\n            \"plan_name\": \"Aetna HealthFund Open Choice\",\n            \"plan_type\": \"PPO\",\n            \"metal_level\": \"string\",\n            \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n            \"network\": \"string\",\n            \"confidence\": 4,\n            \"category\": \"string\",\n            \"codes\": [\n              [\n                \"string\",\n                \"string\"\n              ],\n              [\n                \"string\",\n                \"string\"\n              ]\n            ]\n          }\n        ],\n        \"tins\": \"string\"\n      },\n      \"npi\": 1861664294,\n      \"first_name\": \"Jane\",\n      \"middle_name\": \"J\",\n      \"last_name\": \"Doe\",\n      \"age\": 38,\n      \"gender\": \"f\",\n      \"ratings_count\": 20,\n      \"ratings_avg\": 9.8,\n      \"degrees\": [\n        \"string\",\n        \"string\"\n      ],\n      \"specialties\": [\n        \"2de3d5fd-2de9-8336-f5c2-8688d7b1a433\",\n        \"e3657576-2c79-879d-461a-95b040ea505b\"\n      ],\n      \"languages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"educations\": [\n        {\n          \"education\": {\n            \"name\": \"Stritch School of Medicine\",\n            \"uuid\": \"0b26c31a-d74a-4327-9702-57753b82a126\"\n          },\n          \"type\": \"string\",\n          \"year\": 2007\n        },\n        {\n          \"education\": {\n            \"name\": \"Stritch School of Medicine\",\n            \"uuid\": \"0b26c31a-d74a-4327-9702-57753b82a126\"\n          },\n          \"type\": \"string\",\n          \"year\": 2007\n        }\n      ],\n      \"insurances\": [\n        \"facb0c38-51a6-539c-2fde-093a1bf2113a\",\n        \"2500ee41-ad29-d5e7-209b-21cda5038a13\"\n      ],\n      \"provider_types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"locations\": [\n        {\n          \"uuid\": \"f38b9fd5-1e28-4f6e-953c-1e1493b68e21\",\n          \"name\": \"string\",\n          \"address\": \"185 Berry St # 130, San Francisco, CA 94107, US\",\n          \"address_details\": {\n            \"street\": \"185 Berry St # 130\",\n            \"address_line_1\": \"185 Berry St\",\n            \"address_line_2\": \"# 130\",\n            \"city\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"zip\": \"94107\"\n          },\n          \"latitude\": 37.7765973,\n          \"longitude\": -122.3919488,\n          \"google_maps_link\": \"https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US\",\n          \"phone_numbers\": [\n            {\n              \"phone\": \"4155146410\",\n              \"details\": \"primary\"\n            },\n            {\n              \"phone\": \"4155146410\",\n              \"details\": \"primary\"\n            }\n          ],\n          \"faxes\": [\n            {\n              \"phone\": \"2121234567\",\n              \"details\": \"secondary\",\n              \"confidence\": 3\n            },\n            {\n              \"phone\": \"2121234567\",\n              \"details\": \"secondary\",\n              \"confidence\": 3\n            }\n          ],\n          \"confidence\": 2,\n          \"insurances\": [\n            {\n              \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n              \"carrier_association\": \"Aetna\",\n              \"carrier_brand\": \"Aetna\",\n              \"carrier_name\": \"Aetna\",\n              \"state\": \"NY\",\n              \"plan_name\": \"Aetna HealthFund Open Choice\",\n              \"plan_type\": \"PPO\",\n              \"metal_level\": \"string\",\n              \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n              \"network\": \"string\",\n              \"confidence\": 4,\n              \"category\": \"string\",\n              \"codes\": [\n                [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ]\n              ]\n            },\n            {\n              \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n              \"carrier_association\": \"Aetna\",\n              \"carrier_brand\": \"Aetna\",\n              \"carrier_name\": \"Aetna\",\n              \"state\": \"NY\",\n              \"plan_name\": \"Aetna HealthFund Open Choice\",\n              \"plan_type\": \"PPO\",\n              \"metal_level\": \"string\",\n              \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n              \"network\": \"string\",\n              \"confidence\": 4,\n              \"category\": \"string\",\n              \"codes\": [\n                [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ]\n              ]\n            }\n          ],\n          \"tins\": \"string\"\n        },\n        {\n          \"uuid\": \"f38b9fd5-1e28-4f6e-953c-1e1493b68e21\",\n          \"name\": \"string\",\n          \"address\": \"185 Berry St # 130, San Francisco, CA 94107, US\",\n          \"address_details\": {\n            \"street\": \"185 Berry St # 130\",\n            \"address_line_1\": \"185 Berry St\",\n            \"address_line_2\": \"# 130\",\n            \"city\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"zip\": \"94107\"\n          },\n          \"latitude\": 37.7765973,\n          \"longitude\": -122.3919488,\n          \"google_maps_link\": \"https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US\",\n          \"phone_numbers\": [\n            {\n              \"phone\": \"4155146410\",\n              \"details\": \"primary\"\n            },\n            {\n              \"phone\": \"4155146410\",\n              \"details\": \"primary\"\n            }\n          ],\n          \"faxes\": [\n            {\n              \"phone\": \"2121234567\",\n              \"details\": \"secondary\",\n              \"confidence\": 3\n            },\n            {\n              \"phone\": \"2121234567\",\n              \"details\": \"secondary\",\n              \"confidence\": 3\n            }\n          ],\n          \"confidence\": 2,\n          \"insurances\": [\n            {\n              \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n              \"carrier_association\": \"Aetna\",\n              \"carrier_brand\": \"Aetna\",\n              \"carrier_name\": \"Aetna\",\n              \"state\": \"NY\",\n              \"plan_name\": \"Aetna HealthFund Open Choice\",\n              \"plan_type\": \"PPO\",\n              \"metal_level\": \"string\",\n              \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n              \"network\": \"string\",\n              \"confidence\": 4,\n              \"category\": \"string\",\n              \"codes\": [\n                [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ]\n              ]\n            },\n            {\n              \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n              \"carrier_association\": \"Aetna\",\n              \"carrier_brand\": \"Aetna\",\n              \"carrier_name\": \"Aetna\",\n              \"state\": \"NY\",\n              \"plan_name\": \"Aetna HealthFund Open Choice\",\n              \"plan_type\": \"PPO\",\n              \"metal_level\": \"string\",\n              \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n              \"network\": \"string\",\n              \"confidence\": 4,\n              \"category\": \"string\",\n              \"codes\": [\n                [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ]\n              ]\n            }\n          ],\n          \"tins\": \"string\"\n        }\n      ],\n      \"online_profiles\": [\n        {\n          \"url\": \"string\"\n        },\n        {\n          \"url\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"parameters\": {\n    \"total_count\": 141,\n    \"page\": 1,\n    \"page_size\": 25,\n    \"procedure_id\": \"7ad7c4ef-baf9-4789-8e58-51d2308a1143\",\n    \"procedure\": {\n      \"uuid\": \"0a9a245f-2f52-4cc0-a5c3-77a811acc6f7\",\n      \"display\": \"MRI, arm\",\n      \"procedure_code_count\": 7,\n      \"procedure_codes\": [\n        {\n          \"code\": \"73222\",\n          \"type\": \"CPT\",\n          \"description\": \"MRI, arm\"\n        },\n        {\n          \"code\": \"73222\",\n          \"type\": \"CPT\",\n          \"description\": \"MRI, arm\"\n        }\n      ]\n    },\n    \"insurances\": [\n      \"940c222d-12ac-ae06-4309-da3f83871695\",\n      \"4c867f5d-0cdc-e801-e1e8-90e3e89f276f\"\n    ],\n    \"insurance\": {\n      \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n      \"plan_name\": \"Aetna HealthFund Open Choice\",\n      \"carrier_name\": \"Aetna\"\n    },\n    \"specialty_ids\": [\n      \"fcc9a22c-7a0f-4405-b0c9-c5f8ad83b93e\",\n      \"8b5d3998-d7e2-4b9e-91d1-17c19cd089f5\",\n      \"44b0284c-f360-4312-a17d-d601651cb0ea\"\n    ],\n    \"specialty\": {\n      \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n      \"taxonomy_code\": \"string\",\n      \"board_specialty\": \"Family Medicine\",\n      \"board_sub_specialty\": \"string\",\n      \"non_md_specialty\": \"string\",\n      \"non_md_sub_specialty\": \"None\",\n      \"provider_name\": \"Family Medicine Doctor\",\n      \"colloquial\": \"string\",\n      \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n      \"taxonomy_2\": \"Family Medicine\",\n      \"taxonomy_3\": \"string\",\n      \"display\": \"Family Medicine\",\n      \"provider_type\": \"Doctor\",\n      \"is_primary\": true\n    },\n    \"address\": \"2074 23rd Ave, San Francisco, CA 94116\",\n    \"location\": \"37.7489816,-122.4802092\",\n    \"distance\": 10,\n    \"fields\": [\n      \"matched_location\",\n      \"npi\"\n    ],\n    \"_excl_fields\": [\n      \"insurances\",\n      \"age\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9dfc8efe-712c-4040-9a01-6f381997a0ce",
+              "name": "The given search was not valid. It combined parameters that may not be combined, or did not specify a procedure in any way, or the specified procedure could not be found, etc.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "procedure_id",
+                      "value": "7ad7c4ef-baf9-4789-8e58-51d2308a1143"
+                    },
+                    {
+                      "key": "procedure",
+                      "value": "MRI, thoracic spine"
+                    },
+                    {
+                      "key": "procedure_code",
+                      "value": "73720"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "25"
+                    },
+                    {
+                      "key": "plan_id",
+                      "value": "81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902"
+                    },
+                    {
+                      "key": "specialty_ids",
+                      "value": "fcc9a22c-7a0f-4405-b0c9-c5f8ad83b93e,8b5d3998-d7e2-4b9e-91d1-17c19cd089f5,44b0284c-f360-4312-a17d-d601651cb0ea"
+                    },
+                    {
+                      "key": "specialty",
+                      "value": "gastroenterology"
+                    },
+                    {
+                      "key": "address",
+                      "value": "2074 23rd Ave, San Francisco, CA 94116"
+                    },
+                    {
+                      "key": "location",
+                      "value": "37.7489816,-122.4802092"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "matched_location,npi"
+                    },
+                    {
+                      "key": "_excl_fields",
+                      "value": "insurances,age"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"invalid_query_params\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3da41251-bd8e-4e11-87c9-77c931aec2d0",
+          "name": "getPricingProviderProcedures",
+          "request": {
+            "name": "getPricingProviderProcedures",
+            "description": {
+              "content": "Fetch the list of procedures that a single provider performs, with the lowest available negotiated rates specific to a given insurance for each procedure.\n\n#### Example Use Case\nFor a given provider, search the full list of procedures that they are likely to perform where there are negotiated rates available for a particular insurance, and return the minimum price for each procedure.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing",
+                "providers",
+                ":npi",
+                "procedures"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "plan_id",
+                  "value": "<uuid>",
+                  "description": "Search for negotiated rates for the insurance plan with this UUID."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "The page of the results which was returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "How many results are in each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "npi",
+                  "description": "(Required) The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bdbfa895-32a2-4e77-9566-9af04b175883",
+              "name": "Returns the procedures for the given provider for which we have price data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "providers",
+                    ":npi",
+                    "procedures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "plan_id",
+                      "value": "81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "15"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "npi",
+                      "description": "(Required) The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"uuid\": \"7ad7c4ef-baf9-4789-8e58-51d2308a1143\",\n      \"display\": \"MRI, leg\",\n      \"min_cost\": 9389.911415712231\n    },\n    {\n      \"uuid\": \"7ad7c4ef-baf9-4789-8e58-51d2308a1143\",\n      \"display\": \"MRI, leg\",\n      \"min_cost\": 7843.645365766823\n    }\n  ],\n  \"parameters\": {\n    \"page\": 1,\n    \"page_size\": 25,\n    \"insurance\": {\n      \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n      \"display\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23886140-d7c9-41ff-8446-31303ff1a10c",
+              "name": "The given search was not valid. The given insurance could not be found, etc.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "providers",
+                    ":npi",
+                    "procedures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "plan_id",
+                      "value": "81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "15"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "npi",
+                      "description": "(Required) The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"invalid_query_params\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1f06788-5158-4585-8948-ba97a5901fee",
+              "name": "The given NPI cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "providers",
+                    ":npi",
+                    "procedures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "plan_id",
+                      "value": "81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "15"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "npi",
+                      "description": "(Required) The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4d0142f-7c9b-4557-8193-58267b01b4b3",
+          "name": "getPricingProviderProcedure",
+          "request": {
+            "name": "getPricingProviderProcedure",
+            "description": {
+              "content": "Find the prices offered by a single provider for a specific procedure, with a given insurance, across practice locations.\n\n#### Example Use Case\nCompare insurance-specific price estimates of a Leg MRI for a single provider at multiple relevant practices (e.g., compare this provider's rates when performing the procedure at both the provider's private outpatient facility, as well as a nearby hospital system clinic where they also practice).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing",
+                "providers",
+                ":npi",
+                "procedures",
+                ":procedure_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "plan_id",
+                  "value": "<uuid>",
+                  "description": "Search for negotiated rates for the insurance plan with this UUID."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "The page of the results which was returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "How many results are in each page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "npi",
+                  "description": "(Required) The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "procedure_uuid",
+                  "description": "(Required) The UUID of the target procedure. If the target procedure is a procedure bundle but we do not have any data for it, we will return data for its anchor procedure instead."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67e39a60-0c63-4ff4-a8ca-2744af2c7eea",
+              "name": "Returns costs for the given procedure with the given provider at each location",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "providers",
+                    ":npi",
+                    "procedures",
+                    ":procedure_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "plan_id",
+                      "value": "81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "15"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "npi",
+                      "description": "(Required) The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "procedure_uuid",
+                      "description": "(Required) The UUID of the target procedure. If the target procedure is a procedure bundle but we do not have any data for it, we will return data for its anchor procedure instead."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"locations\": [\n    {\n      \"uuid\": \"7ad7c4ef-baf9-4789-8e58-51d2308a1143\",\n      \"costs\": {\n        \"min\": 239,\n        \"avg\": 520.535,\n        \"max\": 714.93,\n        \"is_bundle\": true,\n        \"outpatient\": {},\n        \"inpatient\": {}\n      }\n    },\n    {\n      \"uuid\": \"7ad7c4ef-baf9-4789-8e58-51d2308a1143\",\n      \"costs\": {\n        \"min\": 239,\n        \"avg\": 520.535,\n        \"max\": 714.93,\n        \"is_bundle\": true,\n        \"outpatient\": {},\n        \"inpatient\": {}\n      }\n    }\n  ],\n  \"parameters\": {\n    \"page\": 1,\n    \"page_size\": 25,\n    \"insurance\": {\n      \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n      \"display\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef582d70-82e7-41ca-bbbe-5ba1032c4ef7",
+              "name": "The given search was not valid. The given insurance could not be found, etc.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "providers",
+                    ":npi",
+                    "procedures",
+                    ":procedure_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "plan_id",
+                      "value": "81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "15"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "npi",
+                      "description": "(Required) The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "procedure_uuid",
+                      "description": "(Required) The UUID of the target procedure. If the target procedure is a procedure bundle but we do not have any data for it, we will return data for its anchor procedure instead."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"invalid_query_params\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d50aa83b-602d-452b-b923-4503b20e9b79",
+              "name": "The given NPI cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "providers",
+                    ":npi",
+                    "procedures",
+                    ":procedure_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "plan_id",
+                      "value": "81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "15"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "npi",
+                      "description": "(Required) The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "procedure_uuid",
+                      "description": "(Required) The UUID of the target procedure. If the target procedure is a procedure bundle but we do not have any data for it, we will return data for its anchor procedure instead."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6ff47c7-e875-47c0-9caa-546c0132c805",
+          "name": "getPricingProviderProcedureLocation",
+          "request": {
+            "name": "getPricingProviderProcedureLocation",
+            "description": {
+              "content": "Search for a price estimate for a specific procedure from a specific provider at a specific location, with a given insurance plan.\n\n#### Example Use Case\nGiven an insurance, identify the expected price of a particular procedure from a specific provider at a known facility.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing",
+                "providers",
+                ":npi",
+                "procedures",
+                ":procedure_uuid",
+                "locations",
+                ":location_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "plan_id",
+                  "value": "<uuid>",
+                  "description": "Search for negotiated rates for the insurance plan with this UUID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "npi",
+                  "description": "(Required) The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "procedure_uuid",
+                  "description": "(Required) The UUID of the target procedure. If the target procedure is a procedure bundle but we do not have any data for it, we will return data for its anchor procedure instead."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "location_uuid",
+                  "description": "(Required) The UUID of the target location."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2847f182-666c-420c-a0c4-b160715b3e36",
+              "name": "Returns the costs associated with the given provider, procedure, and location",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "providers",
+                    ":npi",
+                    "procedures",
+                    ":procedure_uuid",
+                    "locations",
+                    ":location_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "plan_id",
+                      "value": "81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "npi",
+                      "description": "(Required) The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "procedure_uuid",
+                      "description": "(Required) The UUID of the target procedure. If the target procedure is a procedure bundle but we do not have any data for it, we will return data for its anchor procedure instead."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"costs\": {\n      \"min\": 239,\n      \"avg\": 520.535,\n      \"max\": 714.93,\n      \"is_bundle\": true,\n      \"outpatient\": {},\n      \"inpatient\": {}\n    }\n  },\n  \"parameters\": {\n    \"insurance\": {\n      \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n      \"carrier_association\": \"Aetna\",\n      \"carrier_brand\": \"Aetna\",\n      \"carrier_name\": \"Aetna\",\n      \"state\": \"NY\",\n      \"plan_name\": \"Aetna HealthFund Open Choice\",\n      \"plan_type\": \"PPO\",\n      \"metal_level\": \"string\",\n      \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n      \"network\": \"string\",\n      \"confidence\": 4,\n      \"category\": \"string\",\n      \"codes\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f6f1701-3b43-450f-99ad-a43db9910796",
+              "name": "The given search was not valid. The given insurance could not be found, etc.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "providers",
+                    ":npi",
+                    "procedures",
+                    ":procedure_uuid",
+                    "locations",
+                    ":location_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "plan_id",
+                      "value": "81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "npi",
+                      "description": "(Required) The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "procedure_uuid",
+                      "description": "(Required) The UUID of the target procedure. If the target procedure is a procedure bundle but we do not have any data for it, we will return data for its anchor procedure instead."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"invalid_query_params\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae47b69f-3738-41b7-a2d8-a814a01564d5",
+              "name": "The given NPI cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "providers",
+                    ":npi",
+                    "procedures",
+                    ":procedure_uuid",
+                    "locations",
+                    ":location_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "plan_id",
+                      "value": "81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "npi",
+                      "description": "(Required) The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "procedure_uuid",
+                      "description": "(Required) The UUID of the target procedure. If the target procedure is a procedure bundle but we do not have any data for it, we will return data for its anchor procedure instead."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd13368e-78db-46b3-9952-61e1dab8d1d0",
+          "name": "getPricingCarriers",
+          "request": {
+            "name": "getPricingCarriers",
+            "description": {
+              "content": "This endpoint will show the carriers for which we have data. This can be used to fetch the recency of the data used per carrier.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing",
+                "carriers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6a4b45dd-3e0e-444d-9677-b83c834d9d42",
+              "name": "Returns all carriers we have price data for",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "carriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"uuid\": \"ef704f14-c906-4857-acd4-d811f1394c32\",\n      \"name\": \"Aetna\",\n      \"last_updated\": \"2023-01\"\n    },\n    {\n      \"uuid\": \"ef704f14-c906-4857-acd4-d811f1394c32\",\n      \"name\": \"Aetna\",\n      \"last_updated\": \"2023-01\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67463ef9-c9cb-43c6-ab61-4d347cd1b01e",
+          "name": "getPricingCarrier",
+          "request": {
+            "name": "getPricingCarrier",
+            "description": {
+              "content": "Fetch metadata including the recency of the pricing data used for a specific carrier.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing",
+                "carrier",
+                ":carrier_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "carrier_uuid",
+                  "description": "(Required) The UUID of the insurance carrier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b193595-6ccf-40cd-8401-f9d48b13850a",
+              "name": "Returns metadata for the given carrier",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "carrier",
+                    ":carrier_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "carrier_uuid",
+                      "description": "(Required) The UUID of the insurance carrier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"ef704f14-c906-4857-acd4-d811f1394c32\",\n  \"name\": \"Aetna\",\n  \"last_updated\": \"2023-01\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8194ecf7-5a73-46e4-a28c-82b9eefa4477",
+              "name": "The given carrier cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "carrier",
+                    ":carrier_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "carrier_uuid",
+                      "description": "(Required) The UUID of the insurance carrier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ab98eb7-46c2-425f-bc1e-32e6fa925783",
+          "name": "getPricingCarrierNames",
+          "request": {
+            "name": "getPricingCarrierNames",
+            "description": {
+              "content": "This endpoint will the names of the carriers for which we have data. This can be used to fetch the recency of the data used per carrier.\n\nThis endpoint is deprecated. Please use [List Carriers](./getpricingcarriers) instead.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing",
+                "version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f404e382-8cbf-4bdd-a340-dbf53e50b69a",
+              "name": "Returns all carriers we have price data for",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carriers\": [\n    \"Aetna\",\n    \"Cigna\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d86829ba-1e88-4d81-a2dd-254fc30206d2",
+          "name": "getPricingVersionCarrier",
+          "request": {
+            "name": "getPricingVersionCarrier",
+            "description": {
+              "content": "Fetch the recency of the pricing data used for a specific carrier by name.\n\nThis endpoint is deprecated. Please use [Get Carrier](./getpricingcarrier) instead.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing",
+                "version",
+                ":carrier_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "carrier_name",
+                  "description": "(Required) The name of the insurance carrier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e191385c-84ff-4d81-bfa1-01193b8ae40f",
+              "name": "Returns the recency for the given carrier",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "version",
+                    ":carrier_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "carrier_name",
+                      "description": "(Required) The name of the insurance carrier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"last_updated\": \"2023-01\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df0878af-41a3-492e-9eaa-a7ce978529af",
+              "name": "The given carrier cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "version",
+                    ":carrier_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "carrier_name",
+                      "description": "(Required) The name of the insurance carrier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ribbonhealth.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "48e52d7d-444d-4ac0-a474-60897828167d",
+    "name": "ribbon-health Cost Estimates Price Transparency API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.\n",
+      "type": "text/plain"
+    }
+  }
+}

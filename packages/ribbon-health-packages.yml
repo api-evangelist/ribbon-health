@@ -1,0 +1,79 @@
+generated: '2026-08-14'
+method: searched
+source: >-
+  npm registry search + registry.npmjs.org, pypi.org, crates.io, hex.pm, GitHub code search, and
+  the H1 API docs (https://ribbon.readme.io/llms.txt)
+summary: >-
+  Ribbon Health / H1 publishes NO first-party client library in any registry. Three community
+  clients exist, one of which is published to crates.io and self-describes as unofficial. No
+  `SDKs` pointer is emitted for this provider — sdk_count is a genuine zero, not a missing
+  pointer.
+official_sdk_count: 0
+package_count: 3
+registries_searched:
+  - registry: npm
+    result: no first-party package; `ribbon-health`, `ribbonhealth`, `@ribbonhealth/sdk` all 404
+  - registry: pypi
+    result: no first-party package; `ribbon-health`, `ribbonhealth`, `ribbon-api` all 404
+  - registry: crates.io
+    result: one community crate, `ribbon-health` (see below)
+  - registry: hex.pm
+    result: no package; `ribbonex` 404 — the Elixir client is GitHub-only, never published
+  - registry: rubygems / packagist / nuget / maven / pkg.go.dev
+    result: no package found
+docs_evidence: >-
+  The H1 API documentation index (llms.txt, 122 pages) contains no SDK, client-library, or
+  quickstart-install page. The published integration path is raw HTTP with a bearer token, and
+  the docs recommend Postman for exploration rather than a client library.
+packages:
+  - language: rust
+    registry: crates.io
+    name: ribbon-health
+    url: https://crates.io/crates/ribbon-health
+    install: cargo add ribbon-health
+    repository: https://github.com/nikothomas/ribbon-health
+    official: false
+    version: 2.7.1
+    published: '2025-10-03'
+    downloads: 9455
+    note: >-
+      Community client by an individual maintainer (nikothomas). The crate's own description on
+      crates.io begins "Unofficial Rust client for the Ribbon Health API". Currency read from
+      https://crates.io/api/v1/crates/ribbon-health on 2026-08-14. This repository's apis.yml
+      previously carried this GitHub repo under a `GitHub` pointer as though it were H1's own
+      organization; that pointer was corrected in this pass to the verified H1 org
+      (https://github.com/h1insights) and the client moved here.
+  - language: elixir
+    registry: null
+    name: ribbonex
+    url: https://github.com/aristamd/ribbonex
+    install: '{:ribbonex, github: "aristamd/ribbonex"}'
+    repository: https://github.com/aristamd/ribbonex
+    official: false
+    version: null
+    published: null
+    note: >-
+      Community client published by AristaMD (an H1/Ribbon customer), source-only. Never released
+      to hex.pm — https://hex.pm/api/packages/ribbonex returns 404 — so there is no registry
+      metadata endpoint to read a version or release date from. Last commit to the default branch
+      2026-02-21. version/published recorded as null because they were checked and do not exist,
+      not because they were skipped.
+  - language: typescript
+    registry: null
+    name: ribbon-health (join-arlo)
+    url: https://github.com/join-arlo/ribbon-health
+    install: 'npm install github:join-arlo/ribbon-health'
+    repository: https://github.com/join-arlo/ribbon-health
+    official: false
+    version: null
+    published: null
+    note: >-
+      Community TypeScript client by Arlo. Not published to npm (no matching package in the npm
+      registry), so no version metadata endpoint exists. Repository last pushed 2023-08-04 —
+      roughly three years stale against an API that has since shipped an entire Price Transparency
+      v2 surface, so this client cannot cover the current contract.
+abandonment_signal: >-
+  The only registry-published client (crates.io ribbon-health 2.7.1, 2025-10-03) predates the
+  Price Transparency v2 endpoints documented in the provider's own llms.txt and confirmed live on
+  api.ribbonhealth.com/v2/* in this pass. No community client covers v2, and the provider ships
+  none. An integrator's only current option is hand-rolled HTTP.

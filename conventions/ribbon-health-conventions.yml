@@ -1,0 +1,175 @@
+generated: '2026-08-14'
+method: searched
+source: >-
+  https://ribbon.readme.io/llms.txt + https://ribbon.readme.io/docs/authentication.md +
+  https://ribbon.readme.io/docs/latency.md +
+  https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api.md + live unauthenticated probes
+  of https://api.ribbonhealth.com (2026-08-14) + openapi/ribbon-health-*-openapi.yml
+summary: >-
+  Cross-cutting request/response semantics for the H1 API (formerly the Ribbon Health API).
+  Bearer-token auth, page/page_size pagination, an explicit field-selection contract, an
+  asynchronous-write flag, a per-response request id header, and a consistent nested error
+  envelope. Idempotency is NOT part of the contract and no Idempotency pointer is emitted.
+authentication:
+  style: bearer_token
+  header: 'Authorization: Bearer {customer_token}'
+  scheme_name: BearerAuth
+  docs: https://ribbon.readme.io/docs/authentication
+  oauth2: false
+  see: authentication/ribbon-health-authentication.yml
+  notes: >-
+    A single long-lived customer API key. No OAuth, no scopes, no key rotation endpoint and no
+    separate test key documented — which is why scopes/ and sandbox/ are absent from this repo
+    rather than empty.
+base_url:
+  production: https://api.ribbonhealth.com/v1
+  price_transparency_v2: https://api.ribbonhealth.com/v2
+  note: >-
+    v1 is the base for the whole documented surface. A second, newer /v2 namespace exists for
+    Price Transparency only; it was confirmed live in this pass but is not covered by any OpenAPI
+    the provider publishes.
+versioning:
+  scheme: uri-path
+  current: v1
+  docs_version: '2.2'
+  additional_namespace: v2 (Price Transparency only)
+  notes: >-
+    Two version axes that do not line up. The URI path carries v1 (and now v2 for pricing), while
+    the documentation is versioned separately as v2.2 — every canonical docs link is of the form
+    https://ribbon.readme.io/v2.2/reference/<operationId>. An agent resolving "v2" from the docs
+    version would call the wrong namespace.
+pagination:
+  style: page-number
+  params:
+    - name: page
+      description: 1-indexed page number.
+    - name: page_size
+      description: Records per page. Default 25.
+  default_page_size: 25
+  envelopes_divergent: true
+  envelopes:
+    - name: custom-directory envelope
+      fields: [parameters, data]
+      used_by: >-
+        /v1/custom/providers, /v1/custom/locations, /v1/custom/organizations,
+        /v1/network_analysis, /v1/pricing/providers, /v1/procedure_cost_estimate
+      evidence: json-schema/getcustomproviders.json, getcustomlocations.json, getorganizations.json
+    - name: reference-endpoint envelope
+      fields: [count, next, previous, results]
+      used_by: /v1/insurances, /v1/specialties, /v1/custom/conditions
+      evidence: json-schema/getinsurances.json, getspecialties.json, getconditions.json
+      note: >-
+        A Django-REST-Framework style cursor envelope with next/previous URLs — a completely
+        different pagination contract from the custom-directory endpoints in the same API.
+    - name: price-transparency v2 envelope
+      fields: [parameters, total_count, page, page_size, data]
+      used_by: all /v2/* Price Transparency endpoints
+      evidence: >-
+        https://ribbon.readme.io/llms.txt — "All Price Transparency v2 endpoints share the same
+        response envelope: parameters, total_count, page, page_size, and data."
+  divergence_warning: >-
+    THREE different list envelopes coexist in one API. A generic paginator written against
+    /v1/custom/providers (parameters + data) will silently read zero rows from /v1/insurances
+    (count + results), and neither matches the v2 envelope. This is the single most likely
+    integration failure in the API and it is documented nowhere — it was found by comparing the
+    derived JSON Schemas against the v2 docs.
+  guidance: >-
+    The provider's own latency guidance recommends keeping page_size at the default of 25 rather
+    than raising it — larger pages measurably increase response time on the search endpoints.
+  docs: https://ribbon.readme.io/docs/latency
+field_selection:
+  supported: true
+  params:
+    - name: fields
+      description: Allow-list of response fields to include.
+    - name: _excl_fields
+      description: Deny-list of response fields to exclude.
+  docs: https://ribbon.readme.io/docs/includeexclude-fields
+  guidance: >-
+    Documented as the primary latency lever alongside page_size. The number of fields returned is
+    one of the three factors the provider names as driving request latency.
+asynchronous_writes:
+  supported: true
+  param: async
+  values: ['true']
+  scope: edit/write operations on the custom directory surface
+  docs: https://ribbon.readme.io/docs/latency
+  notes: >-
+    'Applying `async=true` on an edit applies it asynchronously. This is a latency optimization,
+    not a job API: no job id, no status endpoint and no completion webhook is documented, so a
+    caller has no published way to confirm an async edit landed.'
+idempotency:
+  documented: false
+  header: null
+  notes: >-
+    No idempotency-key mechanism appears anywhere. Zero matches for "idempoten" across the
+    provider's 122-page documentation index (llms.txt) and zero across all ten OpenAPI documents
+    in this repo. NO `Idempotency` pointer is emitted for this provider — the agent-readiness
+    idempotency dimension is a genuine zero, not a missing pointer.
+  agent_risk: >-
+    The custom-directory write surface is largely PUT (add/remove provider locations, specialties,
+    insurances, clinical areas), which is naturally idempotent by HTTP semantics. The exceptions
+    are the POST creates — POST /custom/locations, /custom/insurances, /custom/specialties,
+    /custom/provider_types, /custom/location_types — where a retry after a timeout will create a
+    duplicate record. The API does return HTTP 409 with "object with given fields already exists"
+    on some create paths, which is the closest thing to a replay guard on offer, but it is
+    field-uniqueness enforcement, not idempotency.
+request_tracing:
+  supported: true
+  method: probed
+  headers:
+    - name: ribbon-request-id
+      note: >-
+        A 32-character hex identifier returned on EVERY response including unauthenticated 401s
+        and 404s (observed values e.g. 798172ea1c514bf0afc06b9a8f175d42 on 2026-08-14). This is
+        the identifier to quote to support. It is not documented anywhere in the published docs —
+        it was found by probing.
+  source: 'HTTP response headers on https://api.ribbonhealth.com/v1/insurances (401), 2026-08-14'
+error_envelope:
+  format: custom-nested-json
+  rfc9457: false
+  content_type: application/json
+  shape: '{"error": {"status": <int>, "code": "<snake_case_code>", "message": "<human message>"}}'
+  method: probed
+  observed:
+    - status: 401
+      code: not_authenticated
+      message: Authentication credentials were not provided.
+    - status: 401
+      code: authentication_failed
+      message: Invalid token.
+    - status: 404
+      code: not_found
+      message: resource not found
+  notes: >-
+    The `status` integer is duplicated inside the body as well as carried on the HTTP response.
+    Content type is application/json, NOT application/problem+json, and there is no `type` URI —
+    so this is a house error envelope, not RFC 9457. See errors/ribbon-health-problem-types.yml.
+rate_limit_signaling:
+  documented_limits: true
+  response_headers: none_observed
+  method: probed
+  status_on_exhaustion: 429
+  error_code_on_exhaustion: rate_limit_exceeded
+  notes: >-
+    Limits are published per endpoint (see rate-limits/ribbon-health-rate-limits.yml) but the API
+    returns NO runtime rate-limit signal. No X-RateLimit-*, no RateLimit-*, no Retry-After was
+    present on any observed response from api.ribbonhealth.com on 2026-08-14. An agent cannot
+    discover its remaining budget; it can only count its own calls against the documented number
+    or wait to be 429d.
+http_semantics:
+  method: probed
+  allow_header: >-
+    The API returns a correct `Allow` header per resource (e.g. "OPTIONS, POST, GET" on
+    /v1/insurances, "GET, HEAD, OPTIONS" on the root), so per-resource method discovery works
+    without the spec.
+  vary: 'Accept'
+  x_frame_options: SAMEORIGIN
+  server: nginx/1.18.0
+cross_links:
+  authentication: authentication/ribbon-health-authentication.yml
+  errors: errors/ribbon-health-problem-types.yml
+  lifecycle: lifecycle/ribbon-health-lifecycle.yml
+  rate_limits: rate-limits/ribbon-health-rate-limits.yml
+  data_model: data-model/ribbon-health-data-model.yml
+  conformance: conformance/ribbon-health-conformance.yml

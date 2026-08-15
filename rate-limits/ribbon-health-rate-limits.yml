@@ -1,62 +1,106 @@
+generated: '2026-08-14'
+method: searched
+source: https://ribbon.readme.io/docs/rate-limits
+docs: https://ribbon.readme.io/docs/rate-limits
+docs_last_updated: '2025-09-18'
+verified: '2026-08-14'
 specificationVersion: "0.1"
 id: ribbon-health-rate-limits
 name: Ribbon Health API Rate Limits
+limit_count: 9
 description: >
-  The H1 API (Ribbon Health) enforces per-endpoint rate limits. Exceeding these
-  limits returns a 429 Too Many Requests error with a rate_limit_exceeded code.
-  Most search and list endpoints are capped at 1,000 requests per minute; single
-  resource lookups by NPI or UUID allow 5,000 requests per minute. The deductible
-  eligibility endpoint has a stricter hourly quota.
+  The H1 API (formerly the Ribbon Health API) publishes a per-endpoint rate-limit table. Most
+  search and list endpoints are capped at 1,000 calls per minute; single-resource lookups by NPI
+  or UUID allow 5,000 calls per minute; the deductible eligibility endpoint has a stricter hourly
+  quota. Exceeding a limit returns HTTP 429 with the code `rate_limit_exceeded`.
+runtime_signal:
+  response_headers: none
+  method: probed
+  checked: '2026-08-14'
+  observed_headers: [date, content-type, content-length, server, vary, allow, x-frame-options, ribbon-request-id]
+  note: >-
+    THE LIMITS ARE PUBLISHED BUT NOT SIGNALLED. No X-RateLimit-*, no RateLimit-* (RFC 9331 style)
+    and no Retry-After header was present on any response observed from api.ribbonhealth.com on
+    2026-08-14. A client cannot discover its remaining budget at runtime; it can only count its
+    own calls against the table below, or wait to be 429d. This is the difference between a
+    documented number and an agent-usable signal.
+  status_on_exhaustion: 429
+  error_code_on_exhaustion: rate_limit_exceeded
+  error_envelope: '{"error": {"status": 429, "code": "rate_limit_exceeded", "message": "..."}}'
 limits:
-  - endpoint: GET /v1/custom/providers
+  - endpoint: v1/custom/providers
     description: Provider search / list
     limit: 1000
     period: minute
     errorCode: rate_limit_exceeded
     httpStatus: 429
-  - endpoint: GET /v1/custom/providers/{npi}
+  - endpoint: v1/custom/providers/{npi}
     description: Single provider lookup by NPI
     limit: 5000
     period: minute
     errorCode: rate_limit_exceeded
     httpStatus: 429
-  - endpoint: GET /v1/custom/locations
+  - endpoint: v1/custom/locations
     description: Location search / list
     limit: 1000
     period: minute
     errorCode: rate_limit_exceeded
     httpStatus: 429
-  - endpoint: GET /v1/custom/locations/{uuid}
+  - endpoint: v1/custom/locations/{uuid}
     description: Single location lookup by UUID
     limit: 5000
     period: minute
     errorCode: rate_limit_exceeded
     httpStatus: 429
-  - endpoint: GET /v1/insurances
+  - endpoint: v1/insurances
     description: Insurance list
     limit: 1000
     period: minute
     errorCode: rate_limit_exceeded
     httpStatus: 429
-  - endpoint: GET /v1/specialties
+  - endpoint: v1/specialties
     description: Specialties list
     limit: 1000
     period: minute
     errorCode: rate_limit_exceeded
     httpStatus: 429
-  - endpoint: GET /v1/conditions
+  - endpoint: v1/conditions
     description: Conditions list
     limit: 1000
     period: minute
     errorCode: rate_limit_exceeded
     httpStatus: 429
-  - endpoint: GET /v1/eligibility/deductible
+  - endpoint: v1/deductible
     description: Member deductible eligibility check
     limit: 1000
     period: hour
     errorCode: rate_limit_exceeded
     httpStatus: 429
+    correction: >-
+      CORRECTED 2026-08-14. The previous round recorded this endpoint as
+      `v1/eligibility/deductible`. The provider's published table names it `v1/deductible`.
+  - endpoint: /v2/procedures and the Price Transparency v2 surface
+    description: Price Transparency v2 endpoints
+    limit: 1000
+    period: minute
+    errorCode: rate_limit_exceeded
+    httpStatus: 429
+    source: https://ribbon.readme.io/reference/getv2procedures
+    note: >-
+      Not in the rate-limits table; stated inline in the v2 endpoint documentation ("Rate limited
+      to 1,000 requests per minute"). The published table has not been updated since 2025-09-18
+      and predates the entire v2 surface.
+coverage_gaps:
+  - >-
+    The table covers 8 endpoints out of ~69 documented operations. Every write operation
+    (the ~30 PUT/POST/DELETE custom-directory calls), the whole /v1/pricing/* surface, network
+    analysis, organizations, TINs, procedures, clinical areas and the procedure cost estimate
+    have no published limit.
+  - >-
+    The rate-limits page is NOT listed in the provider's own llms.txt documentation index, even
+    though llms.txt claims to be the complete index. An agent that trusts llms.txt to enumerate
+    the docs will never find the rate limits. Found by direct probe of
+    https://ribbon.readme.io/docs/rate-limits.md (HTTP 200).
 notes: >
-  Rate limit thresholds are as documented in ribbon.readme.io/docs/rate-limits
-  for API version 2.2. Limits may be adjusted per customer contract. Contact
-  Ribbon Health / H1 support at support@ribbonhealth.com for rate limit increases.
+  Limits may be adjusted per customer contract. Support contact is support@h1.co (the live API
+  401 body still returns the legacy team@ribbonhealth.com).

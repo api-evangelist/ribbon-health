@@ -1,0 +1,129 @@
+# H1 API Docs Documentation
+
+> The H1 API provides healthcare enterprises with accurate data on doctors, insurance plans, and costs of care. Our mission is to simplify healthcare.
+
+## Guides
+- [Getting Started](https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api.md)
+- [Authentication](https://ribbon.readme.io/docs/authentication.md)
+- [H1 Products](https://ribbon.readme.io/docs/ribbon-products.md)
+- [H1 Directory](https://ribbon.readme.io/docs/ribbon-directory.md)
+- [Confidence Scores](https://ribbon.readme.io/docs/confidence-scores.md)
+- [NPI (National Provider Identifier)](https://ribbon.readme.io/docs/npi-national-provider-identifier.md)
+- [Networks](https://ribbon.readme.io/docs/insurances.md)
+- [Focus Areas](https://ribbon.readme.io/docs/focus-areas.md)
+- [Eligibility](https://ribbon.readme.io/docs/eligibility.md)
+- [Cost & Quality](https://ribbon.readme.io/docs/cost-quality.md): Aggregate measures of cost efficiency and outcomes quality at the provider level.
+- [Specialties](https://ribbon.readme.io/docs/specialties.md)
+- [Organizations](https://ribbon.readme.io/docs/organizations-1.md)
+- [Procedures](https://ribbon.readme.io/docs/procedures.md)
+- [Location Types](https://ribbon.readme.io/docs/location-types.md)
+- [TINs](https://ribbon.readme.io/docs/tins.md)
+- [Introduction](https://ribbon.readme.io/docs/introduction.md)
+- [Provider Search](https://ribbon.readme.io/docs/provider-search.md)
+- [Provider Search Basics](https://ribbon.readme.io/docs/provider-search-basics.md)
+- [Search for Specialties](https://ribbon.readme.io/docs/search-for-specialties.md)
+- [Search for In-Network Providers](https://ribbon.readme.io/docs/search-networks.md)
+- [Find a Specific Provider](https://ribbon.readme.io/docs/find-a-specific-provider.md)
+- [Search for Procedures](https://ribbon.readme.io/docs/search-for-procedures.md)
+- [Search by Organization (Providers)](https://ribbon.readme.io/docs/search-for-providers-by-organization.md)
+- [Location Search](https://ribbon.readme.io/docs/location-search.md)
+- [Location Search Basics](https://ribbon.readme.io/docs/location-search-basics.md)
+- [Search for Location Types](https://ribbon.readme.io/docs/search-for-location-types.md)
+- [Search by Organization (Locations)](https://ribbon.readme.io/docs/search-for-organizations-1.md)
+- [Cost & Quality Search](https://ribbon.readme.io/docs/search-for-high-quality-providers.md)
+- [Aggregate Cost/Quality Scores](https://ribbon.readme.io/docs/aggregate-costquality-scores.md)
+- [Network Data](https://ribbon.readme.io/docs/network-data.md)
+- [User Dropdown](https://ribbon.readme.io/docs/user-dropdown.md)
+- [Network Mapping](https://ribbon.readme.io/docs/network-mapping.md)
+- [Filtering/Ranking](https://ribbon.readme.io/docs/filteringranking.md)
+- [Create a Boost Filter](https://ribbon.readme.io/docs/create-a-boost-filter.md)
+- [Create a Custom Filter](https://ribbon.readme.io/docs/create-a-custom-filter.md)
+- [Using Weighted Custom Filters](https://ribbon.readme.io/docs/using-weighted-custom-filters.md)
+- [Eligibility Check](https://ribbon.readme.io/docs/eligibility-check.md)
+- [Latency](https://ribbon.readme.io/docs/latency.md)
+- [Include/Exclude Fields from API Response](https://ribbon.readme.io/docs/includeexclude-fields.md)
+
+## API Reference
+- [Network Analysis Based on Geography](https://ribbon.readme.io/reference/getnetworkanalysis.md): View a provider network across different geographies (i.e. counties).  #### Example Use Case In looking to expand to a new region, analyze existing provider networks in the region to understand how best to construct your own.
+- [Provider Price Search](https://ribbon.readme.io/reference/getpricingproviders.md): Search for providers that perform a given procedure and find the lowest insurance-specific price for a procedure in your area.  #### Example Use Case Search for all applicable provider negotiated rates, given a specific insurance and procedure (and optionally, a specific location/address and distance). For example, search for all providers near me who perform Leg MRIs and who take a given insurance, sorted by lowest price.
+- [Provider Procedures](https://ribbon.readme.io/reference/getpricingproviderprocedures.md): Fetch the list of procedures that a single provider performs, with the lowest available negotiated rates specific to a given insurance for each procedure.  #### Example Use Case For a given provider, search the full list of procedures that they are likely to perform where there are negotiated rates available for a particular insurance, and return the minimum price for each procedure.
+- [Provider Procedure Pricing](https://ribbon.readme.io/reference/getpricingproviderprocedure.md): Find the prices offered by a single provider for a specific procedure, with a given insurance, across practice locations.  #### Example Use Case Compare insurance-specific price estimates of a Leg MRI for a single provider at multiple relevant practices (e.g., compare this provider's rates when performing the procedure at both the provider's private outpatient facility, as well as a nearby hospital system clinic where they also practice).
+- [Provider Location Procedure Pricing](https://ribbon.readme.io/reference/getpricingproviderprocedurelocation.md): Search for a price estimate for a specific procedure from a specific provider at a specific location, with a given insurance plan.  #### Example Use Case Given an insurance, identify the expected price of a particular procedure from a specific provider at a known facility.
+- [List Carriers](https://ribbon.readme.io/reference/getpricingcarriers.md): This endpoint will show the carriers for which we have data. This can be used to fetch the recency of the data used per carrier.
+- [Get Carrier](https://ribbon.readme.io/reference/getpricingcarrier.md): Fetch metadata including the recency of the pricing data used for a specific carrier.
+- [Carrier Names](https://ribbon.readme.io/reference/getpricingcarriernames.md): This endpoint will the names of the carriers for which we have data. This can be used to fetch the recency of the data used per carrier.  This endpoint is deprecated. Please use [List Carriers](./getpricingcarriers) instead.
+- [Carrier Data Versions By Name](https://ribbon.readme.io/reference/getpricingversioncarrier.md): Fetch the recency of the pricing data used for a specific carrier by name.  This endpoint is deprecated. Please use [Get Carrier](./getpricingcarrier) instead.
+- [List Procedures (v2)](https://ribbon.readme.io/reference/getv2procedures.md): Browse or search the Price Transparency v2 procedure code dictionary.  Use this to resolve a CPT (or other) code before pricing lookups, or to discover which care clusters a procedure belongs to. This endpoint does **not** return dollar amounts.  #### Example Use Case Look up CPT `27447` to confirm its description and see that it belongs to the `JOINT_REPLACEMENT` care cluster before calling a pricing endpoint.  #### Notes - Requires Price Transparency access (`doctors.can_price_transparency`). - Rate limited to 1,000 requests per minute. - All Price Transparency v2 endpoints share the same response envelope:   `parameters`, `total_count`, `page`, `page_size`, and `data`.
+- [List Care Clusters (v2)](https://ribbon.readme.io/reference/getv2careclusters.md): Browse care cluster definitions and the procedures each cluster includes.  A care cluster is a curated group of related procedures that together represent a care episode (for example joint replacement). Use this dictionary before querying bundle prices.  #### Example Use Case Search for clusters matching `"joint"` to find `JOINT_REPLACEMENT` and see which CPT codes are expected in that bundle.
+- [List Carriers (v2)](https://ribbon.readme.io/reference/getv2carriers.md): List carriers available in the Price Transparency v2 pricing data set.  Use this to discover valid `carrier_id` values for pricing filters.  #### Important These identifiers are **not** the same as v1 [`/v1/pricing/carriers`](./getpricingcarriers) UUIDs. Always resolve carriers through this endpoint (or a curated customer mapping) when working with v2.
+- [Location Procedure Pricing (v2)](https://ribbon.readme.io/reference/getv2locationprocedurepricing.md): Return all procedure-level negotiated rates for a single facility / practice location, optionally filtered by carrier.  Results are ordered cheapest-first by `min`.  #### Example Use Case Given location `1001` and carrier `78110`, list every procedure priced at that site for that carrier, sorted from lowest to highest `min`.  #### Path parameter `location_id` accepts either the integer location id **or** the location UUID. Unknown values return HTTP 404.  #### Carrier filtering Prefer `carrier_id` (from [`GET /v2/carriers`](./getv2carriers)). `plan_id` is accepted in the contract but currently returns HTTP 501. `carrier_id` and `plan_id` are mutually exclusive (HTTP 400 if both are sent).
+- [Location Care Cluster Pricing (v2)](https://ribbon.readme.io/reference/getv2locationcareclusterpricing.md): Return care-cluster (bundle) prices for a single facility / practice location, optionally filtered by carrier.  Results are ordered cheapest-first by `bundle_price`.  Each record includes completeness fields so clients can see how much of the expected procedure set has pricing at that site: `procedure_count`, `expected_procedure_count`, `completeness_pct`, `included_procedures`, and `missing_procedures`.  #### Path parameter `location_id` accepts either the integer location id **or** the location UUID. Unknown values return HTTP 404.  #### Carrier filtering Prefer `carrier_id`. `plan_id` currently returns HTTP 501. `carrier_id` and `plan_id` are mutually exclusive.
+- [Search Location Procedure Prices (v2)](https://ribbon.readme.io/reference/getv2pricinglocationprocedures.md): Find **location-level** procedure prices near an address or lat/lng, sorted by price ascending (`min`).  This is the primary “shop around me” endpoint for individual procedures.  #### Location required Unlike v1 (which silently defaulted to a New York City address), v2 requires either `address` **or** both `lat` and `lng`. Missing location → HTTP 400. Providing only one of `lat`/`lng` → HTTP 400. Failed geocoding → HTTP 400.  #### Example Use Case Search for CPT `27447` within 25 miles of ZIP `10001` for carrier `78110`, sorted from lowest to highest negotiated `min`, with facility address fields for a map UI.  #### Carrier filtering Prefer `carrier_id`. `plan_id` currently returns HTTP 501. `carrier_id` and `plan_id` are mutually exclusive.
+- [Search Location Care Cluster Prices (v2)](https://ribbon.readme.io/reference/getv2pricinglocationcareclusters.md): Find **location-level** care-cluster (bundle) prices near an address or lat/lng, sorted by `bundle_price` ascending.  Same geo / carrier / pagination rules as [`GET /v2/pricing/locations/procedures`](./getv2pricinglocationprocedures).  Optional `procedure_code` filters to bundles whose `included_procedures` contain that code.  #### Location required Provide either `address` **or** both `lat` and `lng`. Missing location, incomplete coordinates, or failed geocoding → HTTP 400.
+- [Search Providers](https://ribbon.readme.io/reference/getcustomproviders.md): Allows you to quickly list doctors based on important search criteria.
+- [Get Provider](https://ribbon.readme.io/reference/getcustomprovider.md): Retrieve detailed information for any provider given their NPI, such as locations, contact information, education, patient satisfaction, etc.
+- [Modify Provider Fields](https://ribbon.readme.io/reference/putcustomprovider.md): Edit all fields that do not fall under `specialties`, `locations`, or `insurances`. You may also add new fields or remove existing fields.  #### Looking For The Old Documentation? We're in the process of revamping our documentation. You can find the old page for this endpoint [here](https://ribbon.readme.io/docs/add-or-edit-provider-fields-old).
+- [Add Or Remove Provider Locations](https://ribbon.readme.io/reference/putcustomproviderlocations.md): Add or remove locations a provider practices at using our standard location UUIDs.
+- [Modify Provider Location Fields](https://ribbon.readme.io/reference/putcustomproviderlocation.md): Edit all fields that do not fall under `uuid`, `google_maps_link`, `latitude`, or `longitude`. You may also add new fields or remove existing fields. These updates are provider-specific and will not affect other providers practicing at the same location.
+- [Add Or Remove Provider Specialties](https://ribbon.readme.io/reference/putcustomproviderspecialties.md): Add or remove specialties for a provider using our standard specialty UUIDs.
+- [Modify A Provider's Primary Specialties](https://ribbon.readme.io/reference/putcustomproviderprimaryspecialties.md): Edit whether a single specialty is one of the provider's primary specialties.
+- [Add Or Remove Provider Procedures](https://ribbon.readme.io/reference/putcustomproviderprocedures.md): Add or remove procedures for a provider using our standard procedure UUIDs.
+- [Add Or Remove Provider Clinical Areas](https://ribbon.readme.io/reference/putcustomproviderclinicalareas.md): Add or remove clinical areas for a provider using our standard clinical area UUIDs.
+- [Add Or Remove Provider Insurances At A Location](https://ribbon.readme.io/reference/putcustomproviderlocationinsurances.md): Add or remove insurances accepted by a provider at a specific location using our standard insurance UUIDs.
+- [Add Or Remove Provider Organizations At A Location](https://ribbon.readme.io/reference/putcustomproviderlocationorganizations.md): Add or remove organizations accepted by a provider at a specific location using our standard organization UUIDs.
+- [Get Provider Filters](https://ribbon.readme.io/reference/getcustomproviderfilters.md): Fetch all previously created filters for providers.
+- [Create Provider Filter](https://ribbon.readme.io/reference/createcustomproviderfilter.md): Create new filters to be used when searching for providers in the [Search Providers](./getcustomproviders) endpoint.  You can create filters for both Ribbon's existing data fields as well as any custom data fields you create.  #### Example Use Case: Let's say you add a new field to a bunch of providers that match your use case, for instance `c_section_rate`. You could make this field searchable so that your search through [Search Providers](./getcustomproviders) when you pass through a certain parameter that specifies a maximum threshold.
+- [Edit Provider Filter](https://ribbon.readme.io/reference/editcustomproviderfilter.md): Edit any of the fields in a custom provider filter you have already created.
+- [Delete Provider Filter](https://ribbon.readme.io/reference/deletecustomproviderfilter.md): Delete a provider filter.
+- [Get Location Filters](https://ribbon.readme.io/reference/getcustomlocationfilters.md): Fetch all previously created custom filters for locations.
+- [Create Location Filter](https://ribbon.readme.io/reference/createcustomlocationfilter.md): Create new filters to be used when searching for locations in the [Search Locations](./getcustomlocations) endpoint.  You can create filters for both Ribbon's existing data fields as well as any custom data fields you create.  #### Example Use Case: Let's say you add a new field to a bunch of locations that match your use case, for instance `c_section_rate`. You could make this field searchable so that your search through [Search Locations](./getcustomlocations) when you pass through a certain parameter that specifies a maximum threshold.
+- [Edit Location Filter](https://ribbon.readme.io/reference/editcustomlocationfilter.md): Edit any of the fields in a custom location filter you have already created.
+- [Delete Location Filter](https://ribbon.readme.io/reference/deletecustomlocationfilter.md): Delete a location filter.
+- [Search Locations](https://ribbon.readme.io/reference/getcustomlocations.md): Allows you to search for different service locations, including specific location types.
+- [Create Location](https://ribbon.readme.io/reference/postcustomlocations.md): Create new locations and facilities.  #### Example Use Case You want to add new urgent care locations (or labs, imaging centers, therapy centers, etc.) to an area that are not yet included in the existing Ribbon locations listings.
+- [Get Location](https://ribbon.readme.io/reference/getcustomlocation.md): Retrieve data on a specific location.
+- [Add or Edit Location Fields](https://ribbon.readme.io/reference/putcustomlocation.md): Edit all fields that do not fall under `insurances`, `google_maps_link`, `latitude`, or `longitude`. You may also add new fields or remove existing fields.
+- [Delete Location](https://ribbon.readme.io/reference/deletecustomlocation.md): Delete a location.
+- [Add Or Remove Location Insurances](https://ribbon.readme.io/reference/putcustomlocationinsurances.md): Add or remove insurances from a location using our standard insurance UUIDs.
+- [Add Or Remove Location Organizations](https://ribbon.readme.io/reference/putcustomlocationorganizations.md): Add or remove organizations from a location using our standard organization UUIDs.
+- [Add Or Remove Location Clinical Areas](https://ribbon.readme.io/reference/putcustomlocationclinicalareas.md): Add or remove clinical areas from a location using our standard clinical area UUIDs.
+- [Search Insurances](https://ribbon.readme.io/reference/getinsurances.md): Search and list insurances that exist within the Ribbon API.
+- [Create Insurance](https://ribbon.readme.io/reference/postcustominsurance.md): Create a insurance with desired field values.
+- [Get Insurance](https://ribbon.readme.io/reference/getcustominsurance.md): Retrieve data on a specific insurance.
+- [Edit Insurance Fields](https://ribbon.readme.io/reference/putcustominsurance.md): Edit fields of a custom created insurance or a Ribbon created insurance.
+- [Delete Insurance](https://ribbon.readme.io/reference/deletecustominsurance.md): Delete an insurance.  Note: If you've added this insurance to doctors, you are deleting all instances of this UUID, and Ribbon will not be able to regenerate them.
+- [Search Specialties](https://ribbon.readme.io/reference/getspecialties.md): Search and list specialties that exist within the Ribbon API.
+- [Create Specialty](https://ribbon.readme.io/reference/postcustomspecialty.md): Create a custom specialty with desired field values.
+- [Get Specialty](https://ribbon.readme.io/reference/getcustomspecialty.md): Retrieve data on a specific specialty.
+- [Edit Specialty Fields](https://ribbon.readme.io/reference/putcustomspecialty.md): Edit fields of a custom created specialty.  Note: You cannot edit a Ribbon created specialty.
+- [Delete Specialty](https://ribbon.readme.io/reference/deletecustomspecialty.md): Delete a specialty.  Note: You cannot delete a Ribbon created specialty.
+- [Search Provider Types](https://ribbon.readme.io/reference/getcustomprovidertypes.md): Search and list provider types that exist within the Ribbon API.
+- [Create Provider Type](https://ribbon.readme.io/reference/postcustomprovidertype.md): Create a custom provider type with desired field values.
+- [Get Provider Type](https://ribbon.readme.io/reference/getcustomprovidertype.md): Retrieve data on a specific provider type.
+- [Edit Provider Type Fields](https://ribbon.readme.io/reference/putcustomprovidertype.md): Edit fields of a custom created provider type.  Note: You cannot edit a Ribbon created provider type.
+- [Delete Provider Type](https://ribbon.readme.io/reference/deletecustomprovidertype.md): Delete a provider type.  Note: You cannot edit a Ribbon created provider type.
+- [Search Location Types](https://ribbon.readme.io/reference/getcustomlocationtypes.md): Search and list location types that exist within the Ribbon API.
+- [Create Location Type](https://ribbon.readme.io/reference/postcustomlocationtype.md): Create a location type with desired field values.
+- [Get Location Type](https://ribbon.readme.io/reference/getcustomlocationtype.md): Retrieve data on a specific location type.
+- [Edit Location Type Fields](https://ribbon.readme.io/reference/putcustomlocationtype.md): Edit fields of a custom created location type.  Note: You cannot edit a Ribbon created location type.
+- [Delete Location Type](https://ribbon.readme.io/reference/deletecustomlocationtype.md): Delete a location type.  Note: You cannot edit a Ribbon created location type.
+- [Search Procedures](https://ribbon.readme.io/reference/getprocedures.md): Search and list procedures that exist within the Ribbon API.
+- [Get Procedure](https://ribbon.readme.io/reference/getprocedure.md): Retrieve data on a specific procedure.
+- [Search Languages](https://ribbon.readme.io/reference/getlanguages.md): Search and list provider languages that exist in the Ribbon API.
+- [Search Clinical Areas](https://ribbon.readme.io/reference/getclinicalareas.md): Returns clinical areas that exist within the Ribbon API.
+- [Get Clinical Area](https://ribbon.readme.io/reference/getclinicalarea.md): Retrieve data on a specific clinical area.
+- [Search Conditions](https://ribbon.readme.io/reference/getconditions.md): Returns conditions that exist within the Ribbon API.
+- [Get Condition](https://ribbon.readme.io/reference/getcondition.md): Retrieve data on a specific condition.
+- [Search Treatments](https://ribbon.readme.io/reference/gettreatments.md): Returns treatments that exist within the Ribbon API.
+- [Get Treatment](https://ribbon.readme.io/reference/gettreatment.md): Retrieve data on a specific treatment.
+- [Search Organizations](https://ribbon.readme.io/reference/getorganizations.md): Search for different organizations.  #### Example Use Case Display a map of all of all nearby health systems and their relevant information so that a patient can find care.
+- [Get Organization](https://ribbon.readme.io/reference/getorganization.md): Retrieve detailed information for any organization given its UUID
+- [Search TINs](https://ribbon.readme.io/reference/gettins.md): Search and list tins that exist within the Ribbon API.
+- [Get TIN](https://ribbon.readme.io/reference/getcustomtin.md): Retrieve data on a specific TIN.
+- [Check Member Eligibility](https://ribbon.readme.io/reference/geteligibility.md): Verify a member's current insurance coverage and benefits. You can access detailed information including a member’s progress on their Deductible and Out-of-pocket, as well as Copay and Coinsurance information for different services.  #### Example Use Case Inform a member of their current progress against their Deductible as well as their Copay and Coinsurance summaries so they can better estimate their out-of pocket costs.
+- [Search Supported Eligibility Insurances](https://ribbon.readme.io/reference/geteligibilityinsurancepartners.md): Search or list all insurance partners supported by our eligibility features.
+- [Get Eligibility Insurance](https://ribbon.readme.io/reference/geteligibilityinsurancepartner.md): Fetch an insurance partner supported by our eligibility features.
+- [Procedure Cost Estimate](https://ribbon.readme.io/reference/getprocedurecostestimate.md): Calculates estimated costs for a given procedure based on a user's location.  #### Example Use Case Estimate the cost of a knee replacement surgery for a user in Boston so they can plan their personal finances accordingly.
+
+## Pages
+- [Submission Complete](https://ribbon.readme.io/page/submission-complete.md)

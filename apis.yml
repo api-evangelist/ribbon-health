@@ -24,7 +24,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ribbon-health.png
 url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/apis.yml
 created: 2026-06-12
-modified: 2026-06-12
+modified: 2026-08-14
 specificationVersion: "0.19"
 tags:
   - Healthcare
@@ -48,6 +48,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/ribbon-health-cost-estimates-api-openapi.yml
+  - type: Overlay
+    url: overlays/ribbon-health-cost-estimates-overlay.yaml
   - type: Documentation
     url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
   - type: JSONSchema
@@ -75,6 +77,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/ribbon-health-filters-api-openapi.yml
+  - type: Overlay
+    url: overlays/ribbon-health-filters-overlay.yaml
   - type: Documentation
     url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
   - type: JSONSchema
@@ -103,6 +107,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/ribbon-health-focus-area-endpoints-api-openapi.yml
+  - type: Overlay
+    url: overlays/ribbon-health-focus-area-endpoints-overlay.yaml
   - type: Documentation
     url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
   - type: JSONSchema
@@ -130,6 +136,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/ribbon-health-locations-api-openapi.yml
+  - type: Overlay
+    url: overlays/ribbon-health-locations-overlay.yaml
   - type: Documentation
     url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
   - type: JSONSchema
@@ -157,6 +165,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/ribbon-health-networks-api-openapi.yml
+  - type: Overlay
+    url: overlays/ribbon-health-networks-overlay.yaml
   - type: Documentation
     url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
   - type: JSONSchema
@@ -184,6 +194,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/ribbon-health-organizations-api-openapi.yml
+  - type: Overlay
+    url: overlays/ribbon-health-organizations-overlay.yaml
   - type: Documentation
     url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
   - type: JSONSchema
@@ -211,6 +223,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/ribbon-health-price-transparency-api-openapi.yml
+  - type: Overlay
+    url: overlays/ribbon-health-price-transparency-overlay.yaml
   - type: Documentation
     url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
   - type: JSONSchema
@@ -238,6 +252,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/ribbon-health-providers-api-openapi.yml
+  - type: Overlay
+    url: overlays/ribbon-health-providers-overlay.yaml
   - type: Documentation
     url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
   - type: JSONSchema
@@ -266,6 +282,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/ribbon-health-reference-endpoints-api-openapi.yml
+  - type: Overlay
+    url: overlays/ribbon-health-reference-endpoints-overlay.yaml
   - type: Documentation
     url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
   - type: JSONSchema
@@ -293,6 +311,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/ribbon-health-tins-api-openapi.yml
+  - type: Overlay
+    url: overlays/ribbon-health-tins-overlay.yaml
   - type: Documentation
     url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
   - type: JSONSchema
@@ -310,6 +330,25 @@ apis:
   - type: JSONSchema
     url: >-
       https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-schema/getnetworkanalysis.json
+- aid: ribbon-health:ribbon-health-price-transparency-v2-api
+  name: Ribbon Health Price Transparency v2 API
+  description: >-
+    The Price Transparency v2 API from H1 (Ribbon Health) — 7 location-first operations for
+    negotiated-rate shopping. Prices are scoped to a facility rather than to a provider, carriers
+    use string business ids rather than v1 UUIDs, and geographic search requires an explicit
+    address or lat/lng. Harvested from the OpenAPI 3.1.0 definitions H1 publishes verbatim inside
+    each API reference page.
+  humanURL: https://ribbon.readme.io/reference/getv2procedures
+  baseURL: https://api.ribbonhealth.com/v2
+  tags:
+  - Price Transparency v2
+  properties:
+  - type: OpenAPI
+    url: openapi/ribbon-health-price-transparency-v2-api-openapi.yml
+  - type: Overlay
+    url: overlays/ribbon-health-price-transparency-v2-overlay.yaml
+  - type: Documentation
+    url: https://ribbon.readme.io/reference/getv2procedures
 common:
   - type: AgenticAccess
     url: agentic-access/ribbon-health-agentic-access.yml
@@ -318,17 +357,17 @@ common:
   - type: Authentication
     url: authentication/ribbon-health-authentication.yml
   - type: Website
-    url: https://h1.co
+    url: https://h1.com
   - type: Documentation
     url: https://ribbon.readme.io/
-  - type: GitHub
-    url: https://github.com/nikothomas/ribbon-health
+  - type: GitHubOrganization
+    url: https://github.com/h1insights
   - type: LinkedIn
     url: https://www.linkedin.com/company/ribbonhealth
   - type: Blog
-    url: https://h1.co/blog/
+    url: https://h1.com/blog/
   - type: Pricing
-    url: https://h1.co/request-demo/
+    url: https://h1.com/request-demo/
   - type: StatusPage
     url: https://status.ribbonhealth.com/
   - type: X
@@ -344,7 +383,39 @@ common:
   - type: JSONLDContext
     url: https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-ld/ribbon-health-context.jsonld
   - type: BlogRSS
-    url: https://h1.co/blog/feed
+    url: https://h1.com/blog/feed/
+  - type: LLMsTxt
+    url: llms/ribbon-health-llms.txt
+  - type: Conventions
+    url: conventions/ribbon-health-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ribbon-health-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/ribbon-health-lifecycle.yml
+  - type: Conformance
+    url: conformance/ribbon-health-conformance.yml
+  - type: DataModel
+    url: data-model/ribbon-health-data-model.yml
+  - type: Packages
+    url: packages/ribbon-health-packages.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Examples
+    url: examples/
+  - type: DeveloperPortal
+    url: https://ribbon.readme.io/
+  - type: APIReference
+    url: https://ribbon.readme.io/reference/getcustomproviders
+  - type: GettingStarted
+    url: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  - type: Support
+    url: https://h1.com/company/contact-us/
+  - type: SignUp
+    url: https://h1.com/request-demo/
+  - type: TermsOfService
+    url: https://h1.com/terms-of-use/
+  - type: PrivacyPolicy
+    url: https://h1.com/privacy-policy/
   - type: ArazzoWorkflows
     workflows:
     - url: arazzo/ribbon-health-location-insurance-workflow.yml
@@ -359,3 +430,8 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-14'
+  status: enriched
+  artifacts_added: 25
+  pass: local-v1

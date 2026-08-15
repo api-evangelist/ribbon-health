@@ -1,0 +1,2196 @@
+{
+  "item": [
+    {
+      "id": "7c336c5c-1d4e-45da-bb24-888b443e7af7",
+      "name": "Locations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1fc2ba0a-0ae8-4fe6-a72c-8fd79b345a82",
+          "name": "getCustomLocations",
+          "request": {
+            "name": "getCustomLocations",
+            "description": {
+              "content": "Allows you to search for different service locations, including specific location types.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "The page of the results which was returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "How many results are in each page."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Comma separated list of fields within the location object to return. Can be used to greatly reduce the size of the response by requesting only data you intend to use.\nCannot be used in tandem with `_excl_fields`"
+                },
+                {
+                  "disabled": false,
+                  "key": "_excl_fields",
+                  "value": "<string>",
+                  "description": "Comma separated list of fields within the location object to exclude from the response. Can be used to greatly reduce the size of the response by requesting only data you intend to use."
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "String input of an address that will be interpreted and geocoded in real time."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "String input for a 'fuzzy' search on location name."
+                },
+                {
+                  "disabled": false,
+                  "key": "distance",
+                  "value": "<integer>",
+                  "description": "The proximity radius of locations returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "location_types",
+                  "value": "<string>",
+                  "description": "Comma separated list of values that filter to what type of facilities to show. We categorize locations into 36 types. Clients can add their own locations with unique location_types, and they will also be included in the search.\nSee the Location Types Reference Endpoint for a list of all location types."
+                },
+                {
+                  "disabled": false,
+                  "key": "_excl_location_types",
+                  "value": "<string>",
+                  "description": "Comma separated list of the 'types' of locations to exclude. Excludes locations with a matching location type."
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>",
+                  "description": "Latitude/longitude pair of coordinates in lieu of a string address."
+                },
+                {
+                  "disabled": false,
+                  "key": "location_ids",
+                  "value": "<string>",
+                  "description": "Comma separated list of desired practice location uuids."
+                },
+                {
+                  "disabled": false,
+                  "key": "_excl_location_ids",
+                  "value": "<string>",
+                  "description": "Comma separated list of practice location uuids to exclude."
+                },
+                {
+                  "disabled": false,
+                  "key": "insurance_ids",
+                  "value": "<string>",
+                  "description": "Comma separated list of desired insurance uuids. See all locations that accept a given insurance(s)."
+                },
+                {
+                  "disabled": false,
+                  "key": "_excl_insurance_ids",
+                  "value": "<string>",
+                  "description": "Comma separated list of insurance uuids to exclude. Exclude locations that accept a given insurance(s)."
+                },
+                {
+                  "disabled": false,
+                  "key": "insurance_carrier_name",
+                  "value": "<string>",
+                  "description": "String input of carrier_name in order to search for all locations that take at least one plan from a given insurance carrier.\nFind the individual valid carrier_name values from the insurance objects returned in the Insurances Reference Endpoint.\nNote: This input must be an exact string match to work"
+                },
+                {
+                  "disabled": false,
+                  "key": "min_confidence",
+                  "value": "<integer>",
+                  "description": "Integer input (0-5) of the minimum confidence threshold for returned locations. min_location_confidence=4 will only display locations that have a confidence 4 or higher."
+                },
+                {
+                  "disabled": false,
+                  "key": "national_bluecard",
+                  "value": "<boolean>",
+                  "description": "Boolean input that enables an API search to automatically default to the National BlueCard EPO/PPO Network whenever a member searches for out-of-state, in-network care and is covered by a BCBS Association PPO insurance plan. Use the parameter in conjunction with the address parameter and either the insurance_ids or insurance fuzzy search parameters. Defaults to true unless otherwise specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_ids",
+                  "value": "<string>",
+                  "description": "Comma separated list of desired organization uuids. Filters to only locations that are affiliated with the given organization uuid(s)."
+                },
+                {
+                  "disabled": false,
+                  "key": "_excl_organization_ids",
+                  "value": "<string>",
+                  "description": "Comma separated list of organization uuids to exclude. Excludes locations that are affiliated with the given organization uuid(s)."
+                },
+                {
+                  "disabled": false,
+                  "key": "clinical_area",
+                  "value": "<string>",
+                  "description": "String input that is fuzzy matched to the most relevant `clinical_area.display` field. Only a single clinical area will be selected.\nReturns all location with this clinical area."
+                },
+                {
+                  "disabled": false,
+                  "key": "clinical_area_ids",
+                  "value": "<string>",
+                  "description": "Comma-separated list of desired clinical area ids.\nReturns all locations with a clinical area exactly matching any of the entered IDs.\n(Note: Use the `/clinical_areas/` reference endpoint to identify relevant IDs)"
+                },
+                {
+                  "disabled": false,
+                  "key": "_excl_clinical_area_ids",
+                  "value": "<string>",
+                  "description": "Comma-separated list of clinical area ids to exclude.\nReturns all locations without a clinical area exactly matching any of the entered IDs.\n(Note: Use the `/clinical_areas/` reference endpoint to identify relevant IDs)"
+                },
+                {
+                  "disabled": false,
+                  "key": "treatment",
+                  "value": "<string>",
+                  "description": "String input that is fuzzy matched to the most relevant `treatments.display` field. Only a single treatment will be selected.\nReturns all locations with this treatment."
+                },
+                {
+                  "disabled": false,
+                  "key": "treatment_ids",
+                  "value": "<string>",
+                  "description": "Comma-separated list of desired treatment ids.\nReturns all locations with a `treatments.uuid` field exactly matching any of the entered IDs.\n(Note: Use the /treatments/ reference endpoint (docs) to identify relevant IDs)"
+                },
+                {
+                  "disabled": false,
+                  "key": "_excl_treatment_ids",
+                  "value": "<string>",
+                  "description": "Comma-separated list of treatment ids to exclude.\nReturns all locations without a `treatments.uuid` field exactly matching any of the entered IDs.\n(Note: Use the /treatments/ reference endpoint (docs) to identify relevant IDs)"
+                },
+                {
+                  "disabled": false,
+                  "key": "tin_ids",
+                  "value": "<string>",
+                  "description": "Comma separated list of desired TINs. Filters to only locations that are affiliated with the given TINs.\nNote: This parameter cannot be used in combination with any other TINs related parameters. All other TINs related parameters will be ignored."
+                },
+                {
+                  "disabled": false,
+                  "key": "tin_name",
+                  "value": "<string>",
+                  "description": "String input that is fuzzy matched against the `tins.name` field. Filters to only locations that are affiliated with the given TINs name."
+                },
+                {
+                  "disabled": false,
+                  "key": "tin_legal_name",
+                  "value": "<string>",
+                  "description": "String input that is fuzzy matched against the `tins.legal_name` field. Filters to only locations that are affiliated with the given TINs legal name."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "14285169-db06-4592-9829-9c0d4d9b1f8c",
+              "name": "Returns an ordered list of matching locations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "25"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name,address"
+                    },
+                    {
+                      "key": "_excl_fields",
+                      "value": "phone_numbers,insurances"
+                    },
+                    {
+                      "key": "address",
+                      "value": "New York, NY"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Citymd Urgent Care"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "location_types",
+                      "value": "Urgent Care"
+                    },
+                    {
+                      "key": "_excl_location_types",
+                      "value": "Urgent Care"
+                    },
+                    {
+                      "key": "location",
+                      "value": "37.7489816,-122.4802092"
+                    },
+                    {
+                      "key": "location_ids",
+                      "value": "48d4eb27-d82b-4ea4-8ad0-4bcb2c46a960"
+                    },
+                    {
+                      "key": "_excl_location_ids",
+                      "value": "48d4eb27-d82b-4ea4-8ad0-4bcb2c46a960"
+                    },
+                    {
+                      "key": "insurance_ids",
+                      "value": "24617022-92b3-4b9f-af1c-4df21ad6fb6f"
+                    },
+                    {
+                      "key": "_excl_insurance_ids",
+                      "value": "24617022-92b3-4b9f-af1c-4df21ad6fb6f"
+                    },
+                    {
+                      "key": "insurance_carrier_name",
+                      "value": "Aetna"
+                    },
+                    {
+                      "key": "min_confidence",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "national_bluecard",
+                      "value": "true"
+                    },
+                    {
+                      "key": "organization_ids",
+                      "value": "86722ebb-1dd1-4846-a1a9-a7a9e36c944d"
+                    },
+                    {
+                      "key": "_excl_organization_ids",
+                      "value": "86722ebb-1dd1-4846-a1a9-a7a9e36c944d"
+                    },
+                    {
+                      "key": "clinical_area",
+                      "value": "CT"
+                    },
+                    {
+                      "key": "clinical_area_ids",
+                      "value": "4c03ddb4-f6c0-4574-a51e-508f83c43d69"
+                    },
+                    {
+                      "key": "_excl_clinical_area_ids",
+                      "value": "4c03ddb4-f6c0-4574-a51e-508f83c43d69"
+                    },
+                    {
+                      "key": "treatment",
+                      "value": "Neck X-ray"
+                    },
+                    {
+                      "key": "treatment_ids",
+                      "value": "e3079513-bf55-41cc-87c6-f7ff5f923085"
+                    },
+                    {
+                      "key": "_excl_treatment_ids",
+                      "value": "e3079513-bf55-41cc-87c6-f7ff5f923085"
+                    },
+                    {
+                      "key": "tin_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tin_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tin_legal_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"distance\": 0.4,\n      \"uuid\": \"f38b9fd5-1e28-4f6e-953c-1e1493b68e21\",\n      \"name\": \"string\",\n      \"address\": \"185 Berry St # 130, San Francisco, CA 94107, US\",\n      \"address_details\": {\n        \"street\": \"185 Berry St # 130\",\n        \"address_line_1\": \"185 Berry St\",\n        \"address_line_2\": \"# 130\",\n        \"city\": \"San Francisco\",\n        \"state\": \"CA\",\n        \"zip\": \"94107\"\n      },\n      \"latitude\": 37.7765973,\n      \"longitude\": -122.3919488,\n      \"google_maps_link\": \"https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US\",\n      \"phone_numbers\": [\n        {\n          \"phone\": \"4155146410\",\n          \"details\": \"primary\"\n        },\n        {\n          \"phone\": \"4155146410\",\n          \"details\": \"primary\"\n        }\n      ],\n      \"faxes\": [\n        {\n          \"phone\": \"2121234567\",\n          \"details\": \"secondary\",\n          \"confidence\": 3\n        },\n        {\n          \"phone\": \"2121234567\",\n          \"details\": \"secondary\",\n          \"confidence\": 3\n        }\n      ],\n      \"confidence\": 2,\n      \"insurances\": [\n        {\n          \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n          \"carrier_association\": \"Aetna\",\n          \"carrier_brand\": \"Aetna\",\n          \"carrier_name\": \"Aetna\",\n          \"state\": \"NY\",\n          \"plan_name\": \"Aetna HealthFund Open Choice\",\n          \"plan_type\": \"PPO\",\n          \"metal_level\": \"string\",\n          \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n          \"network\": \"string\",\n          \"confidence\": 4,\n          \"category\": \"string\",\n          \"codes\": [\n            [\n              \"string\",\n              \"string\"\n            ],\n            [\n              \"string\",\n              \"string\"\n            ]\n          ]\n        },\n        {\n          \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n          \"carrier_association\": \"Aetna\",\n          \"carrier_brand\": \"Aetna\",\n          \"carrier_name\": \"Aetna\",\n          \"state\": \"NY\",\n          \"plan_name\": \"Aetna HealthFund Open Choice\",\n          \"plan_type\": \"PPO\",\n          \"metal_level\": \"string\",\n          \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n          \"network\": \"string\",\n          \"confidence\": 4,\n          \"category\": \"string\",\n          \"codes\": [\n            [\n              \"string\",\n              \"string\"\n            ],\n            [\n              \"string\",\n              \"string\"\n            ]\n          ]\n        }\n      ],\n      \"tins\": \"string\"\n    },\n    {\n      \"distance\": 0.4,\n      \"uuid\": \"f38b9fd5-1e28-4f6e-953c-1e1493b68e21\",\n      \"name\": \"string\",\n      \"address\": \"185 Berry St # 130, San Francisco, CA 94107, US\",\n      \"address_details\": {\n        \"street\": \"185 Berry St # 130\",\n        \"address_line_1\": \"185 Berry St\",\n        \"address_line_2\": \"# 130\",\n        \"city\": \"San Francisco\",\n        \"state\": \"CA\",\n        \"zip\": \"94107\"\n      },\n      \"latitude\": 37.7765973,\n      \"longitude\": -122.3919488,\n      \"google_maps_link\": \"https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US\",\n      \"phone_numbers\": [\n        {\n          \"phone\": \"4155146410\",\n          \"details\": \"primary\"\n        },\n        {\n          \"phone\": \"4155146410\",\n          \"details\": \"primary\"\n        }\n      ],\n      \"faxes\": [\n        {\n          \"phone\": \"2121234567\",\n          \"details\": \"secondary\",\n          \"confidence\": 3\n        },\n        {\n          \"phone\": \"2121234567\",\n          \"details\": \"secondary\",\n          \"confidence\": 3\n        }\n      ],\n      \"confidence\": 2,\n      \"insurances\": [\n        {\n          \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n          \"carrier_association\": \"Aetna\",\n          \"carrier_brand\": \"Aetna\",\n          \"carrier_name\": \"Aetna\",\n          \"state\": \"NY\",\n          \"plan_name\": \"Aetna HealthFund Open Choice\",\n          \"plan_type\": \"PPO\",\n          \"metal_level\": \"string\",\n          \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n          \"network\": \"string\",\n          \"confidence\": 4,\n          \"category\": \"string\",\n          \"codes\": [\n            [\n              \"string\",\n              \"string\"\n            ],\n            [\n              \"string\",\n              \"string\"\n            ]\n          ]\n        },\n        {\n          \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n          \"carrier_association\": \"Aetna\",\n          \"carrier_brand\": \"Aetna\",\n          \"carrier_name\": \"Aetna\",\n          \"state\": \"NY\",\n          \"plan_name\": \"Aetna HealthFund Open Choice\",\n          \"plan_type\": \"PPO\",\n          \"metal_level\": \"string\",\n          \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n          \"network\": \"string\",\n          \"confidence\": 4,\n          \"category\": \"string\",\n          \"codes\": [\n            [\n              \"string\",\n              \"string\"\n            ],\n            [\n              \"string\",\n              \"string\"\n            ]\n          ]\n        }\n      ],\n      \"tins\": \"string\"\n    }\n  ],\n  \"parameters\": {\n    \"total_count\": 141,\n    \"sort_by\": \"distance\",\n    \"geo\": {\n      \"latitude\": 40.7351327,\n      \"longitude\": -73.9881657\n    },\n    \"page\": 1,\n    \"page_size\": 25,\n    \"fields\": [\n      \"locations\",\n      \"age\"\n    ],\n    \"_excl_fields\": [\n      \"locations\",\n      \"age\"\n    ],\n    \"address\": \"New York, NY\",\n    \"name\": \"Citymd Urgent Care\",\n    \"distance\": 10,\n    \"location_types\": [\n      \"Urgent Care\"\n    ],\n    \"_excl_location_types\": [\n      \"Urgent Care\"\n    ],\n    \"insurance_ids\": [\n      \"e527f6e3-fe42-4932-bf34-d81f1c1fd652\"\n    ],\n    \"_excl_insurance_ids\": [\n      \"e527f6e3-fe42-4932-bf34-d81f1c1fd652\"\n    ],\n    \"insurance_carrier_name\": \"Aetna\",\n    \"min_confidence\": 4,\n    \"national_bluecard\": true,\n    \"organization_ids\": [\n      \"86722ebb-1dd1-4846-a1a9-a7a9e36c944d\"\n    ],\n    \"_excl_organization_ids\": [\n      \"86722ebb-1dd1-4846-a1a9-a7a9e36c944d\"\n    ],\n    \"clinical_area\": {\n      \"uuid\": \"f352b596-dfb0-494f-9a03-224794f5d182\",\n      \"display\": \"Substance Disorders (e.g. Opioid, Cocaine, Alcohol)\",\n      \"types\": [\n        \"providers\",\n        \"locations\"\n      ],\n      \"conditions\": [\n        {\n          \"uuid\": \"99f4762e-c4c2-4d1d-983a-2b8b303e691d\",\n          \"display\": \"Chronic Depression\",\n          \"types\": [\n            \"condition_cost_estimate\",\n            \"condition_cost_estimate\"\n          ],\n          \"specialties\": [\n            {\n              \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n              \"taxonomy_code\": \"string\",\n              \"board_specialty\": \"Family Medicine\",\n              \"board_sub_specialty\": \"string\",\n              \"non_md_specialty\": \"string\",\n              \"non_md_sub_specialty\": \"None\",\n              \"provider_name\": \"Family Medicine Doctor\",\n              \"colloquial\": \"string\",\n              \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n              \"taxonomy_2\": \"Family Medicine\",\n              \"taxonomy_3\": \"string\",\n              \"display\": \"Family Medicine\",\n              \"provider_type\": \"Doctor\",\n              \"is_primary\": true\n            },\n            {\n              \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n              \"taxonomy_code\": \"string\",\n              \"board_specialty\": \"Family Medicine\",\n              \"board_sub_specialty\": \"string\",\n              \"non_md_specialty\": \"string\",\n              \"non_md_sub_specialty\": \"None\",\n              \"provider_name\": \"Family Medicine Doctor\",\n              \"colloquial\": \"string\",\n              \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n              \"taxonomy_2\": \"Family Medicine\",\n              \"taxonomy_3\": \"string\",\n              \"display\": \"Family Medicine\",\n              \"provider_type\": \"Doctor\",\n              \"is_primary\": true\n            }\n          ],\n          \"modules\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"uuid\": \"99f4762e-c4c2-4d1d-983a-2b8b303e691d\",\n          \"display\": \"Chronic Depression\",\n          \"types\": [\n            \"condition_cost_estimate\",\n            \"focus_areas\"\n          ],\n          \"specialties\": [\n            {\n              \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n              \"taxonomy_code\": \"string\",\n              \"board_specialty\": \"Family Medicine\",\n              \"board_sub_specialty\": \"string\",\n              \"non_md_specialty\": \"string\",\n              \"non_md_sub_specialty\": \"None\",\n              \"provider_name\": \"Family Medicine Doctor\",\n              \"colloquial\": \"string\",\n              \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n              \"taxonomy_2\": \"Family Medicine\",\n              \"taxonomy_3\": \"string\",\n              \"display\": \"Family Medicine\",\n              \"provider_type\": \"Doctor\",\n              \"is_primary\": true\n            },\n            {\n              \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n              \"taxonomy_code\": \"string\",\n              \"board_specialty\": \"Family Medicine\",\n              \"board_sub_specialty\": \"string\",\n              \"non_md_specialty\": \"string\",\n              \"non_md_sub_specialty\": \"None\",\n              \"provider_name\": \"Family Medicine Doctor\",\n              \"colloquial\": \"string\",\n              \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n              \"taxonomy_2\": \"Family Medicine\",\n              \"taxonomy_3\": \"string\",\n              \"display\": \"Family Medicine\",\n              \"provider_type\": \"Doctor\",\n              \"is_primary\": true\n            }\n          ],\n          \"modules\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"treatments\": [\n        {\n          \"uuid\": \"88a70b34-d0a7-47e2-89ac-4fed203eca2f\",\n          \"display\": \"Knee Replacement\",\n          \"types\": [\n            \"locations\",\n            \"providers\"\n          ],\n          \"specialties\": [\n            {\n              \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n              \"taxonomy_code\": \"string\",\n              \"board_specialty\": \"Family Medicine\",\n              \"board_sub_specialty\": \"string\",\n              \"non_md_specialty\": \"string\",\n              \"non_md_sub_specialty\": \"None\",\n              \"provider_name\": \"Family Medicine Doctor\",\n              \"colloquial\": \"string\",\n              \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n              \"taxonomy_2\": \"Family Medicine\",\n              \"taxonomy_3\": \"string\",\n              \"display\": \"Family Medicine\",\n              \"provider_type\": \"Doctor\",\n              \"is_primary\": true\n            },\n            {\n              \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n              \"taxonomy_code\": \"string\",\n              \"board_specialty\": \"Family Medicine\",\n              \"board_sub_specialty\": \"string\",\n              \"non_md_specialty\": \"string\",\n              \"non_md_sub_specialty\": \"None\",\n              \"provider_name\": \"Family Medicine Doctor\",\n              \"colloquial\": \"string\",\n              \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n              \"taxonomy_2\": \"Family Medicine\",\n              \"taxonomy_3\": \"string\",\n              \"display\": \"Family Medicine\",\n              \"provider_type\": \"Doctor\",\n              \"is_primary\": true\n            }\n          ]\n        },\n        {\n          \"uuid\": \"88a70b34-d0a7-47e2-89ac-4fed203eca2f\",\n          \"display\": \"Knee Replacement\",\n          \"types\": [\n            \"providers\",\n            \"providers\"\n          ],\n          \"specialties\": [\n            {\n              \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n              \"taxonomy_code\": \"string\",\n              \"board_specialty\": \"Family Medicine\",\n              \"board_sub_specialty\": \"string\",\n              \"non_md_specialty\": \"string\",\n              \"non_md_sub_specialty\": \"None\",\n              \"provider_name\": \"Family Medicine Doctor\",\n              \"colloquial\": \"string\",\n              \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n              \"taxonomy_2\": \"Family Medicine\",\n              \"taxonomy_3\": \"string\",\n              \"display\": \"Family Medicine\",\n              \"provider_type\": \"Doctor\",\n              \"is_primary\": true\n            },\n            {\n              \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n              \"taxonomy_code\": \"string\",\n              \"board_specialty\": \"Family Medicine\",\n              \"board_sub_specialty\": \"string\",\n              \"non_md_specialty\": \"string\",\n              \"non_md_sub_specialty\": \"None\",\n              \"provider_name\": \"Family Medicine Doctor\",\n              \"colloquial\": \"string\",\n              \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n              \"taxonomy_2\": \"Family Medicine\",\n              \"taxonomy_3\": \"string\",\n              \"display\": \"Family Medicine\",\n              \"provider_type\": \"Doctor\",\n              \"is_primary\": true\n            }\n          ]\n        }\n      ],\n      \"specialties\": [\n        {\n          \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n          \"taxonomy_code\": \"string\",\n          \"board_specialty\": \"Family Medicine\",\n          \"board_sub_specialty\": \"string\",\n          \"non_md_specialty\": \"string\",\n          \"non_md_sub_specialty\": \"None\",\n          \"provider_name\": \"Family Medicine Doctor\",\n          \"colloquial\": \"string\",\n          \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n          \"taxonomy_2\": \"Family Medicine\",\n          \"taxonomy_3\": \"string\",\n          \"display\": \"Family Medicine\",\n          \"provider_type\": \"Doctor\",\n          \"is_primary\": true\n        },\n        {\n          \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n          \"taxonomy_code\": \"string\",\n          \"board_specialty\": \"Family Medicine\",\n          \"board_sub_specialty\": \"string\",\n          \"non_md_specialty\": \"string\",\n          \"non_md_sub_specialty\": \"None\",\n          \"provider_name\": \"Family Medicine Doctor\",\n          \"colloquial\": \"string\",\n          \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n          \"taxonomy_2\": \"Family Medicine\",\n          \"taxonomy_3\": \"string\",\n          \"display\": \"Family Medicine\",\n          \"provider_type\": \"Doctor\",\n          \"is_primary\": true\n        }\n      ]\n    },\n    \"clinical_area_ids\": [\n      \"4c03ddb4-f6c0-4574-a51e-508f83c43d69\"\n    ],\n    \"treatment\": {\n      \"uuid\": \"88a70b34-d0a7-47e2-89ac-4fed203eca2f\",\n      \"display\": \"Knee Replacement\",\n      \"types\": [\n        \"providers\",\n        \"providers\"\n      ],\n      \"specialties\": [\n        {\n          \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n          \"taxonomy_code\": \"string\",\n          \"board_specialty\": \"Family Medicine\",\n          \"board_sub_specialty\": \"string\",\n          \"non_md_specialty\": \"string\",\n          \"non_md_sub_specialty\": \"None\",\n          \"provider_name\": \"Family Medicine Doctor\",\n          \"colloquial\": \"string\",\n          \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n          \"taxonomy_2\": \"Family Medicine\",\n          \"taxonomy_3\": \"string\",\n          \"display\": \"Family Medicine\",\n          \"provider_type\": \"Doctor\",\n          \"is_primary\": true\n        },\n        {\n          \"uuid\": \"18d8ad26-7e5f-44ac-9afa-966efb375344\",\n          \"taxonomy_code\": \"string\",\n          \"board_specialty\": \"Family Medicine\",\n          \"board_sub_specialty\": \"string\",\n          \"non_md_specialty\": \"string\",\n          \"non_md_sub_specialty\": \"None\",\n          \"provider_name\": \"Family Medicine Doctor\",\n          \"colloquial\": \"string\",\n          \"taxonomy_1\": \"Allopathic & Osteopathic Physicians\",\n          \"taxonomy_2\": \"Family Medicine\",\n          \"taxonomy_3\": \"string\",\n          \"display\": \"Family Medicine\",\n          \"provider_type\": \"Doctor\",\n          \"is_primary\": true\n        }\n      ]\n    },\n    \"treatment_ids\": [\n      \"e3079513-bf55-41cc-87c6-f7ff5f923085\"\n    ],\n    \"tin_ids\": \"string\",\n    \"tin_name\": \"string\",\n    \"tin_legal_name\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25229c06-e769-4440-a5c0-b82eb0c5f937",
+              "name": "The search could not be completed as requested",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "25"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name,address"
+                    },
+                    {
+                      "key": "_excl_fields",
+                      "value": "phone_numbers,insurances"
+                    },
+                    {
+                      "key": "address",
+                      "value": "New York, NY"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Citymd Urgent Care"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "location_types",
+                      "value": "Urgent Care"
+                    },
+                    {
+                      "key": "_excl_location_types",
+                      "value": "Urgent Care"
+                    },
+                    {
+                      "key": "location",
+                      "value": "37.7489816,-122.4802092"
+                    },
+                    {
+                      "key": "location_ids",
+                      "value": "48d4eb27-d82b-4ea4-8ad0-4bcb2c46a960"
+                    },
+                    {
+                      "key": "_excl_location_ids",
+                      "value": "48d4eb27-d82b-4ea4-8ad0-4bcb2c46a960"
+                    },
+                    {
+                      "key": "insurance_ids",
+                      "value": "24617022-92b3-4b9f-af1c-4df21ad6fb6f"
+                    },
+                    {
+                      "key": "_excl_insurance_ids",
+                      "value": "24617022-92b3-4b9f-af1c-4df21ad6fb6f"
+                    },
+                    {
+                      "key": "insurance_carrier_name",
+                      "value": "Aetna"
+                    },
+                    {
+                      "key": "min_confidence",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "national_bluecard",
+                      "value": "true"
+                    },
+                    {
+                      "key": "organization_ids",
+                      "value": "86722ebb-1dd1-4846-a1a9-a7a9e36c944d"
+                    },
+                    {
+                      "key": "_excl_organization_ids",
+                      "value": "86722ebb-1dd1-4846-a1a9-a7a9e36c944d"
+                    },
+                    {
+                      "key": "clinical_area",
+                      "value": "CT"
+                    },
+                    {
+                      "key": "clinical_area_ids",
+                      "value": "4c03ddb4-f6c0-4574-a51e-508f83c43d69"
+                    },
+                    {
+                      "key": "_excl_clinical_area_ids",
+                      "value": "4c03ddb4-f6c0-4574-a51e-508f83c43d69"
+                    },
+                    {
+                      "key": "treatment",
+                      "value": "Neck X-ray"
+                    },
+                    {
+                      "key": "treatment_ids",
+                      "value": "e3079513-bf55-41cc-87c6-f7ff5f923085"
+                    },
+                    {
+                      "key": "_excl_treatment_ids",
+                      "value": "e3079513-bf55-41cc-87c6-f7ff5f923085"
+                    },
+                    {
+                      "key": "tin_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tin_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tin_legal_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"bad_request\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d6a79ae-5cb4-409d-83c8-f201f9bb4d5e",
+              "name": "Account does not have access to custom locations directory",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "25"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name,address"
+                    },
+                    {
+                      "key": "_excl_fields",
+                      "value": "phone_numbers,insurances"
+                    },
+                    {
+                      "key": "address",
+                      "value": "New York, NY"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Citymd Urgent Care"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "location_types",
+                      "value": "Urgent Care"
+                    },
+                    {
+                      "key": "_excl_location_types",
+                      "value": "Urgent Care"
+                    },
+                    {
+                      "key": "location",
+                      "value": "37.7489816,-122.4802092"
+                    },
+                    {
+                      "key": "location_ids",
+                      "value": "48d4eb27-d82b-4ea4-8ad0-4bcb2c46a960"
+                    },
+                    {
+                      "key": "_excl_location_ids",
+                      "value": "48d4eb27-d82b-4ea4-8ad0-4bcb2c46a960"
+                    },
+                    {
+                      "key": "insurance_ids",
+                      "value": "24617022-92b3-4b9f-af1c-4df21ad6fb6f"
+                    },
+                    {
+                      "key": "_excl_insurance_ids",
+                      "value": "24617022-92b3-4b9f-af1c-4df21ad6fb6f"
+                    },
+                    {
+                      "key": "insurance_carrier_name",
+                      "value": "Aetna"
+                    },
+                    {
+                      "key": "min_confidence",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "national_bluecard",
+                      "value": "true"
+                    },
+                    {
+                      "key": "organization_ids",
+                      "value": "86722ebb-1dd1-4846-a1a9-a7a9e36c944d"
+                    },
+                    {
+                      "key": "_excl_organization_ids",
+                      "value": "86722ebb-1dd1-4846-a1a9-a7a9e36c944d"
+                    },
+                    {
+                      "key": "clinical_area",
+                      "value": "CT"
+                    },
+                    {
+                      "key": "clinical_area_ids",
+                      "value": "4c03ddb4-f6c0-4574-a51e-508f83c43d69"
+                    },
+                    {
+                      "key": "_excl_clinical_area_ids",
+                      "value": "4c03ddb4-f6c0-4574-a51e-508f83c43d69"
+                    },
+                    {
+                      "key": "treatment",
+                      "value": "Neck X-ray"
+                    },
+                    {
+                      "key": "treatment_ids",
+                      "value": "e3079513-bf55-41cc-87c6-f7ff5f923085"
+                    },
+                    {
+                      "key": "_excl_treatment_ids",
+                      "value": "e3079513-bf55-41cc-87c6-f7ff5f923085"
+                    },
+                    {
+                      "key": "tin_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tin_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tin_legal_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"permission_denied\",\n    \"message\": \"a trial account does not have access to this functionality\",\n    \"status\": 403\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64ee7253-a611-4f18-8f8d-cb09bc40c5c9",
+          "name": "postCustomLocations",
+          "request": {
+            "name": "postCustomLocations",
+            "description": {
+              "content": "Create new locations and facilities.\n\n#### Example Use Case\nYou want to add new urgent care locations (or labs, imaging centers, therapy centers, etc.) to an area that are not yet included in the existing Ribbon locations listings.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uuid\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"address\": \"<string>\",\n  \"address_details\": {\n    \"street\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"latitude\": \"<number>\",\n  \"longitude\": \"<number>\",\n  \"google_maps_link\": \"<string>\",\n  \"phone_numbers\": [\n    {\n      \"phone\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"phone\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ],\n  \"faxes\": [\n    {\n      \"phone\": \"<string>\",\n      \"details\": \"<string>\",\n      \"confidence\": \"<integer>\"\n    },\n    {\n      \"phone\": \"<string>\",\n      \"details\": \"<string>\",\n      \"confidence\": \"<integer>\"\n    }\n  ],\n  \"confidence\": \"<integer>\",\n  \"insurances\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"tins\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "81ba9cc0-abe1-45b9-954e-8664eee7c829",
+              "name": "Location was successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"f38b9fd5-1e28-4f6e-953c-1e1493b68e21\",\n  \"name\": \"<string>\",\n  \"address\": \"185 Berry St # 130, San Francisco, CA 94107, US\",\n  \"address_details\": {\n    \"street\": \"185 Berry St # 130\",\n    \"address_line_1\": \"185 Berry St\",\n    \"address_line_2\": \"# 130\",\n    \"city\": \"San Francisco\",\n    \"state\": \"CA\",\n    \"zip\": \"94107\"\n  },\n  \"latitude\": 37.7765973,\n  \"longitude\": -122.3919488,\n  \"google_maps_link\": \"https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US\",\n  \"phone_numbers\": [\n    {\n      \"phone\": \"4155146410\",\n      \"details\": \"primary\"\n    },\n    {\n      \"phone\": \"4155146410\",\n      \"details\": \"primary\"\n    }\n  ],\n  \"faxes\": [\n    {\n      \"phone\": \"2121234567\",\n      \"details\": \"secondary\",\n      \"confidence\": 3\n    },\n    {\n      \"phone\": \"2121234567\",\n      \"details\": \"secondary\",\n      \"confidence\": 3\n    }\n  ],\n  \"confidence\": 2,\n  \"insurances\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"tins\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"uuid\": \"f38b9fd5-1e28-4f6e-953c-1e1493b68e21\",\n    \"name\": \"string\",\n    \"address\": \"185 Berry St # 130, San Francisco, CA 94107, US\",\n    \"address_details\": {\n      \"street\": \"185 Berry St # 130\",\n      \"address_line_1\": \"185 Berry St\",\n      \"address_line_2\": \"# 130\",\n      \"city\": \"San Francisco\",\n      \"state\": \"CA\",\n      \"zip\": \"94107\"\n    },\n    \"latitude\": 37.7765973,\n    \"longitude\": -122.3919488,\n    \"google_maps_link\": \"https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US\",\n    \"phone_numbers\": [\n      {\n        \"phone\": \"4155146410\",\n        \"details\": \"primary\"\n      },\n      {\n        \"phone\": \"4155146410\",\n        \"details\": \"primary\"\n      }\n    ],\n    \"faxes\": [\n      {\n        \"phone\": \"2121234567\",\n        \"details\": \"secondary\",\n        \"confidence\": 3\n      },\n      {\n        \"phone\": \"2121234567\",\n        \"details\": \"secondary\",\n        \"confidence\": 3\n      }\n    ],\n    \"confidence\": 2,\n    \"insurances\": [\n      {\n        \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n        \"carrier_association\": \"Aetna\",\n        \"carrier_brand\": \"Aetna\",\n        \"carrier_name\": \"Aetna\",\n        \"state\": \"NY\",\n        \"plan_name\": \"Aetna HealthFund Open Choice\",\n        \"plan_type\": \"PPO\",\n        \"metal_level\": \"string\",\n        \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n        \"network\": \"string\",\n        \"confidence\": 4,\n        \"category\": \"string\",\n        \"codes\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ]\n      },\n      {\n        \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n        \"carrier_association\": \"Aetna\",\n        \"carrier_brand\": \"Aetna\",\n        \"carrier_name\": \"Aetna\",\n        \"state\": \"NY\",\n        \"plan_name\": \"Aetna HealthFund Open Choice\",\n        \"plan_type\": \"PPO\",\n        \"metal_level\": \"string\",\n        \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n        \"network\": \"string\",\n        \"confidence\": 4,\n        \"category\": \"string\",\n        \"codes\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ]\n      }\n    ],\n    \"tins\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0c86917-36dc-43c4-a7c2-0d81bbbbb73d",
+              "name": "This request attempted to update with invalid schema or was missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"f38b9fd5-1e28-4f6e-953c-1e1493b68e21\",\n  \"name\": \"<string>\",\n  \"address\": \"185 Berry St # 130, San Francisco, CA 94107, US\",\n  \"address_details\": {\n    \"street\": \"185 Berry St # 130\",\n    \"address_line_1\": \"185 Berry St\",\n    \"address_line_2\": \"# 130\",\n    \"city\": \"San Francisco\",\n    \"state\": \"CA\",\n    \"zip\": \"94107\"\n  },\n  \"latitude\": 37.7765973,\n  \"longitude\": -122.3919488,\n  \"google_maps_link\": \"https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US\",\n  \"phone_numbers\": [\n    {\n      \"phone\": \"4155146410\",\n      \"details\": \"primary\"\n    },\n    {\n      \"phone\": \"4155146410\",\n      \"details\": \"primary\"\n    }\n  ],\n  \"faxes\": [\n    {\n      \"phone\": \"2121234567\",\n      \"details\": \"secondary\",\n      \"confidence\": 3\n    },\n    {\n      \"phone\": \"2121234567\",\n      \"details\": \"secondary\",\n      \"confidence\": 3\n    }\n  ],\n  \"confidence\": 2,\n  \"insurances\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"tins\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"bad_request\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04e706f0-f4ce-4124-a259-f96f9ed6a9ac",
+              "name": "A location with this `address` and `name` pair already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuid\": \"f38b9fd5-1e28-4f6e-953c-1e1493b68e21\",\n  \"name\": \"<string>\",\n  \"address\": \"185 Berry St # 130, San Francisco, CA 94107, US\",\n  \"address_details\": {\n    \"street\": \"185 Berry St # 130\",\n    \"address_line_1\": \"185 Berry St\",\n    \"address_line_2\": \"# 130\",\n    \"city\": \"San Francisco\",\n    \"state\": \"CA\",\n    \"zip\": \"94107\"\n  },\n  \"latitude\": 37.7765973,\n  \"longitude\": -122.3919488,\n  \"google_maps_link\": \"https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US\",\n  \"phone_numbers\": [\n    {\n      \"phone\": \"4155146410\",\n      \"details\": \"primary\"\n    },\n    {\n      \"phone\": \"4155146410\",\n      \"details\": \"primary\"\n    }\n  ],\n  \"faxes\": [\n    {\n      \"phone\": \"2121234567\",\n      \"details\": \"secondary\",\n      \"confidence\": 3\n    },\n    {\n      \"phone\": \"2121234567\",\n      \"details\": \"secondary\",\n      \"confidence\": 3\n    }\n  ],\n  \"confidence\": 2,\n  \"insurances\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"tins\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "341164f9-3b4b-41be-8d84-c582b37c14c0",
+          "name": "getCustomLocation",
+          "request": {
+            "name": "getCustomLocation",
+            "description": {
+              "content": "Retrieve data on a specific location.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "locations",
+                ":location_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "location_uuid",
+                  "description": "(Required) The UUID of the target location."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "01c5e537-d176-408f-88e8-ced0e5faee83",
+              "name": "Returns a single location",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    ":location_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"f38b9fd5-1e28-4f6e-953c-1e1493b68e21\",\n  \"name\": \"string\",\n  \"address\": \"185 Berry St # 130, San Francisco, CA 94107, US\",\n  \"address_details\": {\n    \"street\": \"185 Berry St # 130\",\n    \"address_line_1\": \"185 Berry St\",\n    \"address_line_2\": \"# 130\",\n    \"city\": \"San Francisco\",\n    \"state\": \"CA\",\n    \"zip\": \"94107\"\n  },\n  \"latitude\": 37.7765973,\n  \"longitude\": -122.3919488,\n  \"google_maps_link\": \"https://www.google.com/maps/@37.7765973-122.3919488?q=185%20Berry%20St%20%23%20130%2C%20SF%2C%20CA%2094107%2C%20US\",\n  \"phone_numbers\": [\n    {\n      \"phone\": \"4155146410\",\n      \"details\": \"primary\"\n    },\n    {\n      \"phone\": \"4155146410\",\n      \"details\": \"primary\"\n    }\n  ],\n  \"faxes\": [\n    {\n      \"phone\": \"2121234567\",\n      \"details\": \"secondary\",\n      \"confidence\": 3\n    },\n    {\n      \"phone\": \"2121234567\",\n      \"details\": \"secondary\",\n      \"confidence\": 3\n    }\n  ],\n  \"confidence\": 2,\n  \"insurances\": [\n    {\n      \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n      \"carrier_association\": \"Aetna\",\n      \"carrier_brand\": \"Aetna\",\n      \"carrier_name\": \"Aetna\",\n      \"state\": \"NY\",\n      \"plan_name\": \"Aetna HealthFund Open Choice\",\n      \"plan_type\": \"PPO\",\n      \"metal_level\": \"string\",\n      \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n      \"network\": \"string\",\n      \"confidence\": 4,\n      \"category\": \"string\",\n      \"codes\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ]\n    },\n    {\n      \"uuid\": \"d8addf29-1054-4ccb-b179-dda65f7fefdd\",\n      \"carrier_association\": \"Aetna\",\n      \"carrier_brand\": \"Aetna\",\n      \"carrier_name\": \"Aetna\",\n      \"state\": \"NY\",\n      \"plan_name\": \"Aetna HealthFund Open Choice\",\n      \"plan_type\": \"PPO\",\n      \"metal_level\": \"string\",\n      \"display_name\": \"Aetna - HealthFund Open Choice - PPO\",\n      \"network\": \"string\",\n      \"confidence\": 4,\n      \"category\": \"string\",\n      \"codes\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ]\n    }\n  ],\n  \"tins\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c6ff8b2-f307-4cf9-8450-ed462a0394ba",
+              "name": "The given location UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    ":location_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f7c9818-cffa-4d81-aa7f-6ec4c404f8bc",
+          "name": "putCustomLocation",
+          "request": {
+            "name": "putCustomLocation",
+            "description": {
+              "content": "Edit all fields that do not fall under `insurances`, `google_maps_link`, `latitude`, or `longitude`. You may also add new fields or remove existing fields.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "locations",
+                ":location_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "location_uuid",
+                  "description": "(Required) The UUID of the target location."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"remove_fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"key_0\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b21b4f1f-3c09-4fd8-8daf-75ed56b6f670",
+              "name": "The specified fields were successfully updated or added",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    ":location_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"remove_fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"key_0\": \"<string>\",\n  \"key_1\": \"<string>\",\n  \"key_2\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"remove_fields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9703540-0d9e-4bc7-afb0-259488d8ef53",
+              "name": "This request attempted to update fields which cannot be customized or attempted to set a location_type value which does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    ":location_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"remove_fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"key_0\": \"<string>\",\n  \"key_1\": \"<string>\",\n  \"key_2\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"bad_request\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91961ea8-7313-460d-9add-f932e0533661",
+              "name": "The given location UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    ":location_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"remove_fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"key_0\": \"<string>\",\n  \"key_1\": \"<string>\",\n  \"key_2\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82850f3b-a65e-4809-bb8f-a1777058be2e",
+          "name": "deleteCustomLocation",
+          "request": {
+            "name": "deleteCustomLocation",
+            "description": {
+              "content": "Delete a location.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "locations",
+                ":location_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "location_uuid",
+                  "description": "(Required) The UUID of the target location."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3f996f54-8b2f-4917-895c-b93a5f93473a",
+              "name": "Location was successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    ":location_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dd481062-36f0-4ddc-867a-4f3fe83a8559",
+              "name": "The given location UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    ":location_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b201672d-22c7-433b-bf9e-b9c6ec43cf71",
+          "name": "putCustomLocationInsurances",
+          "request": {
+            "name": "putCustomLocationInsurances",
+            "description": {
+              "content": "Add or remove insurances from a location using our standard insurance UUIDs.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "locations",
+                ":location_uuid",
+                "insurances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "location_uuid",
+                  "description": "(Required) The UUID of the target location."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"add\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"remove\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"override\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec68e94b-df88-4e6c-b253-fef12aaed927",
+              "name": "The insurances list was successfully modified.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    ":location_uuid",
+                    "insurances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"add\": [\n    \"003aa14f-31ed-4c20-8888-07055d69afb6\"\n  ],\n  \"remove\": [\n    \"000914b4-d165-4343-bd17-0054505faaa5\"\n  ],\n  \"override\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"add\": [\n      \"003aa14f-31ed-4c20-8888-07055d69afb6\"\n    ],\n    \"remove\": [\n      \"000914b4-d165-4343-bd17-0054505faaa5\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "748188c9-7aee-491a-8966-89356b337311",
+              "name": "This request attempted to use fields which are not supported, or attempted to use invalid value type.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    ":location_uuid",
+                    "insurances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"add\": [\n    \"003aa14f-31ed-4c20-8888-07055d69afb6\"\n  ],\n  \"remove\": [\n    \"000914b4-d165-4343-bd17-0054505faaa5\"\n  ],\n  \"override\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"bad_request\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9c1be40-3b1b-4949-9c62-73c02a1fdffe",
+              "name": "The given location UUID cannot be found, or NPI in request path is not in custom provider directory.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    ":location_uuid",
+                    "insurances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"add\": [\n    \"003aa14f-31ed-4c20-8888-07055d69afb6\"\n  ],\n  \"remove\": [\n    \"000914b4-d165-4343-bd17-0054505faaa5\"\n  ],\n  \"override\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87be030a-b897-4872-8233-f9df715cb360",
+          "name": "putCustomLocationOrganizations",
+          "request": {
+            "name": "putCustomLocationOrganizations",
+            "description": {
+              "content": "Add or remove organizations from a location using our standard organization UUIDs.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "locations",
+                ":location_uuid",
+                "organizations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "location_uuid",
+                  "description": "(Required) The UUID of the target location."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"add\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"remove\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"override\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6e9df4bf-64d8-45fd-8a3d-8ae1c2846efc",
+              "name": "The organizations list was successfully modified.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    ":location_uuid",
+                    "organizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"add\": [\n    \"003aa14f-31ed-4c20-8888-07055d69afb6\"\n  ],\n  \"remove\": [\n    \"000914b4-d165-4343-bd17-0054505faaa5\"\n  ],\n  \"override\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"add\": [\n      \"003aa14f-31ed-4c20-8888-07055d69afb6\"\n    ],\n    \"remove\": [\n      \"000914b4-d165-4343-bd17-0054505faaa5\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39149553-f7d9-4ed3-b3e0-5ff6b96313e2",
+              "name": "This request attempted to use fields which are not supported, or attempted to use invalid value type.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    ":location_uuid",
+                    "organizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"add\": [\n    \"003aa14f-31ed-4c20-8888-07055d69afb6\"\n  ],\n  \"remove\": [\n    \"000914b4-d165-4343-bd17-0054505faaa5\"\n  ],\n  \"override\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"bad_request\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38f2435b-eaff-40f5-a3a8-7aa48f5425e2",
+              "name": "The given location UUID cannot be found, or NPI in request path is not in custom provider directory.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    ":location_uuid",
+                    "organizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"add\": [\n    \"003aa14f-31ed-4c20-8888-07055d69afb6\"\n  ],\n  \"remove\": [\n    \"000914b4-d165-4343-bd17-0054505faaa5\"\n  ],\n  \"override\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5f6b491-d825-45a1-b0b6-01b871e1fb9d",
+          "name": "putCustomLocationClinicalAreas",
+          "request": {
+            "name": "putCustomLocationClinicalAreas",
+            "description": {
+              "content": "Add or remove clinical areas from a location using our standard clinical area UUIDs.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "locations",
+                ":location_uuid",
+                "clinical_areas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "location_uuid",
+                  "description": "(Required) The UUID of the target location."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"add\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"remove\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"override\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f35addb6-1171-47f9-a457-5d4fbc09e96a",
+              "name": "The clinical areas list was successfully modified.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    ":location_uuid",
+                    "clinical_areas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"add\": [\n    \"003aa14f-31ed-4c20-8888-07055d69afb6\"\n  ],\n  \"remove\": [\n    \"000914b4-d165-4343-bd17-0054505faaa5\"\n  ],\n  \"override\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"add\": [\n      \"003aa14f-31ed-4c20-8888-07055d69afb6\"\n    ],\n    \"remove\": [\n      \"000914b4-d165-4343-bd17-0054505faaa5\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db5dfeeb-4c83-4c0a-890e-926e77a6dc11",
+              "name": "This request attempted to use fields which are not supported, or attempted to use invalid value type.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    ":location_uuid",
+                    "clinical_areas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"add\": [\n    \"003aa14f-31ed-4c20-8888-07055d69afb6\"\n  ],\n  \"remove\": [\n    \"000914b4-d165-4343-bd17-0054505faaa5\"\n  ],\n  \"override\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"bad_request\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c3a1b29-7076-4f13-ba0c-9103f2ec19e5",
+              "name": "The given location UUID cannot be found, or NPI in request path is not in custom provider directory.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    ":location_uuid",
+                    "clinical_areas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_uuid",
+                      "description": "(Required) The UUID of the target location."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"add\": [\n    \"003aa14f-31ed-4c20-8888-07055d69afb6\"\n  ],\n  \"remove\": [\n    \"000914b4-d165-4343-bd17-0054505faaa5\"\n  ],\n  \"override\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ribbonhealth.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "630864b8-7fd9-438d-ac90-9c7b90b0740a",
+    "name": "ribbon-health Cost Estimates Locations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.\n",
+      "type": "text/plain"
+    }
+  }
+}

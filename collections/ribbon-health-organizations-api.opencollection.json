@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ribbon-health Cost Estimates Organizations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getOrganizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/custom/organizations",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "String input of an address that will be interpreted and geocoded in real time."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "String input that is fuzzy matched to against the `organization.name` field."
+              },
+              {
+                "name": "distance",
+                "value": "",
+                "type": "query",
+                "description": "Constrains the search to within this many miles of the center point"
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Latitude/longitude pair of coordinates in lieu of a string address."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of the results which was returned."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "How many results are in each page."
+              }
+            ]
+          },
+          "docs": "Search for different organizations.\n\n#### Example Use Case\nDisplay a map of all of all nearby health systems and their relevant information so that a patient can find care.\n"
+        },
+        {
+          "info": {
+            "name": "getOrganization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/custom/organizations/:organization_uuid",
+            "params": [
+              {
+                "name": "organization_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target organization."
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information for any organization given its UUID\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

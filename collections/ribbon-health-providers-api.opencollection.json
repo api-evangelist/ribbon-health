@@ -1,0 +1,665 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ribbon-health Cost Estimates Providers API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getCustomProviders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/custom/providers",
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "The page number to return."
+              },
+              {
+                "name": "page_size",
+                "value": "25",
+                "type": "query",
+                "description": "Number of items per page."
+              },
+              {
+                "name": "max_locations",
+                "value": "5",
+                "type": "query",
+                "description": "Max number of locations returned per provider."
+              },
+              {
+                "name": "fields",
+                "value": "locations,age",
+                "type": "query",
+                "description": "Comma-separated list of fields to include."
+              },
+              {
+                "name": "_excl_fields",
+                "value": "locations,age",
+                "type": "query",
+                "description": "Comma-separated list of fields to exclude."
+              },
+              {
+                "name": "npis",
+                "value": "1234567890",
+                "type": "query",
+                "description": "A comma-separated list of NPIs to filter on."
+              },
+              {
+                "name": "name",
+                "value": "Doe",
+                "type": "query",
+                "description": "Provider’s name or partial name to search."
+              },
+              {
+                "name": "provider_types",
+                "value": "Optometry",
+                "type": "query",
+                "description": "Comma-separated list of provider types to include."
+              },
+              {
+                "name": "_excl_provider_types",
+                "value": "Optometry",
+                "type": "query",
+                "description": "Comma-separated list of provider types to exclude."
+              },
+              {
+                "name": "gender",
+                "value": "m",
+                "type": "query",
+                "description": "Filter providers by gender (e.g., 'm', 'f')."
+              },
+              {
+                "name": "max_age",
+                "value": "70",
+                "type": "query",
+                "description": "Maximum provider age to include."
+              },
+              {
+                "name": "min_age",
+                "value": "45",
+                "type": "query",
+                "description": "Minimum provider age to include."
+              },
+              {
+                "name": "language",
+                "value": "English",
+                "type": "query",
+                "description": "Provider’s language (or comma-separated languages)."
+              },
+              {
+                "name": "_excl_language",
+                "value": "English",
+                "type": "query",
+                "description": "Language(s) to exclude."
+              },
+              {
+                "name": "min_rating",
+                "value": "6",
+                "type": "query",
+                "description": "Minimum star rating allowed."
+              },
+              {
+                "name": "address",
+                "value": "New York, NY",
+                "type": "query",
+                "description": "Free-text address to search."
+              },
+              {
+                "name": "location_ids",
+                "value": "34ecc98a-e49e-49e3-84f9-b0ab2ff00495",
+                "type": "query",
+                "description": "Comma-separated list of location IDs to include."
+              },
+              {
+                "name": "_excl_location_ids",
+                "value": "34ecc98a-e49e-49e3-84f9-b0ab2ff00495",
+                "type": "query",
+                "description": "Comma-separated list of location IDs to exclude."
+              },
+              {
+                "name": "location",
+                "value": "37.7489816,-122.4802092",
+                "type": "query",
+                "description": "A latitude,longitude pair for proximity searching."
+              },
+              {
+                "name": "min_location_confidence",
+                "value": "3",
+                "type": "query",
+                "description": "Minimum location confidence score to include."
+              },
+              {
+                "name": "min_confidence",
+                "value": "3",
+                "type": "query",
+                "description": "(Synonym to min_location_confidence, if used.)"
+              },
+              {
+                "name": "distance",
+                "value": "10",
+                "type": "query",
+                "description": "Distance in miles from the given location."
+              },
+              {
+                "name": "state",
+                "value": "NY",
+                "type": "query",
+                "description": "Two-letter US state code (e.g., \"NY\")."
+              },
+              {
+                "name": "insurance_ids",
+                "value": "e527f6e3-fe42-4932-bf34-d81f1c1fd652",
+                "type": "query",
+                "description": "Comma-separated insurance IDs to include."
+              },
+              {
+                "name": "_excl_insurance_ids",
+                "value": "e527f6e3-fe42-4932-bf34-d81f1c1fd652",
+                "type": "query",
+                "description": "Comma-separated insurance IDs to exclude."
+              },
+              {
+                "name": "insurance_carrier_name",
+                "value": "Aetna",
+                "type": "query",
+                "description": "Filter providers by insurance carrier name."
+              },
+              {
+                "name": "location_insurance_ids",
+                "value": "34ecc98a-e49e-49e3-84f9-b0ab2ff00495",
+                "type": "query",
+                "description": "Comma-separated insurance IDs applicable at certain locations."
+              },
+              {
+                "name": "_excl_location_insurance_ids",
+                "value": "34ecc98a-e49e-49e3-84f9-b0ab2ff00495",
+                "type": "query",
+                "description": "Comma-separated insurance IDs to exclude at locations."
+              },
+              {
+                "name": "national_bluecard",
+                "value": "true",
+                "type": "query",
+                "description": "True if searching for BlueCard or national Blue network coverage."
+              },
+              {
+                "name": "specialty_ids",
+                "value": "1de33770-eb1c-47fa-ab3e-f9a4ab924d9d",
+                "type": "query",
+                "description": "Comma-separated list of specialty IDs to include."
+              },
+              {
+                "name": "_excl_specialty_ids",
+                "value": "1de33770-eb1c-47fa-ab3e-f9a4ab924d9d",
+                "type": "query",
+                "description": "Comma-separated list of specialty IDs to exclude."
+              },
+              {
+                "name": "specialty",
+                "value": "gastroenterology",
+                "type": "query",
+                "description": "Specialty name to include."
+              },
+              {
+                "name": "specialty_ids_primary",
+                "value": "1de33770-eb1c-47fa-ab3e-f9a4ab924d9d",
+                "type": "query",
+                "description": "Comma-separated list of primary specialty IDs to include."
+              },
+              {
+                "name": "_excl_specialty_ids_primary",
+                "value": "1de33770-eb1c-47fa-ab3e-f9a4ab924d9d",
+                "type": "query",
+                "description": "Comma-separated list of primary specialty IDs to exclude."
+              },
+              {
+                "name": "specialty_primary",
+                "value": "gastroenterology",
+                "type": "query",
+                "description": "Primary specialty name to include."
+              },
+              {
+                "name": "apply_specialty_grouping",
+                "value": "false",
+                "type": "query",
+                "description": "Whether to group related specialties automatically."
+              },
+              {
+                "name": "procedure_ids",
+                "value": "9f3fd9e8-96b0-4cc7-ab2c-8d538e9164ae",
+                "type": "query",
+                "description": "Comma-separated list of procedure IDs to include."
+              },
+              {
+                "name": "_excl_procedure_ids",
+                "value": "9f3fd9e8-96b0-4cc7-ab2c-8d538e9164ae",
+                "type": "query",
+                "description": "Comma-separated list of procedure IDs to exclude."
+              },
+              {
+                "name": "procedure",
+                "value": "MRI, thoracic spine",
+                "type": "query",
+                "description": "Procedure name to include."
+              },
+              {
+                "name": "min_experience_index",
+                "value": "4",
+                "type": "query",
+                "description": "Minimum experience index of providers for the given procedure."
+              },
+              {
+                "name": "max_cost_index",
+                "value": "4",
+                "type": "query",
+                "description": "Maximum allowed cost index for the given procedure."
+              },
+              {
+                "name": "clinical_area",
+                "value": "Mental Health",
+                "type": "query",
+                "description": "Name of the clinical area to filter on."
+              },
+              {
+                "name": "clinical_area_ids",
+                "value": "a7da792c-fae3-4b46-bab7-220e0c54e376",
+                "type": "query",
+                "description": "Comma-separated clinical area IDs to include."
+              },
+              {
+                "name": "_excl_clinical_area_ids",
+                "value": "a7da792c-fae3-4b46-bab7-220e0c54e376",
+                "type": "query",
+                "description": "Comma-separated clinical area IDs to exclude."
+              },
+              {
+                "name": "condition",
+                "value": "depression",
+                "type": "query",
+                "description": "Name of the condition to filter on."
+              },
+              {
+                "name": "condition_ids",
+                "value": "fd7c10f3-fbec-482a-929b-be94a8bb3bc1",
+                "type": "query",
+                "description": "Comma-separated condition IDs to include."
+              },
+              {
+                "name": "_excl_condition_ids",
+                "value": "fd7c10f3-fbec-482a-929b-be94a8bb3bc1",
+                "type": "query",
+                "description": "Comma-separated condition IDs to exclude."
+              },
+              {
+                "name": "treatment",
+                "value": "Psychological Therapy",
+                "type": "query",
+                "description": "Treatment name to filter on."
+              },
+              {
+                "name": "treatment_ids",
+                "value": "11016779-e286-4b17-bd45-2d78660a9f28",
+                "type": "query",
+                "description": "Comma-separated treatment IDs to include."
+              },
+              {
+                "name": "_excl_treatment_ids",
+                "value": "11016779-e286-4b17-bd45-2d78660a9f28",
+                "type": "query",
+                "description": "Comma-separated treatment IDs to exclude."
+              },
+              {
+                "name": "panel_ages",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated age panels to include."
+              },
+              {
+                "name": "_excl_panel_ages",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated age panels to exclude."
+              },
+              {
+                "name": "panel_sexes",
+                "value": "Primarily female",
+                "type": "query",
+                "description": "Filter for sexes or gender categories (e.g., 'Primarily female')."
+              },
+              {
+                "name": "min_outcomes_index",
+                "value": "5",
+                "type": "query",
+                "description": "Minimal acceptable outcomes score/index."
+              },
+              {
+                "name": "min_efficiency_index",
+                "value": "5",
+                "type": "query",
+                "description": "Minimal acceptable efficiency score/index."
+              },
+              {
+                "name": "max_unit_cost_index",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum allowable unit cost index."
+              },
+              {
+                "name": "max_ribbon_cost_score",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum allowable \"ribbon\" cost score."
+              },
+              {
+                "name": "location_organization_ids",
+                "value": "497a1ac1-52cc-43a9-b796-844dabde10fc",
+                "type": "query",
+                "description": "Comma-separated organization IDs for location matching."
+              },
+              {
+                "name": "_excl_location_organization_ids",
+                "value": "497a1ac1-52cc-43a9-b796-844dabde10fc",
+                "type": "query",
+                "description": "Comma-separated organization IDs to exclude."
+              },
+              {
+                "name": "tin_ids",
+                "value": "123456789",
+                "type": "query",
+                "description": "Comma-separated TIN IDs to include."
+              },
+              {
+                "name": "tin_name",
+                "value": "Acme TIN",
+                "type": "query",
+                "description": "TIN name or partial name to include."
+              },
+              {
+                "name": "tin_legal_name",
+                "value": "Acme Legal TIN",
+                "type": "query",
+                "description": "TIN's legal name to include."
+              }
+            ]
+          },
+          "docs": "Allows you to quickly list doctors based on important search criteria."
+        },
+        {
+          "info": {
+            "name": "getCustomProvider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/custom/providers/:npi",
+            "params": [
+              {
+                "name": "npi",
+                "value": "",
+                "type": "path",
+                "description": "The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+              },
+              {
+                "name": "max_insurances",
+                "value": "",
+                "type": "query",
+                "description": "If provided, returns only up to this many insurances per provider. Useful to limit the amount of data returned when you do not need the entire list of accepted insurances."
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information for any provider given their NPI, such as locations, contact information, education, patient satisfaction, etc.\n"
+        },
+        {
+          "info": {
+            "name": "putCustomProvider",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/providers/:npi",
+            "params": [
+              {
+                "name": "npi",
+                "value": "",
+                "type": "path",
+                "description": "The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit all fields that do not fall under `specialties`, `locations`, or `insurances`. You may also add new fields or remove existing fields.\n\n#### Looking For The Old Documentation?\nWe're in the process of revamping our documentation. You can find the old page for this endpoint [here](https://ribbon.readme.io/docs/add-or-edit-provider-fields-old).\n"
+        },
+        {
+          "info": {
+            "name": "putCustomProviderLocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/providers/:npi/locations",
+            "params": [
+              {
+                "name": "npi",
+                "value": "",
+                "type": "path",
+                "description": "The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add or remove locations a provider practices at using our standard location UUIDs.\n"
+        },
+        {
+          "info": {
+            "name": "putCustomProviderLocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/providers/:npi/locations/:location_uuid",
+            "params": [
+              {
+                "name": "npi",
+                "value": "",
+                "type": "path",
+                "description": "The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+              },
+              {
+                "name": "location_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target location."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit all fields that do not fall under `uuid`, `google_maps_link`, `latitude`, or `longitude`. You may also add new fields or remove existing fields.\nThese updates are provider-specific and will not affect other providers practicing at the same location.\n"
+        },
+        {
+          "info": {
+            "name": "putCustomProviderSpecialties",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/providers/:npi/specialties",
+            "params": [
+              {
+                "name": "npi",
+                "value": "",
+                "type": "path",
+                "description": "The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add or remove specialties for a provider using our standard specialty UUIDs.\n"
+        },
+        {
+          "info": {
+            "name": "putCustomProviderPrimarySpecialties",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/providers/:npi/specialties/:specialty_uuid",
+            "params": [
+              {
+                "name": "npi",
+                "value": "",
+                "type": "path",
+                "description": "The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+              },
+              {
+                "name": "specialty_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target specialty."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit whether a single specialty is one of the provider's primary specialties.\n"
+        },
+        {
+          "info": {
+            "name": "putCustomProviderProcedures",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/providers/:npi/procedures",
+            "params": [
+              {
+                "name": "npi",
+                "value": "",
+                "type": "path",
+                "description": "The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add or remove procedures for a provider using our standard procedure UUIDs.\n"
+        },
+        {
+          "info": {
+            "name": "putCustomProviderClinicalAreas",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/providers/:npi/clinical_areas",
+            "params": [
+              {
+                "name": "npi",
+                "value": "",
+                "type": "path",
+                "description": "The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add or remove clinical areas for a provider using our standard clinical area UUIDs.\n"
+        },
+        {
+          "info": {
+            "name": "putCustomProviderLocationInsurances",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/providers/:npi/locations/:location_uuid/insurances",
+            "params": [
+              {
+                "name": "npi",
+                "value": "",
+                "type": "path",
+                "description": "The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+              },
+              {
+                "name": "location_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target location."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add or remove insurances accepted by a provider at a specific location using our standard insurance UUIDs.\n"
+        },
+        {
+          "info": {
+            "name": "putCustomProviderLocationOrganizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/providers/:npi/locations/:location_uuid/organizations",
+            "params": [
+              {
+                "name": "npi",
+                "value": "",
+                "type": "path",
+                "description": "The 10-digit National Provider Identifier (NPI) of the healthcare provider to fetch."
+              },
+              {
+                "name": "location_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target location."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add or remove organizations accepted by a provider at a specific location using our standard organization UUIDs.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

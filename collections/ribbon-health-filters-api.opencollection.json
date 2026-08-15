@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ribbon-health Cost Estimates Filters API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Filters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getCustomProviderFilters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/custom/providers/filters"
+          },
+          "docs": "Fetch all previously created filters for providers.\n"
+        },
+        {
+          "info": {
+            "name": "createCustomProviderFilter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ribbonhealth.com/v1/custom/providers/filters",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create new filters to be used when searching for providers in the [Search Providers](./getcustomproviders) endpoint. \nYou can create filters for both Ribbon's existing data fields as well as any custom data fields you create.\n\n#### Example Use Case:\nLet's say you add a new field to a bunch of providers that match your use case, for instance `c_section_rate`. You could make this field searchable so that your search through [Search Providers](./getcustomproviders) when you pass through a certain p"
+        },
+        {
+          "info": {
+            "name": "editCustomProviderFilter",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/providers/filters/:filter_uuid",
+            "params": [
+              {
+                "name": "filter_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the filter you want to edit."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit any of the fields in a custom provider filter you have already created.\n"
+        },
+        {
+          "info": {
+            "name": "deleteCustomProviderFilter",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ribbonhealth.com/v1/custom/providers/filters/:filter_uuid",
+            "params": [
+              {
+                "name": "filter_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the filter you want to delete."
+              }
+            ]
+          },
+          "docs": "Delete a provider filter.\n"
+        },
+        {
+          "info": {
+            "name": "getCustomLocationFilters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/custom/locations/filters"
+          },
+          "docs": "Fetch all previously created custom filters for locations.\n"
+        },
+        {
+          "info": {
+            "name": "createCustomLocationFilter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ribbonhealth.com/v1/custom/locations/filters",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create new filters to be used when searching for locations in the [Search Locations](./getcustomlocations) endpoint. \nYou can create filters for both Ribbon's existing data fields as well as any custom data fields you create.\n\n#### Example Use Case:\nLet's say you add a new field to a bunch of locations that match your use case, for instance `c_section_rate`. You could make this field searchable so that your search through [Search Locations](./getcustomlocations) when you pass through a certain p"
+        },
+        {
+          "info": {
+            "name": "editCustomLocationFilter",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/locations/filters/:filter_uuid",
+            "params": [
+              {
+                "name": "filter_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the filter you want to edit."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit any of the fields in a custom location filter you have already created.\n"
+        },
+        {
+          "info": {
+            "name": "deleteCustomLocationFilter",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ribbonhealth.com/v1/custom/locations/filters/:filter_uuid",
+            "params": [
+              {
+                "name": "filter_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the filter you want to delete."
+              }
+            ]
+          },
+          "docs": "Delete a location filter.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

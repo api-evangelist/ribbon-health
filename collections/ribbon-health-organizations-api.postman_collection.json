@@ -1,0 +1,334 @@
+{
+  "item": [
+    {
+      "id": "ec61479a-c2da-44d8-bc35-e7a945a22418",
+      "name": "Organizations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7059c93f-5a79-41db-a8c1-c6e589d51704",
+          "name": "getOrganizations",
+          "request": {
+            "name": "getOrganizations",
+            "description": {
+              "content": "Search for different organizations.\n\n#### Example Use Case\nDisplay a map of all of all nearby health systems and their relevant information so that a patient can find care.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "organizations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "String input of an address that will be interpreted and geocoded in real time."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "String input that is fuzzy matched to against the `organization.name` field."
+                },
+                {
+                  "disabled": false,
+                  "key": "distance",
+                  "value": "<integer>",
+                  "description": "Constrains the search to within this many miles of the center point"
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>",
+                  "description": "Latitude/longitude pair of coordinates in lieu of a string address."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "The page of the results which was returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "How many results are in each page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e905c946-30fb-4b7e-9293-f93586ddc997",
+              "name": "Specialties returned from a valid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "organizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "New York, NY"
+                    },
+                    {
+                      "key": "name",
+                      "value": "baptist"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "location",
+                      "value": "37.7489816,-122.4802092"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "15"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"uuid\": \"a1dbf998-a65b-4780-8361-648357785d96\",\n      \"name\": \"Baptist Health (Jacksonville)\",\n      \"organization_types\": [\n        \"Health System\",\n        \"Health System\"\n      ],\n      \"websites\": [\n        {\n          \"url\": \"https://www.baptistjax.com/\"\n        },\n        {\n          \"url\": \"https://www.baptistjax.com/\"\n        }\n      ],\n      \"ids\": [\n        {\n          \"id\": \"5\",\n          \"id_type\": \"AHA_ID\"\n        },\n        {\n          \"id\": \"5\",\n          \"id_type\": \"AHA_ID\"\n        }\n      ],\n      \"address\": \"841 Prudential Dr # 1601, Jacksonville, FL 32207, US\",\n      \"address_details\": {\n        \"zip\": \"32207\",\n        \"city\": \"Jacksonville\",\n        \"state\": \"FL\",\n        \"street\": \"841 Prudential Dr # 1601\",\n        \"address_line_1\": \"841 Prudential Dr\",\n        \"address_line_2\": \"# 1601\"\n      },\n      \"latitude\": 30.3159499,\n      \"longitude\": 81.6630919,\n      \"phone_numbers\": [\n        {\n          \"phone\": \"9042022000\",\n          \"detail\": \"primary\"\n        },\n        {\n          \"phone\": \"9042022000\",\n          \"detail\": \"primary\"\n        }\n      ]\n    },\n    {\n      \"uuid\": \"a1dbf998-a65b-4780-8361-648357785d96\",\n      \"name\": \"Baptist Health (Jacksonville)\",\n      \"organization_types\": [\n        \"Health System\",\n        \"Health System\"\n      ],\n      \"websites\": [\n        {\n          \"url\": \"https://www.baptistjax.com/\"\n        },\n        {\n          \"url\": \"https://www.baptistjax.com/\"\n        }\n      ],\n      \"ids\": [\n        {\n          \"id\": \"5\",\n          \"id_type\": \"AHA_ID\"\n        },\n        {\n          \"id\": \"5\",\n          \"id_type\": \"AHA_ID\"\n        }\n      ],\n      \"address\": \"841 Prudential Dr # 1601, Jacksonville, FL 32207, US\",\n      \"address_details\": {\n        \"zip\": \"32207\",\n        \"city\": \"Jacksonville\",\n        \"state\": \"FL\",\n        \"street\": \"841 Prudential Dr # 1601\",\n        \"address_line_1\": \"841 Prudential Dr\",\n        \"address_line_2\": \"# 1601\"\n      },\n      \"latitude\": 30.3159499,\n      \"longitude\": 81.6630919,\n      \"phone_numbers\": [\n        {\n          \"phone\": \"9042022000\",\n          \"detail\": \"primary\"\n        },\n        {\n          \"phone\": \"9042022000\",\n          \"detail\": \"primary\"\n        }\n      ]\n    }\n  ],\n  \"parameters\": {\n    \"page\": 1,\n    \"page_size\": 25,\n    \"total_count\": 141,\n    \"sort_by\": \"distance\",\n    \"distance\": 10,\n    \"geo\": {\n      \"latitude\": 40.7351327,\n      \"longitude\": -73.9881657\n    },\n    \"address\": \"Jacksonville, FL, USA\",\n    \"name\": \"baptist\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "48ffe410-712a-4b6c-8d43-9c14648c67fc",
+          "name": "getOrganization",
+          "request": {
+            "name": "getOrganization",
+            "description": {
+              "content": "Retrieve detailed information for any organization given its UUID\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "organizations",
+                ":organization_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "organization_uuid",
+                  "description": "(Required) The UUID of the target organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ff89e5f-edcb-44d2-b4b4-53ab8f5e69a4",
+              "name": "The requested organization is returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "organizations",
+                    ":organization_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "organization_uuid",
+                      "description": "(Required) The UUID of the target organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"a1dbf998-a65b-4780-8361-648357785d96\",\n  \"name\": \"Baptist Health (Jacksonville)\",\n  \"organization_types\": [\n    \"Health System\",\n    \"Health System\"\n  ],\n  \"websites\": [\n    {\n      \"url\": \"https://www.baptistjax.com/\"\n    },\n    {\n      \"url\": \"https://www.baptistjax.com/\"\n    }\n  ],\n  \"ids\": [\n    {\n      \"id\": \"5\",\n      \"id_type\": \"AHA_ID\"\n    },\n    {\n      \"id\": \"5\",\n      \"id_type\": \"AHA_ID\"\n    }\n  ],\n  \"address\": \"841 Prudential Dr # 1601, Jacksonville, FL 32207, US\",\n  \"address_details\": {\n    \"zip\": \"32207\",\n    \"city\": \"Jacksonville\",\n    \"state\": \"FL\",\n    \"street\": \"841 Prudential Dr # 1601\",\n    \"address_line_1\": \"841 Prudential Dr\",\n    \"address_line_2\": \"# 1601\"\n  },\n  \"latitude\": 30.3159499,\n  \"longitude\": 81.6630919,\n  \"phone_numbers\": [\n    {\n      \"phone\": \"9042022000\",\n      \"detail\": \"primary\"\n    },\n    {\n      \"phone\": \"9042022000\",\n      \"detail\": \"primary\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4646dfb5-0ebb-4abe-ad7a-f36f14ec0ad0",
+              "name": "The given UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "organizations",
+                    ":organization_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "organization_uuid",
+                      "description": "(Required) The UUID of the target organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ribbonhealth.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e52c3758-f172-4ed9-bd44-10cddb7c6b54",
+    "name": "ribbon-health Cost Estimates Organizations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.\n",
+      "type": "text/plain"
+    }
+  }
+}

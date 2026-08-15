@@ -1,0 +1,43 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for ribbon-health Cost Estimates Organizations API
+  version: 1.0.0
+extends: openapi/ribbon-health-organizations-api-openapi.yml
+x-apievangelist:
+  generated: '2026-08-14'
+  method: generated
+  source: openapi/ribbon-health-organizations-api-openapi.yml + https://ribbon.readme.io/llms.txt + live
+    probes of https://api.ribbonhealth.com
+actions:
+- target: $.info
+  update:
+    x-apievangelist-source: https://ribbon.readme.io/llms.txt
+    x-apievangelist-provider: ribbon-health
+    x-apievangelist-conventions: conventions/ribbon-health-conventions.yml
+    x-apievangelist-errors: errors/ribbon-health-problem-types.yml
+    x-apievangelist-data-model: data-model/ribbon-health-data-model.yml
+    x-apievangelist-lifecycle: lifecycle/ribbon-health-lifecycle.yml
+    x-apievangelist-rebrand: Ribbon Health is now part of H1; the docs brand this "the H1 API" while the
+      host remains api.ribbonhealth.com.
+- target: $
+  update:
+    x-apievangelist-error-envelope:
+      content_type: application/json
+      shape: '{"error": {"status": <int>, "code": "<snake_case_code>", "message": "<string>"}}'
+      rfc9457: false
+      method: probed
+      source: live 401/404 responses from https://api.ribbonhealth.com, 2026-08-14
+    x-apievangelist-request-id-header:
+      name: ribbon-request-id
+      method: probed
+      note: Returned on every response including errors. Undocumented by the provider.
+    x-apievangelist-rate-limit-signal:
+      response_headers: none
+      status_on_exhaustion: 429
+      error_code: rate_limit_exceeded
+      method: probed
+      note: Limits are documented per endpoint but no X-RateLimit-*/RateLimit-*/Retry-After header is
+        returned.
+    x-apievangelist-idempotency:
+      supported: false
+      note: No idempotency key anywhere in the spec or the docs. POST creates are not safely retryable.

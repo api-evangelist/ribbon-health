@@ -1,0 +1,259 @@
+generated: '2026-08-14'
+method: derived
+source: >-
+  openapi/ribbon-health-*-openapi.yml (55 paths) + json-schema/*.json (12 documents) +
+  https://ribbon.readme.io/llms.txt
+summary: >-
+  A provider-data graph anchored on two identifier systems: the federal NPI for providers and
+  H1-issued UUIDs for everything else. Provider, Location and Insurance form the core triangle —
+  a provider practises at locations, and accepts insurances AT a specific location, so network
+  participation is an edge on the provider-location pair rather than a property of the provider.
+  That three-way join is the distinguishing feature of the model and the thing most integrators
+  get wrong.
+identifier_systems:
+  - system: NPI
+    applies_to: [Provider]
+    format: 10-digit National Provider Identifier
+    external: true
+    note: >-
+      The provider primary key is the federal NPI, not an H1 id. Providers are therefore
+      addressable without a prior lookup, and are joinable to any other NPI-keyed dataset.
+      Documented at https://ribbon.readme.io/docs/npi-national-provider-identifier.
+  - system: UUID
+    applies_to: [Location, Insurance, Specialty, Procedure, ClinicalArea, Condition, Treatment,
+      Organization, ProviderType, LocationType, Filter, PricingCarrier]
+    format: H1-issued UUID
+    external: false
+    note: >-
+      Opaque and H1-scoped. Reference endpoints exist for each type specifically so a caller can
+      resolve a name to a UUID before using it in a search filter or a write.
+  - system: TIN
+    applies_to: [Tin]
+    format: Tax Identification Number
+    external: true
+  - system: CPT
+    applies_to: [Procedure]
+    external: true
+    note: Price Transparency v2 resolves procedures by CPT code via GET /v2/procedures.
+  - system: SSA county code
+    applies_to: [NetworkAnalysis]
+    external: true
+    note: Network analysis rows are keyed by `ssa_code` with an `npi_count` per geography.
+entities:
+  - name: Provider
+    key: npi
+    collection: /v1/custom/providers
+    item: /v1/custom/providers/{npi}
+    fields: [npi, first_name, middle_name, last_name, age, gender, ratings_count, ratings_avg,
+      degrees, specialties, languages, educations, insurances, provider_types, locations,
+      online_profiles]
+    writable: true
+    source: json-schema/getcustomprovider.json
+  - name: Location
+    key: uuid
+    collection: /v1/custom/locations
+    item: /v1/custom/locations/{location_uuid}
+    fields: [uuid, name, address, address_details, latitude, longitude, google_maps_link,
+      phone_numbers, faxes, confidence, insurances, tins]
+    writable: true
+    source: json-schema/getcustomlocation.json
+  - name: Insurance
+    key: uuid
+    collection: /v1/insurances
+    item: /v1/custom/insurances/{insurance_uuid}
+    writable: true
+    source: json-schema/getinsurances.json
+  - name: Organization
+    key: uuid
+    collection: /v1/custom/organizations
+    item: /v1/custom/organizations/{organization_uuid}
+    fields: [uuid, name, organization_types, websites, ids, address, address_details, latitude,
+      longitude, phone_numbers]
+    writable: false
+    source: json-schema/getorganizations.json
+  - name: Specialty
+    key: uuid
+    collection: /v1/custom/specialties
+    item: /v1/custom/specialties/{specialty_uuid}
+    writable: true
+  - name: ProviderType
+    key: uuid
+    item: /v1/custom/provider_types/{provider_type_uuid}
+    writable: true
+  - name: LocationType
+    key: uuid
+    collection: /v1/location_types
+    item: /v1/custom/location_types/{location_type_uuid}
+    writable: true
+  - name: Procedure
+    key: uuid
+    collection: /v1/procedures
+    item: /v1/procedures/{procedure_uuid}
+    writable: false
+  - name: ClinicalArea
+    key: uuid
+    collection: /v1/custom/clinical_areas
+    item: /v1/custom/clinical_areas/{clinical_area_uuid}
+    writable: false
+    note: The "focus area" surface. Conditions and Treatments hang beneath it.
+  - name: Condition
+    key: uuid
+    collection: /v1/custom/conditions
+    item: /v1/custom/conditions/{condition_uuid}
+    writable: false
+  - name: Treatment
+    key: uuid
+    collection: /v1/custom/treatments
+    item: /v1/custom/treatments/{treatment_uuid}
+    writable: false
+  - name: Language
+    collection: /v1/languages
+    writable: false
+  - name: Tin
+    key: tin_id
+    collection: /v1/custom/tin
+    item: /v1/custom/tin/{tin_id}
+    writable: false
+  - name: Filter
+    key: filter_uuid
+    collection: /v1/custom/providers/filters, /v1/custom/locations/filters
+    writable: true
+    note: >-
+      Customer-defined search filters and boost filters over both H1 fields and customer-added
+      custom fields. A Filter is metadata about the search surface, not a clinical entity.
+  - name: PricingCarrier
+    key: carrier_uuid
+    collection: /v1/pricing/carriers
+    item: /v1/pricing/carrier/{carrier_uuid}
+    writable: false
+    note: >-
+      Carrier records carry pricing-data recency. v2 carrier ids are a DIFFERENT identifier space
+      from these v1 UUIDs — the provider states this explicitly.
+  - name: Eligibility
+    collection: POST /v1/eligibility
+    writable: false
+    fields: [status, request_id, plan_info, deductible_detail, out_of_pocket_detail,
+      primary_care_summary, specialist_office_summary, mental_health_summary, surgical_summary,
+      urgent_care_summary, diagnostic_lab_summary, asc_facility_summary, mri_ct_scan_summary,
+      x_ray_summary, oncology_summary, vision_optometry_summary, physical_therapy_summary,
+      chiropractic_summary, dme_summary]
+    source: json-schema/geteligibility.json
+    sensitivity: phi
+    note: >-
+      A benefits response, not a directory object. It has no durable key and carries its own
+      `request_id`. It is the only PHI-bearing surface in the API.
+  - name: NetworkAnalysis
+    collection: /v1/network_analysis
+    fields: [ssa_code, display, npi_count, npis]
+    writable: false
+    note: An aggregate over the provider-insurance edge, grouped by SSA county code.
+relationships:
+  - from: Provider
+    to: Location
+    type: has_many
+    via: locations
+    write_op: putCustomProviderLocations
+  - from: Provider
+    to: Specialty
+    type: has_many
+    via: specialties
+    write_op: putCustomProviderSpecialties
+    note: A subset are flagged primary via putCustomProviderPrimarySpecialties.
+  - from: Provider
+    to: ProviderType
+    type: has_many
+    via: provider_types
+  - from: Provider
+    to: Language
+    type: has_many
+    via: languages
+  - from: Provider
+    to: Procedure
+    type: has_many
+    via: procedures
+    write_op: putCustomProviderProcedures
+  - from: Provider
+    to: ClinicalArea
+    type: has_many
+    via: clinical_areas
+    write_op: putCustomProviderClinicalAreas
+  - from: Provider
+    to: Insurance
+    type: has_many
+    via: insurances
+    write_op: putCustomProviderLocationInsurances
+    qualified_by: Location
+    note: >-
+      THE KEY EDGE. Insurance acceptance is written on the (provider, location) pair —
+      PUT /v1/custom/providers/{npi}/locations/{location_uuid}/insurances — not on the provider
+      alone. A provider can be in-network at one practice and out at another. Treating
+      Provider.insurances as global is the most common modelling error against this API.
+  - from: Provider
+    to: Organization
+    type: has_many
+    via: organizations
+    write_op: putCustomProviderLocationOrganizations
+    qualified_by: Location
+  - from: Location
+    to: Insurance
+    type: has_many
+    via: insurances
+    write_op: putCustomLocationInsurances
+  - from: Location
+    to: Organization
+    type: has_many
+    via: organizations
+    write_op: putCustomLocationOrganizations
+  - from: Location
+    to: ClinicalArea
+    type: has_many
+    via: clinical_areas
+    write_op: putCustomLocationClinicalAreas
+  - from: Location
+    to: Tin
+    type: has_many
+    via: tins
+  - from: Location
+    to: LocationType
+    type: belongs_to
+    via: location_type
+  - from: ClinicalArea
+    to: Condition
+    type: has_many
+  - from: ClinicalArea
+    to: Treatment
+    type: has_many
+  - from: PricingResult
+    to: Provider
+    type: belongs_to
+    via: npi
+  - from: PricingResult
+    to: Procedure
+    type: belongs_to
+    via: procedure
+  - from: PricingResult
+    to: Insurance
+    type: belongs_to
+    via: insurance
+  - from: PricingResult
+    to: Location
+    type: belongs_to
+    via: matched_location
+    note: >-
+      A price is only meaningful at the intersection of all four — provider, procedure, insurance
+      and location — which is why /v1/pricing/providers/{npi}/procedures/{procedure_uuid}/locations/{location_uuid}
+      is the deepest path in the API.
+data_quality:
+  confidence_scores:
+    field: confidence
+    entities: [Location, Provider]
+    docs: https://ribbon.readme.io/docs/confidence-scores
+    note: >-
+      Records carry an H1 confidence score. This is a first-class part of the model, not a
+      footnote: the product is provider-data ACCURACY, so a consumer is expected to threshold on
+      confidence rather than trust every row equally.
+  customization_layer: >-
+    Nearly every entity has a "custom" variant under /v1/custom/*. A customer overlays its own
+    records and fields on top of H1's base data, and reads back the merged view. Deleting a
+    custom insurance deletes every instance of that UUID across the customer's providers and H1
+    cannot regenerate it — the provider warns about this explicitly.

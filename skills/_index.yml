@@ -1,0 +1,36 @@
+generated: '2026-08-14'
+method: generated
+source: >-
+  openapi/ribbon-health-*-openapi.yml + https://ribbon.readme.io/llms.txt +
+  conventions/ribbon-health-conventions.yml + errors/ribbon-health-problem-types.yml
+provider_published_skills: none
+provider_published_note: >-
+  Searched the provider's 122-page documentation index (https://ribbon.readme.io/llms.txt), the
+  verified H1 GitHub organization (https://github.com/h1insights — 0 public repositories) and the
+  corporate site for an AGENTS.md or published agent skill. None exists. These three skills are
+  GENERATED from the provider's OpenAPI and docs; every operationId in them was verified to exist
+  verbatim in the referenced spec.
+skills:
+  - file: ribbon-health-in-network-provider-search.md
+    name: In-network provider search
+    api: openapi/ribbon-health-providers-api-openapi.yml
+    mirrors_workflow: arazzo/ribbon-health-provider-search-workflow.yml
+    operations: [getInsurances, getSpecialties, getCustomProviders, getCustomProvider]
+  - file: ribbon-health-cost-and-eligibility.md
+    name: Cost estimates and member eligibility
+    api: openapi/ribbon-health-cost-estimates-api-openapi.yml
+    operations: [getEligibilityInsurancePartners, getEligibility, getProcedureCostEstimate,
+      getPricingProviders, getPricingProviderProcedures, getPricingProviderProcedure]
+    sensitivity: phi
+    note: Transmits member PHI. Documented as human-in-the-loop by default.
+  - file: ribbon-health-directory-maintenance.md
+    name: Custom provider directory maintenance
+    api: openapi/ribbon-health-providers-api-openapi.yml
+    mirrors_workflow: arazzo/ribbon-health-provider-directory-management-workflow.yml
+    operations: [postCustomLocations, getCustomLocation, putCustomProvider,
+      putCustomProviderLocations, putCustomProviderSpecialties,
+      putCustomProviderPrimarySpecialties, putCustomProviderLocationInsurances,
+      putCustomLocationInsurances, getCustomProvider]
+    note: >-
+      Write surface. Carries the retry rules the API itself does not publish — PUTs are
+      idempotent by HTTP semantics, POST creates are not, and no idempotency key exists.

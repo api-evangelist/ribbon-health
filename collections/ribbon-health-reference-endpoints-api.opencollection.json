@@ -1,0 +1,563 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ribbon-health Cost Estimates Reference Endpoints API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reference Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getInsurances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/custom/insurances",
+            "params": [
+              {
+                "name": "search",
+                "value": "Aetna",
+                "type": "query",
+                "description": "String input that fuzzy searches across `display_name`, `carrier_name`, and `uuid`."
+              },
+              {
+                "name": "carrier_association",
+                "value": "BCBS Association",
+                "type": "query",
+                "description": "Comma separated list of the carrier association of insurances you are searching for.\n\nNote: This input must be an exact string match to work"
+              },
+              {
+                "name": "carrier_brand",
+                "value": "BCBS",
+                "type": "query",
+                "description": "Comma separated list of the carrier brand of insurances you are searching for.\n\nNote: This input must be an exact string match to work"
+              },
+              {
+                "name": "carrier_name",
+                "value": "Blue Cross Blue Shield of Illinois",
+                "type": "query",
+                "description": "Comma separated list of the carrier name of insurances you are searching for.\n\nNote: This input must be an exact string match to work"
+              },
+              {
+                "name": "state",
+                "value": "NY",
+                "type": "query",
+                "description": "Two letter abbreviated state code of insurances you are searching for."
+              },
+              {
+                "name": "plan_name",
+                "value": "BlueCare Direct",
+                "type": "query",
+                "description": "Exact string input of the plan name of insurances you are searching for."
+              },
+              {
+                "name": "plan_type",
+                "value": "PPO",
+                "type": "query",
+                "description": "Exact string input of the plan type of insurances you are searching for."
+              },
+              {
+                "name": "display_name",
+                "value": "Blue Cross Blue Shield of Illinois - BlueCare Direct - HMO",
+                "type": "query",
+                "description": "Exact string input of the display name of insurances you are searching for."
+              },
+              {
+                "name": "category",
+                "value": "Medicare Advantage",
+                "type": "query",
+                "description": "Comma separated list of the category of insurances you are searching for.\n\nNote: This input must be an exact string match to work"
+              },
+              {
+                "name": "_excl_category",
+                "value": "Medicare Advantage",
+                "type": "query",
+                "description": "Comma separated list of the category of insurances you wish to exclude.\n\nNote: This input must be an exact string match to work"
+              },
+              {
+                "name": "codes",
+                "value": "H9572-001",
+                "type": "query",
+                "description": "Single code input to search for plans with an exact string match within the codes field."
+              },
+              {
+                "name": "partial_codes",
+                "value": "H9572",
+                "type": "query",
+                "description": "Partial string input to match to the codes field.\nFor Medicare Advantage plans this is a contract ID (i.e. H9572). For Federal or State Exchange plans this is the first 10 digits of the HIOS ID (i.e. 36096il100)\n\nNote: This parameter can only be used if the `category` param is also utilized with a single category value."
+              }
+            ]
+          },
+          "docs": "Search and list insurances that exist within the Ribbon API."
+        },
+        {
+          "info": {
+            "name": "postCustomInsurance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ribbonhealth.com/v1/custom/insurances",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a insurance with desired field values.\n"
+        },
+        {
+          "info": {
+            "name": "getCustomInsurance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/custom/insurances/:insurance_uuid",
+            "params": [
+              {
+                "name": "insurance_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target insurance."
+              }
+            ]
+          },
+          "docs": "Retrieve data on a specific insurance.\n"
+        },
+        {
+          "info": {
+            "name": "putCustomInsurance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/insurances/:insurance_uuid",
+            "params": [
+              {
+                "name": "insurance_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target insurance."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit fields of a custom created insurance or a Ribbon created insurance.\n"
+        },
+        {
+          "info": {
+            "name": "deleteCustomInsurance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ribbonhealth.com/v1/custom/insurances/:insurance_uuid",
+            "params": [
+              {
+                "name": "insurance_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target insurance."
+              }
+            ]
+          },
+          "docs": "Delete an insurance.\n\nNote: If you've added this insurance to doctors, you are deleting all instances of this UUID, and Ribbon will not be able to regenerate them.\n"
+        },
+        {
+          "info": {
+            "name": "getSpecialties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/custom/specialties",
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "The page of the results which was returned."
+              },
+              {
+                "name": "page_size",
+                "value": "25",
+                "type": "query",
+                "description": "How many results are in each page."
+              },
+              {
+                "name": "search",
+                "value": "Gastroenterology",
+                "type": "query",
+                "description": "String input that fuzzy searches against key fields within each specialties object to return the most relevant options."
+              },
+              {
+                "name": "provider_type",
+                "value": "Doctor",
+                "type": "query",
+                "description": "'Type' of provider specialty to filter results on. Here are a few key provider types:\n- Doctor\n- Nursing\n- Dental Providers"
+              }
+            ]
+          },
+          "docs": "Search and list specialties that exist within the Ribbon API.\n"
+        },
+        {
+          "info": {
+            "name": "postCustomSpecialty",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ribbonhealth.com/v1/custom/specialties",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a custom specialty with desired field values.\n"
+        },
+        {
+          "info": {
+            "name": "getCustomSpecialty",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/custom/specialties/:specialty_uuid",
+            "params": [
+              {
+                "name": "specialty_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target specialty."
+              }
+            ]
+          },
+          "docs": "Retrieve data on a specific specialty.\n"
+        },
+        {
+          "info": {
+            "name": "putCustomSpecialty",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/specialties/:specialty_uuid",
+            "params": [
+              {
+                "name": "specialty_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target specialty."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit fields of a custom created specialty.\n\nNote: You cannot edit a Ribbon created specialty.\n"
+        },
+        {
+          "info": {
+            "name": "deleteCustomSpecialty",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ribbonhealth.com/v1/custom/specialties/:specialty_uuid",
+            "params": [
+              {
+                "name": "specialty_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target specialty."
+              }
+            ]
+          },
+          "docs": "Delete a specialty.\n\nNote: You cannot delete a Ribbon created specialty.\n"
+        },
+        {
+          "info": {
+            "name": "getCustomProviderTypes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/provider_types",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search parameter for reference endpoints (Provider Type, Location Type, Languages)"
+              }
+            ]
+          },
+          "docs": "Search and list provider types that exist within the Ribbon API.\n"
+        },
+        {
+          "info": {
+            "name": "postCustomProviderType",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ribbonhealth.com/v1/custom/provider_types",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a custom provider type with desired field values.\n"
+        },
+        {
+          "info": {
+            "name": "getCustomProviderType",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/custom/provider_types/:provider_type_uuid",
+            "params": [
+              {
+                "name": "provider_type_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target provider type."
+              }
+            ]
+          },
+          "docs": "Retrieve data on a specific provider type.\n"
+        },
+        {
+          "info": {
+            "name": "putCustomProviderType",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/provider_types/:provider_type_uuid",
+            "params": [
+              {
+                "name": "provider_type_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target provider type."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit fields of a custom created provider type.\n\nNote: You cannot edit a Ribbon created provider type.\n"
+        },
+        {
+          "info": {
+            "name": "deleteCustomProviderType",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ribbonhealth.com/v1/custom/provider_types/:provider_type_uuid",
+            "params": [
+              {
+                "name": "provider_type_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target provider type."
+              }
+            ]
+          },
+          "docs": "Delete a provider type.\n\nNote: You cannot edit a Ribbon created provider type.\n"
+        },
+        {
+          "info": {
+            "name": "getCustomLocationTypes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/location_types",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search parameter for reference endpoints (Provider Type, Location Type, Languages)"
+              }
+            ]
+          },
+          "docs": "Search and list location types that exist within the Ribbon API.\n"
+        },
+        {
+          "info": {
+            "name": "postCustomLocationType",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ribbonhealth.com/v1/custom/location_types",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a location type with desired field values.\n"
+        },
+        {
+          "info": {
+            "name": "getCustomLocationType",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/custom/location_types/:location_type_uuid",
+            "params": [
+              {
+                "name": "location_type_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target location type."
+              }
+            ]
+          },
+          "docs": "Retrieve data on a specific location type.\n"
+        },
+        {
+          "info": {
+            "name": "putCustomLocationType",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/location_types/:location_type_uuid",
+            "params": [
+              {
+                "name": "location_type_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target location type."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit fields of a custom created location type.\n\nNote: You cannot edit a Ribbon created location type.\n"
+        },
+        {
+          "info": {
+            "name": "deleteCustomLocationType",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ribbonhealth.com/v1/custom/location_types/:location_type_uuid",
+            "params": [
+              {
+                "name": "location_type_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target location type."
+              }
+            ]
+          },
+          "docs": "Delete a location type.\n\nNote: You cannot edit a Ribbon created location type.\n"
+        },
+        {
+          "info": {
+            "name": "getProcedures",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/procedures",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search parameter for reference endpoints (Provider Type, Location Type, Languages)"
+              },
+              {
+                "name": "procedure_code",
+                "value": "",
+                "type": "query",
+                "description": "A specific billing code (e.g., CPT, DRG) to search for"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of the results which was returned."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "How many results are in each page."
+              }
+            ]
+          },
+          "docs": "Search and list procedures that exist within the Ribbon API.\n"
+        },
+        {
+          "info": {
+            "name": "getProcedure",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/procedures/:procedure_uuid",
+            "params": [
+              {
+                "name": "procedure_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target procedure."
+              }
+            ]
+          },
+          "docs": "Retrieve data on a specific procedure.\n"
+        },
+        {
+          "info": {
+            "name": "getLanguages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/languages",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search parameter for reference endpoints (Provider Type, Location Type, Languages)"
+              }
+            ]
+          },
+          "docs": "Search and list provider languages that exist in the Ribbon API.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

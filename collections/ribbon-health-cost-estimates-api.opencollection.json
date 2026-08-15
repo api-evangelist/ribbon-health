@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ribbon-health Cost Estimates API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cost Estimates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getEligibility",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ribbonhealth.com/v1/eligibility",
+            "params": [
+              {
+                "name": "include_full_response",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return the full eligibility response from the payer. Defaults to `false` when not provided."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify a member's current insurance coverage and benefits. You can access detailed information including a member’s progress on their Deductible and Out-of-pocket, as well as Copay and Coinsurance information for different services.\n\n#### Example Use Case\nInform a member of their current progress against their Deductible as well as their Copay and Coinsurance summaries so they can better estimate their out-of pocket costs.\n"
+        },
+        {
+          "info": {
+            "name": "getEligibilityInsurancePartners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/eligibility_insurance_partners",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Fuzzy search input for insurance names"
+              }
+            ]
+          },
+          "docs": "Search or list all insurance partners supported by our eligibility features.\n"
+        },
+        {
+          "info": {
+            "name": "getEligibilityInsurancePartner",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/eligibility_insurance_partners/:insurance_partner",
+            "params": [
+              {
+                "name": "insurance_partner",
+                "value": "",
+                "type": "path",
+                "description": "The identifier for this insurance partner in the Ribbon API"
+              }
+            ]
+          },
+          "docs": "Fetch an insurance partner supported by our eligibility features.\n"
+        },
+        {
+          "info": {
+            "name": "getProcedureCostEstimate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/procedure_cost_estimate",
+            "params": [
+              {
+                "name": "procedure_ids",
+                "value": "",
+                "type": "query",
+                "description": "The UUIDs of the procedures to filter results to, as a comma-delimited string"
+              },
+              {
+                "name": "member_zip",
+                "value": "",
+                "type": "query",
+                "description": "The zip code of the member we are generating cost estimates for"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of data to base cost estimates on: `claims` data or payer-filed `price_transparency` data. Defaults to `claims`."
+              },
+              {
+                "name": "plan_id",
+                "value": "",
+                "type": "query",
+                "description": "The UUID of the insurance plan to use when fetching negotiated rates with providers. Necessary only if searching for estimates using the 'price_transparency' `type`."
+              }
+            ]
+          },
+          "docs": "Calculates estimated costs for a given procedure based on a user's location.\n\n#### Example Use Case\nEstimate the cost of a knee replacement surgery for a user in Boston so they can plan their personal finances accordingly.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

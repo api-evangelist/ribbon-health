@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ribbon-health Cost Estimates TINs API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TINs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getTins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/custom/tin",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "String input that fuzzy searches across tins, name, address, and legal_name."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The billing entity name that appears on claims data, or if available, the official legal name of the billing entity.\nString input that is fuzzy matched against the `name` field.\nNote: This parameter will not match with the `legal_name` field, only the `name` field."
+              },
+              {
+                "name": "legal_name",
+                "value": "",
+                "type": "query",
+                "description": "The legal name of the entity associated with the TIN.\nString input that is fuzzy matched against the `legal_name` field."
+              },
+              {
+                "name": "tin_ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of TINs.\nNote: This parameter cannot be used in combination with any other parameters."
+              },
+              {
+                "name": "has_tin",
+                "value": "",
+                "type": "query",
+                "description": "Boolean input that applies to tin_confirmed field."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of the results which was returned."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "How many results are in each page."
+              }
+            ]
+          },
+          "docs": "Search and list tins that exist within the Ribbon API.\n"
+        },
+        {
+          "info": {
+            "name": "getCustomTin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/custom/tin/:tin_id",
+            "params": [
+              {
+                "name": "tin_id",
+                "value": "",
+                "type": "path",
+                "description": "The target TIN."
+              }
+            ]
+          },
+          "docs": "Retrieve data on a specific TIN.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

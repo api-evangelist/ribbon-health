@@ -1,0 +1,1537 @@
+{
+  "item": [
+    {
+      "id": "cc1d56f9-dea6-45d8-9177-ee7fee1de234",
+      "name": "Filters",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bae91e7b-fd08-4bcc-81cf-a4f96b19eee3",
+          "name": "getCustomProviderFilters",
+          "request": {
+            "name": "getCustomProviderFilters",
+            "description": {
+              "content": "Fetch all previously created filters for providers.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "providers",
+                "filters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f20e1671-e918-4799-b3c2-16c0bae36a92",
+              "name": "Returns a list of provider filters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "providers",
+                    "filters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"filter\": {\n        \"field\": \"c_section_rate\",\n        \"filter_type\": \"boost\",\n        \"parameter\": \"max_c_section_rate\",\n        \"value_type\": \"string\"\n      },\n      \"uuid\": \"9da04268-65e4-4422-a095-98208695b8b9\"\n    },\n    {\n      \"filter\": {\n        \"field\": \"c_section_rate\",\n        \"filter_type\": \"boost\",\n        \"parameter\": \"max_c_section_rate\",\n        \"value_type\": \"integer\"\n      },\n      \"uuid\": \"9da04268-65e4-4422-a095-98208695b8b9\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3fb7aa3-ef7a-4e0e-af7e-637fd17faf7c",
+          "name": "createCustomProviderFilter",
+          "request": {
+            "name": "createCustomProviderFilter",
+            "description": {
+              "content": "Create new filters to be used when searching for providers in the [Search Providers](./getcustomproviders) endpoint. \nYou can create filters for both Ribbon's existing data fields as well as any custom data fields you create.\n\n#### Example Use Case:\nLet's say you add a new field to a bunch of providers that match your use case, for instance `c_section_rate`. You could make this field searchable so that your search through [Search Providers](./getcustomproviders) when you pass through a certain parameter that specifies a maximum threshold.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "providers",
+                "filters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"field\": \"<string>\",\n  \"filter_type\": \"<string>\",\n  \"parameter\": \"<string>\",\n  \"value_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "49d75cb0-9d88-4662-b6fa-360ec59311ca",
+              "name": "The specified filter was successfully created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "providers",
+                    "filters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"field\": \"c_section_rate\",\n  \"filter_type\": \"<string>\",\n  \"parameter\": \"max_c_section_rate\",\n  \"value_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"filter\": {\n      \"field\": \"c_section_rate\",\n      \"filter_type\": \"less_than\",\n      \"parameter\": \"max_c_section_rate\",\n      \"value_type\": \"float\"\n    },\n    \"uuid\": \"9da04268-65e4-4422-a095-98208695b8b9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af3b6b94-7f3d-4ab6-8928-4ecddfe19d2a",
+              "name": "The filter you attempted to create was malformed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "providers",
+                    "filters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"field\": \"c_section_rate\",\n  \"filter_type\": \"<string>\",\n  \"parameter\": \"max_c_section_rate\",\n  \"value_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"bad_request\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae6e876b-c848-4cf1-96a1-aa8e7269f93b",
+              "name": "A filter with the given `parameter` name already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "providers",
+                    "filters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"field\": \"c_section_rate\",\n  \"filter_type\": \"<string>\",\n  \"parameter\": \"max_c_section_rate\",\n  \"value_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"bad_request\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f01c0521-6142-4e9c-808e-81f3004d51a4",
+          "name": "editCustomProviderFilter",
+          "request": {
+            "name": "editCustomProviderFilter",
+            "description": {
+              "content": "Edit any of the fields in a custom provider filter you have already created.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "providers",
+                "filters",
+                ":filter_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "filter_uuid",
+                  "description": "(Required) The UUID of the filter you want to edit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"field\": \"<string>\",\n  \"filter_type\": \"<string>\",\n  \"parameter\": \"<string>\",\n  \"value_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "49a6bb50-ef1c-4e7a-a1bf-d9febc79094c",
+              "name": "The specified filter was successfully updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "providers",
+                    "filters",
+                    ":filter_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "filter_uuid",
+                      "description": "(Required) The UUID of the filter you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"field\": \"c_section_rate\",\n  \"filter_type\": \"<string>\",\n  \"parameter\": \"max_c_section_rate\",\n  \"value_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"filter\": {\n      \"field\": \"c_section_rate\",\n      \"filter_type\": \"less_than\",\n      \"parameter\": \"max_c_section_rate\",\n      \"value_type\": \"float\"\n    },\n    \"uuid\": \"9da04268-65e4-4422-a095-98208695b8b9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "feb75685-bc44-4897-81b5-c1879dba73ff",
+              "name": "The filter updates you are trying to make are invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "providers",
+                    "filters",
+                    ":filter_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "filter_uuid",
+                      "description": "(Required) The UUID of the filter you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"field\": \"c_section_rate\",\n  \"filter_type\": \"<string>\",\n  \"parameter\": \"max_c_section_rate\",\n  \"value_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"bad_request\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fafe4f30-2a21-4717-a24f-63067e7230b8",
+              "name": "The given filter UUID cannot be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "providers",
+                    "filters",
+                    ":filter_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "filter_uuid",
+                      "description": "(Required) The UUID of the filter you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"field\": \"c_section_rate\",\n  \"filter_type\": \"<string>\",\n  \"parameter\": \"max_c_section_rate\",\n  \"value_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94ae89b4-e610-4fc9-bdbb-70170b5259ac",
+              "name": "A filter with the given parameter already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "providers",
+                    "filters",
+                    ":filter_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "filter_uuid",
+                      "description": "(Required) The UUID of the filter you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"field\": \"c_section_rate\",\n  \"filter_type\": \"<string>\",\n  \"parameter\": \"max_c_section_rate\",\n  \"value_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "407865ca-3993-4003-bef3-20470f80c270",
+          "name": "deleteCustomProviderFilter",
+          "request": {
+            "name": "deleteCustomProviderFilter",
+            "description": {
+              "content": "Delete a provider filter.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "providers",
+                "filters",
+                ":filter_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "filter_uuid",
+                  "description": "(Required) The UUID of the filter you want to delete."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bf55eca8-b9ee-4623-9861-13455734ef62",
+              "name": "Filter was successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "providers",
+                    "filters",
+                    ":filter_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "filter_uuid",
+                      "description": "(Required) The UUID of the filter you want to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "12384cae-13b4-45a9-a760-b86934d7698c",
+              "name": "The given filter UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "providers",
+                    "filters",
+                    ":filter_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "filter_uuid",
+                      "description": "(Required) The UUID of the filter you want to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ff4a51c-02a9-46a1-a975-44262a1cab66",
+          "name": "getCustomLocationFilters",
+          "request": {
+            "name": "getCustomLocationFilters",
+            "description": {
+              "content": "Fetch all previously created custom filters for locations.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "locations",
+                "filters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6a25fc6-4a98-468c-9e0d-7721866dcc40",
+              "name": "Returns a list of location filters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    "filters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"filter\": {\n        \"field\": \"c_section_rate\",\n        \"filter_type\": \"boost\",\n        \"parameter\": \"max_c_section_rate\",\n        \"value_type\": \"string\"\n      },\n      \"uuid\": \"9da04268-65e4-4422-a095-98208695b8b9\"\n    },\n    {\n      \"filter\": {\n        \"field\": \"c_section_rate\",\n        \"filter_type\": \"boost\",\n        \"parameter\": \"max_c_section_rate\",\n        \"value_type\": \"integer\"\n      },\n      \"uuid\": \"9da04268-65e4-4422-a095-98208695b8b9\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a2f233c8-788f-47d7-b2d9-1fe2e0a5bb2e",
+          "name": "createCustomLocationFilter",
+          "request": {
+            "name": "createCustomLocationFilter",
+            "description": {
+              "content": "Create new filters to be used when searching for locations in the [Search Locations](./getcustomlocations) endpoint. \nYou can create filters for both Ribbon's existing data fields as well as any custom data fields you create.\n\n#### Example Use Case:\nLet's say you add a new field to a bunch of locations that match your use case, for instance `c_section_rate`. You could make this field searchable so that your search through [Search Locations](./getcustomlocations) when you pass through a certain parameter that specifies a maximum threshold.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "locations",
+                "filters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"field\": \"<string>\",\n  \"filter_type\": \"<string>\",\n  \"parameter\": \"<string>\",\n  \"value_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "87a96e46-9d0b-4708-85ab-7838d8e18102",
+              "name": "The specified filter was successfully created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    "filters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"field\": \"c_section_rate\",\n  \"filter_type\": \"<string>\",\n  \"parameter\": \"max_c_section_rate\",\n  \"value_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"filter\": {\n      \"field\": \"c_section_rate\",\n      \"filter_type\": \"less_than\",\n      \"parameter\": \"max_c_section_rate\",\n      \"value_type\": \"float\"\n    },\n    \"uuid\": \"9da04268-65e4-4422-a095-98208695b8b9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec387665-dd1c-4378-a826-a26a671d163e",
+              "name": "The filter you attempted to create was malformed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    "filters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"field\": \"c_section_rate\",\n  \"filter_type\": \"<string>\",\n  \"parameter\": \"max_c_section_rate\",\n  \"value_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"bad_request\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "408b829c-660f-4e4d-93c3-c95abf2f601f",
+              "name": "A filter with the given `parameter` name already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    "filters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"field\": \"c_section_rate\",\n  \"filter_type\": \"<string>\",\n  \"parameter\": \"max_c_section_rate\",\n  \"value_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"bad_request\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f88606ad-1359-4d01-8293-d96074526df6",
+          "name": "editCustomLocationFilter",
+          "request": {
+            "name": "editCustomLocationFilter",
+            "description": {
+              "content": "Edit any of the fields in a custom location filter you have already created.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "locations",
+                "filters",
+                ":filter_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "filter_uuid",
+                  "description": "(Required) The UUID of the filter you want to edit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"field\": \"<string>\",\n  \"filter_type\": \"<string>\",\n  \"parameter\": \"<string>\",\n  \"value_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1380c259-198b-4de2-bc33-b2f4c5726da9",
+              "name": "The specified filter was successfully updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    "filters",
+                    ":filter_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "filter_uuid",
+                      "description": "(Required) The UUID of the filter you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"field\": \"location_types\",\n  \"filter_type\": \"contains_any\",\n  \"parameter\": \"location_types_filter\",\n  \"value_type\": \"list\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"filter\": {\n      \"field\": \"location_types\",\n      \"filter_type\": \"contains_any\",\n      \"parameter\": \"location_types_filter\",\n      \"value_type\": \"list\"\n    },\n    \"uuid\": \"9da04268-65e4-4422-a095-98208695b8b9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fb79cad-48d0-40ad-ba3a-21d7c7ae1ea9",
+              "name": "The filter updates you are trying to make are invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    "filters",
+                    ":filter_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "filter_uuid",
+                      "description": "(Required) The UUID of the filter you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"field\": \"location_types\",\n  \"filter_type\": \"contains_any\",\n  \"parameter\": \"location_types_filter\",\n  \"value_type\": \"list\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"bad_request\",\n    \"message\": {},\n    \"status\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "615e9a03-8ad8-4fa0-8d24-fcbf1824051a",
+              "name": "The given filter UUID cannot be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    "filters",
+                    ":filter_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "filter_uuid",
+                      "description": "(Required) The UUID of the filter you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"field\": \"location_types\",\n  \"filter_type\": \"contains_any\",\n  \"parameter\": \"location_types_filter\",\n  \"value_type\": \"list\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7f103b3-e8ee-4d2c-91f7-073a35e49508",
+              "name": "A filter with the given parameter already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    "filters",
+                    ":filter_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "filter_uuid",
+                      "description": "(Required) The UUID of the filter you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"field\": \"location_types\",\n  \"filter_type\": \"contains_any\",\n  \"parameter\": \"location_types_filter\",\n  \"value_type\": \"list\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c404bfa9-72b4-47b3-9b54-5ddd66d17141",
+          "name": "deleteCustomLocationFilter",
+          "request": {
+            "name": "deleteCustomLocationFilter",
+            "description": {
+              "content": "Delete a location filter.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "locations",
+                "filters",
+                ":filter_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "filter_uuid",
+                  "description": "(Required) The UUID of the filter you want to delete."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6278d96a-233d-44d0-8ff0-05a5288ea8c4",
+              "name": "Filter was successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    "filters",
+                    ":filter_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "filter_uuid",
+                      "description": "(Required) The UUID of the filter you want to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b19fcfac-73d7-4760-85ec-56f141502b27",
+              "name": "The given filter UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "locations",
+                    "filters",
+                    ":filter_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "filter_uuid",
+                      "description": "(Required) The UUID of the filter you want to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ribbonhealth.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cc9bdb4e-a60c-4d80-8ff8-a92618635525",
+    "name": "ribbon-health Cost Estimates Filters API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.\n",
+      "type": "text/plain"
+    }
+  }
+}

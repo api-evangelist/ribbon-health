@@ -1,0 +1,160 @@
+generated: '2026-08-14'
+method: searched
+source: >-
+  https://ribbon.readme.io/llms.txt + https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api.md
+  + https://status.ribbonhealth.com/ + live probes of https://api.ribbonhealth.com (2026-08-14)
+summary: >-
+  The API is actively evolving — an entire Price Transparency v2 namespace has shipped and two v1
+  pricing endpoints are marked deprecated in the reference — but none of that change is published
+  as a dated changelog, a deprecation policy or a sunset schedule. The provider announces
+  deprecations inside individual endpoint descriptions and nowhere else.
+versioning:
+  scheme: uri-path
+  current: v1
+  additional: v2 (Price Transparency only)
+  docs_version: '2.2'
+  docs: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
+  notes: >-
+    Two independent version axes. The URI path is v1 (with a v2 namespace for pricing); the docs
+    are versioned as 2.2 and every canonical reference link is
+    https://ribbon.readme.io/v2.2/reference/<operationId>. These numbers are unrelated and the
+    docs do not say so.
+changelog:
+  published: false
+  probed:
+    - url: https://ribbon.readme.io/changelog
+      status: 404
+      checked: '2026-08-14'
+    - url: https://ribbon.readme.io/recipes
+      status: 404
+      checked: '2026-08-14'
+  notes: >-
+    ReadMe's changelog module is not enabled on this docs site and no dated release notes exist
+    anywhere on ribbon.readme.io or h1.com. No changelog/ artifact and no ChangeLog pointer are
+    emitted, because there is nothing dated to capture. Doc pages do carry an `updatedAt`
+    timestamp in their .md frontmatter (most guides 2025-09-18; the products page 2026-05-14),
+    which is the only change trail available.
+deprecation:
+  policy_documented: false
+  policy_url: null
+  sunset_header: false
+  sunset_header_note: >-
+    No Sunset or Deprecation header (RFC 8594) was observed on any live response from
+    api.ribbonhealth.com on 2026-08-14.
+  notes: >-
+    Deprecations ARE announced, but only inside the prose of the affected endpoint's own
+    reference page, with a pointer to the replacement. There is no policy, no removal date, and
+    no way to discover a deprecation without reading every endpoint. NO `Deprecation` pointer is
+    emitted: the provider practises deprecation but publishes no deprecation policy, and the
+    scoring check reads the policy.
+  deprecated_operations:
+    - operation: getPricingCarrierNames
+      path: GET /v1/pricing/version
+      replacement: getPricingCarriers (GET /v1/pricing/carriers)
+      announced_in: https://ribbon.readme.io/reference/getpricingcarriernames
+      source: https://ribbon.readme.io/llms.txt
+      sunset_date: null
+    - operation: getPricingVersionCarrier
+      path: GET /v1/pricing/version/{carrier_name}
+      replacement: getPricingCarrier (GET /v1/pricing/carrier/{carrier_uuid})
+      announced_in: https://ribbon.readme.io/reference/getpricingversioncarrier
+      source: https://ribbon.readme.io/llms.txt
+      sunset_date: null
+  deprecated_in_spec: []
+  deprecated_in_spec_note: >-
+    Zero operations carry `deprecated: true` in any of the ten OpenAPI documents in this repo,
+    even though two are announced as deprecated in the reference. The machine-readable contract
+    and the human documentation disagree — a code generator reading the spec will happily emit
+    clients for both retired endpoints.
+spec_coverage_gap:
+  status: RESOLVED in this pass
+  finding: >-
+    The provider documents and serves a Price Transparency v2 surface that none of the ten
+    existing OpenAPI documents in this repo covered.
+  resolution: >-
+    Harvested. Every ReadMe reference page embeds a verbatim single-operation slice of H1's live
+    OpenAPI 3.1.0 inside a "# OpenAPI definition" code fence — a machine-readable contract that
+    is not linked from anywhere and was invisible to the earlier round, which only had the older
+    3.0.0 source spec. The seven v2 slices were fetched and unioned into
+    openapi/ribbon-health-price-transparency-v2-api-openapi.yml. No content was authored.
+  documented_in: https://ribbon.readme.io/llms.txt
+  confirmed_live: '2026-08-14'
+  probe_method: >-
+    Unauthenticated GET. HTTP 401 (not_authenticated) proves the route exists and requires auth;
+    HTTP 404 (not_found) proves it does not.
+  endpoints:
+    - path: /v2/procedures
+      status: 401
+      operation: getV2Procedures
+    - path: /v2/care-clusters
+      status: 401
+      operation: getV2CareClusters
+    - path: /v2/carriers
+      status: 401
+      operation: getV2Carriers
+    - path: /v2/pricing/locations/procedures
+      status: 401
+      operation: getV2PricingLocationProcedures
+    - path: /v2/pricing/locations/care-clusters
+      status: 401
+      operation: getV2PricingLocationCareClusters
+    - path: /v2/locations/{location_id}/pricing/procedures
+      status: 401
+      operation: getV2LocationProcedurePricing
+  entitlement: 'doctors.can_price_transparency'
+  breaking_change_note: >-
+    v2 is not a drop-in for v1. The provider states that v2 carrier identifiers are NOT the same
+    as the v1 /v1/pricing/carriers UUIDs, and that v2 requires an explicit location (address, or
+    both lat and lng) where v1 silently defaulted to a New York City address. Both are behaviour
+    changes a v1 client will get wrong.
+  action: >-
+    Nothing was authored. The captured spec is the provider's own, verbatim. The remaining gap to
+    raise with H1 is that this OpenAPI is published only as fragments inside rendered docs pages —
+    there is no single downloadable spec URL, and the older 3.0.0 document the catalog holds is
+    both a different OpenAPI version and missing an entire product.
+  spec_version_divergence: >-
+    The harvested v2 slices are OpenAPI 3.1.0 titled "H1's API"; the ten specs already in this
+    repo derive from a 3.0.0 document titled "ribbon-health ... API". H1 has moved to 3.1 without
+    republishing a whole-spec artifact.
+status_page:
+  url: https://status.ribbonhealth.com/
+  provider: Atlassian Statuspage
+  probed:
+    - url: https://status.ribbonhealth.com/
+      status: 200
+      checked: '2026-08-14'
+  note: >-
+    Live and branded to Ribbon Health. Note that the security.txt served on this host belongs to
+    Atlassian, not to H1 — see well-known/ribbon-health-well-known.yml.
+sla:
+  documented: false
+  notes: >-
+    No public SLA or uptime commitment. The docs publish latency GUIDANCE (which parameters cost
+    the most, keep page_size at 25, use fields/_excl_fields) at
+    https://ribbon.readme.io/docs/latency, but state no target.
+roadmap:
+  published: false
+  probed:
+    - url: https://ribbon.readme.io/changelog
+      status: 404
+      checked: '2026-08-14'
+  note: No Roadmap pointer emitted.
+corporate:
+  acquisition: >-
+    Ribbon Health was acquired by H1. The API kept its host (api.ribbonhealth.com) and its docs
+    subdomain (ribbon.readme.io) but the product is now branded "the H1 API" throughout the
+    documentation, and support moved from team@ribbonhealth.com to support@h1.co.
+  domain_migration:
+    - from: https://ribbonhealth.com
+      status: 404
+      note: '"Site Not Configured" holding page. The brand domain is retired.'
+      checked: '2026-08-14'
+    - from: https://h1.co
+      to: https://h1.com
+      status: 301
+      note: h1.co now redirects to h1.com; h1.com is the canonical corporate site.
+      checked: '2026-08-14'
+  residual_ribbon_branding: >-
+    The API host, the docs host, the error message contact address (team@ribbonhealth.com,
+    still returned by the live 401 on the API root) and the status page all still carry the
+    Ribbon Health name, while the docs, the support address and the marketing site carry H1.

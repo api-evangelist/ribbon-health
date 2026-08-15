@@ -1,0 +1,1361 @@
+openapi: 3.1.0
+info:
+  title: H1's API — Price Transparency v2
+  version: 1.0.0
+  description: "An API for interacting with the data provided by Ribbon Health, including information about healthcare\
+    \ providers,\nlocations, insurances, and more.\n\n## Price Transparency v2\n\nLocation-first negotiated rate\
+    \ endpoints live under `/v2/*` (separate from legacy\n`/v1/pricing/*`). Use them to:\n\n1. Look up procedures,\
+    \ care clusters, and carriers (`GET /v2/procedures`,\n   `/v2/care-clusters`, `/v2/carriers`)\n2. Get prices\
+    \ for a known location (`GET /v2/locations/{location_id}/pricing/...`)\n3. Shop by geography (`GET /v2/pricing/locations/...`)\n\
+    \n**Key differences from v1:** prices are location-scoped (not provider-first);\ncarriers use string business\
+    \ ids (not v1 carrier UUIDs); every v2 response uses\nthe same envelope (`parameters`, `total_count`, `page`,\
+    \ `page_size`, `data`);\ngeo search requires an explicit `address` or `lat`+`lng` (no silent default).\n\nSee\
+    \ the **Price Transparency v2** tag for full endpoint reference.\n"
+  x-apievangelist-provenance:
+    harvested: '2026-08-14'
+    method: searched
+    source: https://ribbon.readme.io/reference/{getv2procedures,getv2careclusters,getv2carriers,getv2locationprocedurepricing,getv2locationcareclusterpricing,getv2pricinglocationprocedures,getv2pricinglocationcareclusters}.md
+    note: Assembled from the OpenAPI 3.1.0 definitions the provider publishes verbatim inside each ReadMe reference
+      page (each page embeds a single-operation slice of H1's live spec). Only the paths were unioned; no operation,
+      parameter, schema or description was written, edited or invented. servers[], security and components.securitySchemes
+      are the provider's own. This surface is documented and live but is absent from every other OpenAPI in this
+      repo.
+servers:
+- url: https://api.ribbonhealth.com
+security:
+- BearerAuth: []
+tags:
+- name: Price Transparency v2
+  description: Location-first negotiated-rate endpoints under /v2/*.
+paths:
+  /v2/procedures:
+    get:
+      summary: List Procedures (v2)
+      description: "Browse or search the Price Transparency v2 procedure code dictionary.\n\nUse this to resolve\
+        \ a CPT (or other) code before pricing lookups, or to\ndiscover which care clusters a procedure belongs\
+        \ to. This endpoint does\n**not** return dollar amounts.\n\n#### Example Use Case\nLook up CPT `27447` to\
+        \ confirm its description and see that it belongs to\nthe `JOINT_REPLACEMENT` care cluster before calling\
+        \ a pricing endpoint.\n\n#### Notes\n- Requires Price Transparency access (`doctors.can_price_transparency`).\n\
+        - Rate limited to 1,000 requests per minute.\n- All Price Transparency v2 endpoints share the same response\
+        \ envelope:\n  `parameters`, `total_count`, `page`, `page_size`, and `data`.\n"
+      operationId: getV2Procedures
+      tags:
+      - Price Transparency v2
+      parameters:
+      - name: procedure_code
+        in: query
+        required: false
+        description: Exact procedure code filter (for example `27447`).
+        schema:
+          type: string
+          example: '27447'
+      - name: procedure_code_scheme
+        in: query
+        required: false
+        description: 'Exact match on procedure coding system (for example `CPT` or `HCPCS`).
+
+          '
+        schema:
+          type: string
+          example: CPT
+      - name: procedure_description
+        in: query
+        required: false
+        description: Case-insensitive substring match on procedure description.
+        schema:
+          type: string
+          example: knee
+      - name: care_cluster_code
+        in: query
+        required: false
+        description: Filter to a specific care cluster by its business code (for example `JOINT_REPLACEMENT`).
+        schema:
+          type: string
+          example: JOINT_REPLACEMENT
+      - name: care_cluster_description
+        in: query
+        required: false
+        description: 'Match on care cluster display description. Case-insensitive substring on
+
+          dictionary endpoints; case-insensitive exact match on DB-backed pricing
+
+          endpoints; case-sensitive exact match on Elasticsearch search endpoints.
+
+          '
+        schema:
+          type: string
+          example: Joint Replacement
+      - $ref: '#/paths/~1v2~1carriers/get/parameters/2'
+      - $ref: '#/paths/~1v2~1carriers/get/parameters/3'
+      responses:
+        '200':
+          description: Matching procedure dictionary records.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/paths/~1v2~1carriers/get/responses/200/content/application~1json/schema/allOf/0'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        description: A procedure code from the Price Transparency v2 dictionary.
+                        required:
+                        - code
+                        - code_scheme
+                        - description
+                        properties:
+                          code:
+                            type: string
+                            description: Procedure code.
+                            example: '27447'
+                          code_scheme:
+                            type: string
+                            description: Coding system (for example `CPT`).
+                            example: CPT
+                          description:
+                            type: string
+                            description: Human-readable procedure description.
+                            example: Total knee arthroplasty
+                          care_clusters:
+                            type: array
+                            description: 'Present only when the procedure belongs to one or more care clusters.
+
+                              '
+                            items:
+                              type: object
+                              required:
+                              - care_cluster_code
+                              - care_cluster_description
+                              properties:
+                                care_cluster_code:
+                                  type: string
+                                  example: JOINT_REPLACEMENT
+                                care_cluster_description:
+                                  type: string
+                                  example: Joint Replacement
+                      example:
+                      - code: '27447'
+                        code_scheme: CPT
+                        description: Total knee arthroplasty
+                        care_clusters:
+                        - care_cluster_code: JOINT_REPLACEMENT
+                          care_cluster_description: Joint Replacement
+              example:
+                parameters:
+                  procedure_code: '27447'
+                  procedure_code_scheme: CPT
+                total_count: 1
+                page: 1
+                page_size: 20
+                data:
+                - code: '27447'
+                  code_scheme: CPT
+                  description: Total knee arthroplasty
+                  care_clusters:
+                  - care_cluster_code: JOINT_REPLACEMENT
+                    care_cluster_description: Joint Replacement
+        '400':
+          description: Invalid query parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1carriers/get/responses/400/content/application~1json/schema'
+        '403':
+          description: The caller does not have Price Transparency access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1carriers/get/responses/403/content/application~1json/schema'
+  /v2/care-clusters:
+    get:
+      summary: List Care Clusters (v2)
+      description: 'Browse care cluster definitions and the procedures each cluster includes.
+
+
+        A care cluster is a curated group of related procedures that together
+
+        represent a care episode (for example joint replacement). Use this
+
+        dictionary before querying bundle prices.
+
+
+        #### Example Use Case
+
+        Search for clusters matching `"joint"` to find `JOINT_REPLACEMENT` and see
+
+        which CPT codes are expected in that bundle.
+
+        '
+      operationId: getV2CareClusters
+      tags:
+      - Price Transparency v2
+      parameters:
+      - $ref: '#/paths/~1v2~1procedures/get/parameters/3'
+      - $ref: '#/paths/~1v2~1procedures/get/parameters/4'
+      - $ref: '#/paths/~1v2~1procedures/get/parameters/0'
+      - $ref: '#/paths/~1v2~1carriers/get/parameters/2'
+      - $ref: '#/paths/~1v2~1carriers/get/parameters/3'
+      responses:
+        '200':
+          description: Matching care cluster definitions.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/paths/~1v2~1carriers/get/responses/200/content/application~1json/schema/allOf/0'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        description: A care cluster definition from the Price Transparency v2 dictionary.
+                        required:
+                        - care_cluster_code
+                        - care_cluster_description
+                        - procedures
+                        properties:
+                          care_cluster_code:
+                            type: string
+                            description: Stable business code for the cluster.
+                            example: JOINT_REPLACEMENT
+                          care_cluster_description:
+                            type: string
+                            description: Display name for the cluster.
+                            example: Joint Replacement
+                          procedures:
+                            type: array
+                            description: Member procedures that make up this care episode.
+                            items:
+                              type: object
+                              required:
+                              - code
+                              - code_scheme
+                              - description
+                              properties:
+                                code:
+                                  type: string
+                                  example: '27447'
+                                code_scheme:
+                                  type: string
+                                  example: CPT
+                                description:
+                                  type: string
+                                  example: Total knee arthroplasty
+                      example:
+                      - care_cluster_code: JOINT_REPLACEMENT
+                        care_cluster_description: Joint Replacement
+                        procedures:
+                        - code: '27447'
+                          code_scheme: CPT
+                          description: Total knee arthroplasty
+              example:
+                parameters:
+                  care_cluster_description: joint
+                total_count: 1
+                page: 1
+                page_size: 20
+                data:
+                - care_cluster_code: JOINT_REPLACEMENT
+                  care_cluster_description: Joint Replacement
+                  procedures:
+                  - code: '27447'
+                    code_scheme: CPT
+                    description: Total knee arthroplasty
+        '400':
+          description: Invalid query parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1carriers/get/responses/400/content/application~1json/schema'
+        '403':
+          description: The caller does not have Price Transparency access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1carriers/get/responses/403/content/application~1json/schema'
+  /v2/carriers:
+    get:
+      summary: List Carriers (v2)
+      description: 'List carriers available in the Price Transparency v2 pricing data set.
+
+
+        Use this to discover valid `carrier_id` values for pricing filters.
+
+
+        #### Important
+
+        These identifiers are **not** the same as v1 [`/v1/pricing/carriers`](./getpricingcarriers)
+
+        UUIDs. Always resolve carriers through this endpoint (or a curated customer
+
+        mapping) when working with v2.
+
+        '
+      operationId: getV2Carriers
+      tags:
+      - Price Transparency v2
+      parameters:
+      - name: carrier_id
+        in: query
+        required: false
+        description: Exact match on carrier business id.
+        schema:
+          type: string
+          example: '78110'
+      - name: carrier_name
+        in: query
+        required: false
+        description: 'Match on carrier display name. Case-insensitive substring on
+
+          `/v2/carriers`; case-insensitive exact match on DB-backed pricing endpoints;
+
+          case-sensitive exact match on Elasticsearch search endpoints.
+
+          '
+        schema:
+          type: string
+          example: Aetna
+      - name: page
+        in: query
+        required: false
+        description: 'Page of results to return. Values below `1` are treated as `1`.
+
+          '
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          example: 1
+      - name: page_size
+        in: query
+        required: false
+        description: 'Number of results per page. Hard-capped at **100**.
+
+          '
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+          example: 20
+      responses:
+        '200':
+          description: Matching carriers.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - type: object
+                  description: 'Standard response envelope for all Price Transparency v2 endpoints.
+
+                    Pagination fields are always present; `parameters` echoes the non-null filters
+
+                    that were applied (pagination keys are omitted from the echo).
+
+                    '
+                  required:
+                  - parameters
+                  - total_count
+                  - page
+                  - page_size
+                  - data
+                  properties:
+                    parameters:
+                      type: object
+                      additionalProperties: true
+                      description: Echo of non-null request filters (pagination omitted).
+                      example:
+                        code: '27447'
+                        code_scheme: CPT
+                    total_count:
+                      type: integer
+                      description: Total matching rows across all pages.
+                      example: 1
+                    page:
+                      type: integer
+                      description: Current page number.
+                      example: 1
+                    page_size:
+                      type: integer
+                      description: Page size used for this response.
+                      example: 20
+                    data:
+                      type: array
+                      description: Records for the current page.
+                      items: {}
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        description: 'An insurance carrier in the Price Transparency v2 data set.
+
+                          Use `carrier_id` as the filter value on pricing endpoints.
+
+                          '
+                        required:
+                        - carrier_id
+                        - name
+                        properties:
+                          carrier_id:
+                            type: string
+                            description: Business id used in all v2 pricing filters.
+                            example: '78110'
+                          name:
+                            type: string
+                            description: Display name.
+                            example: Aetna
+                      example:
+                      - carrier_id: '78110'
+                        name: Aetna
+              example:
+                parameters:
+                  carrier_name: aetna
+                total_count: 1
+                page: 1
+                page_size: 20
+                data:
+                - carrier_id: '78110'
+                  name: Aetna
+        '400':
+          description: Invalid query parameters.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An error returned from the API
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - status
+                    - code
+                    - message
+                    properties:
+                      status:
+                        type: integer
+                        description: The HTTP error code associated with this error
+                        example: 400
+                      code:
+                        type: string
+                        enum:
+                        - invalid_query_params
+                        - bad_request
+                      message:
+                        type:
+                        - object
+                        - string
+                        description: 'An object representing what exactly went wrong. The keys available in this
+                          object vary with the type of error  returned.
+
+                          '
+                        example:
+                          query:
+                            _schema:
+                            - parameters 'npis' and 'location_ids' cannot be used together
+        '403':
+          description: The caller does not have Price Transparency access.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: You are not allow to make this request
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - status
+                    - code
+                    - message
+                    properties:
+                      status:
+                        type: integer
+                        example: 403
+                      code:
+                        type: string
+                        enum:
+                        - permission_denied
+                      message:
+                        type: string
+                        example: a trial account does not have access to this functionality
+  /v2/locations/{location_id}/pricing/procedures:
+    get:
+      summary: Location Procedure Pricing (v2)
+      description: 'Return all procedure-level negotiated rates for a single facility /
+
+        practice location, optionally filtered by carrier.
+
+
+        Results are ordered cheapest-first by `min`.
+
+
+        #### Example Use Case
+
+        Given location `1001` and carrier `78110`, list every procedure priced at
+
+        that site for that carrier, sorted from lowest to highest `min`.
+
+
+        #### Path parameter
+
+        `location_id` accepts either the integer location id **or** the location UUID.
+
+        Unknown values return HTTP 404.
+
+
+        #### Carrier filtering
+
+        Prefer `carrier_id` (from [`GET /v2/carriers`](./getv2carriers)).
+
+        `plan_id` is accepted in the contract but currently returns HTTP 501.
+
+        `carrier_id` and `plan_id` are mutually exclusive (HTTP 400 if both are sent).
+
+        '
+      operationId: getV2LocationProcedurePricing
+      tags:
+      - Price Transparency v2
+      parameters:
+      - name: location_id
+        in: path
+        required: true
+        description: 'The location to look up. Accepts either the integer location id **or** the location UUID.
+
+          '
+        schema:
+          type: string
+          example: '1001'
+      - $ref: '#/paths/~1v2~1pricing~1locations~1procedures/get/parameters/7'
+      - $ref: '#/paths/~1v2~1carriers/get/parameters/1'
+      - $ref: '#/paths/~1v2~1procedures/get/parameters/1'
+      - $ref: '#/paths/~1v2~1pricing~1locations~1procedures/get/parameters/9'
+      - $ref: '#/paths/~1v2~1carriers/get/parameters/2'
+      - $ref: '#/paths/~1v2~1carriers/get/parameters/3'
+      responses:
+        '200':
+          description: Procedure price records for the location.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/paths/~1v2~1carriers/get/responses/200/content/application~1json/schema/allOf/0'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        description: 'Location-scoped negotiated rate statistics for a single procedure and carrier.
+
+                          '
+                        required:
+                        - procedure_code
+                        - procedure_code_scheme
+                        - procedure_description
+                        - carrier_id
+                        - carrier_name
+                        - location_id
+                        - min
+                        - median
+                        - avg
+                        - max
+                        properties:
+                          procedure_code:
+                            type: string
+                            example: '27447'
+                          procedure_code_scheme:
+                            type: string
+                            example: CPT
+                          procedure_description:
+                            type: string
+                            example: Total knee arthroplasty
+                          carrier_id:
+                            type: string
+                            example: '78110'
+                          carrier_name:
+                            type: string
+                            example: Aetna
+                          location_id:
+                            type: string
+                            description: Location id as a string.
+                            example: '1001'
+                          npi:
+                            type:
+                            - integer
+                            - 'null'
+                            description: Null for location-level records.
+                            example: null
+                          negotiated_type:
+                            type: string
+                            example: negotiated
+                          negotiation_arrangement:
+                            type: string
+                            example: ffs
+                          min:
+                            type: number
+                            format: float
+                            example: 14200
+                          median:
+                            type: number
+                            format: float
+                            example: 16850
+                          avg:
+                            type: number
+                            format: float
+                            example: 17120.5
+                          max:
+                            type: number
+                            format: float
+                            example: 21400
+                          care_cluster_codes:
+                            type: array
+                            description: Present when the procedure belongs to one or more care clusters.
+                            items:
+                              type: string
+                            example:
+                            - JOINT_REPLACEMENT
+              example:
+                parameters:
+                  carrier_id: '78110'
+                  location_id: '1001'
+                total_count: 1
+                page: 1
+                page_size: 20
+                data:
+                - procedure_code: '27447'
+                  procedure_code_scheme: CPT
+                  procedure_description: Total knee arthroplasty
+                  carrier_id: '78110'
+                  carrier_name: Aetna
+                  location_id: '1001'
+                  npi: null
+                  negotiated_type: negotiated
+                  negotiation_arrangement: ffs
+                  min: 14200
+                  median: 16850
+                  avg: 17120.5
+                  max: 21400
+                  care_cluster_codes:
+                  - JOINT_REPLACEMENT
+        '400':
+          description: Invalid query parameters (for example both `carrier_id` and `plan_id`).
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1carriers/get/responses/400/content/application~1json/schema'
+        '403':
+          description: The caller does not have Price Transparency access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1carriers/get/responses/403/content/application~1json/schema'
+        '404':
+          description: The given location could not be found.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: The requested resource could not be found
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - status
+                    - code
+                    - message
+                    properties:
+                      status:
+                        type: integer
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                x-apievangelist-inlined-from: https://ribbon.readme.io/reference/getcustomtin.md
+                x-apievangelist-inline-note: Verbatim from the provider's own published OpenAPI slice for GET /v1/custom/tin/{tin_id}.
+                  Inlined only because ReadMe's per-operation slicing left this $ref pointing outside the Price
+                  Transparency v2 paths. Content unmodified.
+        '501':
+          description: '`plan_id` filtering is not implemented yet.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1carriers/get/responses/400/content/application~1json/schema'
+  /v2/locations/{location_id}/pricing/care-clusters:
+    get:
+      summary: Location Care Cluster Pricing (v2)
+      description: 'Return care-cluster (bundle) prices for a single facility / practice
+
+        location, optionally filtered by carrier.
+
+
+        Results are ordered cheapest-first by `bundle_price`.
+
+
+        Each record includes completeness fields so clients can see how much of the
+
+        expected procedure set has pricing at that site:
+
+        `procedure_count`, `expected_procedure_count`, `completeness_pct`,
+
+        `included_procedures`, and `missing_procedures`.
+
+
+        #### Path parameter
+
+        `location_id` accepts either the integer location id **or** the location UUID.
+
+        Unknown values return HTTP 404.
+
+
+        #### Carrier filtering
+
+        Prefer `carrier_id`. `plan_id` currently returns HTTP 501.
+
+        `carrier_id` and `plan_id` are mutually exclusive.
+
+        '
+      operationId: getV2LocationCareClusterPricing
+      tags:
+      - Price Transparency v2
+      parameters:
+      - $ref: '#/paths/~1v2~1locations~1%7Blocation_id%7D~1pricing~1procedures/get/parameters/0'
+      - $ref: '#/paths/~1v2~1pricing~1locations~1procedures/get/parameters/7'
+      - $ref: '#/paths/~1v2~1carriers/get/parameters/1'
+      - $ref: '#/paths/~1v2~1procedures/get/parameters/4'
+      - $ref: '#/paths/~1v2~1procedures/get/parameters/0'
+      - $ref: '#/paths/~1v2~1pricing~1locations~1procedures/get/parameters/9'
+      - $ref: '#/paths/~1v2~1carriers/get/parameters/2'
+      - $ref: '#/paths/~1v2~1carriers/get/parameters/3'
+      responses:
+        '200':
+          description: Care cluster price records for the location.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/paths/~1v2~1carriers/get/responses/200/content/application~1json/schema/allOf/0'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        description: 'Location-scoped care-cluster (bundle) price for a single carrier.
+
+                          '
+                        required:
+                        - care_cluster_code
+                        - care_cluster_description
+                        - carrier_id
+                        - carrier_name
+                        - location_id
+                        - bundle_price
+                        - procedure_count
+                        - expected_procedure_count
+                        - completeness_pct
+                        - included_procedures
+                        - missing_procedures
+                        properties:
+                          care_cluster_code:
+                            type: string
+                            example: JOINT_REPLACEMENT
+                          care_cluster_description:
+                            type: string
+                            example: Joint Replacement
+                          carrier_id:
+                            type: string
+                            example: '78110'
+                          carrier_name:
+                            type: string
+                            example: Aetna
+                          location_id:
+                            type: string
+                            description: Location id as a string.
+                            example: '1001'
+                          npi:
+                            type:
+                            - integer
+                            - 'null'
+                            example: null
+                          bundle_price:
+                            type: number
+                            format: float
+                            description: Aggregated price for the cluster at this location / carrier.
+                            example: 28500
+                          procedure_count:
+                            type: integer
+                            description: How many expected procedures in the cluster have pricing.
+                            example: 4
+                          expected_procedure_count:
+                            type: integer
+                            description: How many procedures the cluster definition expects.
+                            example: 5
+                          completeness_pct:
+                            type: number
+                            format: float
+                            description: Coverage percentage (`procedure_count / expected_procedure_count`).
+                            example: 80
+                          included_procedures:
+                            type: array
+                            description: Procedures that contributed to the bundle. Defaults to `[]`.
+                            items: {}
+                            example:
+                            - '27447'
+                            - '27446'
+                          missing_procedures:
+                            type: array
+                            description: Expected procedures with no price at this location/carrier. Defaults to
+                              `[]`.
+                            items: {}
+                            example:
+                            - '27445'
+              example:
+                parameters:
+                  carrier_id: '78110'
+                  location_id: '1001'
+                total_count: 1
+                page: 1
+                page_size: 20
+                data:
+                - care_cluster_code: JOINT_REPLACEMENT
+                  care_cluster_description: Joint Replacement
+                  carrier_id: '78110'
+                  carrier_name: Aetna
+                  location_id: '1001'
+                  npi: null
+                  bundle_price: 28500
+                  procedure_count: 4
+                  expected_procedure_count: 5
+                  completeness_pct: 80
+                  included_procedures:
+                  - '27447'
+                  - '27446'
+                  missing_procedures:
+                  - '27445'
+        '400':
+          description: Invalid query parameters (for example both `carrier_id` and `plan_id`).
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1carriers/get/responses/400/content/application~1json/schema'
+        '403':
+          description: The caller does not have Price Transparency access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1carriers/get/responses/403/content/application~1json/schema'
+        '404':
+          description: The given location could not be found.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: The requested resource could not be found
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - status
+                    - code
+                    - message
+                    properties:
+                      status:
+                        type: integer
+                        example: 404
+                      code:
+                        type: string
+                        enum:
+                        - not_found
+                      message:
+                        type: string
+                        enum:
+                        - resource not found
+                x-apievangelist-inlined-from: https://ribbon.readme.io/reference/getcustomtin.md
+                x-apievangelist-inline-note: Verbatim from the provider's own published OpenAPI slice for GET /v1/custom/tin/{tin_id}.
+                  Inlined only because ReadMe's per-operation slicing left this $ref pointing outside the Price
+                  Transparency v2 paths. Content unmodified.
+        '501':
+          description: '`plan_id` filtering is not implemented yet.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1carriers/get/responses/400/content/application~1json/schema'
+  /v2/pricing/locations/procedures:
+    get:
+      summary: Search Location Procedure Prices (v2)
+      description: 'Find **location-level** procedure prices near an address or lat/lng,
+
+        sorted by price ascending (`min`).
+
+
+        This is the primary “shop around me” endpoint for individual procedures.
+
+
+        #### Location required
+
+        Unlike v1 (which silently defaulted to a New York City address), v2 requires
+
+        either `address` **or** both `lat` and `lng`. Missing location → HTTP 400.
+
+        Providing only one of `lat`/`lng` → HTTP 400. Failed geocoding → HTTP 400.
+
+
+        #### Example Use Case
+
+        Search for CPT `27447` within 25 miles of ZIP `10001` for carrier `78110`,
+
+        sorted from lowest to highest negotiated `min`, with facility address fields
+
+        for a map UI.
+
+
+        #### Carrier filtering
+
+        Prefer `carrier_id`. `plan_id` currently returns HTTP 501.
+
+        `carrier_id` and `plan_id` are mutually exclusive.
+
+        '
+      operationId: getV2PricingLocationProcedures
+      tags:
+      - Price Transparency v2
+      parameters:
+      - name: address
+        in: query
+        required: false
+        description: 'Free-text address or ZIP code, geocoded server-side.
+
+
+          Provide **either** `address` **or** both `lat` and `lng`. Failed geocoding returns HTTP 400.
+
+          '
+        schema:
+          type: string
+          example: '10001'
+      - name: lat
+        in: query
+        required: false
+        description: 'Latitude for a coordinate search. Must be provided together with `lng`.
+
+
+          Provide **either** both `lat` and `lng`, **or** `address`. Providing only one of
+
+          `lat`/`lng` returns HTTP 400.
+
+          '
+        schema:
+          type: number
+          format: float
+          example: 40.7506
+      - name: lng
+        in: query
+        required: false
+        description: 'Longitude for a coordinate search. Must be provided together with `lat`.
+
+
+          Provide **either** both `lat` and `lng`, **or** `address`. Providing only one of
+
+          `lat`/`lng` returns HTTP 400.
+
+          '
+        schema:
+          type: number
+          format: float
+          example: -73.9971
+      - name: distance_miles
+        in: query
+        required: false
+        description: 'Search radius in miles from the resolved address or coordinates. Must be greater than zero.
+
+          '
+        schema:
+          type: number
+          format: float
+          exclusiveMinimum: 0
+          default: 25
+          example: 25
+      - $ref: '#/paths/~1v2~1procedures/get/parameters/0'
+      - $ref: '#/paths/~1v2~1procedures/get/parameters/1'
+      - $ref: '#/paths/~1v2~1procedures/get/parameters/3'
+      - name: carrier_id
+        in: query
+        required: false
+        description: 'Filter results to a single insurance carrier using the v2 carrier business id
+
+          (for example `78110`).
+
+
+          Discover valid values with [`GET /v2/carriers`](./getv2carriers). These ids are
+
+          **not** the same as v1 `/v1/pricing/carriers` UUIDs.
+
+
+          Mutually exclusive with `plan_id` — sending both returns HTTP 400.
+
+          '
+        schema:
+          type: string
+          example: '78110'
+      - $ref: '#/paths/~1v2~1carriers/get/parameters/1'
+      - name: plan_id
+        in: query
+        required: false
+        description: 'Reserved for filtering by a Ribbon insurance plan UUID.
+
+
+          **Not functional yet** — requests that include `plan_id` return HTTP 501 until
+
+          plan→carrier mapping is available. Prefer `carrier_id` today.
+
+
+          Mutually exclusive with `carrier_id` — sending both returns HTTP 400.
+
+          '
+        schema:
+          type: string
+          example: 81ba3a1a-05a9-48d9-b9b2-cb8f9eafc902
+      - $ref: '#/paths/~1v2~1carriers/get/parameters/2'
+      - $ref: '#/paths/~1v2~1carriers/get/parameters/3'
+      responses:
+        '200':
+          description: Location procedure price hits near the search point.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/paths/~1v2~1carriers/get/responses/200/content/application~1json/schema/allOf/0'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        description: 'Geographic search hit for a location-level procedure price. Sorted by `min`
+
+                          ascending. Includes facility identity and geo fields for mapping UIs.
+
+                          '
+                        required:
+                        - location_id
+                        - carrier_id
+                        - procedure_code
+                        - min
+                        - median
+                        - avg
+                        - max
+                        properties:
+                          location_id:
+                            type: string
+                            example: '1001'
+                          location_name:
+                            type: string
+                            example: Example Orthopedic Center
+                          address:
+                            type: string
+                            example: 123 Main St, New York, NY 10001
+                          state:
+                            type: string
+                            example: NY
+                          latitude:
+                            type: number
+                            format: float
+                            example: 40.7506
+                          longitude:
+                            type: number
+                            format: float
+                            example: -73.9971
+                          npi:
+                            type:
+                            - integer
+                            - 'null'
+                            description: Null for location-level hits.
+                            example: null
+                          carrier_id:
+                            type: string
+                            example: '78110'
+                          carrier_name:
+                            type: string
+                            example: Aetna
+                          procedure_code:
+                            type: string
+                            example: '27447'
+                          procedure_code_scheme:
+                            type: string
+                            example: CPT
+                          procedure_description:
+                            type: string
+                            example: Total knee arthroplasty
+                          care_cluster_code:
+                            type: string
+                            description: Present when the procedure is associated with a care cluster.
+                            example: JOINT_REPLACEMENT
+                          negotiated_type:
+                            type: string
+                            example: negotiated
+                          negotiation_arrangement:
+                            type: string
+                            example: ffs
+                          min:
+                            type: number
+                            format: float
+                            example: 14200
+                          median:
+                            type: number
+                            format: float
+                            example: 16850
+                          avg:
+                            type: number
+                            format: float
+                            example: 17120.5
+                          max:
+                            type: number
+                            format: float
+                            example: 21400
+              example:
+                parameters:
+                  address: '10001'
+                  procedure_code: '27447'
+                  carrier_id: '78110'
+                  distance_miles: 25
+                total_count: 18
+                page: 1
+                page_size: 20
+                data:
+                - location_id: '1001'
+                  location_name: Example Orthopedic Center
+                  address: 123 Main St, New York, NY 10001
+                  state: NY
+                  latitude: 40.7506
+                  longitude: -73.9971
+                  npi: null
+                  carrier_id: '78110'
+                  carrier_name: Aetna
+                  procedure_code: '27447'
+                  procedure_code_scheme: CPT
+                  procedure_description: Total knee arthroplasty
+                  care_cluster_code: JOINT_REPLACEMENT
+                  negotiated_type: negotiated
+                  negotiation_arrangement: ffs
+                  min: 14200
+                  median: 16850
+                  avg: 17120.5
+                  max: 21400
+        '400':
+          description: 'Invalid search — missing location, incomplete lat/lng, failed geocode,
+
+            or mutually exclusive carrier filters.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1carriers/get/responses/400/content/application~1json/schema'
+        '403':
+          description: The caller does not have Price Transparency access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1carriers/get/responses/403/content/application~1json/schema'
+        '501':
+          description: '`plan_id` filtering is not implemented yet.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1carriers/get/responses/400/content/application~1json/schema'
+  /v2/pricing/locations/care-clusters:
+    get:
+      summary: Search Location Care Cluster Prices (v2)
+      description: 'Find **location-level** care-cluster (bundle) prices near an address or
+
+        lat/lng, sorted by `bundle_price` ascending.
+
+
+        Same geo / carrier / pagination rules as
+
+        [`GET /v2/pricing/locations/procedures`](./getv2pricinglocationprocedures).
+
+
+        Optional `procedure_code` filters to bundles whose `included_procedures`
+
+        contain that code.
+
+
+        #### Location required
+
+        Provide either `address` **or** both `lat` and `lng`. Missing location,
+
+        incomplete coordinates, or failed geocoding → HTTP 400.
+
+        '
+      operationId: getV2PricingLocationCareClusters
+      tags:
+      - Price Transparency v2
+      parameters:
+      - $ref: '#/paths/~1v2~1pricing~1locations~1procedures/get/parameters/0'
+      - $ref: '#/paths/~1v2~1pricing~1locations~1procedures/get/parameters/1'
+      - $ref: '#/paths/~1v2~1pricing~1locations~1procedures/get/parameters/2'
+      - $ref: '#/paths/~1v2~1pricing~1locations~1procedures/get/parameters/3'
+      - $ref: '#/paths/~1v2~1procedures/get/parameters/3'
+      - $ref: '#/paths/~1v2~1procedures/get/parameters/4'
+      - $ref: '#/paths/~1v2~1procedures/get/parameters/0'
+      - $ref: '#/paths/~1v2~1pricing~1locations~1procedures/get/parameters/7'
+      - $ref: '#/paths/~1v2~1carriers/get/parameters/1'
+      - $ref: '#/paths/~1v2~1pricing~1locations~1procedures/get/parameters/9'
+      - $ref: '#/paths/~1v2~1carriers/get/parameters/2'
+      - $ref: '#/paths/~1v2~1carriers/get/parameters/3'
+      responses:
+        '200':
+          description: Location care cluster price hits near the search point.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/paths/~1v2~1carriers/get/responses/200/content/application~1json/schema/allOf/0'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        description: 'Geographic search hit for a location-level care-cluster (bundle) price.
+
+                          Sorted by `bundle_price` ascending.
+
+                          '
+                        required:
+                        - location_id
+                        - carrier_id
+                        - care_cluster_code
+                        - bundle_price
+                        properties:
+                          location_id:
+                            type: string
+                            example: '1001'
+                          location_name:
+                            type: string
+                            example: Example Orthopedic Center
+                          address:
+                            type: string
+                            example: 123 Main St, New York, NY 10001
+                          state:
+                            type: string
+                            example: NY
+                          latitude:
+                            type: number
+                            format: float
+                          longitude:
+                            type: number
+                            format: float
+                          npi:
+                            type:
+                            - integer
+                            - 'null'
+                            description: Null for location-level hits.
+                            example: null
+                          carrier_id:
+                            type: string
+                            example: '78110'
+                          carrier_name:
+                            type: string
+                            example: Aetna
+                          care_cluster_code:
+                            type: string
+                            example: JOINT_REPLACEMENT
+                          care_cluster_description:
+                            type: string
+                            example: Joint Replacement
+                          bundle_price:
+                            type: number
+                            format: float
+                            description: Sort key (ascending).
+                            example: 28500
+                          procedure_count:
+                            type: integer
+                            example: 4
+                          expected_procedure_count:
+                            type: integer
+                            example: 5
+                          completeness_pct:
+                            type: number
+                            format: float
+                            example: 80
+                          included_procedures:
+                            type: array
+                            items: {}
+                          missing_procedures:
+                            type: array
+                            items: {}
+              example:
+                parameters:
+                  lat: 40.75
+                  lng: -73.99
+                  care_cluster_code: JOINT_REPLACEMENT
+                  distance_miles: 25
+                total_count: 7
+                page: 1
+                page_size: 20
+                data:
+                - location_id: '1001'
+                  location_name: Example Orthopedic Center
+                  address: 123 Main St, New York, NY 10001
+                  state: NY
+                  latitude: 40.7506
+                  longitude: -73.9971
+                  npi: null
+                  carrier_id: '78110'
+                  carrier_name: Aetna
+                  care_cluster_code: JOINT_REPLACEMENT
+                  care_cluster_description: Joint Replacement
+                  bundle_price: 28500
+                  procedure_count: 4
+                  expected_procedure_count: 5
+                  completeness_pct: 80
+                  included_procedures:
+                  - '27447'
+                  missing_procedures:
+                  - '27445'
+        '400':
+          description: 'Invalid search — missing location, incomplete lat/lng, failed geocode,
+
+            or mutually exclusive carrier filters.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1carriers/get/responses/400/content/application~1json/schema'
+        '403':
+          description: The caller does not have Price Transparency access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1carriers/get/responses/403/content/application~1json/schema'
+        '501':
+          description: '`plan_id` filtering is not implemented yet.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1carriers/get/responses/400/content/application~1json/schema'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

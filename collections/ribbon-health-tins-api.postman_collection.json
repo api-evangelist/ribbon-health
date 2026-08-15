@@ -1,0 +1,417 @@
+{
+  "item": [
+    {
+      "id": "eecfd1f6-5abc-4b82-b34f-e84a27c275ce",
+      "name": "TINs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "be951307-26a0-4110-8d98-9ac1ccbec0f9",
+          "name": "getTins",
+          "request": {
+            "name": "getTins",
+            "description": {
+              "content": "Search and list tins that exist within the Ribbon API.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "tin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "String input that fuzzy searches across tins, name, address, and legal_name."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The billing entity name that appears on claims data, or if available, the official legal name of the billing entity.\nString input that is fuzzy matched against the `name` field.\nNote: This parameter will not match with the `legal_name` field, only the `name` field."
+                },
+                {
+                  "disabled": false,
+                  "key": "legal_name",
+                  "value": "<string>",
+                  "description": "The legal name of the entity associated with the TIN.\nString input that is fuzzy matched against the `legal_name` field."
+                },
+                {
+                  "disabled": false,
+                  "key": "tin_ids",
+                  "value": "<string>",
+                  "description": "Comma separated list of TINs.\nNote: This parameter cannot be used in combination with any other parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "has_tin",
+                  "value": "<boolean>",
+                  "description": "Boolean input that applies to tin_confirmed field."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "The page of the results which was returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "How many results are in each page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "56b305f7-493c-4c73-8771-e708dac46f76",
+              "name": "Tins returned from a valid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "tin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "legal_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tin_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "has_tin",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"parameters\": {\n    \"tin_ids\": \"string\"\n  },\n  \"tins\": [\n    {\n      \"tin\": \"string\",\n      \"name\": \"string\",\n      \"legal_name\": \"string\",\n      \"address\": \"string\",\n      \"tin_confirmed\": true\n    },\n    {\n      \"tin\": \"string\",\n      \"name\": \"string\",\n      \"legal_name\": \"string\",\n      \"address\": \"string\",\n      \"tin_confirmed\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c18b365f-31d4-4c85-8d82-83c9917b6c70",
+              "name": "Trial accounts do not have access to custom tins",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "tin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "legal_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tin_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "has_tin",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"permission_denied\",\n    \"message\": \"a trial account does not have access to this functionality\",\n    \"status\": 403\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ee67c54-23a1-476f-8f12-b7a91909a200",
+          "name": "getCustomTin",
+          "request": {
+            "name": "getCustomTin",
+            "description": {
+              "content": "Retrieve data on a specific TIN.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom",
+                "tin",
+                ":tin_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tin_id",
+                  "description": "(Required) The target TIN."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c5a05af-07fb-4482-9d25-3cfb012f20c2",
+              "name": "Returns a single TIN",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "tin",
+                    ":tin_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tin_id",
+                      "description": "(Required) The target TIN."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tin\": \"string\",\n  \"name\": \"string\",\n  \"legal_name\": \"string\",\n  \"address\": \"string\",\n  \"tin_confirmed\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e04b09d2-07b9-45e3-a798-9ebee3cfa0d2",
+              "name": "The given TIN UUID cannot be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom",
+                    "tin",
+                    ":tin_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tin_id",
+                      "description": "(Required) The target TIN."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"not_found\",\n    \"message\": \"resource not found\",\n    \"status\": 404\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ribbonhealth.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d875386b-d403-4e52-a602-6c98da99e68e",
+    "name": "ribbon-health Cost Estimates TINs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.\n",
+      "type": "text/plain"
+    }
+  }
+}

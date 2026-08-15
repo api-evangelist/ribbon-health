@@ -1,3 +1,27 @@
+generated: '2026-08-14'
+method: searched
+source: https://h1.com/request-demo/
+docs: https://ribbon.readme.io/docs/ribbon-products
+verified: '2026-08-14'
+plan_count: 1
+self_serve_pricing_published: false
+pricing_probe:
+  - url: https://h1.co/request-demo/
+    status: 200
+    checked: '2026-08-14'
+    note: >-
+      A "request a demo" form. No prices, no tiers, no published quota or overage anywhere on the
+      H1 site. h1.co now 301s to h1.com; the demo form is the only pricing surface.
+packaging_published: true
+packaging_note: >-
+  H1 does publish its PACKAGE STRUCTURE even though it publishes no prices. The docs describe
+  three tiers of access — "Base API Access", "Upgraded API", and separately purchasable "Add-Ons"
+  — with a feature matrix naming which modules fall in each (Providers, Locations, Networks,
+  Specialties/Location Types and Focus Areas in Base; Custom/Boost Filters and Provider
+  Cost/Quality in Upgraded; Eligibility Check and Price Transparency as add-ons). Entitlements are
+  enforced at runtime as HTTP 403 and appear in the docs as named flags such as
+  `doctors.can_price_transparency`. Source: https://ribbon.readme.io/docs/ribbon-products
+  (page last updated 2026-05-14).
 specificationVersion: "0.1"
 id: ribbon-health-plans-pricing
 name: Ribbon Health Plans and Pricing
@@ -39,6 +63,6 @@ plans:
       - endpoint: v1/custom/locations/{uuid}
         limit: 5000
         period: minute
-      - endpoint: v1/eligibility/deductible
+      - endpoint: v1/deductible
         limit: 1000
         period: hour

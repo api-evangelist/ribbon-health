@@ -1,0 +1,350 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ribbon-health Cost Estimates Locations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getCustomLocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/custom/locations",
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "The page of the results which was returned."
+              },
+              {
+                "name": "page_size",
+                "value": "25",
+                "type": "query",
+                "description": "How many results are in each page."
+              },
+              {
+                "name": "fields",
+                "value": "name,address",
+                "type": "query",
+                "description": "Comma separated list of fields within the location object to return. Can be used to greatly reduce the size of the response by requesting only data you intend to use.\nCannot be used in tandem with `_excl_fields`"
+              },
+              {
+                "name": "_excl_fields",
+                "value": "phone_numbers,insurances",
+                "type": "query",
+                "description": "Comma separated list of fields within the location object to exclude from the response. Can be used to greatly reduce the size of the response by requesting only data you intend to use."
+              },
+              {
+                "name": "address",
+                "value": "New York, NY",
+                "type": "query",
+                "description": "String input of an address that will be interpreted and geocoded in real time."
+              },
+              {
+                "name": "name",
+                "value": "Citymd Urgent Care",
+                "type": "query",
+                "description": "String input for a 'fuzzy' search on location name."
+              },
+              {
+                "name": "distance",
+                "value": "10",
+                "type": "query",
+                "description": "The proximity radius of locations returned."
+              },
+              {
+                "name": "location_types",
+                "value": "Urgent Care",
+                "type": "query",
+                "description": "Comma separated list of values that filter to what type of facilities to show. We categorize locations into 36 types. Clients can add their own locations with unique location_types, and they will also be included in the search.\nSee the Location Types Reference Endpoint for a list of all location types."
+              },
+              {
+                "name": "_excl_location_types",
+                "value": "Urgent Care",
+                "type": "query",
+                "description": "Comma separated list of the 'types' of locations to exclude. Excludes locations with a matching location type."
+              },
+              {
+                "name": "location",
+                "value": "37.7489816,-122.4802092",
+                "type": "query",
+                "description": "Latitude/longitude pair of coordinates in lieu of a string address."
+              },
+              {
+                "name": "location_ids",
+                "value": "48d4eb27-d82b-4ea4-8ad0-4bcb2c46a960",
+                "type": "query",
+                "description": "Comma separated list of desired practice location uuids."
+              },
+              {
+                "name": "_excl_location_ids",
+                "value": "48d4eb27-d82b-4ea4-8ad0-4bcb2c46a960",
+                "type": "query",
+                "description": "Comma separated list of practice location uuids to exclude."
+              },
+              {
+                "name": "insurance_ids",
+                "value": "24617022-92b3-4b9f-af1c-4df21ad6fb6f",
+                "type": "query",
+                "description": "Comma separated list of desired insurance uuids. See all locations that accept a given insurance(s)."
+              },
+              {
+                "name": "_excl_insurance_ids",
+                "value": "24617022-92b3-4b9f-af1c-4df21ad6fb6f",
+                "type": "query",
+                "description": "Comma separated list of insurance uuids to exclude. Exclude locations that accept a given insurance(s)."
+              },
+              {
+                "name": "insurance_carrier_name",
+                "value": "Aetna",
+                "type": "query",
+                "description": "String input of carrier_name in order to search for all locations that take at least one plan from a given insurance carrier.\nFind the individual valid carrier_name values from the insurance objects returned in the Insurances Reference Endpoint.\nNote: This input must be an exact string match to work"
+              },
+              {
+                "name": "min_confidence",
+                "value": "",
+                "type": "query",
+                "description": "Integer input (0-5) of the minimum confidence threshold for returned locations. min_location_confidence=4 will only display locations that have a confidence 4 or higher."
+              },
+              {
+                "name": "national_bluecard",
+                "value": "true",
+                "type": "query",
+                "description": "Boolean input that enables an API search to automatically default to the National BlueCard EPO/PPO Network whenever a member searches for out-of-state, in-network care and is covered by a BCBS Association PPO insurance plan. Use the parameter in conjunction with the address parameter and either the insurance_ids or insurance fuzzy search parameters. Defaults to true unless otherwise specified."
+              },
+              {
+                "name": "organization_ids",
+                "value": "86722ebb-1dd1-4846-a1a9-a7a9e36c944d",
+                "type": "query",
+                "description": "Comma separated list of desired organization uuids. Filters to only locations that are affiliated with the given organization uuid(s)."
+              },
+              {
+                "name": "_excl_organization_ids",
+                "value": "86722ebb-1dd1-4846-a1a9-a7a9e36c944d",
+                "type": "query",
+                "description": "Comma separated list of organization uuids to exclude. Excludes locations that are affiliated with the given organization uuid(s)."
+              },
+              {
+                "name": "clinical_area",
+                "value": "CT",
+                "type": "query",
+                "description": "String input that is fuzzy matched to the most relevant `clinical_area.display` field. Only a single clinical area will be selected.\nReturns all location with this clinical area."
+              },
+              {
+                "name": "clinical_area_ids",
+                "value": "4c03ddb4-f6c0-4574-a51e-508f83c43d69",
+                "type": "query",
+                "description": "Comma-separated list of desired clinical area ids.\nReturns all locations with a clinical area exactly matching any of the entered IDs.\n(Note: Use the `/clinical_areas/` reference endpoint to identify relevant IDs)"
+              },
+              {
+                "name": "_excl_clinical_area_ids",
+                "value": "4c03ddb4-f6c0-4574-a51e-508f83c43d69",
+                "type": "query",
+                "description": "Comma-separated list of clinical area ids to exclude.\nReturns all locations without a clinical area exactly matching any of the entered IDs.\n(Note: Use the `/clinical_areas/` reference endpoint to identify relevant IDs)"
+              },
+              {
+                "name": "treatment",
+                "value": "Neck X-ray",
+                "type": "query",
+                "description": "String input that is fuzzy matched to the most relevant `treatments.display` field. Only a single treatment will be selected.\nReturns all locations with this treatment."
+              },
+              {
+                "name": "treatment_ids",
+                "value": "e3079513-bf55-41cc-87c6-f7ff5f923085",
+                "type": "query",
+                "description": "Comma-separated list of desired treatment ids.\nReturns all locations with a `treatments.uuid` field exactly matching any of the entered IDs.\n(Note: Use the /treatments/ reference endpoint (docs) to identify relevant IDs)"
+              },
+              {
+                "name": "_excl_treatment_ids",
+                "value": "e3079513-bf55-41cc-87c6-f7ff5f923085",
+                "type": "query",
+                "description": "Comma-separated list of treatment ids to exclude.\nReturns all locations without a `treatments.uuid` field exactly matching any of the entered IDs.\n(Note: Use the /treatments/ reference endpoint (docs) to identify relevant IDs)"
+              },
+              {
+                "name": "tin_ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of desired TINs. Filters to only locations that are affiliated with the given TINs.\nNote: This parameter cannot be used in combination with any other TINs related parameters. All other TINs related parameters will be ignored."
+              },
+              {
+                "name": "tin_name",
+                "value": "",
+                "type": "query",
+                "description": "String input that is fuzzy matched against the `tins.name` field. Filters to only locations that are affiliated with the given TINs name."
+              },
+              {
+                "name": "tin_legal_name",
+                "value": "",
+                "type": "query",
+                "description": "String input that is fuzzy matched against the `tins.legal_name` field. Filters to only locations that are affiliated with the given TINs legal name."
+              }
+            ]
+          },
+          "docs": "Allows you to search for different service locations, including specific location types.\n"
+        },
+        {
+          "info": {
+            "name": "postCustomLocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ribbonhealth.com/v1/custom/locations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create new locations and facilities.\n\n#### Example Use Case\nYou want to add new urgent care locations (or labs, imaging centers, therapy centers, etc.) to an area that are not yet included in the existing Ribbon locations listings.\n"
+        },
+        {
+          "info": {
+            "name": "getCustomLocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/custom/locations/:location_uuid",
+            "params": [
+              {
+                "name": "location_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target location."
+              }
+            ]
+          },
+          "docs": "Retrieve data on a specific location.\n"
+        },
+        {
+          "info": {
+            "name": "putCustomLocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/locations/:location_uuid",
+            "params": [
+              {
+                "name": "location_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target location."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit all fields that do not fall under `insurances`, `google_maps_link`, `latitude`, or `longitude`. You may also add new fields or remove existing fields.\n"
+        },
+        {
+          "info": {
+            "name": "deleteCustomLocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ribbonhealth.com/v1/custom/locations/:location_uuid",
+            "params": [
+              {
+                "name": "location_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target location."
+              }
+            ]
+          },
+          "docs": "Delete a location.\n"
+        },
+        {
+          "info": {
+            "name": "putCustomLocationInsurances",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/locations/:location_uuid/insurances",
+            "params": [
+              {
+                "name": "location_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target location."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add or remove insurances from a location using our standard insurance UUIDs.\n"
+        },
+        {
+          "info": {
+            "name": "putCustomLocationOrganizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/locations/:location_uuid/organizations",
+            "params": [
+              {
+                "name": "location_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target location."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add or remove organizations from a location using our standard organization UUIDs.\n"
+        },
+        {
+          "info": {
+            "name": "putCustomLocationClinicalAreas",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ribbonhealth.com/v1/custom/locations/:location_uuid/clinical_areas",
+            "params": [
+              {
+                "name": "location_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the target location."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add or remove clinical areas from a location using our standard clinical area UUIDs.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

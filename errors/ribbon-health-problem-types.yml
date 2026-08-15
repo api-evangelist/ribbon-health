@@ -1,0 +1,143 @@
+generated: '2026-08-14'
+method: probed
+source: >-
+  live unauthenticated responses from https://api.ribbonhealth.com (2026-08-14) +
+  derived from 4xx responses across openapi/ribbon-health-*-openapi.yml +
+  https://ribbon.readme.io/llms.txt
+format: custom-json-envelope
+rfc9457: false
+summary: >-
+  The H1 API returns a consistent nested JSON error envelope on every failure. It is NOT RFC 9457
+  problem+json — content type is application/json, there is no `type` URI and no `title`/`detail`
+  split — but it is machine-parseable and carries a stable snake_case `code` that is more useful
+  than the HTTP status alone.
+envelope:
+  content_type: application/json
+  shape: '{"error": {"status": <int>, "code": "<snake_case_code>", "message": "<string>"}}'
+  fields:
+    - name: error.status
+      type: integer
+      description: Duplicates the HTTP status code inside the body.
+    - name: error.code
+      type: string
+      description: Stable snake_case machine code. This is the field to branch on.
+    - name: error.message
+      type: string
+      description: Human-readable explanation. Not stable; do not parse.
+  correlation_header: ribbon-request-id
+  correlation_note: >-
+    Every error response carries a `ribbon-request-id` header (32-char hex). Quote it to support.
+    Observed on live 401/404 responses; undocumented by the provider.
+problems:
+  - status: 401
+    code: not_authenticated
+    title: No API key supplied
+    message_observed: >-
+      You did not provide an API Key. If you need help, please feel free to contact us at
+      team@ribbonhealth.com!
+    alternate_message_observed: Authentication credentials were not provided.
+    remediation: >-
+      Send `Authorization: Bearer {customer_token}`. Two different messages are returned for the
+      same code depending on path (the API root vs a /v1 resource), so branch on `code`, never
+      on `message`.
+    evidence:
+      - url: https://api.ribbonhealth.com/
+        http_status: 401
+        checked: '2026-08-14'
+      - url: https://api.ribbonhealth.com/v1/insurances
+        http_status: 401
+        checked: '2026-08-14'
+  - status: 401
+    code: authentication_failed
+    title: Invalid token
+    message_observed: Invalid token.
+    remediation: >-
+      The bearer token was present but rejected. Distinct code from `not_authenticated` — an
+      agent can tell "no credential" from "bad credential" without parsing prose.
+    evidence:
+      - url: https://api.ribbonhealth.com/v1/insurances
+        http_status: 401
+        checked: '2026-08-14'
+        note: probed with an intentionally invalid bearer token
+  - status: 404
+    code: not_found
+    title: Resource not found
+    message_observed: resource not found
+    remediation: >-
+      Returned both for unknown routes and for known routes with an unknown UUID/NPI. The
+      Price Transparency v2 docs state that an unknown `location_id` returns HTTP 404.
+    evidence:
+      - url: https://api.ribbonhealth.com/v1/nonexistent
+        http_status: 404
+        checked: '2026-08-14'
+  - status: 400
+    code: null
+    title: Malformed request
+    description_from_spec: A failure due to a malformed request
+    occurrences_in_spec: 36
+    remediation: >-
+      Most commonly a missing or conflicting query parameter. Documented v2 cases: Price
+      Transparency v2 search requires either `address` or both `lat` and `lng` (missing location,
+      only one of lat/lng, or a geocoding failure all return 400), and sending both `carrier_id`
+      and `plan_id` returns 400 because they are mutually exclusive.
+    source_operations: openapi/ribbon-health-*-openapi.yml (36 operations declare a 400)
+  - status: 403
+    code: null
+    title: Plan does not include this capability
+    description_from_spec: Trial accounts do not have access to custom specialties
+    occurrences_in_spec: 18
+    remediation: >-
+      Entitlement failure, not an auth failure. The customer's package does not include the
+      module. The docs express entitlements as named flags (e.g. `doctors.can_price_transparency`
+      gates the Price Transparency v2 endpoints) and as product packages (Base API Access vs
+      Upgraded API vs Add-Ons). An agent seeing 403 should stop and escalate to a human — no
+      retry will help.
+    source_operations: openapi/ribbon-health-*-openapi.yml (18 operations declare a 403)
+  - status: 404
+    code: null
+    title: Referenced object UUID cannot be found
+    description_from_spec: The given insurance UUID cannot be found
+    occurrences_in_spec: 44
+    remediation: >-
+      Resolve the UUID through the matching reference endpoint (/v1/insurances, /v1/specialties,
+      /v1/procedures, /v1/custom/clinical_areas) before referencing it in a write.
+    source_operations: openapi/ribbon-health-*-openapi.yml (44 operations declare a 404)
+  - status: 409
+    code: null
+    title: Object already exists
+    description_from_spec: Insurance object with given fields already exists.
+    occurrences_in_spec: 13
+    remediation: >-
+      Field-uniqueness conflict on a create. This is the nearest thing the API offers to a replay
+      guard on the POST create surface — but it is uniqueness enforcement, not idempotency. See
+      conventions/ribbon-health-conventions.yml.
+    source_operations: openapi/ribbon-health-*-openapi.yml (13 operations declare a 409)
+  - status: 429
+    code: rate_limit_exceeded
+    title: Rate limit exceeded
+    remediation: >-
+      Back off. No Retry-After or RateLimit-* header is returned, so the client must implement its
+      own backoff from the documented per-endpoint limit. See
+      rate-limits/ribbon-health-rate-limits.yml.
+    source: rate-limits/ribbon-health-rate-limits.yml
+    evidence_note: >-
+      Not directly observed in this pass (would require an authenticated key and deliberate abuse).
+      Recorded from the documented limits and the provider's published error code.
+  - status: 501
+    code: null
+    title: Not implemented
+    remediation: >-
+      Price Transparency v2 accepts `plan_id` in the contract but currently returns HTTP 501 for
+      it; use `carrier_id` instead. A rare and explicitly documented case of a parameter that
+      parses but is not implemented.
+    source: https://ribbon.readme.io/llms.txt (Price Transparency v2 endpoint descriptions)
+spec_coverage:
+  '400': 36
+  '403': 18
+  '404': 44
+  '409': 13
+  '5xx': 0
+  note: >-
+    No operation in any of the ten OpenAPI documents declares a 5xx response, and none declares a
+    429 — so a client generated purely from the spec will not have a code path for either the
+    rate limit the provider documents or for server failure.

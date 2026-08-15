@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ribbon-health Cost Estimates Networks API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Networks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getNetworkAnalysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ribbonhealth.com/v1/network_analysis",
+            "params": [
+              {
+                "name": "insurance_id",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifier for a single provider network from the Insurances reference endpoint."
+              },
+              {
+                "name": "ssa_codes",
+                "value": "",
+                "type": "query",
+                "description": "SSA codes of the counties to run a network analysis on. \n\nA maximum of 50 codes may be included in a single request."
+              },
+              {
+                "name": "exclude_npis",
+                "value": "",
+                "type": "query",
+                "description": "When set to `true` the response will not list specific NPIs in the network but will continue to include the `npi_count` fields to let you know how many there are.\n\nThis parameter can be used to greater lower the amount of data sent back when specific NPIs are not necessary."
+              }
+            ]
+          },
+          "docs": "View a provider network across different geographies (i.e. counties).\n\n#### Example Use Case\nIn looking to expand to a new region, analyze existing provider networks in the region to understand how best to construct your own.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
