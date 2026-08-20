@@ -190,6 +190,8 @@ apis:
   humanURL: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
   baseURL: https://api.ribbonhealth.com/v1
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
