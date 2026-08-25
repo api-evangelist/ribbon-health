@@ -5,7 +5,7 @@
       "source": "https://h1.co/feed/",
       "feed_url": "https://h1.co/feed/",
       "title": "",
-      "saved": 1,
+      "saved": 0,
       "method": "feed"
     },
     {
@@ -13,18 +13,13 @@
       "feed_url": "https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-ld/ribbon-health-context.jsonld",
       "title": "",
       "saved": 0,
-      "method": "none",
-      "error": "parse_failed"
+      "method": "none"
     },
     {
       "source": "https://www.linkedin.com/company/ribbonhealth",
-      "feed_url": "https://www.linkedin.com/company/ribbonhealth",
-      "title": "",
-      "saved": 0,
-      "method": "none",
-      "error": "parse_failed"
+      "error": "HTTPError"
     }
   ],
-  "fetched": "2026-08-15T12:11:08Z",
-  "post_count": 19
+  "fetched": "2026-08-22T20:20:02Z",
+  "post_count": 20
 }
