@@ -12,8 +12,11 @@ info:
     inlines its request so the flow is self-contained.
   version: 1.0.0
 sourceDescriptions:
-- name: ribbonApi
-  url: ../openapi/ribbon-health-h1-api-openapi.yml
+- name: providersApi
+  url: ../openapi/ribbon-health-providers-api-openapi.yml
+  type: openapi
+- name: referenceEndpointsApi
+  url: ../openapi/ribbon-health-reference-endpoints-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: provider-search
