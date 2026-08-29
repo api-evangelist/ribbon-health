@@ -11,26 +11,16 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 2
+edge_count: 1
 edges:
 - tag: Cost Estimates
   spec_file: ribbon-health-cost-estimates-api-openapi.yml
   capability_id: BC-2800.30
   capability_id_l1: BC-2800
   capability_name: Eligibility & Benefits Verification
-  confidence: 0.75
+  confidence: 0.8
   evidence: POST /eligibility getEligibility; GET /eligibility_insurance_partners; GET /procedure_cost_estimate
-  reason: Operations verify insurance eligibility against insurance partners and return procedure cost
-    estimates before service — eligibility and benefits verification, with an adjacent out-of-pocket estimation
-    element (BC-2800.40).
-- tag: Providers
-  spec_file: ribbon-health-providers-api-openapi.yml
-  capability_id: BC-610.20
-  capability_id_l1: BC-610
-  capability_name: Master Data Management
-  confidence: 0.7
-  evidence: PUT /custom/providers/{npi}/specialties, PUT /custom/providers/{npi}/locations/{location_uuid}/insurances
-  reason: CRUD over a custom provider directory record — NPI, locations, specialties, insurances accepted
-    at location — is provider master-data stewardship rather than credentialing or care delivery. Maps
-    to Master Data Management; not BC-2890 because no primary source verification or privileging operations
-    appear.
+  reason: The operations perform insurance eligibility checks against insurance partners plus a procedure
+    cost estimate — i.e. verification of coverage/benefits before service, which is Eligibility & Benefits
+    Verification. Slight ambiguity because the cost-estimate operation also touches patient out-of-pocket
+    estimation (BC-2800.40).
