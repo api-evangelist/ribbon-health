@@ -364,6 +364,9 @@ apis:
   - type: Documentation
     url: https://ribbon.readme.io/reference/getv2procedures
 common:
+  - type: CapabilityMap
+    url: capabilities/ribbon-health-capability-edges.yml
+    name: Ribbon Health Business Capability Map
   - type: AgenticAccess
     url: agentic-access/ribbon-health-agentic-access.yml
   - type: DomainSecurity
