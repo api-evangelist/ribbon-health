@@ -2,13 +2,11 @@
   "repo": "ribbon-health",
   "feeds": [
     {
-      "source": "https://h1.co/feed/",
-      "feed_url": "https://h1.co/feed/",
+      "source": "https://www.linkedin.com/company/ribbonhealth",
+      "feed_url": "https://www.linkedin.com/company/ribbonhealth",
       "title": "",
       "saved": 0,
-      "method": "feed",
-      "nature": "vendor-blog",
-      "nature_basis": "path_blog"
+      "method": "none"
     },
     {
       "source": "https://raw.githubusercontent.com/api-evangelist/ribbon-health/refs/heads/main/json-ld/ribbon-health-context.jsonld",
@@ -18,14 +16,14 @@
       "method": "none"
     },
     {
-      "source": "https://www.linkedin.com/company/ribbonhealth",
-      "feed_url": "https://www.linkedin.com/company/ribbonhealth",
+      "source": "https://h1.co/feed/",
+      "feed_url": "https://h1.co/feed/",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "feed"
     }
   ],
-  "fetched": "2026-08-30T22:33:40Z",
+  "fetched": "2026-09-06T19:17:18Z",
   "post_count": 20,
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
