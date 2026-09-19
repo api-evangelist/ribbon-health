@@ -146,6 +146,8 @@ apis:
   humanURL: https://ribbon.readme.io/docs/welcome-to-the-ribbon-health-api
   baseURL: https://api.ribbonhealth.com/v1
   tags:
+  - Location
+  tags_raw:
   - Locations
   properties:
   - type: OpenAPI
