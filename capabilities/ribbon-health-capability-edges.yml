@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 1
+edge_count: 2
 edges:
 - tag: Cost Estimates
   spec_file: ribbon-health-cost-estimates-api-openapi.yml
@@ -24,3 +24,15 @@ edges:
     cost estimate — i.e. verification of coverage/benefits before service, which is Eligibility & Benefits
     Verification. Slight ambiguity because the cost-estimate operation also touches patient out-of-pocket
     estimation (BC-2800.40).
+- tag: Providers
+  spec_file: ribbon-health-providers-api-openapi.yml
+  capability_id: BC-610.20
+  capability_id_l1: BC-610
+  capability_name: Master Data Management
+  confidence: 0.7
+  evidence: PUT /custom/providers/{npi}/specialties, PUT /custom/providers/{npi}/locations/{location_uuid}/insurances
+  reason: CRUD over a custom provider directory record — NPI, locations, specialties, insurances accepted
+    at location — is provider master-data stewardship rather than credentialing or care delivery. Maps
+    to Master Data Management; not BC-2890 because no primary source verification or privileging operations
+    appear.
+  recovered_from: healthcare-vertical-edges.json
