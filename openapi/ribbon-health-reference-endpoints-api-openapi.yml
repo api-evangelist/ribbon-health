@@ -1,9 +1,7 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: ribbon-health Cost Estimates Reference Endpoints API
-  description: 'An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
-
-    '
+  title: ribbon-health Reference Endpoints API
+  description: An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
   contact: {}
   version: 1.0.0
   x-codegen-settings:
@@ -262,12 +260,14 @@ paths:
                     format: int32
                     example: 141
                   next:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     example: https://api.ribbonhealth.com/v1/custom/insurances?search=aetna&page=3
                   previous:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     example: https://api.ribbonhealth.com/v1/custom/insurances?search=aetna&page=1
                   results:
                     type: array
@@ -281,46 +281,56 @@ paths:
                           format: uuid
                           example: d8addf29-1054-4ccb-b179-dda65f7fefdd
                         carrier_association:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: Aetna
                         carrier_brand:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: Aetna
                         carrier_name:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: Aetna
                         state:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: NY
                         plan_name:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: Aetna HealthFund Open Choice
                         plan_type:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: PPO
                         metal_level:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         display_name:
                           type: string
                           example: Aetna - HealthFund Open Choice - PPO
                         network:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         confidence:
-                          type: integer
+                          type:
+                          - integer
+                          - 'null'
                           format: int32
-                          nullable: true
                           example: 4
                         category:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         codes:
                           type: array
                           description: ''
@@ -401,9 +411,7 @@ paths:
       tags:
       - Reference Endpoints
       summary: postCustomInsurance
-      description: 'Create a insurance with desired field values.
-
-        '
+      description: Create a insurance with desired field values.
       operationId: postCustomInsurance
       parameters: []
       requestBody:
@@ -419,46 +427,56 @@ paths:
                   format: uuid
                   example: d8addf29-1054-4ccb-b179-dda65f7fefdd
                 carrier_association:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: Aetna
                 carrier_brand:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: Aetna
                 carrier_name:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: Aetna
                 state:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: NY
                 plan_name:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: Aetna HealthFund Open Choice
                 plan_type:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: PPO
                 metal_level:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 display_name:
                   type: string
                   example: Aetna - HealthFund Open Choice - PPO
                 network:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 confidence:
-                  type: integer
+                  type:
+                  - integer
+                  - 'null'
                   format: int32
-                  nullable: true
                   example: 4
                 category:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 codes:
                   type: array
                   description: ''
@@ -488,46 +506,56 @@ paths:
                         format: uuid
                         example: d8addf29-1054-4ccb-b179-dda65f7fefdd
                       carrier_association:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: Aetna
                       carrier_brand:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: Aetna
                       carrier_name:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: Aetna
                       state:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: NY
                       plan_name:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: Aetna HealthFund Open Choice
                       plan_type:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: PPO
                       metal_level:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       display_name:
                         type: string
                         example: Aetna - HealthFund Open Choice - PPO
                       network:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       confidence:
-                        type: integer
+                        type:
+                        - integer
+                        - 'null'
                         format: int32
-                        nullable: true
                         example: 4
                       category:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       codes:
                         type: array
                         description: ''
@@ -620,9 +648,7 @@ paths:
       tags:
       - Reference Endpoints
       summary: getCustomInsurance
-      description: 'Retrieve data on a specific insurance.
-
-        '
+      description: Retrieve data on a specific insurance.
       operationId: getCustomInsurance
       parameters:
       - name: insurance_uuid
@@ -649,46 +675,56 @@ paths:
                     format: uuid
                     example: d8addf29-1054-4ccb-b179-dda65f7fefdd
                   carrier_association:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     example: Aetna
                   carrier_brand:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     example: Aetna
                   carrier_name:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     example: Aetna
                   state:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     example: NY
                   plan_name:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     example: Aetna HealthFund Open Choice
                   plan_type:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     example: PPO
                   metal_level:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   display_name:
                     type: string
                     example: Aetna - HealthFund Open Choice - PPO
                   network:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   confidence:
-                    type: integer
+                    type:
+                    - integer
+                    - 'null'
                     format: int32
-                    nullable: true
                     example: 4
                   category:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   codes:
                     type: array
                     description: ''
@@ -757,9 +793,7 @@ paths:
       tags:
       - Reference Endpoints
       summary: putCustomInsurance
-      description: 'Edit fields of a custom created insurance or a Ribbon created insurance.
-
-        '
+      description: Edit fields of a custom created insurance or a Ribbon created insurance.
       operationId: putCustomInsurance
       parameters:
       - name: insurance_uuid
@@ -785,46 +819,56 @@ paths:
                   format: uuid
                   example: d8addf29-1054-4ccb-b179-dda65f7fefdd
                 carrier_association:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: Aetna
                 carrier_brand:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: Aetna
                 carrier_name:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: Aetna
                 state:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: NY
                 plan_name:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: Aetna HealthFund Open Choice
                 plan_type:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: PPO
                 metal_level:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 display_name:
                   type: string
                   example: Aetna - HealthFund Open Choice - PPO
                 network:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 confidence:
-                  type: integer
+                  type:
+                  - integer
+                  - 'null'
                   format: int32
-                  nullable: true
                   example: 4
                 category:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 codes:
                   type: array
                   description: ''
@@ -854,46 +898,56 @@ paths:
                         format: uuid
                         example: d8addf29-1054-4ccb-b179-dda65f7fefdd
                       carrier_association:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: Aetna
                       carrier_brand:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: Aetna
                       carrier_name:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: Aetna
                       state:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: NY
                       plan_name:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: Aetna HealthFund Open Choice
                       plan_type:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: PPO
                       metal_level:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       display_name:
                         type: string
                         example: Aetna - HealthFund Open Choice - PPO
                       network:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       confidence:
-                        type: integer
+                        type:
+                        - integer
+                        - 'null'
                         format: int32
-                        nullable: true
                         example: 4
                       category:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       codes:
                         type: array
                         description: ''
@@ -1017,9 +1071,7 @@ paths:
       description: 'Delete an insurance.
 
 
-        Note: If you''ve added this insurance to doctors, you are deleting all instances of this UUID, and Ribbon will not be able to regenerate them.
-
-        '
+        Note: If you''ve added this insurance to doctors, you are deleting all instances of this UUID, and Ribbon will not be able to regenerate them.'
       operationId: deleteCustomInsurance
       parameters:
       - name: insurance_uuid
@@ -1099,9 +1151,7 @@ paths:
       tags:
       - Reference Endpoints
       summary: getSpecialties
-      description: 'Search and list specialties that exist within the Ribbon API.
-
-        '
+      description: Search and list specialties that exist within the Ribbon API.
       operationId: getSpecialties
       parameters:
       - name: page
@@ -1159,12 +1209,14 @@ paths:
                     format: int32
                     example: 141
                   next:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     example: https://api.ribbonhealth.com/v1/custom/specialties?page=3
                   previous:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     example: https://api.ribbonhealth.com/v1/custom/specialties?page=1
                   results:
                     type: array
@@ -1182,37 +1234,46 @@ paths:
                           oneOf:
                           - type: string
                         board_specialty:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: Family Medicine
                         board_sub_specialty:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         non_md_specialty:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         non_md_sub_specialty:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: None
                         provider_name:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: Family Medicine Doctor
                         colloquial:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         taxonomy_1:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: Allopathic & Osteopathic Physicians
                         taxonomy_2:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: Family Medicine
                         taxonomy_3:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         display:
                           type: string
                           example: Family Medicine
@@ -1282,9 +1343,7 @@ paths:
       tags:
       - Reference Endpoints
       summary: postCustomSpecialty
-      description: 'Create a custom specialty with desired field values.
-
-        '
+      description: Create a custom specialty with desired field values.
       operationId: postCustomSpecialty
       parameters: []
       requestBody:
@@ -1304,37 +1363,46 @@ paths:
                   oneOf:
                   - type: string
                 board_specialty:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: Family Medicine
                 board_sub_specialty:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 non_md_specialty:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 non_md_sub_specialty:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: None
                 provider_name:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: Family Medicine Doctor
                 colloquial:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 taxonomy_1:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: Allopathic & Osteopathic Physicians
                 taxonomy_2:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: Family Medicine
                 taxonomy_3:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 display:
                   type: string
                   example: Family Medicine
@@ -1370,37 +1438,46 @@ paths:
                         oneOf:
                         - type: string
                       board_specialty:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: Family Medicine
                       board_sub_specialty:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       non_md_specialty:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       non_md_sub_specialty:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: None
                       provider_name:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: Family Medicine Doctor
                       colloquial:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       taxonomy_1:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: Allopathic & Osteopathic Physicians
                       taxonomy_2:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: Family Medicine
                       taxonomy_3:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       display:
                         type: string
                         example: Family Medicine
@@ -1495,9 +1572,7 @@ paths:
       tags:
       - Reference Endpoints
       summary: getCustomSpecialty
-      description: 'Retrieve data on a specific specialty.
-
-        '
+      description: Retrieve data on a specific specialty.
       operationId: getCustomSpecialty
       parameters:
       - name: specialty_uuid
@@ -1528,37 +1603,46 @@ paths:
                     oneOf:
                     - type: string
                   board_specialty:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     example: Family Medicine
                   board_sub_specialty:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   non_md_specialty:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   non_md_sub_specialty:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     example: None
                   provider_name:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     example: Family Medicine Doctor
                   colloquial:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   taxonomy_1:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     example: Allopathic & Osteopathic Physicians
                   taxonomy_2:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     example: Family Medicine
                   taxonomy_3:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   display:
                     type: string
                     example: Family Medicine
@@ -1632,9 +1716,7 @@ paths:
       description: 'Edit fields of a custom created specialty.
 
 
-        Note: You cannot edit a Ribbon created specialty.
-
-        '
+        Note: You cannot edit a Ribbon created specialty.'
       operationId: putCustomSpecialty
       parameters:
       - name: specialty_uuid
@@ -1664,37 +1746,46 @@ paths:
                   oneOf:
                   - type: string
                 board_specialty:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: Family Medicine
                 board_sub_specialty:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 non_md_specialty:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 non_md_sub_specialty:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: None
                 provider_name:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: Family Medicine Doctor
                 colloquial:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 taxonomy_1:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: Allopathic & Osteopathic Physicians
                 taxonomy_2:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   example: Family Medicine
                 taxonomy_3:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 display:
                   type: string
                   example: Family Medicine
@@ -1730,37 +1821,46 @@ paths:
                         oneOf:
                         - type: string
                       board_specialty:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: Family Medicine
                       board_sub_specialty:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       non_md_specialty:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       non_md_sub_specialty:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: None
                       provider_name:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: Family Medicine Doctor
                       colloquial:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       taxonomy_1:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: Allopathic & Osteopathic Physicians
                       taxonomy_2:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                         example: Family Medicine
                       taxonomy_3:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       display:
                         type: string
                         example: Family Medicine
@@ -1886,9 +1986,7 @@ paths:
       description: 'Delete a specialty.
 
 
-        Note: You cannot delete a Ribbon created specialty.
-
-        '
+        Note: You cannot delete a Ribbon created specialty.'
       operationId: deleteCustomSpecialty
       parameters:
       - name: specialty_uuid
@@ -1968,9 +2066,7 @@ paths:
       tags:
       - Reference Endpoints
       summary: getCustomProviderTypes
-      description: 'Search and list provider types that exist within the Ribbon API.
-
-        '
+      description: Search and list provider types that exist within the Ribbon API.
       operationId: getCustomProviderTypes
       parameters:
       - name: search
@@ -2043,9 +2139,7 @@ paths:
       tags:
       - Reference Endpoints
       summary: postCustomProviderType
-      description: 'Create a custom provider type with desired field values.
-
-        '
+      description: Create a custom provider type with desired field values.
       operationId: postCustomProviderType
       parameters: []
       requestBody:
@@ -2165,9 +2259,7 @@ paths:
       tags:
       - Reference Endpoints
       summary: getCustomProviderType
-      description: 'Retrieve data on a specific provider type.
-
-        '
+      description: Retrieve data on a specific provider type.
       operationId: getCustomProviderType
       parameters:
       - name: provider_type_uuid
@@ -2259,9 +2351,7 @@ paths:
       description: 'Edit fields of a custom created provider type.
 
 
-        Note: You cannot edit a Ribbon created provider type.
-
-        '
+        Note: You cannot edit a Ribbon created provider type.'
       operationId: putCustomProviderType
       parameters:
       - name: provider_type_uuid
@@ -2450,9 +2540,7 @@ paths:
       description: 'Delete a provider type.
 
 
-        Note: You cannot edit a Ribbon created provider type.
-
-        '
+        Note: You cannot edit a Ribbon created provider type.'
       operationId: deleteCustomProviderType
       parameters:
       - name: provider_type_uuid
@@ -2560,9 +2648,7 @@ paths:
       tags:
       - Reference Endpoints
       summary: getCustomLocationTypes
-      description: 'Search and list location types that exist within the Ribbon API.
-
-        '
+      description: Search and list location types that exist within the Ribbon API.
       operationId: getCustomLocationTypes
       parameters:
       - name: search
@@ -2635,9 +2721,7 @@ paths:
       tags:
       - Reference Endpoints
       summary: postCustomLocationType
-      description: 'Create a location type with desired field values.
-
-        '
+      description: Create a location type with desired field values.
       operationId: postCustomLocationType
       parameters: []
       requestBody:
@@ -2757,9 +2841,7 @@ paths:
       tags:
       - Reference Endpoints
       summary: getCustomLocationType
-      description: 'Retrieve data on a specific location type.
-
-        '
+      description: Retrieve data on a specific location type.
       operationId: getCustomLocationType
       parameters:
       - name: location_type_uuid
@@ -2851,9 +2933,7 @@ paths:
       description: 'Edit fields of a custom created location type.
 
 
-        Note: You cannot edit a Ribbon created location type.
-
-        '
+        Note: You cannot edit a Ribbon created location type.'
       operationId: putCustomLocationType
       parameters:
       - name: location_type_uuid
@@ -3042,9 +3122,7 @@ paths:
       description: 'Delete a location type.
 
 
-        Note: You cannot edit a Ribbon created location type.
-
-        '
+        Note: You cannot edit a Ribbon created location type.'
       operationId: deleteCustomLocationType
       parameters:
       - name: location_type_uuid
@@ -3152,9 +3230,7 @@ paths:
       tags:
       - Reference Endpoints
       summary: getProcedures
-      description: 'Search and list procedures that exist within the Ribbon API.
-
-        '
+      description: Search and list procedures that exist within the Ribbon API.
       operationId: getProcedures
       parameters:
       - name: search
@@ -3214,12 +3290,14 @@ paths:
                     format: int32
                     example: 141
                   next:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     example: https://api.ribbonhealth.com/v1/procedures?page=3
                   previous:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     example: https://api.ribbonhealth.com/v1/procedures?page=1
                   results:
                     type: array
@@ -3267,9 +3345,7 @@ paths:
       tags:
       - Reference Endpoints
       summary: getProcedure
-      description: 'Retrieve data on a specific procedure.
-
-        '
+      description: Retrieve data on a specific procedure.
       operationId: getProcedure
       parameters:
       - name: procedure_uuid
@@ -3378,9 +3454,7 @@ paths:
       tags:
       - Reference Endpoints
       summary: getLanguages
-      description: 'Search and list provider languages that exist in the Ribbon API.
-
-        '
+      description: Search and list provider languages that exist in the Ribbon API.
       operationId: getLanguages
       parameters:
       - name: search

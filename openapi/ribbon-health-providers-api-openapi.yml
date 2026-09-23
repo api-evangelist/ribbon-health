@@ -1,9 +1,7 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: ribbon-health Cost Estimates Providers API
-  description: 'An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
-
-    '
+  title: ribbon-health Providers API
+  description: An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
   contact: {}
   version: 1.0.0
   x-codegen-settings:
@@ -825,37 +823,46 @@ paths:
                             oneOf:
                             - type: string
                           board_specialty:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Family Medicine
                           board_sub_specialty:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           non_md_specialty:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           non_md_sub_specialty:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: None
                           provider_name:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Family Medicine Doctor
                           colloquial:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           taxonomy_1:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Allopathic & Osteopathic Physicians
                           taxonomy_2:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Family Medicine
                           taxonomy_3:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           display:
                             type: string
                             example: Family Medicine
@@ -890,37 +897,46 @@ paths:
                             oneOf:
                             - type: string
                           board_specialty:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Family Medicine
                           board_sub_specialty:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           non_md_specialty:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           non_md_sub_specialty:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: None
                           provider_name:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Family Medicine Doctor
                           colloquial:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           taxonomy_1:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Allopathic & Osteopathic Physicians
                           taxonomy_2:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Family Medicine
                           taxonomy_3:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           display:
                             type: string
                             example: Family Medicine
@@ -1061,37 +1077,46 @@ paths:
                                         oneOf:
                                         - type: string
                                       board_specialty:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                         example: Family Medicine
                                       board_sub_specialty:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                       non_md_specialty:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                       non_md_sub_specialty:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                         example: None
                                       provider_name:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                         example: Family Medicine Doctor
                                       colloquial:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                       taxonomy_1:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                         example: Allopathic & Osteopathic Physicians
                                       taxonomy_2:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                         example: Family Medicine
                                       taxonomy_3:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                       display:
                                         type: string
                                         example: Family Medicine
@@ -1150,37 +1175,46 @@ paths:
                                         oneOf:
                                         - type: string
                                       board_specialty:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                         example: Family Medicine
                                       board_sub_specialty:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                       non_md_specialty:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                       non_md_sub_specialty:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                         example: None
                                       provider_name:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                         example: Family Medicine Doctor
                                       colloquial:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                       taxonomy_1:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                         example: Allopathic & Osteopathic Physicians
                                       taxonomy_2:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                         example: Family Medicine
                                       taxonomy_3:
-                                        type: string
-                                        nullable: true
+                                        type:
+                                        - string
+                                        - 'null'
                                       display:
                                         type: string
                                         example: Family Medicine
@@ -1207,37 +1241,46 @@ paths:
                                   oneOf:
                                   - type: string
                                 board_specialty:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                   example: Family Medicine
                                 board_sub_specialty:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                 non_md_specialty:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                 non_md_sub_specialty:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                   example: None
                                 provider_name:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                   example: Family Medicine Doctor
                                 colloquial:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                 taxonomy_1:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                   example: Allopathic & Osteopathic Physicians
                                 taxonomy_2:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                   example: Family Medicine
                                 taxonomy_3:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                 display:
                                   type: string
                                   example: Family Medicine
@@ -1288,37 +1331,46 @@ paths:
                                   oneOf:
                                   - type: string
                                 board_specialty:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                   example: Family Medicine
                                 board_sub_specialty:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                 non_md_specialty:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                 non_md_sub_specialty:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                   example: None
                                 provider_name:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                   example: Family Medicine Doctor
                                 colloquial:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                 taxonomy_1:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                   example: Allopathic & Osteopathic Physicians
                                 taxonomy_2:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                   example: Family Medicine
                                 taxonomy_3:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                 display:
                                   type: string
                                   example: Family Medicine
@@ -1387,37 +1439,46 @@ paths:
                                   oneOf:
                                   - type: string
                                 board_specialty:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                   example: Family Medicine
                                 board_sub_specialty:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                 non_md_specialty:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                 non_md_sub_specialty:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                   example: None
                                 provider_name:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                   example: Family Medicine Doctor
                                 colloquial:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                 taxonomy_1:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                   example: Allopathic & Osteopathic Physicians
                                 taxonomy_2:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                   example: Family Medicine
                                 taxonomy_3:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                 display:
                                   type: string
                                   example: Family Medicine
@@ -1632,19 +1693,21 @@ paths:
                           description: First name of the provider
                           example: Jane
                         middle_name:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           description: Middle name of the provider
-                          nullable: true
                           example: J
                         last_name:
                           type: string
                           description: Last name of the provider
                           example: Doe
                         age:
-                          type: integer
+                          type:
+                          - integer
+                          - 'null'
                           description: The estimated age of the provider
                           format: int32
-                          nullable: true
                           example: 38
                         gender:
                           type: string
@@ -1663,9 +1726,10 @@ paths:
                           format: int32
                           example: 20
                         ratings_avg:
-                          type: number
+                          type:
+                          - number
+                          - 'null'
                           description: Average patient satisfaction rating out of 10 points across multiple sources
-                          nullable: true
                           example: 9.8
                         degrees:
                           type: array
@@ -1688,37 +1752,46 @@ paths:
                                 oneOf:
                                 - type: string
                               board_specialty:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                                 example: Family Medicine
                               board_sub_specialty:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               non_md_specialty:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               non_md_sub_specialty:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                                 example: None
                               provider_name:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                                 example: Family Medicine Doctor
                               colloquial:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               taxonomy_1:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                                 example: Allopathic & Osteopathic Physicians
                               taxonomy_2:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                                 example: Family Medicine
                               taxonomy_3:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               display:
                                 type: string
                                 example: Family Medicine
@@ -1755,12 +1828,14 @@ paths:
                                     format: uuid
                                     example: 0b26c31a-d74a-4327-9702-57753b82a126
                               type:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               year:
-                                type: integer
+                                type:
+                                - integer
+                                - 'null'
                                 format: int32
-                                nullable: true
                                 example: 2007
                         insurances:
                           type: array
@@ -1774,46 +1849,56 @@ paths:
                                 format: uuid
                                 example: d8addf29-1054-4ccb-b179-dda65f7fefdd
                               carrier_association:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                                 example: Aetna
                               carrier_brand:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                                 example: Aetna
                               carrier_name:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                                 example: Aetna
                               state:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                                 example: NY
                               plan_name:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                                 example: Aetna HealthFund Open Choice
                               plan_type:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                                 example: PPO
                               metal_level:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               display_name:
                                 type: string
                                 example: Aetna - HealthFund Open Choice - PPO
                               network:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               confidence:
-                                type: integer
+                                type:
+                                - integer
+                                - 'null'
                                 format: int32
-                                nullable: true
                                 example: 4
                               category:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               codes:
                                 type: array
                                 description: ''
@@ -1839,8 +1924,9 @@ paths:
                                 format: uuid
                                 example: f38b9fd5-1e28-4f6e-953c-1e1493b68e21
                               name:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               address:
                                 type: string
                                 example: '185 Berry St # 130, San Francisco, CA 94107, US'
@@ -1854,8 +1940,9 @@ paths:
                                     type: string
                                     example: 185 Berry St
                                   address_line_2:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                     example: '# 130'
                                   city:
                                     type: string
@@ -1907,13 +1994,14 @@ paths:
                                       format: int32
                                       example: 3
                               confidence:
-                                type: integer
+                                type:
+                                - integer
+                                - 'null'
                                 description: 'Each location contains a confidence score. This score indicates the probability of the given provider practicing at said location with the included contact information
 
 
                                   This field will only be populated for Ribbon-provided locations. Locations you create yourself will have a confidence score of `null`.'
                                 format: int32
-                                nullable: true
                                 example: 2
                               insurances:
                                 type: array
@@ -1927,46 +2015,56 @@ paths:
                                       format: uuid
                                       example: d8addf29-1054-4ccb-b179-dda65f7fefdd
                                     carrier_association:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                       example: Aetna
                                     carrier_brand:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                       example: Aetna
                                     carrier_name:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                       example: Aetna
                                     state:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                       example: NY
                                     plan_name:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                       example: Aetna HealthFund Open Choice
                                     plan_type:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                       example: PPO
                                     metal_level:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                     display_name:
                                       type: string
                                       example: Aetna - HealthFund Open Choice - PPO
                                     network:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                     confidence:
-                                      type: integer
+                                      type:
+                                      - integer
+                                      - 'null'
                                       format: int32
-                                      nullable: true
                                       example: 4
                                     category:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                     codes:
                                       type: array
                                       description: ''
@@ -2091,9 +2189,7 @@ paths:
       tags:
       - Providers
       summary: getCustomProvider
-      description: 'Retrieve detailed information for any provider given their NPI, such as locations, contact information, education, patient satisfaction, etc.
-
-        '
+      description: Retrieve detailed information for any provider given their NPI, such as locations, contact information, education, patient satisfaction, etc.
       operationId: getCustomProvider
       parameters:
       - name: npi
@@ -2134,19 +2230,21 @@ paths:
                     description: First name of the provider
                     example: Jane
                   middle_name:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     description: Middle name of the provider
-                    nullable: true
                     example: J
                   last_name:
                     type: string
                     description: Last name of the provider
                     example: Doe
                   age:
-                    type: integer
+                    type:
+                    - integer
+                    - 'null'
                     description: The estimated age of the provider
                     format: int32
-                    nullable: true
                     example: 38
                   gender:
                     type: string
@@ -2165,9 +2263,10 @@ paths:
                     format: int32
                     example: 20
                   ratings_avg:
-                    type: number
+                    type:
+                    - number
+                    - 'null'
                     description: Average patient satisfaction rating out of 10 points across multiple sources
-                    nullable: true
                     example: 9.8
                   degrees:
                     type: array
@@ -2190,37 +2289,46 @@ paths:
                           oneOf:
                           - type: string
                         board_specialty:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: Family Medicine
                         board_sub_specialty:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         non_md_specialty:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         non_md_sub_specialty:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: None
                         provider_name:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: Family Medicine Doctor
                         colloquial:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         taxonomy_1:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: Allopathic & Osteopathic Physicians
                         taxonomy_2:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: Family Medicine
                         taxonomy_3:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         display:
                           type: string
                           example: Family Medicine
@@ -2257,12 +2365,14 @@ paths:
                               format: uuid
                               example: 0b26c31a-d74a-4327-9702-57753b82a126
                         type:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         year:
-                          type: integer
+                          type:
+                          - integer
+                          - 'null'
                           format: int32
-                          nullable: true
                           example: 2007
                   insurances:
                     type: array
@@ -2276,46 +2386,56 @@ paths:
                           format: uuid
                           example: d8addf29-1054-4ccb-b179-dda65f7fefdd
                         carrier_association:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: Aetna
                         carrier_brand:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: Aetna
                         carrier_name:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: Aetna
                         state:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: NY
                         plan_name:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: Aetna HealthFund Open Choice
                         plan_type:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           example: PPO
                         metal_level:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         display_name:
                           type: string
                           example: Aetna - HealthFund Open Choice - PPO
                         network:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         confidence:
-                          type: integer
+                          type:
+                          - integer
+                          - 'null'
                           format: int32
-                          nullable: true
                           example: 4
                         category:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         codes:
                           type: array
                           description: ''
@@ -2341,8 +2461,9 @@ paths:
                           format: uuid
                           example: f38b9fd5-1e28-4f6e-953c-1e1493b68e21
                         name:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         address:
                           type: string
                           example: '185 Berry St # 130, San Francisco, CA 94107, US'
@@ -2356,8 +2477,9 @@ paths:
                               type: string
                               example: 185 Berry St
                             address_line_2:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                               example: '# 130'
                             city:
                               type: string
@@ -2409,13 +2531,14 @@ paths:
                                 format: int32
                                 example: 3
                         confidence:
-                          type: integer
+                          type:
+                          - integer
+                          - 'null'
                           description: 'Each location contains a confidence score. This score indicates the probability of the given provider practicing at said location with the included contact information
 
 
                             This field will only be populated for Ribbon-provided locations. Locations you create yourself will have a confidence score of `null`.'
                           format: int32
-                          nullable: true
                           example: 2
                         insurances:
                           type: array
@@ -2429,46 +2552,56 @@ paths:
                                 format: uuid
                                 example: d8addf29-1054-4ccb-b179-dda65f7fefdd
                               carrier_association:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                                 example: Aetna
                               carrier_brand:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                                 example: Aetna
                               carrier_name:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                                 example: Aetna
                               state:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                                 example: NY
                               plan_name:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                                 example: Aetna HealthFund Open Choice
                               plan_type:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                                 example: PPO
                               metal_level:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               display_name:
                                 type: string
                                 example: Aetna - HealthFund Open Choice - PPO
                               network:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               confidence:
-                                type: integer
+                                type:
+                                - integer
+                                - 'null'
                                 format: int32
-                                nullable: true
                                 example: 4
                               category:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               codes:
                                 type: array
                                 description: ''
@@ -2581,9 +2714,7 @@ paths:
 
         #### Looking For The Old Documentation?
 
-        We''re in the process of revamping our documentation. You can find the old page for this endpoint [here](https://ribbon.readme.io/docs/add-or-edit-provider-fields-old).
-
-        '
+        We''re in the process of revamping our documentation. You can find the old page for this endpoint here.'
       operationId: putCustomProvider
       parameters:
       - name: npi
@@ -2614,7 +2745,7 @@ paths:
                 - type: integer
                   format: int32
                 - type: boolean
-                - nullable: true
+                - {}
                 x-is-dynamic: true
               description: A JSON object mapping the name of the field to update to its new value
         required: true
@@ -2642,7 +2773,7 @@ paths:
                       - type: integer
                         format: int32
                       - type: boolean
-                      - nullable: true
+                      - {}
                       x-is-dynamic: true
         '400':
           description: This request attempted to update fields which cannot be customized or attempted to set a provider_type value which does not exist.
@@ -2756,9 +2887,7 @@ paths:
       tags:
       - Providers
       summary: putCustomProviderLocations
-      description: 'Add or remove locations a provider practices at using our standard location UUIDs.
-
-        '
+      description: Add or remove locations a provider practices at using our standard location UUIDs.
       operationId: putCustomProviderLocations
       parameters:
       - name: npi
@@ -2965,9 +3094,7 @@ paths:
       summary: putCustomProviderLocation
       description: 'Edit all fields that do not fall under `uuid`, `google_maps_link`, `latitude`, or `longitude`. You may also add new fields or remove existing fields.
 
-        These updates are provider-specific and will not affect other providers practicing at the same location.
-
-        '
+        These updates are provider-specific and will not affect other providers practicing at the same location.'
       operationId: putCustomProviderLocation
       parameters:
       - name: npi
@@ -3008,7 +3135,7 @@ paths:
                 - type: integer
                   format: int32
                 - type: boolean
-                - nullable: true
+                - {}
                 x-is-dynamic: true
               description: A JSON object mapping the name of the field to update to its new value
         required: true
@@ -3036,7 +3163,7 @@ paths:
                       - type: integer
                         format: int32
                       - type: boolean
-                      - nullable: true
+                      - {}
                       x-is-dynamic: true
         '400':
           description: This request attempted to use fields which are not supported.
@@ -3150,9 +3277,7 @@ paths:
       tags:
       - Providers
       summary: putCustomProviderSpecialties
-      description: 'Add or remove specialties for a provider using our standard specialty UUIDs.
-
-        '
+      description: Add or remove specialties for a provider using our standard specialty UUIDs.
       operationId: putCustomProviderSpecialties
       parameters:
       - name: npi
@@ -3359,9 +3484,7 @@ paths:
       tags:
       - Providers
       summary: putCustomProviderPrimarySpecialties
-      description: 'Edit whether a single specialty is one of the provider''s primary specialties.
-
-        '
+      description: Edit whether a single specialty is one of the provider's primary specialties.
       operationId: putCustomProviderPrimarySpecialties
       parameters:
       - name: npi
@@ -3530,9 +3653,7 @@ paths:
       tags:
       - Providers
       summary: putCustomProviderProcedures
-      description: 'Add or remove procedures for a provider using our standard procedure UUIDs.
-
-        '
+      description: Add or remove procedures for a provider using our standard procedure UUIDs.
       operationId: putCustomProviderProcedures
       parameters:
       - name: npi
@@ -3737,9 +3858,7 @@ paths:
       tags:
       - Providers
       summary: putCustomProviderClinicalAreas
-      description: 'Add or remove clinical areas for a provider using our standard clinical area UUIDs.
-
-        '
+      description: Add or remove clinical areas for a provider using our standard clinical area UUIDs.
       operationId: putCustomProviderClinicalAreas
       parameters:
       - name: npi
@@ -3944,9 +4063,7 @@ paths:
       tags:
       - Providers
       summary: putCustomProviderLocationInsurances
-      description: 'Add or remove insurances accepted by a provider at a specific location using our standard insurance UUIDs.
-
-        '
+      description: Add or remove insurances accepted by a provider at a specific location using our standard insurance UUIDs.
       operationId: putCustomProviderLocationInsurances
       parameters:
       - name: npi
@@ -4161,9 +4278,7 @@ paths:
       tags:
       - Providers
       summary: putCustomProviderLocationOrganizations
-      description: 'Add or remove organizations accepted by a provider at a specific location using our standard organization UUIDs.
-
-        '
+      description: Add or remove organizations accepted by a provider at a specific location using our standard organization UUIDs.
       operationId: putCustomProviderLocationOrganizations
       parameters:
       - name: npi

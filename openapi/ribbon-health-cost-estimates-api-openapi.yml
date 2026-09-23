@@ -1,9 +1,7 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   title: ribbon-health Cost Estimates API
-  description: 'An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
-
-    '
+  description: An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
   contact: {}
   version: 1.0.0
   x-codegen-settings:
@@ -141,9 +139,7 @@ paths:
 
         #### Example Use Case
 
-        Inform a member of their current progress against their Deductible as well as their Copay and Coinsurance summaries so they can better estimate their out-of pocket costs.
-
-        '
+        Inform a member of their current progress against their Deductible as well as their Copay and Coinsurance summaries so they can better estimate their out-of pocket costs.'
       operationId: getEligibility
       parameters:
       - name: include_full_response
@@ -230,9 +226,10 @@ paths:
                         description: Whether the eligibility check was successful
                         example: true
                       error:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         description: If `is_valid` is `true`, an error code explaining what went wrong. When `is_valid` is `false`, this will be `null`.
-                        nullable: true
                   request_id:
                     type: string
                     description: A unique identifier for the given response which Ribbon can use to find it in our logs during support requests
@@ -258,10 +255,11 @@ paths:
                         format: date
                         example: 2012-02-01
                       plan_end_date:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         description: The ending date for the member's coverage by this plan
                         format: date
-                        nullable: true
                         example: 2024-01-01
                   deductible_detail:
                     type: object
@@ -273,14 +271,16 @@ paths:
                             type: object
                             properties:
                               spend:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The amount the member has paid towards in-network deductibles, in dollars
-                                nullable: true
                                 example: '16.43'
                               maximum:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The maximum amount the member can pay towards in-network deductibles, in dollars
-                                nullable: true
                                 example: '3000'
                               remaining:
                                 type: string
@@ -290,19 +290,22 @@ paths:
                             type: object
                             properties:
                               spend:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The amount the member has paid towards out-of-network deductibles, in dollars
-                                nullable: true
                                 example: '16.43'
                               maximum:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The maximum amount the member can pay towards out-of-network deductibles, in dollars
-                                nullable: true
                                 example: '6000'
                               remaining:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The remaining amount the member can pay towards out-of-network deductibles, in dollars
-                                nullable: true
                                 example: '5983.57'
                       family:
                         type: object
@@ -311,37 +314,43 @@ paths:
                             type: object
                             properties:
                               spend:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The amount the member has paid towards in-network deductibles, in dollars
-                                nullable: true
                                 example: '16.43'
                               maximum:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The maximum amount the member can pay towards in-network deductibles, in dollars
-                                nullable: true
                                 example: '6000'
                               remaining:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The remaining amount the member can pay towards in-network deductibles, in dollars
-                                nullable: true
                                 example: '5983.57'
                           out_of_network:
                             type: object
                             properties:
                               spend:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The amount the member has paid towards out-of-network deductibles, in dollars
-                                nullable: true
                                 example: '16.43'
                               maximum:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The maximum amount the member can pay towards out-of-network deductibles, in dollars
-                                nullable: true
                                 example: '6000'
                               remaining:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The remaining amount the member can pay towards out-of-network deductibles, in dollars
-                                nullable: true
                                 example: '5983.57'
                   out_of_pocket_detail:
                     type: object
@@ -353,37 +362,43 @@ paths:
                             type: object
                             properties:
                               spend:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The amount the member has paid towards their in-network out-of-pocket maximum, in dollars
-                                nullable: true
                                 example: '16.43'
                               maximum:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The maximum amount the member can pay towards their in-network out-of-pocket maximum, in dollars
-                                nullable: true
                                 example: '3000'
                               remaining:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The remaining amount the member can pay towards their in-network out-of-pocket maximum, in dollars
-                                nullable: true
                                 example: '2983.57'
                           out_of_network:
                             type: object
                             properties:
                               spend:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The amount the member has paid towards their out-of-network out-of-pocket maximum, in dollars
-                                nullable: true
                                 example: '16.43'
                               maximum:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The maximum amount the member can pay towards their out-of-network out-of-pocket maximum, in dollars
-                                nullable: true
                                 example: '6000'
                               remaining:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The remaining amount the member can pay towards their out-of-network out-of-pocket maximum, in dollars
-                                nullable: true
                                 example: '5983.57'
                       family:
                         type: object
@@ -392,37 +407,43 @@ paths:
                             type: object
                             properties:
                               spend:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The amount the member has paid towards their in-network out-of-pocket maximum, in dollars
-                                nullable: true
                                 example: '16.43'
                               maximum:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The maximum amount the member can pay towards their in-network out-of-pocket maximum, in dollars
-                                nullable: true
                                 example: '3000'
                               remaining:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The remaining amount the member can pay towards their in-network out-of-pocket maximum, in dollars
-                                nullable: true
                                 example: '2983.57'
                           out_of_network:
                             type: object
                             properties:
                               spend:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The amount the member has paid towards their out-of-network out-of-pocket maximum, in dollars
-                                nullable: true
                                 example: '16.43'
                               maximum:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The maximum amount the member can pay towards their out-of-network out-of-pocket maximum, in dollars
-                                nullable: true
                                 example: '6000'
                               remaining:
-                                type: string
+                                type:
+                                - string
+                                - 'null'
                                 description: The remaining amount the member can pay towards their out-of-network out-of-pocket maximum, in dollars
-                                nullable: true
                                 example: '5983.57'
                   primary_care_summary:
                     type: object
@@ -435,8 +456,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -446,8 +468,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   dme_summary:
                     type: object
@@ -460,8 +483,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -471,8 +495,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   oncology_summary:
                     type: object
@@ -485,8 +510,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -496,8 +522,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   vision_optometry_summary:
                     type: object
@@ -510,8 +537,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -521,8 +549,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   physical_therapy_summary:
                     type: object
@@ -535,8 +564,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -546,8 +576,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   specialist_office_summary:
                     type: object
@@ -560,8 +591,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -571,8 +603,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   mental_health_summary:
                     type: object
@@ -585,8 +618,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -596,8 +630,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   surgical_summary:
                     type: object
@@ -610,8 +645,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -621,8 +657,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   urgent_care_summary:
                     type: object
@@ -635,8 +672,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -646,8 +684,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   diagnostic_lab_summary:
                     type: object
@@ -660,8 +699,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -671,8 +711,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   asc_facility_summary:
                     type: object
@@ -685,8 +726,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -696,8 +738,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   chiropractic_summary:
                     type: object
@@ -710,8 +753,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -721,8 +765,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   mri_ct_scan_summary:
                     type: object
@@ -735,8 +780,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -746,8 +792,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   x_ray_summary:
                     type: object
@@ -760,8 +807,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -771,8 +819,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   speech_therapy_summary:
                     type: object
@@ -785,8 +834,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -796,8 +846,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   occupational_therapy_summary:
                     type: object
@@ -810,8 +861,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -821,8 +873,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   emergency_medical_summary:
                     type: object
@@ -835,8 +888,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -846,8 +900,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   wellness_or_routine_visit_summary:
                     type: object
@@ -860,8 +915,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -871,8 +927,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   podiatry_office_summary:
                     type: object
@@ -885,8 +942,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -896,8 +954,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   outpatient_professional_summary:
                     type: object
@@ -910,8 +969,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -921,8 +981,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   anesthesia_summary:
                     type: object
@@ -935,8 +996,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -946,8 +1008,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   substance_abuse_professional_summary:
                     type: object
@@ -960,8 +1023,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -971,8 +1035,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   substance_abuse_in_patient_facility_summary:
                     type: object
@@ -985,8 +1050,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -996,8 +1062,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   substance_abuse_out_patient_facility_summary:
                     type: object
@@ -1010,8 +1077,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -1021,8 +1089,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   flu_vaccination_summary:
                     type: object
@@ -1035,8 +1104,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -1046,8 +1116,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   hospital_inpatient_summary:
                     type: object
@@ -1060,8 +1131,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -1071,8 +1143,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   pharmacy_summary:
                     type: object
@@ -1085,8 +1158,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -1096,8 +1170,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   hospital_outpatient_summary:
                     type: object
@@ -1110,8 +1185,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -1121,8 +1197,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   telemedicine_primary_care_summary:
                     type: object
@@ -1135,8 +1212,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -1146,8 +1224,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   telemedicine_specialist_summary:
                     type: object
@@ -1160,8 +1239,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -1171,8 +1251,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   telemedicine_urgent_care_summary:
                     type: object
@@ -1185,8 +1266,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -1196,8 +1278,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   telemedicine_physical_therapy_summary:
                     type: object
@@ -1210,8 +1293,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -1221,8 +1305,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   telemedicine_mental_health_summary:
                     type: object
@@ -1235,8 +1320,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -1246,8 +1332,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   psychotherapy_summary:
                     type: object
@@ -1260,8 +1347,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -1271,8 +1359,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   snf_summary:
                     type: object
@@ -1285,8 +1374,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -1296,8 +1386,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   snf_room_board_summary:
                     type: object
@@ -1310,8 +1401,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -1321,8 +1413,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   home_health_care_summary:
                     type: object
@@ -1335,8 +1428,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -1346,8 +1440,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   hospice_summary:
                     type: object
@@ -1360,8 +1455,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -1371,8 +1467,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                   professional_physician_visit_inpatient_summary:
                     type: object
@@ -1385,8 +1482,9 @@ paths:
                             description: The amount of the member's in-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
                       out_of_network:
                         type: object
@@ -1396,8 +1494,9 @@ paths:
                             description: The amount of the member's out-of-network copay, in dollars
                             example: '30.0'
                           coinsurance:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: '0.0'
       deprecated: false
       x-operation-settings:
@@ -1415,9 +1514,7 @@ paths:
       tags:
       - Cost Estimates
       summary: getEligibilityInsurancePartners
-      description: 'Search or list all insurance partners supported by our eligibility features.
-
-        '
+      description: Search or list all insurance partners supported by our eligibility features.
       operationId: getEligibilityInsurancePartners
       parameters:
       - name: search
@@ -1491,9 +1588,7 @@ paths:
       tags:
       - Cost Estimates
       summary: getEligibilityInsurancePartner
-      description: 'Fetch an insurance partner supported by our eligibility features.
-
-        '
+      description: Fetch an insurance partner supported by our eligibility features.
       operationId: getEligibilityInsurancePartner
       parameters:
       - name: insurance_partner
@@ -1587,9 +1682,7 @@ paths:
 
         #### Example Use Case
 
-        Estimate the cost of a knee replacement surgery for a user in Boston so they can plan their personal finances accordingly.
-
-        '
+        Estimate the cost of a knee replacement surgery for a user in Boston so they can plan their personal finances accordingly.'
       operationId: getProcedureCostEstimate
       parameters:
       - name: procedure_ids

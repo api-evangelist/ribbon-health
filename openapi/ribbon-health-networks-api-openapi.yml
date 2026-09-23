@@ -1,9 +1,7 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: ribbon-health Cost Estimates Networks API
-  description: 'An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
-
-    '
+  title: ribbon-health Networks API
+  description: An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
   contact: {}
   version: 1.0.0
   x-codegen-settings:
@@ -141,9 +139,7 @@ paths:
 
         #### Example Use Case
 
-        In looking to expand to a new region, analyze existing provider networks in the region to understand how best to construct your own.
-
-        '
+        In looking to expand to a new region, analyze existing provider networks in the region to understand how best to construct your own.'
       operationId: getNetworkAnalysis
       parameters:
       - name: insurance_id

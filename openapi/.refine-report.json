@@ -1,16 +1,8 @@
 {
   "provider": "ribbon-health",
   "sources": [
-    "ribbon-health-cost-estimates-api-openapi.yml",
-    "ribbon-health-filters-api-openapi.yml",
-    "ribbon-health-focus-area-endpoints-api-openapi.yml",
-    "ribbon-health-locations-api-openapi.yml",
-    "ribbon-health-networks-api-openapi.yml",
-    "ribbon-health-organizations-api-openapi.yml",
-    "ribbon-health-price-transparency-api-openapi.yml",
-    "ribbon-health-providers-api-openapi.yml",
-    "ribbon-health-reference-endpoints-api-openapi.yml",
-    "ribbon-health-tins-api-openapi.yml"
+    "_original/ribbon-health-h1-api-openapi.yml",
+    "ribbon-health-price-transparency-v2-api-openapi.yml"
   ],
   "outputs": [
     "ribbon-health-cost-estimates-api-openapi.yml",
@@ -22,11 +14,31 @@
     "ribbon-health-price-transparency-api-openapi.yml",
     "ribbon-health-providers-api-openapi.yml",
     "ribbon-health-reference-endpoints-api-openapi.yml",
-    "ribbon-health-tins-api-openapi.yml"
+    "ribbon-health-tins-api-openapi.yml",
+    "ribbon-health-price-transparency-v2-api-openapi.yml"
   ],
   "archived": [],
-  "errors": [],
-  "warnings": [],
-  "notes": [],
-  "skipped": []
+  "errors": [
+    "ribbon-health-price-transparency-v2-api-openapi.yml: dangling $ref: #/paths/~1v2~1locations~1%7Blocation_id%7D~1pricing~1procedures/get/parameters/0"
+  ],
+  "warnings": [
+    "ribbon-health-price-transparency-v2-api-openapi.yml: previously refined output kept for 7 operation(s) no archived document covers (e.g. /v2/care-clusters get, /v2/carriers get, /v2/locations/{location_id}/pricing/care-clusters get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "ribbon-health-h1-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "ribbon-health-cost-estimates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ribbon-health-filters-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ribbon-health-focus-area-endpoints-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ribbon-health-locations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ribbon-health-networks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ribbon-health-organizations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ribbon-health-price-transparency-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ribbon-health-providers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ribbon-health-reference-endpoints-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ribbon-health-tins-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

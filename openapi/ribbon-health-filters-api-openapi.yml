@@ -1,9 +1,7 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: ribbon-health Cost Estimates Filters API
-  description: 'An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
-
-    '
+  title: ribbon-health Filters API
+  description: An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
   contact: {}
   version: 1.0.0
   x-codegen-settings:
@@ -136,9 +134,7 @@ paths:
       tags:
       - Filters
       summary: getCustomProviderFilters
-      description: 'Fetch all previously created filters for providers.
-
-        '
+      description: Fetch all previously created filters for providers.
       operationId: getCustomProviderFilters
       parameters: []
       responses:
@@ -264,7 +260,14 @@ paths:
       tags:
       - Filters
       summary: createCustomProviderFilter
-      description: "Create new filters to be used when searching for providers in the [Search Providers](./getcustomproviders) endpoint. \nYou can create filters for both Ribbon's existing data fields as well as any custom data fields you create.\n\n#### Example Use Case:\nLet's say you add a new field to a bunch of providers that match your use case, for instance `c_section_rate`. You could make this field searchable so that your search through [Search Providers](./getcustomproviders) when you pass through a certain parameter that specifies a maximum threshold.\n"
+      description: 'Create new filters to be used when searching for providers in the Search Providers endpoint.
+
+        You can create filters for both Ribbon''s existing data fields as well as any custom data fields you create.
+
+
+        #### Example Use Case:
+
+        Let''s say you add a new field to a bunch of providers that match your use case, for instance `c_section_rate`. You could make this field searchable so that your search through Search Providers when you pass through a certain parameter that specifies a maximum threshold.'
       operationId: createCustomProviderFilter
       parameters: []
       requestBody:
@@ -526,9 +529,7 @@ paths:
       tags:
       - Filters
       summary: editCustomProviderFilter
-      description: 'Edit any of the fields in a custom provider filter you have already created.
-
-        '
+      description: Edit any of the fields in a custom provider filter you have already created.
       operationId: editCustomProviderFilter
       parameters:
       - name: filter_uuid
@@ -816,9 +817,7 @@ paths:
       tags:
       - Filters
       summary: deleteCustomProviderFilter
-      description: 'Delete a provider filter.
-
-        '
+      description: Delete a provider filter.
       operationId: deleteCustomProviderFilter
       parameters:
       - name: filter_uuid
@@ -895,9 +894,7 @@ paths:
       tags:
       - Filters
       summary: getCustomLocationFilters
-      description: 'Fetch all previously created custom filters for locations.
-
-        '
+      description: Fetch all previously created custom filters for locations.
       operationId: getCustomLocationFilters
       parameters: []
       responses:
@@ -1023,7 +1020,14 @@ paths:
       tags:
       - Filters
       summary: createCustomLocationFilter
-      description: "Create new filters to be used when searching for locations in the [Search Locations](./getcustomlocations) endpoint. \nYou can create filters for both Ribbon's existing data fields as well as any custom data fields you create.\n\n#### Example Use Case:\nLet's say you add a new field to a bunch of locations that match your use case, for instance `c_section_rate`. You could make this field searchable so that your search through [Search Locations](./getcustomlocations) when you pass through a certain parameter that specifies a maximum threshold.\n"
+      description: 'Create new filters to be used when searching for locations in the Search Locations endpoint.
+
+        You can create filters for both Ribbon''s existing data fields as well as any custom data fields you create.
+
+
+        #### Example Use Case:
+
+        Let''s say you add a new field to a bunch of locations that match your use case, for instance `c_section_rate`. You could make this field searchable so that your search through Search Locations when you pass through a certain parameter that specifies a maximum threshold.'
       operationId: createCustomLocationFilter
       parameters: []
       requestBody:
@@ -1285,9 +1289,7 @@ paths:
       tags:
       - Filters
       summary: editCustomLocationFilter
-      description: 'Edit any of the fields in a custom location filter you have already created.
-
-        '
+      description: Edit any of the fields in a custom location filter you have already created.
       operationId: editCustomLocationFilter
       parameters:
       - name: filter_uuid
@@ -1579,9 +1581,7 @@ paths:
       tags:
       - Filters
       summary: deleteCustomLocationFilter
-      description: 'Delete a location filter.
-
-        '
+      description: Delete a location filter.
       operationId: deleteCustomLocationFilter
       parameters:
       - name: filter_uuid

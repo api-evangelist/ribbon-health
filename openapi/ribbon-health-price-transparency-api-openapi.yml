@@ -1,9 +1,7 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: ribbon-health Cost Estimates Price Transparency API
-  description: 'An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
-
-    '
+  title: ribbon-health Price Transparency API
+  description: An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
   contact: {}
   version: 1.0.0
   x-codegen-settings:
@@ -141,9 +139,7 @@ paths:
 
         #### Example Use Case
 
-        Search for all applicable provider negotiated rates, given a specific insurance and procedure (and optionally, a specific location/address and distance). For example, search for all providers near me who perform Leg MRIs and who take a given insurance, sorted by lowest price.
-
-        '
+        Search for all applicable provider negotiated rates, given a specific insurance and procedure (and optionally, a specific location/address and distance). For example, search for all providers near me who perform Leg MRIs and who take a given insurance, sorted by lowest price.'
       operationId: getPricingProviders
       parameters:
       - name: procedure_id
@@ -351,12 +347,14 @@ paths:
                             format: uuid
                             example: d8addf29-1054-4ccb-b179-dda65f7fefdd
                           plan_name:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Aetna HealthFund Open Choice
                           carrier_name:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Aetna
                       specialty_ids:
                         type: array
@@ -381,37 +379,46 @@ paths:
                             oneOf:
                             - type: string
                           board_specialty:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Family Medicine
                           board_sub_specialty:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           non_md_specialty:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           non_md_sub_specialty:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: None
                           provider_name:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Family Medicine Doctor
                           colloquial:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           taxonomy_1:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Allopathic & Osteopathic Physicians
                           taxonomy_2:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Family Medicine
                           taxonomy_3:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           display:
                             type: string
                             example: Family Medicine
@@ -479,9 +486,10 @@ paths:
                               description: The name of the insurance plan this UUID represents.
                               example: Aetna
                             carrier_name:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               description: The carrier that this insurance plan is associated with, if any.
-                              nullable: true
                         procedure:
                           type: object
                           properties:
@@ -518,7 +526,7 @@ paths:
                                   example: true
                                 outpatient:
                                   oneOf:
-                                  - nullable: true
+                                  - {}
                                   - required:
                                     - components
                                     - is_bundle
@@ -544,12 +552,13 @@ paths:
                                         description: Where this data is the costs for a procedure bundle rather than a regular procedure.
                                         example: true
                                       components:
-                                        type: array
+                                        type:
+                                        - array
+                                        - 'null'
                                         description: 'Individual costs for the components that make up this procedure bundle.
 
 
                                           For a regular procedure, this field will always be `null`.'
-                                        nullable: true
                                         items:
                                           type: object
                                           properties:
@@ -579,7 +588,7 @@ paths:
                                     This key will only be populated for procedure bundles, and only if we have relevant data. A regular procedure will always have a `null` value here.'
                                 inpatient:
                                   oneOf:
-                                  - nullable: true
+                                  - {}
                                   - required:
                                     - components
                                     - is_bundle
@@ -605,12 +614,13 @@ paths:
                                         description: Where this data is the costs for a procedure bundle rather than a regular procedure.
                                         example: true
                                       components:
-                                        type: array
+                                        type:
+                                        - array
+                                        - 'null'
                                         description: 'Individual costs for the components that make up this procedure bundle.
 
 
                                           For a regular procedure, this field will always be `null`.'
-                                        nullable: true
                                         items:
                                           type: object
                                           properties:
@@ -645,8 +655,9 @@ paths:
                               format: uuid
                               example: f38b9fd5-1e28-4f6e-953c-1e1493b68e21
                             name:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             address:
                               type: string
                               example: '185 Berry St # 130, San Francisco, CA 94107, US'
@@ -660,8 +671,9 @@ paths:
                                   type: string
                                   example: 185 Berry St
                                 address_line_2:
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                   example: '# 130'
                                 city:
                                   type: string
@@ -713,13 +725,14 @@ paths:
                                     format: int32
                                     example: 3
                             confidence:
-                              type: integer
+                              type:
+                              - integer
+                              - 'null'
                               description: 'Each location contains a confidence score. This score indicates the probability of the given provider practicing at said location with the included contact information
 
 
                                 This field will only be populated for Ribbon-provided locations. Locations you create yourself will have a confidence score of `null`.'
                               format: int32
-                              nullable: true
                               example: 2
                             insurances:
                               type: array
@@ -733,46 +746,56 @@ paths:
                                     format: uuid
                                     example: d8addf29-1054-4ccb-b179-dda65f7fefdd
                                   carrier_association:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                     example: Aetna
                                   carrier_brand:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                     example: Aetna
                                   carrier_name:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                     example: Aetna
                                   state:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                     example: NY
                                   plan_name:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                     example: Aetna HealthFund Open Choice
                                   plan_type:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                     example: PPO
                                   metal_level:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                   display_name:
                                     type: string
                                     example: Aetna - HealthFund Open Choice - PPO
                                   network:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                   confidence:
-                                    type: integer
+                                    type:
+                                    - integer
+                                    - 'null'
                                     format: int32
-                                    nullable: true
                                     example: 4
                                   category:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                   codes:
                                     type: array
                                     description: ''
@@ -797,19 +820,21 @@ paths:
                           description: First name of the provider
                           example: Jane
                         middle_name:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           description: Middle name of the provider
-                          nullable: true
                           example: J
                         last_name:
                           type: string
                           description: Last name of the provider
                           example: Doe
                         age:
-                          type: integer
+                          type:
+                          - integer
+                          - 'null'
                           description: The estimated age of the provider
                           format: int32
-                          nullable: true
                           example: 38
                         gender:
                           type: string
@@ -828,9 +853,10 @@ paths:
                           format: int32
                           example: 20
                         ratings_avg:
-                          type: number
+                          type:
+                          - number
+                          - 'null'
                           description: Average patient satisfaction rating out of 10 points across multiple sources
-                          nullable: true
                           example: 9.8
                         degrees:
                           type: array
@@ -869,12 +895,14 @@ paths:
                                     format: uuid
                                     example: 0b26c31a-d74a-4327-9702-57753b82a126
                               type:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               year:
-                                type: integer
+                                type:
+                                - integer
+                                - 'null'
                                 format: int32
-                                nullable: true
                                 example: 2007
                         insurances:
                           type: array
@@ -899,8 +927,9 @@ paths:
                                 format: uuid
                                 example: f38b9fd5-1e28-4f6e-953c-1e1493b68e21
                               name:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               address:
                                 type: string
                                 example: '185 Berry St # 130, San Francisco, CA 94107, US'
@@ -914,8 +943,9 @@ paths:
                                     type: string
                                     example: 185 Berry St
                                   address_line_2:
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                     example: '# 130'
                                   city:
                                     type: string
@@ -967,13 +997,14 @@ paths:
                                       format: int32
                                       example: 3
                               confidence:
-                                type: integer
+                                type:
+                                - integer
+                                - 'null'
                                 description: 'Each location contains a confidence score. This score indicates the probability of the given provider practicing at said location with the included contact information
 
 
                                   This field will only be populated for Ribbon-provided locations. Locations you create yourself will have a confidence score of `null`.'
                                 format: int32
-                                nullable: true
                                 example: 2
                               insurances:
                                 type: array
@@ -987,46 +1018,56 @@ paths:
                                       format: uuid
                                       example: d8addf29-1054-4ccb-b179-dda65f7fefdd
                                     carrier_association:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                       example: Aetna
                                     carrier_brand:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                       example: Aetna
                                     carrier_name:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                       example: Aetna
                                     state:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                       example: NY
                                     plan_name:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                       example: Aetna HealthFund Open Choice
                                     plan_type:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                       example: PPO
                                     metal_level:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                     display_name:
                                       type: string
                                       example: Aetna - HealthFund Open Choice - PPO
                                     network:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                     confidence:
-                                      type: integer
+                                      type:
+                                      - integer
+                                      - 'null'
                                       format: int32
-                                      nullable: true
                                       example: 4
                                     category:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                     codes:
                                       type: array
                                       description: ''
@@ -1129,9 +1170,7 @@ paths:
 
         #### Example Use Case
 
-        For a given provider, search the full list of procedures that they are likely to perform where there are negotiated rates available for a particular insurance, and return the minimum price for each procedure.
-
-        '
+        For a given provider, search the full list of procedures that they are likely to perform where there are negotiated rates available for a particular insurance, and return the minimum price for each procedure.'
       operationId: getPricingProviderProcedures
       parameters:
       - name: npi
@@ -1340,9 +1379,7 @@ paths:
 
         #### Example Use Case
 
-        Compare insurance-specific price estimates of a Leg MRI for a single provider at multiple relevant practices (e.g., compare this provider''s rates when performing the procedure at both the provider''s private outpatient facility, as well as a nearby hospital system clinic where they also practice).
-
-        '
+        Compare insurance-specific price estimates of a Leg MRI for a single provider at multiple relevant practices (e.g., compare this provider''s rates when performing the procedure at both the provider''s private outpatient facility, as well as a nearby hospital system clinic where they also practice).'
       operationId: getPricingProviderProcedure
       parameters:
       - name: npi
@@ -1466,7 +1503,7 @@ paths:
                               example: true
                             outpatient:
                               oneOf:
-                              - nullable: true
+                              - {}
                               - required:
                                 - components
                                 - is_bundle
@@ -1492,12 +1529,13 @@ paths:
                                     description: Where this data is the costs for a procedure bundle rather than a regular procedure.
                                     example: true
                                   components:
-                                    type: array
+                                    type:
+                                    - array
+                                    - 'null'
                                     description: 'Individual costs for the components that make up this procedure bundle.
 
 
                                       For a regular procedure, this field will always be `null`.'
-                                    nullable: true
                                     items:
                                       type: object
                                       properties:
@@ -1527,7 +1565,7 @@ paths:
                                 This key will only be populated for procedure bundles, and only if we have relevant data. A regular procedure will always have a `null` value here.'
                             inpatient:
                               oneOf:
-                              - nullable: true
+                              - {}
                               - required:
                                 - components
                                 - is_bundle
@@ -1553,12 +1591,13 @@ paths:
                                     description: Where this data is the costs for a procedure bundle rather than a regular procedure.
                                     example: true
                                   components:
-                                    type: array
+                                    type:
+                                    - array
+                                    - 'null'
                                     description: 'Individual costs for the components that make up this procedure bundle.
 
 
                                       For a regular procedure, this field will always be `null`.'
-                                    nullable: true
                                     items:
                                       type: object
                                       properties:
@@ -1698,9 +1737,7 @@ paths:
 
         #### Example Use Case
 
-        Given an insurance, identify the expected price of a particular procedure from a specific provider at a known facility.
-
-        '
+        Given an insurance, identify the expected price of a particular procedure from a specific provider at a known facility.'
       operationId: getPricingProviderProcedureLocation
       parameters:
       - name: npi
@@ -1766,46 +1803,56 @@ paths:
                             format: uuid
                             example: d8addf29-1054-4ccb-b179-dda65f7fefdd
                           carrier_association:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Aetna
                           carrier_brand:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Aetna
                           carrier_name:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Aetna
                           state:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: NY
                           plan_name:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: Aetna HealthFund Open Choice
                           plan_type:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                             example: PPO
                           metal_level:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           display_name:
                             type: string
                             example: Aetna - HealthFund Open Choice - PPO
                           network:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           confidence:
-                            type: integer
+                            type:
+                            - integer
+                            - 'null'
                             format: int32
-                            nullable: true
                             example: 4
                           category:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           codes:
                             type: array
                             description: ''
@@ -1841,7 +1888,7 @@ paths:
                             example: true
                           outpatient:
                             oneOf:
-                            - nullable: true
+                            - {}
                             - required:
                               - components
                               - is_bundle
@@ -1867,12 +1914,13 @@ paths:
                                   description: Where this data is the costs for a procedure bundle rather than a regular procedure.
                                   example: true
                                 components:
-                                  type: array
+                                  type:
+                                  - array
+                                  - 'null'
                                   description: 'Individual costs for the components that make up this procedure bundle.
 
 
                                     For a regular procedure, this field will always be `null`.'
-                                  nullable: true
                                   items:
                                     type: object
                                     properties:
@@ -1902,7 +1950,7 @@ paths:
                               This key will only be populated for procedure bundles, and only if we have relevant data. A regular procedure will always have a `null` value here.'
                           inpatient:
                             oneOf:
-                            - nullable: true
+                            - {}
                             - required:
                               - components
                               - is_bundle
@@ -1928,12 +1976,13 @@ paths:
                                   description: Where this data is the costs for a procedure bundle rather than a regular procedure.
                                   example: true
                                 components:
-                                  type: array
+                                  type:
+                                  - array
+                                  - 'null'
                                   description: 'Individual costs for the components that make up this procedure bundle.
 
 
                                     For a regular procedure, this field will always be `null`.'
-                                  nullable: true
                                   items:
                                     type: object
                                     properties:
@@ -2068,9 +2117,7 @@ paths:
       tags:
       - Price Transparency
       summary: getPricingCarriers
-      description: 'This endpoint will show the carriers for which we have data. This can be used to fetch the recency of the data used per carrier.
-
-        '
+      description: This endpoint will show the carriers for which we have data. This can be used to fetch the recency of the data used per carrier.
       operationId: getPricingCarriers
       parameters: []
       responses:
@@ -2134,9 +2181,7 @@ paths:
       tags:
       - Price Transparency
       summary: getPricingCarrier
-      description: 'Fetch metadata including the recency of the pricing data used for a specific carrier.
-
-        '
+      description: Fetch metadata including the recency of the pricing data used for a specific carrier.
       operationId: getPricingCarrier
       parameters:
       - name: carrier_uuid
@@ -2234,9 +2279,7 @@ paths:
       description: 'This endpoint will the names of the carriers for which we have data. This can be used to fetch the recency of the data used per carrier.
 
 
-        This endpoint is deprecated. Please use [List Carriers](./getpricingcarriers) instead.
-
-        '
+        This endpoint is deprecated. Please use List Carriers instead.'
       operationId: getPricingCarrierNames
       parameters: []
       responses:
@@ -2293,9 +2336,7 @@ paths:
       description: 'Fetch the recency of the pricing data used for a specific carrier by name.
 
 
-        This endpoint is deprecated. Please use [Get Carrier](./getpricingcarrier) instead.
-
-        '
+        This endpoint is deprecated. Please use Get Carrier instead.'
       operationId: getPricingVersionCarrier
       parameters:
       - name: carrier_name

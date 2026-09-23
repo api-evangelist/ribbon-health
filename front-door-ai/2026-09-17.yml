@@ -1,0 +1,27 @@
+# Front Door AI Index — ribbon-health — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: ribbon-health
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: h1.com
+  final_host: h1.com
+  ownership: own
+  owner: ribbon-health
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 3
+  host_score: 3
+  density: 2.52
+  words: 1190
+  tiers:
+    agentic: 0
+    core: 3
+    model: 0
+  ambiguous: 8
+  top_terms:
+    intelligence: 7
+    AI: 3
+    automation: 1

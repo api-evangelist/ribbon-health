@@ -1,9 +1,7 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: ribbon-health Cost Estimates Organizations API
-  description: 'An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
-
-    '
+  title: ribbon-health Organizations API
+  description: An API for interacting with the data provided by Ribbon Health, including information about healthcare providers, locations, insurances, and more.
   contact: {}
   version: 1.0.0
   x-codegen-settings:
@@ -141,9 +139,7 @@ paths:
 
         #### Example Use Case
 
-        Display a map of all of all nearby health systems and their relevant information so that a patient can find care.
-
-        '
+        Display a map of all of all nearby health systems and their relevant information so that a patient can find care.'
       operationId: getOrganizations
       parameters:
       - name: address
@@ -253,9 +249,10 @@ paths:
                             description: The longitude the search was focused on.
                             example: -73.9881657
                       address:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         description: String input of an address that will be interpreted and geocoded in real time.
-                        nullable: true
                         example: Jacksonville, FL, USA
                       name:
                         type: string
@@ -385,9 +382,7 @@ paths:
       tags:
       - Organizations
       summary: getOrganization
-      description: 'Retrieve detailed information for any organization given its UUID
-
-        '
+      description: Retrieve detailed information for any organization given its UUID
       operationId: getOrganization
       parameters:
       - name: organization_uuid

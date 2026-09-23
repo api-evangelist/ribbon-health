@@ -1,25 +1,15 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: H1's API — Price Transparency v2
+  title: H1's Price Transparency v2 API
   version: 1.0.0
-  description: "An API for interacting with the data provided by Ribbon Health, including information about healthcare\
-    \ providers,\nlocations, insurances, and more.\n\n## Price Transparency v2\n\nLocation-first negotiated rate\
-    \ endpoints live under `/v2/*` (separate from legacy\n`/v1/pricing/*`). Use them to:\n\n1. Look up procedures,\
-    \ care clusters, and carriers (`GET /v2/procedures`,\n   `/v2/care-clusters`, `/v2/carriers`)\n2. Get prices\
-    \ for a known location (`GET /v2/locations/{location_id}/pricing/...`)\n3. Shop by geography (`GET /v2/pricing/locations/...`)\n\
-    \n**Key differences from v1:** prices are location-scoped (not provider-first);\ncarriers use string business\
-    \ ids (not v1 carrier UUIDs); every v2 response uses\nthe same envelope (`parameters`, `total_count`, `page`,\
-    \ `page_size`, `data`);\ngeo search requires an explicit `address` or `lat`+`lng` (no silent default).\n\nSee\
-    \ the **Price Transparency v2** tag for full endpoint reference.\n"
+  description: 'An API for interacting with the data provided by Ribbon Health, including information about healthcare providers,
+
+    locations, insurances, and more.'
   x-apievangelist-provenance:
     harvested: '2026-08-14'
     method: searched
     source: https://ribbon.readme.io/reference/{getv2procedures,getv2careclusters,getv2carriers,getv2locationprocedurepricing,getv2locationcareclusterpricing,getv2pricinglocationprocedures,getv2pricinglocationcareclusters}.md
-    note: Assembled from the OpenAPI 3.1.0 definitions the provider publishes verbatim inside each ReadMe reference
-      page (each page embeds a single-operation slice of H1's live spec). Only the paths were unioned; no operation,
-      parameter, schema or description was written, edited or invented. servers[], security and components.securitySchemes
-      are the provider's own. This surface is documented and live but is absent from every other OpenAPI in this
-      repo.
+    note: Assembled from the OpenAPI 3.1.0 definitions the provider publishes verbatim inside each ReadMe reference page (each page embeds a single-operation slice of H1's live spec). Only the paths were unioned; no operation, parameter, schema or description was written, edited or invented. servers[], security and components.securitySchemes are the provider's own. This surface is documented and live but is absent from every other OpenAPI in this repo.
 servers:
 - url: https://api.ribbonhealth.com
 security:
@@ -31,13 +21,32 @@ paths:
   /v2/procedures:
     get:
       summary: List Procedures (v2)
-      description: "Browse or search the Price Transparency v2 procedure code dictionary.\n\nUse this to resolve\
-        \ a CPT (or other) code before pricing lookups, or to\ndiscover which care clusters a procedure belongs\
-        \ to. This endpoint does\n**not** return dollar amounts.\n\n#### Example Use Case\nLook up CPT `27447` to\
-        \ confirm its description and see that it belongs to\nthe `JOINT_REPLACEMENT` care cluster before calling\
-        \ a pricing endpoint.\n\n#### Notes\n- Requires Price Transparency access (`doctors.can_price_transparency`).\n\
-        - Rate limited to 1,000 requests per minute.\n- All Price Transparency v2 endpoints share the same response\
-        \ envelope:\n  `parameters`, `total_count`, `page`, `page_size`, and `data`.\n"
+      description: 'Browse or search the Price Transparency v2 procedure code dictionary.
+
+
+        Use this to resolve a CPT (or other) code before pricing lookups, or to
+
+        discover which care clusters a procedure belongs to. This endpoint does
+
+        **not** return dollar amounts.
+
+
+        #### Example Use Case
+
+        Look up CPT `27447` to confirm its description and see that it belongs to
+
+        the `JOINT_REPLACEMENT` care cluster before calling a pricing endpoint.
+
+
+        #### Notes
+
+        - Requires Price Transparency access (`doctors.can_price_transparency`).
+
+        - Rate limited to 1,000 requests per minute.
+
+        - All Price Transparency v2 endpoints share the same response envelope:
+
+        `parameters`, `total_count`, `page`, `page_size`, and `data`.'
       operationId: getV2Procedures
       tags:
       - Price Transparency v2
@@ -186,9 +195,7 @@ paths:
 
         Search for clusters matching `"joint"` to find `JOINT_REPLACEMENT` and see
 
-        which CPT codes are expected in that bundle.
-
-        '
+        which CPT codes are expected in that bundle.'
       operationId: getV2CareClusters
       tags:
       - Price Transparency v2
@@ -288,13 +295,11 @@ paths:
 
         #### Important
 
-        These identifiers are **not** the same as v1 [`/v1/pricing/carriers`](./getpricingcarriers)
+        These identifiers are **not** the same as v1 `/v1/pricing/carriers`
 
         UUIDs. Always resolve carriers through this endpoint (or a curated customer
 
-        mapping) when working with v2.
-
-        '
+        mapping) when working with v2.'
       operationId: getV2Carriers
       tags:
       - Price Transparency v2
@@ -452,8 +457,7 @@ paths:
                         type:
                         - object
                         - string
-                        description: 'An object representing what exactly went wrong. The keys available in this
-                          object vary with the type of error  returned.
+                        description: 'An object representing what exactly went wrong. The keys available in this object vary with the type of error  returned.
 
                           '
                         example:
@@ -514,13 +518,11 @@ paths:
 
         #### Carrier filtering
 
-        Prefer `carrier_id` (from [`GET /v2/carriers`](./getv2carriers)).
+        Prefer `carrier_id` (from `GET /v2/carriers`).
 
         `plan_id` is accepted in the contract but currently returns HTTP 501.
 
-        `carrier_id` and `plan_id` are mutually exclusive (HTTP 400 if both are sent).
-
-        '
+        `carrier_id` and `plan_id` are mutually exclusive (HTTP 400 if both are sent).'
       operationId: getV2LocationProcedurePricing
       tags:
       - Price Transparency v2
@@ -687,9 +689,7 @@ paths:
                         enum:
                         - resource not found
                 x-apievangelist-inlined-from: https://ribbon.readme.io/reference/getcustomtin.md
-                x-apievangelist-inline-note: Verbatim from the provider's own published OpenAPI slice for GET /v1/custom/tin/{tin_id}.
-                  Inlined only because ReadMe's per-operation slicing left this $ref pointing outside the Price
-                  Transparency v2 paths. Content unmodified.
+                x-apievangelist-inline-note: Verbatim from the provider's own published OpenAPI slice for GET /v1/custom/tin/{tin_id}. Inlined only because ReadMe's per-operation slicing left this $ref pointing outside the Price Transparency v2 paths. Content unmodified.
         '501':
           description: '`plan_id` filtering is not implemented yet.'
           content:
@@ -727,9 +727,7 @@ paths:
 
         Prefer `carrier_id`. `plan_id` currently returns HTTP 501.
 
-        `carrier_id` and `plan_id` are mutually exclusive.
-
-        '
+        `carrier_id` and `plan_id` are mutually exclusive.'
       operationId: getV2LocationCareClusterPricing
       tags:
       - Price Transparency v2
@@ -820,8 +818,7 @@ paths:
                             - '27446'
                           missing_procedures:
                             type: array
-                            description: Expected procedures with no price at this location/carrier. Defaults to
-                              `[]`.
+                            description: Expected procedures with no price at this location/carrier. Defaults to `[]`.
                             items: {}
                             example:
                             - '27445'
@@ -889,9 +886,7 @@ paths:
                         enum:
                         - resource not found
                 x-apievangelist-inlined-from: https://ribbon.readme.io/reference/getcustomtin.md
-                x-apievangelist-inline-note: Verbatim from the provider's own published OpenAPI slice for GET /v1/custom/tin/{tin_id}.
-                  Inlined only because ReadMe's per-operation slicing left this $ref pointing outside the Price
-                  Transparency v2 paths. Content unmodified.
+                x-apievangelist-inline-note: Verbatim from the provider's own published OpenAPI slice for GET /v1/custom/tin/{tin_id}. Inlined only because ReadMe's per-operation slicing left this $ref pointing outside the Price Transparency v2 paths. Content unmodified.
         '501':
           description: '`plan_id` filtering is not implemented yet.'
           content:
@@ -931,9 +926,7 @@ paths:
 
         Prefer `carrier_id`. `plan_id` currently returns HTTP 501.
 
-        `carrier_id` and `plan_id` are mutually exclusive.
-
-        '
+        `carrier_id` and `plan_id` are mutually exclusive.'
       operationId: getV2PricingLocationProcedures
       tags:
       - Price Transparency v2
@@ -1190,7 +1183,7 @@ paths:
 
         Same geo / carrier / pagination rules as
 
-        [`GET /v2/pricing/locations/procedures`](./getv2pricinglocationprocedures).
+        `GET /v2/pricing/locations/procedures`.
 
 
         Optional `procedure_code` filters to bundles whose `included_procedures`
@@ -1202,9 +1195,7 @@ paths:
 
         Provide either `address` **or** both `lat` and `lng`. Missing location,
 
-        incomplete coordinates, or failed geocoding → HTTP 400.
-
-        '
+        incomplete coordinates, or failed geocoding → HTTP 400.'
       operationId: getV2PricingLocationCareClusters
       tags:
       - Price Transparency v2
