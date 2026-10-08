@@ -66,3 +66,15 @@ plans:
       - endpoint: v1/deductible
         limit: 1000
         period: hour
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Enterprise (Custom)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
