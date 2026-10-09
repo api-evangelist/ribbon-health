@@ -1,19 +1,536 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/ribbon-health-h1-api-openapi.yml
+source: openapi/ribbon-health-cost-estimates-api-openapi.yml, openapi/ribbon-health-filters-api-openapi.yml,
+  openapi/ribbon-health-focus-area-endpoints-api-openapi.yml, openapi/ribbon-health-locations-api-openapi.yml,
+  openapi/ribbon-health-networks-api-openapi.yml, openapi/ribbon-health-organizations-api-openapi.yml,
+  openapi/ribbon-health-price-transparency-api-openapi.yml, openapi/ribbon-health-price-transparency-v2-api-openapi.yml,
+  openapi/ribbon-health-providers-api-openapi.yml, openapi/ribbon-health-reference-endpoints-api-openapi.yml,
+  openapi/ribbon-health-tins-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 73
+  operations: 80
   by_action_class:
-    connected: 39
-    acting: 34
+    connected: 47
+    acting: 33
   by_consequence:
-    read: 39
-    write: 34
+    read: 47
+    write: 33
   human_in_the_loop_required: 0
 operations:
+- path: /eligibility
+  method: post
+  operationId: getEligibility
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /eligibility_insurance_partners
+  method: get
+  operationId: getEligibilityInsurancePartners
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /eligibility_insurance_partners/{insurance_partner}
+  method: get
+  operationId: getEligibilityInsurancePartner
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /procedure_cost_estimate
+  method: get
+  operationId: getProcedureCostEstimate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /custom/providers/filters
+  method: get
+  operationId: getCustomProviderFilters
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /custom/providers/filters
+  method: post
+  operationId: createCustomProviderFilter
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /custom/providers/filters/{filter_uuid}
+  method: put
+  operationId: editCustomProviderFilter
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /custom/providers/filters/{filter_uuid}
+  method: delete
+  operationId: deleteCustomProviderFilter
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /custom/locations/filters
+  method: get
+  operationId: getCustomLocationFilters
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /custom/locations/filters
+  method: post
+  operationId: createCustomLocationFilter
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /custom/locations/filters/{filter_uuid}
+  method: put
+  operationId: editCustomLocationFilter
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /custom/locations/filters/{filter_uuid}
+  method: delete
+  operationId: deleteCustomLocationFilter
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /custom/clinical_areas
+  method: get
+  operationId: getClinicalAreas
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /custom/clinical_areas/{clinical_area_uuid}
+  method: get
+  operationId: getClinicalArea
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /custom/conditions
+  method: get
+  operationId: getConditions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /custom/conditions/{condition_uuid}
+  method: get
+  operationId: getCondition
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /custom/treatments
+  method: get
+  operationId: getTreatments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /custom/treatments/{treatment_uuid}
+  method: get
+  operationId: getTreatment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /custom/locations
+  method: get
+  operationId: getCustomLocations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /custom/locations
+  method: post
+  operationId: postCustomLocations
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /custom/locations/{location_uuid}
+  method: get
+  operationId: getCustomLocation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /custom/locations/{location_uuid}
+  method: put
+  operationId: putCustomLocation
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /custom/locations/{location_uuid}
+  method: delete
+  operationId: deleteCustomLocation
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /custom/locations/{location_uuid}/insurances
+  method: put
+  operationId: putCustomLocationInsurances
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /custom/locations/{location_uuid}/organizations
+  method: put
+  operationId: putCustomLocationOrganizations
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /custom/locations/{location_uuid}/clinical_areas
+  method: put
+  operationId: putCustomLocationClinicalAreas
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /network_analysis
+  method: get
+  operationId: getNetworkAnalysis
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /custom/organizations
+  method: get
+  operationId: getOrganizations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /custom/organizations/{organization_uuid}
+  method: get
+  operationId: getOrganization
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /pricing/providers
+  method: get
+  operationId: getPricingProviders
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /pricing/providers/{npi}/procedures
+  method: get
+  operationId: getPricingProviderProcedures
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /pricing/providers/{npi}/procedures/{procedure_uuid}
+  method: get
+  operationId: getPricingProviderProcedure
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /pricing/providers/{npi}/procedures/{procedure_uuid}/locations/{location_uuid}
+  method: get
+  operationId: getPricingProviderProcedureLocation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /pricing/carriers
+  method: get
+  operationId: getPricingCarriers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /pricing/carrier/{carrier_uuid}
+  method: get
+  operationId: getPricingCarrier
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /pricing/version
+  method: get
+  operationId: getPricingCarrierNames
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /pricing/version/{carrier_name}
+  method: get
+  operationId: getPricingVersionCarrier
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/procedures
+  method: get
+  operationId: getV2Procedures
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/care-clusters
+  method: get
+  operationId: getV2CareClusters
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/carriers
+  method: get
+  operationId: getV2Carriers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/locations/{location_id}/pricing/procedures
+  method: get
+  operationId: getV2LocationProcedurePricing
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/locations/{location_id}/pricing/care-clusters
+  method: get
+  operationId: getV2LocationCareClusterPricing
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/pricing/locations/procedures
+  method: get
+  operationId: getV2PricingLocationProcedures
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/pricing/locations/care-clusters
+  method: get
+  operationId: getV2PricingLocationCareClusters
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /custom/providers
   method: get
   operationId: getCustomProviders
@@ -165,238 +682,6 @@ operations:
 - path: /custom/providers/{npi}/locations/{location_uuid}/organizations
   method: put
   operationId: putCustomProviderLocationOrganizations
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /custom/providers/filters
-  method: get
-  operationId: getCustomProviderFilters
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /custom/providers/filters
-  method: post
-  operationId: createCustomProviderFilter
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /custom/providers/filters/{filter_uuid}
-  method: put
-  operationId: editCustomProviderFilter
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /custom/providers/filters/{filter_uuid}
-  method: delete
-  operationId: deleteCustomProviderFilter
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /custom/locations/filters
-  method: get
-  operationId: getCustomLocationFilters
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /custom/locations/filters
-  method: post
-  operationId: createCustomLocationFilter
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /custom/locations/filters/{filter_uuid}
-  method: put
-  operationId: editCustomLocationFilter
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /custom/locations/filters/{filter_uuid}
-  method: delete
-  operationId: deleteCustomLocationFilter
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /custom/locations
-  method: get
-  operationId: getCustomLocations
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /custom/locations
-  method: post
-  operationId: postCustomLocations
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /custom/locations/{location_uuid}
-  method: get
-  operationId: getCustomLocation
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /custom/locations/{location_uuid}
-  method: put
-  operationId: putCustomLocation
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /custom/locations/{location_uuid}
-  method: delete
-  operationId: deleteCustomLocation
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /custom/locations/{location_uuid}/insurances
-  method: put
-  operationId: putCustomLocationInsurances
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /custom/locations/{location_uuid}/organizations
-  method: put
-  operationId: putCustomLocationOrganizations
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /custom/locations/{location_uuid}/clinical_areas
-  method: put
-  operationId: putCustomLocationClinicalAreas
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -712,86 +997,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /custom/clinical_areas
-  method: get
-  operationId: getClinicalAreas
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /custom/clinical_areas/{clinical_area_uuid}
-  method: get
-  operationId: getClinicalArea
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /custom/conditions
-  method: get
-  operationId: getConditions
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /custom/conditions/{condition_uuid}
-  method: get
-  operationId: getCondition
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /custom/treatments
-  method: get
-  operationId: getTreatments
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /custom/treatments/{treatment_uuid}
-  method: get
-  operationId: getTreatment
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /custom/organizations
-  method: get
-  operationId: getOrganizations
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /custom/organizations/{organization_uuid}
-  method: get
-  operationId: getOrganization
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /custom/tin
   method: get
   operationId: getTins
@@ -805,142 +1010,6 @@ operations:
 - path: /custom/tin/{tin_id}
   method: get
   operationId: getCustomTin
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /pricing/providers
-  method: get
-  operationId: getPricingProviders
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /pricing/providers/{npi}/procedures
-  method: get
-  operationId: getPricingProviderProcedures
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /pricing/providers/{npi}/procedures/{procedure_uuid}
-  method: get
-  operationId: getPricingProviderProcedure
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /pricing/providers/{npi}/procedures/{procedure_uuid}/locations/{location_uuid}
-  method: get
-  operationId: getPricingProviderProcedureLocation
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /pricing/carriers
-  method: get
-  operationId: getPricingCarriers
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /pricing/carrier/{carrier_uuid}
-  method: get
-  operationId: getPricingCarrier
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /pricing/version
-  method: get
-  operationId: getPricingCarrierNames
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /pricing/version/{carrier_name}
-  method: get
-  operationId: getPricingVersionCarrier
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /eligibility
-  method: post
-  operationId: getEligibility
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /eligibility_insurance_partners
-  method: get
-  operationId: getEligibilityInsurancePartners
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /eligibility_insurance_partners/{insurance_partner}
-  method: get
-  operationId: getEligibilityInsurancePartner
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /procedure_cost_estimate
-  method: get
-  operationId: getProcedureCostEstimate
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /network_analysis
-  method: get
-  operationId: getNetworkAnalysis
   x-agentic-access:
     action-class: connected
     consequence: read
